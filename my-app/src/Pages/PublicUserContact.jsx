@@ -1,22 +1,21 @@
 import React from 'react'
 import PublicUserNav from '../Component/Navbar/PublicUserNav'
+import PublicContact from '../Component/Public/PublicContact'
 import PublicUserFooter from '../Component/Footer/PublicUserFooter'
 import PublicSlider from '../Component/Public/PublicSlider'
 import PublicUserTop from '../Component/Topbar/PublicUserTop'
-import PublicUserContact from './PublicUserContact'
 
-const PublicUser = () => {
+const PublicUserContact = () => {
   return (
     <div>
-        <PublicUserTop/>
-        <PublicUserNav/>
-        <PublicSlider/>
-        <PublicUserFooter/>
-        
-      
+      <PublicUserTop/>
+   <PublicUserNav/>
+  
+   <PublicContact/>
+
 
     </div>
   )
 }
 
-export default PublicUser
+export default PublicUserContact

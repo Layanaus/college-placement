@@ -1,22 +1,19 @@
 import React from 'react'
-import PublicUserNav from '../Component/Navbar/PublicUserNav'
-import PublicUserFooter from '../Component/Footer/PublicUserFooter'
-import PublicSlider from '../Component/Public/PublicSlider'
 import PublicUserTop from '../Component/Topbar/PublicUserTop'
-import PublicUserContact from './PublicUserContact'
+import PublicUserNav from '../Component/Navbar/PublicUserNav'
+import jobs from '../Component/Userfunctionality/jobs'
+import PublicUserFooter from '../Component/Footer/PublicUserFooter'
 
-const PublicUser = () => {
+const jobs = () => {
   return (
     <div>
         <PublicUserTop/>
         <PublicUserNav/>
-        <PublicSlider/>
+        <jobs/>
         <PublicUserFooter/>
         
-      
-
     </div>
   )
 }
 
-export default PublicUser
+export default jobs
