@@ -8,41 +8,65 @@ const ViewJobcategory = () => {
             <h1> Job Categories</h1>
         </div>
     </div>
+   
     <div className="job-listings">
-    <div className="job-item">
-    <h1>Software Development</h1>
+      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div>
+    <h1>Non IT Field</h1>
     <p>100+ Vacancy</p>
-    <a href="applyjobs"><button>Click here</button></a>
-</div>
-
-      <div className="job-item">
-       
-        <h1>Digital Marketing</h1>
-        <p>100+ Vacancy</p>
-        <a href="applyjobs"><button>Click here</button></a>
+  </div>
+  <div>
+        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
       </div>
-      <div className="job-item">
-      <h1>IT Field</h1>
-        <p>100+ Vacancy</p>
-        <a href="applyjobs"><button>Click here</button></a>
+      </div>
+      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div>
+    <h1>Non IT Field</h1>
+    <p>100+ Vacancy</p>
+  </div>
+  <div>
+        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+      </div>
+      </div>
+      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div>
+    <h1>Non IT Field</h1>
+    <p>100+ Vacancy</p>
+  </div>
+  <div>
+        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+      </div>
       </div>
     </div>
+
     
     <div className="job-listings">
-      <div className="job-item">
-      <h1>Non IT Field</h1>
-        <p>100+ Vacancy</p>
-        <a href="applyjobs"><button>Click here</button></a>
+      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div>
+    <h1>Non IT Field</h1>
+    <p>100+ Vacancy</p>
+  </div>
+  <div>
+        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
       </div>
-      <div className="job-item">
-      <h1>Sales & Marketing</h1>
-        <p>100+ Vacancy</p>
-        <a href="applyjobs"><button>Click here</button></a>
       </div>
-      <div className="job-item">
-      <h1>Healthcare & Medicine</h1>
-        <p>100+ Vacancy</p>
-        <a href="applyjobs"><button>Click here</button></a>
+      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div>
+    <h1>Non IT Field</h1>
+    <p>100+ Vacancy</p>
+  </div>
+  <div>
+        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+      </div>
+      </div>
+      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div>
+    <h1>Non IT Field</h1>
+    <p>100+ Vacancy</p>
+  </div>
+  <div>
+        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+      </div>
       </div>
     </div>
    </>

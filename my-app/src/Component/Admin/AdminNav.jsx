@@ -87,7 +87,7 @@ const AdminNav = () => {
               <a href="adminviewjobs" className="dropdown-item">
                 Job opening
               </a>
-              <a href="vm.html" className="dropdown-item">
+              <a href="adviewjobportal" className="dropdown-item">
                 Job portal
               </a>
               {/* <a href="company.html" className="dropdown-item">

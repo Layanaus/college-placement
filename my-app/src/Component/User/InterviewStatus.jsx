@@ -32,6 +32,7 @@ const InterviewStatus = () => {
       <div id="w">
         <div id="content">
           {/* Icons source http://dribbble.com/shots/913555-Flat-Web-Elements */}
+    
           <div className="notify successbox">
             <h4>Jws Steels</h4>
             <p>
@@ -41,6 +42,7 @@ const InterviewStatus = () => {
               12/09/2022 between 10.30 and 12.00 pm
             </p>
           </div>
+    
           <div className="notify errorbox">
             <h4>Nesto</h4>
             <p>

@@ -50,6 +50,13 @@ import Applyjobs from '../User/Applyjobs'
 import Jobportaljobdetails from '../User/Jobportaljobdetails'
 import Applyjobportal from '../User/Applyjobportal'
 import Viewcompanyresponse from '../PlacementOfficer/Viewcompanyresponse'
+import Adviewjobportal from '../Admin/Adviewjobportal'
+import Createplacedstudent from '../PlacementOfficer/Createplacedstudent'
+import Aptitudetest from '../Company/Aptitudetest'
+import Appliedjobs from '../../Pages/User/Appliedjobs'
+import ViewAppliedstudents from '../PlacementOfficer/ViewAppliedstudents'
+import Colleges from '../Company/Colleges'
+import Viewrequests from '../PlacementOfficer/Viewrequests'
 
 const MainRouter = () => {
   return (
@@ -65,8 +72,7 @@ const MainRouter = () => {
             <Route path="placementReg" element={< PlacementOfficerReg/>}/>
             <Route path="Admin" element={< Admin/>}/>
             <Route path="Company" element={< Company/>}/>
-            <Route path="Placementofficer" element={< Placementofficer/>}/>
-            <Route path="User" element={< User/>}/>            
+            <Route path="Placementofficer" element={< Placementofficer/>}/>        
             <Route path="Jobportal" element={< Jobportalpage/>}/>
             <Route path="Jobopening" element={< Jobopeningpage/>}/>
             <Route path="manageuser" element={<Manageuser/>}/>
@@ -79,7 +85,7 @@ const MainRouter = () => {
             <Route path="Pjobportal" element={<CreateJobportal/>}/>
             <Route path="Uchangepassword" element={<Userchangepassword/>}/>
             <Route path="UserProfile" element={<MyProfile/>}/>
-            <Route path="viewjobs" element={<ViewJobs/>}/>
+            <Route path="user" element={<ViewJobs/>}/>
             <Route path="Jobdetails" element={<Jobdetails/>}/>
             <Route path="Usernotification" element={<Usernotification/>}/>
             <Route path="Viewrequest" element={<Viewrequest/>}/>
@@ -105,6 +111,17 @@ const MainRouter = () => {
             <Route path="PJobdetails" element={<Jobportaljobdetails/>}/>
             <Route path="applyjobportal" element={<Applyjobportal/>}/>
             <Route path="companyresponse" element={<Viewcompanyresponse/>}/>
+            <Route path="adviewjobportal" element={<Adviewjobportal/>}/>
+            <Route path="placedstudent" element={<Createplacedstudent/>}/>
+            <Route path="aptitudetst" element={<Aptitudetest/>}/>
+            <Route path="appliedjobs" element={<Appliedjobs/>}/>
+            <Route path="viewstudents" element={<ViewAppliedstudents/>}/>
+            <Route path="companycolleges" element={<Colleges/>}/>
+            <Route path="viewrequests" element={<Viewrequests/>}/>
+
+          
+
+
 
 
 

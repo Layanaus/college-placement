@@ -8,7 +8,6 @@ const UJobportalhome = () => {
   return (
     <>
     <Usernav/>
-    <Jobportalbody/>
     <ViewJobcategory/>
     <PublicUserFooter/>
         </>

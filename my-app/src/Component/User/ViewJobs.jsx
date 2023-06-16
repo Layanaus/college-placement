@@ -71,67 +71,116 @@ const ViewJobs = () => {
     </div>
   </div>
       <div className="row">
-        <div className="col-md-6 mb-5">
-          <div className="card">
+      <div className="col-md-4 mb-5">
+          <div className="card"  style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div className="card-header">IT JOBSs</div>
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
+              <div>
+              <h5 className="card-title">14 MNC Companies Hiring you..</h5>
               <p className="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                1000+ Vaccancies
               </p>
-              <a href="SearchVacancy" className="btn btn-primary">
-                Seach Vaccancy
-              </a>
+              <div>
+              </div>
+                   
+        <a href="searchvacancy" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+         
+              </div>
             </div>
           </div>
         </div>
-        <div className="col-md-6">
-          <div className="card">
+        <div className="col-md-4">
+          <div className="card"  style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
             <div className="card-header">ENGINEERING JOBS</div>
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
+              <div>
+              <h5 className="card-title">200 International Companies</h5>
               <p className="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                540+ Vaccancies
               </p>
-              <a href="SearchVacancy" className="btn btn-primary">
-                Seach Vaccancy
-              </a>
+              <div>
+
+              </div>
+                       
+        <a href="searchvacancy" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+         
+              </div>
             </div>
           </div>
         </div>
-        <div className="col-md-6">
-          <div className="card">
-            <div className="card-header">IT JOBSs</div>
+        <div className="col-md-4 mb-5">
+          <div className="card"  style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div className="card-header">Sales and marketing JOBSs</div>
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
+              <div>
+              <h5 className="card-title">110 Companies</h5>
               <p className="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                1000+ Vaccancies
               </p>
-              <a href="SearchVacancy" className="btn btn-primary">
-                Seach Vaccancy
-              </a>
+              <div>
+              </div>
+                   
+        <a href="searchvacancy" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+         
+              </div>
             </div>
           </div>
         </div>
-        <div className="col-md-6">
-          <div className="card">
+        <div className="col-md-4">
+          <div className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div className="card-header">Digital Marketing</div>
+            <div className="card-body">
+            <div>
+              <h5 className="card-title">54 Companies Started Hiring</h5>
+              <p className="card-text">
+                540+ Vaccancies
+              </p>
+              <div>
+              </div>
+              
+        <a href="searchvacancy" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+             </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+
             <div className="card-header">ENGINEERING JOBS</div>
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
+            <div>
+              <h5 className="card-title">200 International Companies</h5>
               <p className="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                540+ Vaccancies
               </p>
-              <a href="SearchVacancy" className="btn btn-primary">
-                Seach Vaccancy
-              </a>
+        
+              <div>
+              </div>
+               
+        <a href="searchvacancy" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+             </div>
             </div>
           </div>
         </div>
-      </div>
+        <div className="col-md-4 mb-5">
+          <div className="card">
+            <div className="card-header">Sales and marketing JOBSs</div>
+            <div className="card-body"  style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div>
+              <h5 className="card-title">110 Companies</h5>
+              <p className="card-text">
+                1000+ Vaccancies
+              </p>
+              
+              <div>
+              </div>  
+        <a href="searchvacancy" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+        
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
     </div>
   
     <PublicUserFooter/>

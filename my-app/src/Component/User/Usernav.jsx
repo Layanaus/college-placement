@@ -58,13 +58,30 @@ const Usernav = () => {
         className="collapse navbar-collapse justify-content-between px-lg-3"
         id="navbarCollapse"
       >
-        <div className="navbar-nav mx-auto py-0">
-          <a href="User" className="nav-item nav-link active">
-            Home
-          </a>
-          <a href="viewjobs" className="nav-item nav-link active">
-            Jobs
-          </a>
+        <div className="navbar-nav mx-auto py-0"> 
+          <div className="nav-item dropdown">
+            <a
+              href=""
+              className="nav-link dropdown-toggle active"
+              data-toggle="dropdown"
+            >
+              View jobs
+            </a>
+            <div className="dropdown-menu m-0">
+              <a href="user" className="dropdown-item">
+                Job Vaccancies
+              </a>
+              <a href="appliedjobs" className="dropdown-item">
+                Applied Jobs
+              </a>
+              {/* <a href="company.html" className="dropdown-item">
+                Company
+              </a>
+              <a href="placement offcr.html" className="dropdown-item">
+                Placement Officer
+              </a> */}
+            </div>
+          </div>
           {/* <a href="course.html" class="nav-item nav-link">Courses</a> */}
           <a href="jobportalhome" className="nav-item nav-link active">
             Job portal

@@ -30,22 +30,26 @@ const Usernotification = () => {
   <div className="container-fluid">
     <div id="w">
       <div id="content">
+      <div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Well done!</h4>
+  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+
+  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+</div>
         {/* Icons source http://dribbble.com/shots/913555-Flat-Web-Elements */}
-        <div className="notify successbox">
-          <h4>Join Notification</h4>
-          <p>
-            Thanks so much for your message. We check e-mail frequently and will
-            try our best to respond to your inquiry.
-          </p>
-        </div>
-        <div className="notify errorbox">
-          <h4>apco Interview Date</h4>
-          <p>
-            You did not set the proper return e-mail address. Please fill out
-            the fields and then submit the form.
-          </p>
-        </div>
-      </div>
+        <div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Well done!</h4>
+  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+
+  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+</div>
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Well done!</h4>
+  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+
+  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+</div>
+</div>
       {/* @end #content */}
     </div>
     {/* @end #w */}

@@ -30,6 +30,38 @@ const Jobportaljobdetails = () => {
     According to the years of experience, the salary ranges between ₹2 Lakhs
     to ₹9 Lakhs.
   </li>
+  <li>
+    <table>
+      <tr>
+        <td>Job Location</td>
+        <td>calicut</td>
+      </tr>
+      <tr>
+        <td>Job Type</td>
+     <td>python Developer</td>
+      </tr>
+      <tr>
+        <td>Duration</td>
+     <td>12 hrs</td>
+      </tr>
+      <tr>
+        <td>Qualifications</td>
+     <td>bca</td>
+      </tr>
+      <tr>
+        <td>Benefits</td>
+     <td>high demosation</td>
+      </tr>
+      <tr>
+        <td>Salary or Compensation</td>
+     <td>50 k</td>
+      </tr>
+      <tr>
+        <td>Application Deadline</td>
+     <td>12/25/2022</td>
+      </tr>
+    </table>
+    </li>
 </ul>
   </div>
   <PublicUserFooter/>

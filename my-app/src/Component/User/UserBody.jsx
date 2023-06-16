@@ -6,12 +6,12 @@ const UserBody = () => {
   className="jumbotron2 jumbotron2-fluid position-relative overlay-bottom"
   style={{ marginTop:'-50px' }}
 >
-  <div className="container text-center my-5 py-5">
+  {/* <div className="container text-center my-5 py-5">
     <h1 className="text-white mt-4 mb-4">Job Search Made Easy: Discover, Apply, Succeed</h1>
     <h1 className="text-white display-1 mb-5">Your Future Starts Here</h1>
     <div className="mx-auto mb-5" style={{ width: "100%", maxWidth: 600 }}>
       <div className="wrapper fadeInDown">
-        <div id="formContent">
+        <div id="formContent"> */}
           {/* Tabs Titles
           Icon */}
           {/* <div className="fadeIn first">
@@ -57,10 +57,10 @@ const UserBody = () => {
             </a>
           </div>  */}
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+//       </div>
+//     </div>
+//   </div>
+// </div>
 
   )
 }

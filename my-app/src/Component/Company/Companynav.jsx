@@ -65,10 +65,14 @@ const Companynav = () => {
             <a href="Createjob" className="nav-item nav-link active">
               Deals
             </a>
+           
             {/* <a href="course.html" class="nav-item nav-link">Courses</a> */}
             {/* <a href="contact.html" class="nav-item nav-link">Contact</a> */}
             <a href="Viewrequest" className="nav-item nav-link active">
               Requests
+            </a>
+            <a href="companycolleges" className="nav-item nav-link active">
+              Colleges
             </a>
             {/* <a href="#" class="nav-item nav-link active">Scheduling interview or exams</a> */}
             <a href="Editcompanyprofile" className="nav-item nav-link active">

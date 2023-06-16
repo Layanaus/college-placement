@@ -16,6 +16,22 @@ const UserReg = () => {
     console.log("data",inputs);
   }
   console.log(inputs);
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setinputs({ ...inputs, [name]: value });
+  };
+
+  const handleReset = () => {
+    setinputs({});
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('data', inputs);
+    // Perform additional actions here, such as making API requests or updating the database
+  }
   return (
     <>
 
@@ -27,31 +43,33 @@ const UserReg = () => {
             <center>
               <h2>Student Registration</h2>
             </center>
-            <div className="form-group">
-              <div className="form-row form-row-1">
-                <input
-                  type="text"
-                  name="first_name"
-                  placeholder="First Name"
-                  value={inputs.first_name ||""}
-                  onChange={setRegister}
-                  
-                />
+            <div className="form-row">
+            <input
+  type="text"
+  name="first_name"
+  placeholder="First Name"
+  value={inputs.first_name || ""}
+  onChange={setRegister}
+  style={{ textAlign: "left", paddingLeft: "10px" }}
+/>
+
               </div>
-              <div className="form-row form-row-2">
-                <input
-                  type="text"
-                  name="username"
-                  
-                
-                  placeholder=" username"
-                  value={inputs.username ||""}
+              <div className="form-row">
+              <input
+                type="date"
+                name="dob"
+              
+                placeholder="DOB"
+                value={inputs.dob ||""}
                   onChange={setRegister}
-                  
-                />
-              </div>
+              />
             </div>
-            <div className="form-row  form-row-3">
+            <div class="form-row">
+  <label className="labels">Applicant Image</label>
+  <input type="file" class="form-control-file" name="file4"/>
+</div>
+
+              <div className="form-row  form-row-3" style={{textAlign:'center',}}>
               <input
                 type="text"
                 name="address"
@@ -66,6 +84,19 @@ const UserReg = () => {
             </div>
             <div className="form-row">
               <select name="position" onChange={setRegister}>
+                <option value="choose college">Choose College</option>
+                <option >College name1 </option>
+                <option >College name2 </option>
+                <option >College name2  </option>
+              </select>
+              <span className="select-btn">
+                <i className="zmdi zmdi-chevron-down" />
+              </span>
+            </div>
+           
+           
+            <div className="form-row">
+              <select name="position" onChange={setRegister}>
                 <option value="qualification">Qualitfication</option>
                 <option value="Post Graduated">Post Graduated</option>
                 <option value="Graduated">Graduated</option>
@@ -75,17 +106,23 @@ const UserReg = () => {
                 <i className="zmdi zmdi-chevron-down" />
               </span>
             </div>
-            <div className="form-row">
+            <div className="form-row  form-row-3" style={{textAlign:'center',}}>
               <input
-                type="date"
-                name="dob"
-              
-                placeholder="DOB"
-                value={inputs.dob ||""}
+                type="text"
+                name="register number"
+               
+                
+                placeholder="Stud-Reg-No"
+                value={inputs.year ||""}
                   onChange={setRegister}
+                
+                style={{ textAlign: "left" }}
               />
             </div>
-         
+              
+            
+            
+           
             <div className="form-row">
               <input
                 type="email"
@@ -96,10 +133,7 @@ const UserReg = () => {
                   onChange={setRegister}
               />
             </div>
-            <div class="form-row">
-  <label className="labels">Applicant Image</label>
-  <input type="file" class="form-control-file" name="file4"/>
-</div>
+            
             <div className="form-row">
               <input
                 type="tel"
@@ -111,17 +145,17 @@ const UserReg = () => {
                 onChange={setRegister}
               />
             </div>
+            
             <div className="form-row">
-              <select name="position" onChange={setRegister}>
-                <option value="choose college">Choose College</option>
-                <option >College name1 </option>
-                <option >College name2 </option>
-                <option >College name2  </option>
-              </select>
-              <span className="select-btn">
-                <i className="zmdi zmdi-chevron-down" />
-              </span>
-            </div>
+                <input
+                  type="text"
+                  name="username"
+                  placeholder="Username"
+                  value={inputs.username || ""}
+                  onChange={setRegister}
+                  style={{ textAlign: "left", paddingLeft: "10px" }}
+                />
+              </div>
             <div className="form-row">
               <input
                 type="password"
@@ -139,20 +173,31 @@ const UserReg = () => {
                 name="cnf_password"
                 
                 
-                placeholder="Confirm-Passoword"
+                placeholder="Confirm-Password"
                 value={inputs.cnf_password ||""}
                   onChange={setRegister}
               />
             </div>
             <center>
-              <div className="register">
+           
+<div className="register d-flex gap-3">
                 <input
                   type="submit"
                   name="register"
-                  className="btn-primary"
-                  defaultValue="Register Badge"
+                  className="btn btn-primary flex-grow-1"
+                  value="Register"
+                />
+                <input
+                  type="reset"
+                  name="reset"
+                  className="btn btn-secondary"
+                  value="Reset"
+                  onClick={handleReset}
                 />
               </div>
+
+
+
             </center>
           </div>
         </form>

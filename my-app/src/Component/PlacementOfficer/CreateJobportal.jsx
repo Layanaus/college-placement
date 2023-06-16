@@ -106,7 +106,7 @@ const CreateJobportal = () => {
                   htmlFor="user_name"
                   className="col-md-4 col-form-label text-md-right"
                 >
-                  Qualification
+                  Required Qualification
                 </label>
                 <div className="col-md-6">
                   <input
@@ -117,12 +117,24 @@ const CreateJobportal = () => {
                   />
                 </div>
               </div>
+             
+              <div className="form-group row">
+                <label
+                  htmlFor="phone_number"
+                  className="col-md-4 col-form-label text-md-right"
+                >
+                   Salary Range
+                </label>
+                <div className="col-md-6">
+                  <input type="text" id="phone_number" className="form-control" />
+                </div>
+              </div>
               <div className="form-group row">
                 <label
                   htmlFor="present_address"
                   className="col-md-4 col-form-label text-md-right"
                 >
-                  Branch
+                  Company contact
                 </label>
                 <div className="col-md-6">
                   <input
@@ -130,17 +142,6 @@ const CreateJobportal = () => {
                     id="present_address"
                     className="form-control"
                   />
-                </div>
-              </div>
-              <div className="form-group row">
-                <label
-                  htmlFor="phone_number"
-                  className="col-md-4 col-form-label text-md-right"
-                >
-                   Salary
-                </label>
-                <div className="col-md-6">
-                  <input type="text" id="phone_number" className="form-control" />
                 </div>
               </div>
               

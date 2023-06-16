@@ -70,63 +70,88 @@ const Adviewjobs = () => {
       </div>
     </div>
   </div>
+  
       <div className="row">
-        <div className="col-md-6 mb-5">
+        <div className="col-md-4 mb-5">
           <div className="card">
             <div className="card-header">IT JOBSs</div>
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
+              <h5 className="card-title">14 MNC Companies Hiring you..</h5>
               <p className="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                1000+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Seach Vaccancy
+                Search Vaccancy
               </a>
             </div>
           </div>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-4">
           <div className="card">
             <div className="card-header">ENGINEERING JOBS</div>
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
+              <h5 className="card-title">200 International Companies</h5>
               <p className="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                540+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Seach Vaccancy
+                Search Vaccancy
               </a>
             </div>
           </div>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-4 mb-5">
           <div className="card">
-            <div className="card-header">IT JOBSs</div>
+            <div className="card-header">Sales and marketing JOBSs</div>
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
+              <h5 className="card-title">110 Companies</h5>
               <p className="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                1000+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Seach Vaccancy
+                Search Vaccancy
               </a>
             </div>
           </div>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-4">
           <div className="card">
-            <div className="card-header">ENGINEERING JOBS</div>
+            <div className="card-header">Digital Marketing</div>
+            <div className="card-body">
+              <h5 className="card-title">200 Companies</h5>
+              <p className="card-text">
+                540+ Vaccancies
+              </p>
+              <a href="adsearchjob" className="btn btn-primary">
+                Search Vaccancy
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="card">
+            <div className="card-header">Management</div>
+            <div className="card-body">
+              <h5 className="card-title">20 Companies</h5>
+              <p className="card-text">
+              50+ Vaccancies
+              </p>
+              <a href="adsearchjob" className="btn btn-primary">
+                Search Vaccancy
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="card">
+            <div className="card-header">Others</div>
             <div className="card-body">
               <h5 className="card-title">Special title treatment</h5>
               <p className="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+              150+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Seach Vaccancy
+                Search Vaccancy
               </a>
             </div>
           </div>

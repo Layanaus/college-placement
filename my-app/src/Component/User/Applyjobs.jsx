@@ -76,21 +76,31 @@ const Applyjobs = () => {
                   <li className="mr-md-4">
                     <i className="zmdi zmdi-time mr-2" /> Full Time
                   </li>
-                  
+                  <li>
+                 
+                  </li>
 
                 </ul>
-
+               
               </div>
-              <a style={{marginLeft:'300px'}} href="PJobdetails"><button>More Details</button></a>
+            
 
             </div>
             <div className="job-right my-4 flex-shrink-0">
-              <a
+            <ul className="d-md-flex flex-wrap text-capitalize ff-open-sans">
+              <li>
+              <a href="PJobdetails" className='btn btn-light'>More Details</a>
+              </li>
+           <li>
+           <a
                 href="applyjobportal"
-                className="btn d-block w-100 d-sm-inline-block btn-light"
+                className="btn d-block w-100 d-sm-inline-block btn-primary ml-4"
               >
                 Apply now
               </a>
+           </li>
+           
+              </ul>
             </div>
           </div>
           <div className="job-box d-md-flex align-items-center justify-content-between mb-30">
@@ -112,16 +122,22 @@ const Applyjobs = () => {
                   </li>
                 </ul>
               </div>
-              <a style={{marginLeft:'300px'}} href="PJobdetails"><button>More Details</button></a>
-
             </div>
             <div className="job-right my-4 flex-shrink-0">
-              <a
+            <ul className="d-md-flex flex-wrap text-capitalize ff-open-sans">
+              <li>
+              <a href="PJobdetails" className='btn btn-light'>More Details</a>
+              </li>
+           <li>
+           <a
                 href="applyjobportal"
-                className="btn d-block w-100 d-sm-inline-block btn-light"
+                className="btn d-block w-100 d-sm-inline-block btn-primary ml-4"
               >
                 Apply now
               </a>
+           </li>
+           
+              </ul>
             </div>
           </div>
           <div className="job-box d-md-flex align-items-center justify-content-between mb-30">
@@ -144,16 +160,22 @@ const Applyjobs = () => {
                 </ul>
 
               </div>
-              <a style={{marginLeft:'300px'}} href="PJobdetails"><button>More Details</button></a>
-
             </div>
             <div className="job-right my-4 flex-shrink-0">
-              <a
+            <ul className="d-md-flex flex-wrap text-capitalize ff-open-sans">
+              <li>
+              <a href="PJobdetails" className='btn btn-light'>More Details</a>
+              </li>
+           <li>
+           <a
                 href="applyjobportal"
-                className="btn d-block w-100 d-sm-inline-block btn-light"
+                className="btn d-block w-100 d-sm-inline-block btn-primary ml-4"
               >
                 Apply now
               </a>
+           </li>
+           
+              </ul>
             </div>
           </div>
           <div className="job-box d-md-flex align-items-center justify-content-between mb-30">
@@ -177,65 +199,58 @@ const Applyjobs = () => {
                   </li>
                 </ul>
               </div>
-              <a style={{marginLeft:'300px'}} href="PJobdetails"><button>More Details</button></a>
-
             </div>
             <div className="job-right my-4 flex-shrink-0">
-              <a
+            <ul className="d-md-flex flex-wrap text-capitalize ff-open-sans">
+              <li>
+              <a href="PJobdetails" className='btn btn-light'>More Details</a>
+              </li>
+           <li>
+           <a
                 href="applyjobportal"
-                className="btn d-block w-100 d-sm-inline-block btn-light"
+                className="btn d-block w-100 d-sm-inline-block btn-primary ml-4"
               >
                 Apply now
               </a>
+           </li>
+           
+              </ul>
             </div>
           </div>
         </div>
       </div>
       {/* START Pagination */}
-      <nav aria-label="Page navigation">
-        <ul className="pagination pagination-reset justify-content-center">
-          <li className="page-item disabled">
-            <a
-              className="page-link"
-              href="#"
-              tabIndex={-1}
-              aria-disabled="true"
-            >
-              <i className="zmdi zmdi-long-arrow-left" />
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li className="page-item d-none d-md-inline-block">
-            <a className="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li className="page-item d-none d-md-inline-block">
-            <a className="page-link" href="#">
-              3
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              ...
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              8
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              <i className="zmdi zmdi-long-arrow-right" />
-            </a>
-          </li>
-        </ul>
-      </nav>
+      <div className="row justify-content-center">
+    <nav aria-label="Page navigation justify-content-center">
+      <ul className="pagination">
+        <li className="page-item">
+          <a className="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">«</span>
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            1
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            2
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            3
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">»</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
       {/* END Pagination */}
     </div>
   </div>

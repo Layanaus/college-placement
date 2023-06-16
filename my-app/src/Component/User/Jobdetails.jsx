@@ -152,15 +152,20 @@ import Usernav from './Usernav';
 
 const Jobdetails = () => {
   const [showForm, setShowForm] = useState(false);
+  const [showDetails, setShowDetails] = useState(true);
 
   const handleApplyClick = () => {
     setShowForm(true);
+    setShowDetails(false);
+
   };
 
   return (
     <>
       <Usernav />
       <div className="container">
+      {showDetails && (
+        <>
         <h2>Job Details</h2>
         <ul>
       <li>
@@ -183,9 +188,43 @@ const Jobdetails = () => {
         Python developer’s average annual salary in India is ₹8,15,153.
         According to the years of experience, the salary ranges between ₹2 Lakhs
         to ₹9 Lakhs.
-      </li>
-    </ul>
+      </li><li>
+    <table>
+      <tr>
+        <td>Job Location</td>
+        <td>calicut</td>
+      </tr>
+      <tr>
+        <td>Job Type</td>
+     <td>python Developer</td>
+      </tr>
+      <tr>
+        <td>Duration</td>
+     <td>12 hrs</td>
+      </tr>
+      <tr>
+        <td>Qualifications</td>
+     <td>bca</td>
+      </tr>
+      <tr>
+        <td>Benefits</td>
+     <td>high demosation</td>
+      </tr>
+      <tr>
+        <td>Salary or Compensation</td>
+     <td>50 k</td>
+      </tr>
+      <tr>
+        <td>Application Deadline</td>
+     <td>12/25/2022</td>
+      </tr>
+    </table>
+    </li>
+    </ul>  
+  </>
+     )}
       </div>
+   
       <center>
         {!showForm && (
           <button className="btn-primary" onClick={handleApplyClick}>
@@ -194,12 +233,12 @@ const Jobdetails = () => {
         )}
       </center>
       {showForm && (
-        <div className="container">
+        <div className="container mt-5">
           <div className="row justify-content-center">
             <div className="col-md-8 text-center">
             <form
           method="POST"
-          className="w-100 rounded p-4 border bg-dark"
+          className="w-100 rounded p-4 border bg-light"
           action="https://herotofu.com/start"
           encType="multipart/form-data"
         >
@@ -214,6 +253,33 @@ const Jobdetails = () => {
             />
           </label>
           <label className="d-block mb-4">
+  <span className="d-block mb-2">Date Of Birth</span>
+  <input
+    name="DOB"
+    type="date"
+    className="form-control"
+    placeholder="Enter your Date of Birth"
+  />
+</label>
+<label className="d-block mb-4">
+  <span className="d-block mb-2">Date Of Birth</span>
+  <textarea
+    name="address"
+    type="text"
+    className="form-control"
+    placeholder="Enter your Address"
+  />
+</label>
+<label className="d-block mb-4">
+            <span className="d-block mb-2">Phone No</span>
+            <input
+              name="phone"
+              type="number"
+              className="form-control"
+              placeholder="Enter your Phone No"
+            />
+          </label>
+          <label className="d-block mb-4">
             <span className="d-block mb-2">Email address</span>
             <input
               required=""
@@ -221,6 +287,25 @@ const Jobdetails = () => {
               type="email"
               className="form-control"
               placeholder="Enter your Email"
+            />
+          </label>
+          <label className="d-block mb-4">
+            <span className="d-block mb-2">Enter Your Education</span>
+            <input
+              required=""
+              name="education"
+              type="text"
+              className="form-control"
+              placeholder="Type your current educational level"
+            />
+          </label>
+          <label className="d-block mb-4">
+            <span className="d-block mb-2">Enter Your Skills</span>
+            <input
+              name="skill"
+              type="text"
+              className="form-control"
+              placeholder="Type your Skills"
             />
           </label>
           <label className="d-block mb-4">
@@ -244,46 +329,9 @@ const Jobdetails = () => {
               defaultValue={""}
             />
           </label>
-          <div className="mb-4">
-            <label className="d-block mb-2">Your CV</label>
-            <div className="form-control h-auto">
-              <input
-                required=""
-                name="cv"
-                type="file"
-                className="form-control-file"
-              />
-            </div>
-          </div>
-          <div className="mb-4">
-            <div>
-              <label className="custom-control custom-radio">
-                <input
-                  name="remote"
-                  defaultValue="yes"
-                  type="radio"
-                  className="custom-control-input"
-                  defaultChecked=""
-                />
-                <span className="d-inline-block mt-1 custom-control-label">
-                  You'd like to work remotely
-                </span>
-              </label>
-            </div>
-            <div>
-              <label className="custom-control custom-radio">
-                <input
-                  name="remote"
-                  defaultValue="no"
-                  type="radio"
-                  className="custom-control-input"
-                />
-                <span className="d-inline-block mt-1 custom-control-label">
-                  You'd prefer to work onsite
-                </span>
-              </label>
-            </div>
-          </div>
+          
+          
+              
           <div className="d-block text-right">
             <div className="mb-3">
               <button type="submit" className="btn btn-primary px-3">

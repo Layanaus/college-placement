@@ -26,12 +26,11 @@ const SearchVacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
+        <div className="card-header text text-center">Salesman</div>
         <div className="card-body text-center">
-          <h5 className="card-title">Special title treatment</h5>
+          <h5 className="card-title">My life style pvt</h5> 
           <p className="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
+           Looking for freshers
           </p>
           <a href="Jobdetails" className="btn btn-primary">
             View Salary &amp; More Info
@@ -43,12 +42,11 @@ const SearchVacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
+        <div className="card-header text text-center">Electrical Maintenance</div>
         <div className="card-body text-center">
-          <h5 className="card-title">Special title treatment</h5>
+          <h5 className="card-title">Thomson Industries</h5>
           <p className="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
+           Minimum three year experiencce
           </p>
           <a href="Jobdetails" className="btn btn-primary">
             View Salary &amp; More Info
@@ -60,12 +58,12 @@ const SearchVacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
+        <div className="card-header text text-center">Supervisor</div>
         <div className="card-body text-center">
-          <h5 className="card-title">Special title treatment</h5>
+          <h5 className="card-title">Ikea</h5>
           <p className="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
+            Both for freshers and experience
+            
           </p>
           <a href="Jobdetails" className="btn btn-primary">
             View Salary &amp; More Info
@@ -77,12 +75,11 @@ const SearchVacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
+        <div className="card-header text text-center">Marketing Manager</div>
         <div className="card-body text-center">
-          <h5 className="card-title">Special title treatment</h5>
+          <h5 className="card-title">Ikea</h5>
           <p className="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
+           Required much communication skill
           </p>
           <a href="Jobdetails" className="btn btn-primary">
             View Salary &amp; More Info

@@ -11,18 +11,47 @@ const Applyjobportal = () => {
             <div className="col-md-8 text-center">
             <form
           method="POST"
-          className="w-100 rounded p-4 border bg-dark"
+          className="w-100 rounded p-4 border bg-light"
           action="https://herotofu.com/start"
           encType="multipart/form-data"
         >
           <label className="d-block mb-4">
-            <span className="d-block mb-2">Your name</span>
+            <span className="d-block mb-2">Enter Your Name</span>
             <input
               required=""
-              name="name"
+              name="address"
               type="text"
               className="form-control"
               placeholder="Type your full name"
+            />
+          </label>
+          <label className="d-block mb-4">
+  <span className="d-block mb-2">Date Of Birth</span>
+  <input
+    name="DOB"
+    type="date"
+    className="form-control"
+    placeholder="Enter your Date of Birth"
+  />
+</label>
+
+          <label className="d-block mb-4">
+            <span className="d-block mb-2">Address</span>
+            <textarea
+              name="address"
+              type="text"
+              className="form-control"
+              placeholder="Enter your Address"
+            />
+          </label>
+          <label className="d-block mb-4">
+            <span className="d-block mb-2">Phone Number</span>
+            <input
+              required=""
+              name="phone"
+              type="number"
+              className="form-control"
+              placeholder="Enter your Phone Number"
             />
           </label>
           <label className="d-block mb-4">
@@ -33,6 +62,26 @@ const Applyjobportal = () => {
               type="email"
               className="form-control"
               placeholder="Enter your Email"
+            />
+          </label>
+          <label className="d-block mb-4">
+            <span className="d-block mb-2">Enter Your Education</span>
+            <input
+              required=""
+              name="education"
+              type="text"
+              className="form-control"
+              placeholder="Type your Current Education Level"
+            />
+          </label>
+          <label className="d-block mb-4">
+            <span className="d-block mb-2">Enter Your Skills</span>
+            <input
+              required=""
+              name="skills"
+              type="text"
+              className="form-control"
+              placeholder="Type your Skills"
             />
           </label>
           <label className="d-block mb-4">
@@ -56,46 +105,8 @@ const Applyjobportal = () => {
               defaultValue={""}
             />
           </label>
-          <div className="mb-4">
-            <label className="d-block mb-2">Your CV</label>
-            <div className="form-control h-auto">
-              <input
-                required=""
-                name="cv"
-                type="file"
-                className="form-control-file"
-              />
-            </div>
-          </div>
-          <div className="mb-4">
-            <div>
-              <label className="custom-control custom-radio">
-                <input
-                  name="remote"
-                  defaultValue="yes"
-                  type="radio"
-                  className="custom-control-input"
-                  defaultChecked=""
-                />
-                <span className="d-inline-block mt-1 custom-control-label">
-                  You'd like to work remotely
-                </span>
-              </label>
-            </div>
-            <div>
-              <label className="custom-control custom-radio">
-                <input
-                  name="remote"
-                  defaultValue="no"
-                  type="radio"
-                  className="custom-control-input"
-                />
-                <span className="d-inline-block mt-1 custom-control-label">
-                  You'd prefer to work onsite
-                </span>
-              </label>
-            </div>
-          </div>
+         
+          
           <div className="d-block text-right">
             <div className="mb-3">
               <button type="submit" className="btn btn-primary px-3">

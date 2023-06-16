@@ -13,37 +13,89 @@ const Applications = () => {
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Position</th>
+          <th scope="col">Attachment</th>
           <th scope="col">Status</th>
-          <th scope="col">Action</th>
         </tr>
       </thead>
       <tbody>
+      <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Java</td>
+          <td>
+            <a href="Reviewapplication">View Cv &amp; More Detail</a>
+          </td>
+          <td>interview passed</td>
+          
+        </tr>
         <tr>
           <th scope="row">1</th>
           <td>Mark</td>
           <td>Java</td>
-          <td>Not Examined</td>
           <td>
             <a href="Reviewapplication">View Cv &amp; More Detail</a>
           </td>
+          <td>ineligible for interview</td>
+          
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Java</td>
+          <td>
+            <a href="Reviewapplication">View Cv &amp; More Detail</a>
+          </td>
+          <td>Not Examined</td>
+          
         </tr>
         <tr>
           <th scope="row">2</th>
           <td>Jacob</td>
           <td>Graphics Design</td>
-          <td>Eligible</td>
           <td>
             <a href="Reviewapplication">View Cv &amp; More Detail</a>
           </td>
+          <td>Eligible For Test</td>
         </tr>
         <tr>
           <th scope="row">3</th>
           <td>Larry</td>
           <td>Php Developer</td>
-          <td>Not Eligible</td>
           <td>
             <a href="Reviewapplication">View Cv &amp; More Detail</a>
           </td>
+          <td>Not Eligible Test</td>
+          
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Java</td>
+          <td>
+            <a href="Reviewapplication">View Cv &amp; More Detail</a>
+          </td>
+          <td>Eligible for interview</td>
+          
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Java</td>
+          <td>
+            <a href="Reviewapplication">View Cv &amp; More Detail</a>
+          </td>
+          <td>interview failed</td>
+          
+        </tr>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Java</td>
+          <td>
+            <a href="Reviewapplication">View Cv &amp; More Detail</a>
+          </td>
+          <td>ineligible for interview</td>
+          
         </tr>
       </tbody>
     </table>

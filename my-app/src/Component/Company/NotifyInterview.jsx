@@ -9,10 +9,7 @@ const NotifyInterview = () => {
       <div className="container">
         <h2>Notify Interview Date</h2>
         <form>
-          <div className="form-group">
-            <label htmlFor="subject">Subject</label>
-            <input type="text" className="form-control" id="subject" name="subject" />
-          </div>
+         
           <div className="form-group">
             <label htmlFor="message">Message:</label>
             <textarea

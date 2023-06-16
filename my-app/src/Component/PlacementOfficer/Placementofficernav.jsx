@@ -69,15 +69,40 @@ const Placementofficernav = () => {
             <a href="studentmanage" className="nav-item nav-link active">
               Manage user
             </a>
-            <a href="sendrequest" className="nav-item nav-link active">
-              Make placement request
+            
+          
+            <div className="nav-item dropdown">
+            <a
+              href=""
+              className="nav-link dropdown-toggle active"
+              data-toggle="dropdown"
+            >
+              Placement cell
             </a>
-            <a href="companyresponse" className="nav-item nav-link active">
-              View Company request
+            <div className="dropdown-menu m-0">
+            <a href="sendrequest" className="dropdown-item">
+              Make requests
             </a>
+            <a href="companyresponse" className="dropdown-item">
+              View response
+            </a>
+            <a href="viewrequests" className="dropdown-item">
+              View Requests
+            </a>
+              {/* <a href="company.html" className="dropdown-item">
+                Company
+              </a>
+              <a href="placement offcr.html" className="dropdown-item">
+                Placement Officer
+              </a> */}
+            </div>
+          </div>
            
             <a href="POviewjobs" className="nav-item nav-link active">
               View Jobs
+            </a>
+            <a href="placedstudent" className="nav-item nav-link active">
+              Placed Students
             </a>
             {/* <div className="nav-item dropdown">
               <a

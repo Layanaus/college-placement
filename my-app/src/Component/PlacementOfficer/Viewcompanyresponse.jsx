@@ -37,7 +37,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2013/08/08</td>
                 <td className="text-center">
-                  <span className="label label-default">Inactive</span>
+                  <span className="label label-default">Approved</span>
                 </td>
                 <td>
                   <a href="#">mila@kunis.com</a>
@@ -56,7 +56,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2013/08/12</td>
                 <td className="text-center">
-                  <span className="label label-success">Active</span>
+                  <span className="label label-success">Reject</span>
                 </td>
                 <td>
                   <a href="#">marlon@brando.com</a>
@@ -76,7 +76,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2013/03/03</td>
                 <td className="text-center">
-                  <span className="label label-danger">Banned</span>
+                  <span className="label label-danger">Approved</span>
                 </td>
                 <td>
                   <a href="#">jack@nicholson</a>
@@ -94,7 +94,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2004/01/24</td>
                 <td className="text-center">
-                  <span className="label label-warning">Pending</span>
+                  <span className="label label-warning">Reject</span>
                 </td>
                 <td>
                   <a href="#">humphrey@bogart.com</a>
@@ -113,7 +113,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2013/12/31</td>
                 <td className="text-center">
-                  <span className="label label-success">Active</span>
+                  <span className="label label-success">Approved</span>
                 </td>
                 <td>
                   <a href="#">spencer@tracy</a>
@@ -132,7 +132,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2013/08/08</td>
                 <td className="text-center">
-                  <span className="label label-default">Inactive</span>
+                  <span className="label label-default">Reject</span>
                 </td>
                 <td>
                   <a href="#">mila@kunis.com</a>
@@ -151,7 +151,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2013/08/12</td>
                 <td className="text-center">
-                  <span className="label label-success">Active</span>
+                  <span className="label label-success">Approved</span>
                 </td>
                 <td>
                   <a href="#">marlon@brando.com</a>
@@ -170,7 +170,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2013/03/03</td>
                 <td className="text-center">
-                  <span className="label label-danger">Banned</span>
+                  <span className="label label-danger">Reject</span>
                 </td>
                 <td>
                   <a href="#">jack@nicholson</a>
@@ -189,7 +189,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2004/01/24</td>
                 <td className="text-center">
-                  <span className="label label-warning">Pending</span>
+                  <span className="label label-warning">Approved</span>
                 </td>
                 <td>
                   <a href="#">humphrey@bogart.com</a>
@@ -208,7 +208,7 @@ const Viewcompanyresponse = () => {
                 </td>
                 <td>2013/12/31</td>
                 <td className="text-center">
-                  <span className="label label-success">Active</span>
+                  <span className="label label-success">Reject</span>
                 </td>
                 <td>
                   <a href="#">spencer@tracy</a>
@@ -222,50 +222,37 @@ const Viewcompanyresponse = () => {
             </tbody>
           </table>
         </div>
-        <nav aria-label="Page navigation">
-        <ul className="pagination pagination-reset justify-content-center">
-          <li className="page-item disabled">
-            <a
-              className="page-link"
-              href="#"
-              tabIndex={-1}
-              aria-disabled="true"
-            >
-              <i className="zmdi zmdi-long-arrow-left" />
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li className="page-item d-none d-md-inline-block">
-            <a className="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li className="page-item d-none d-md-inline-block">
-            <a className="page-link" href="#">
-              3
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              ...
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              8
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              <i className="zmdi zmdi-long-arrow-right" />
-            </a>
-          </li>
-        </ul>
-      </nav>
+        <div className="row justify-content-center">
+    <nav aria-label="Page navigation justify-content-center">
+      <ul className="pagination">
+        <li className="page-item">
+          <a className="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">«</span>
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            1
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            2
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            3
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">»</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
       </div>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 
@@ -7,14 +7,14 @@ const Editcompanyprofile = () => {
     <>
       <Companynav />
       <div className="container">
-        <h2>Edit Company Profile</h2>
+        <h1 className="text-center">Edit Company Profile</h1>
         <form>
           <div className="form-group row">
             <label htmlFor="companyName" className="col-sm-2 col-form-label">Company Name:</label>
             <div className="col-sm-10">
               <input
                 type="text"
-                className="form-control"
+                className="form-control custom-input"
                 id="companyName"
                 name="companyName"
                 placeholder="Company name"
@@ -26,7 +26,7 @@ const Editcompanyprofile = () => {
             <div className="col-sm-10">
               <input
                 type="text"
-                className="form-control"
+                className="form-control custom-input"
                 id="address"
                 name="address"
                 placeholder="Location"
@@ -34,55 +34,52 @@ const Editcompanyprofile = () => {
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="website" className="col-sm-2 col-form-label">Founded In:</label>
+            <label htmlFor="e-mail" className="col-sm-2 col-form-label">E-mail:</label>
             <div className="col-sm-10">
               <input
                 type="text"
-                className="form-control"
-                id="website"
+                className="form-control custom-input"
+                name="e-mail"
+                placeholder="E-mail"
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label htmlFor="phone" className="col-sm-2 col-form-label">Phone:</label>
+            <div className="col-sm-10">
+              <input
+                type="text"
+                pattern="[0-9]*"
+                className="form-control custom-input"
+                name="phone"
+                placeholder="Phone"
+              />
+            </div>
+          </div>
+          <div className="form-group row">
+            <label htmlFor="website" className="col-sm-2 col-form-label">Website Address:</label>
+            <div className="col-sm-10">
+              <input
+                type="text"
+                className="form-control custom-input"
                 name="website"
-                placeholder="12/09/2002"
+                placeholder="Website Address"
               />
             </div>
           </div>
           <div className="form-group row">
-            <label htmlFor="founder" className="col-sm-2 col-form-label">Founder:</label>
+            <label htmlFor="username" className="col-sm-2 col-form-label">Username:</label>
             <div className="col-sm-10">
               <input
                 type="text"
-                className="form-control"
-                id="founder"
-                name="founder"
-                placeholder="Founder name"
+                className="form-control custom-input"
+                name="username"
+                placeholder="Username"
               />
             </div>
           </div>
-          <div className="form-group row">
-            <label htmlFor="website" className="col-sm-2 col-form-label">Website:</label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="website"
-                name="website"
-                placeholder="website.blog"
-              />
-            </div>
-          </div>
-          <div className="form-group row">
-            <label htmlFor="description" className="col-sm-2 col-form-label">Description:</label>
-            <div className="col-sm-10">
-              <textarea
-                className="form-control"
-                id="description"
-                name="description"
-                rows={5}
-                placeholder="Description about Company"
-                defaultValue={""}
-              />
-            </div>
-          </div>
-          <div className="form-group row">
+          
+          <div className="form-group row" style={{marginLeft:'385px'}}>
             <div className="col-sm-10 offset-sm-2">
               <button type="submit" className="btn btn-primary">
                 Save Changes

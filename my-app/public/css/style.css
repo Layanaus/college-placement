@@ -1,4 +1,4 @@
-/******* Bootstrap Theming ********/
+****** Bootstrap Theming *******
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
@@ -4508,6 +4508,7 @@ input[type="button"].btn-block {
 
 .card-title {
   margin-bottom: 0.75rem;
+  color: #1c4966;
 }
 
 .card-subtitle {
@@ -22033,12 +22034,17 @@ p {
 
 /* Job listing item */
 .job-item {
-  background-color: #f5f5f5;
+  background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px;
   padding: 20px;
   width: calc(25% - 40px); /* 25% width minus margin and padding */
+}
+.job-item h1{
+  color: #1C4966;
 }
 
 .job-item h2 {
@@ -22239,3 +22245,60 @@ ul {
 .mb-30 {
     margin-bottom: 30px;
 }
+
+/* aptitude test */
+.question-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: #eaf6ff;
+  border-radius: 10px;
+  padding: 20px;
+}
+/* Style the dropdown container */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Style the dropdown button */
+.dropbtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style the dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+/* Style the dropdown links */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Show the dropdown content when the dropdown button is clicked */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.colour1
+{
+  color: #1c4966;
+}
+/* testimonials */
