@@ -35,13 +35,17 @@ const MyProfile = () => {
     <div className="col-md-5 border-right">
       <div className="p-3 py-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
-          <h4 className="text-right">Profile Settings</h4>
+          <h4 className="text-right" >Profile Settings</h4>
         </div>
+        
+
+        
+
         <div className="row mt-2">
           <div className="col-md-6">
             <label className="labels">First Name</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               placeholder="first name"
               defaultValue=""
@@ -50,7 +54,7 @@ const MyProfile = () => {
           <div className="col-md-6">
             <label className="labels">Last Name</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               defaultValue=""
               placeholder="lastname"
@@ -61,7 +65,7 @@ const MyProfile = () => {
         <div className="col-md-12">
   <label className="labels">Date of Birth</label>
   <input
-    type="text"
+    type=""
     className="form-control"
     placeholder="select date of birth"
   style={{width:'350px'}}
@@ -80,9 +84,9 @@ const MyProfile = () => {
 
           
           <div className="col-md-12">
-            <label className="labels">Address Line 1</label>
+            <label className="labels" >Address Line 1</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               placeholder="enter address line 1"
               defaultValue=""
@@ -91,7 +95,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Address Line 2</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               placeholder="enter address line 2"
               defaultValue=""
@@ -100,7 +104,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Postcode</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               placeholder="enter Pincode"
               defaultValue=""
@@ -111,7 +115,7 @@ const MyProfile = () => {
           <div className="col-md-6">
             <label className="labels">Area</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               placeholder="area"
               defaultValue=""
@@ -120,7 +124,7 @@ const MyProfile = () => {
           <div className="col-md-6">
             <label className="labels">District</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               defaultValue=""
               placeholder="district"
@@ -167,7 +171,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Email ID</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               placeholder="enter email id"
               defaultValue=""
@@ -176,7 +180,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Alternative Email ID</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               placeholder="enter email id"
               defaultValue=""
@@ -185,7 +189,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Mobile Number</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               placeholder="enter phone number"
               defaultValue=""
@@ -194,7 +198,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Alternative Mobile Number</label>
             <input
-              type="text"
+              type=""
               className="form-control"
               placeholder="enter phone number"
               defaultValue=""
@@ -270,7 +274,7 @@ const MyProfile = () => {
     <div className="col-md-12">
             <label className="labels">Branch</label>
             <input  style={{width:'400px'}}
-              type="text"
+              type=""
               className="form-control"
               placeholder="enter branch"
               defaultValue=""
@@ -295,15 +299,15 @@ const MyProfile = () => {
     <div className="col-md-12">
       <label className="labels">Experience(optional)</label>
       <input
-        style={{ width: '400px' }}
-        type="text"
+        style={{ width: '400px',marginBottom:'10px' }}
+        // type="text"
         className="form-control input-lg"
         placeholder="job type"
         defaultValue=""
       />
        <input
         style={{ width: '400px' }}
-        type="text"
+        // type="text"
         className="form-control input-lg"
         placeholder="year"
         defaultValue=""
@@ -317,7 +321,7 @@ const MyProfile = () => {
           <label className="labels">Additional Skill {index + 1}</label>
           <input
             style={{ width: '400px' }}
-            type="text"
+            type=""
             className="form-control input-lg"
             placeholder={`Skill ${index + 1}`}
             value={skill}

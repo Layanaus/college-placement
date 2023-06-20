@@ -12,7 +12,7 @@ const ViewJobcategory = () => {
     <div className="job-listings">
       <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <div>
-    <h1>Non IT Field</h1>
+    <h1> IT Field</h1>
     <p>100+ Vacancy</p>
   </div>
   <div>
@@ -30,7 +30,7 @@ const ViewJobcategory = () => {
       </div>
       <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <div>
-    <h1>Non IT Field</h1>
+    <h1>Digital Marketing</h1>
     <p>100+ Vacancy</p>
   </div>
   <div>
@@ -43,7 +43,7 @@ const ViewJobcategory = () => {
     <div className="job-listings">
       <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <div>
-    <h1>Non IT Field</h1>
+    <h1>Sales and Marketing</h1>
     <p>100+ Vacancy</p>
   </div>
   <div>
@@ -52,7 +52,7 @@ const ViewJobcategory = () => {
       </div>
       <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <div>
-    <h1>Non IT Field</h1>
+    <h1>Health care</h1>
     <p>100+ Vacancy</p>
   </div>
   <div>
@@ -61,7 +61,7 @@ const ViewJobcategory = () => {
       </div>
       <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <div>
-    <h1>Non IT Field</h1>
+    <h1>Others</h1>
     <p>100+ Vacancy</p>
   </div>
   <div>

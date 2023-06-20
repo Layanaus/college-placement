@@ -32,7 +32,7 @@ const CreateJobportal = () => {
                 </label>
                 <div className="col-md-6">
                   <input
-                    type="text"
+                    // type="text"
                     id="full_name"
                     className="form-control"
                     name="full-name"
@@ -48,7 +48,7 @@ const CreateJobportal = () => {
                 </label>
                 <div className="col-md-6">
                   <input
-                    type="text"
+                    // type="text"
                     className="form-control"
                     name="location"
                   />
@@ -63,7 +63,7 @@ const CreateJobportal = () => {
                 </label>
                 <div className="col-md-6">
                   <input
-                    type="text"
+                    // type="text"
                     className="form-control"
                     name="description"
                   />
@@ -78,13 +78,43 @@ const CreateJobportal = () => {
                 </label>
                 <div className="col-md-6">
                   <input
-                    type="text"
+                    // type="text"
                     id="description"
                     className="form-control"
                     name="description"
                   />
                 </div>
               </div>
+              {/* <div className="form-group row">
+                <label
+                  htmlFor="category"
+                  className="col-md-4 col-form-label text-md-right"
+                >
+                  Job Category
+                </label>
+                <div className="col-md-6">
+                  <input
+                    type="text"
+                    id="category"
+                    className="form-control"
+                    name="category"
+                  />
+                </div>
+              </div> */}
+              <div className="form-group row">
+  <label htmlFor="category" className="col-md-4 col-form-label text-md-right">
+    Job Category
+  </label>
+  <div className="col-md-6" >
+    <select id="category" className="form-control" name="category">
+      <option value="">Select Job Category</option>
+      <option value="category1">Category 1</option>
+      <option value="category2">Category 2</option>
+      <option value="category3">Category 3</option>
+    </select>
+  </div>
+</div>
+
               <div className="form-group row">
                 <label
                   htmlFor="email_address"
@@ -94,7 +124,7 @@ const CreateJobportal = () => {
                 </label>
                 <div className="col-md-6">
                   <input
-                    type="text"
+                    // type="text"
                     id="email_address"
                     className="form-control"
                     name="email-address"
@@ -110,7 +140,7 @@ const CreateJobportal = () => {
                 </label>
                 <div className="col-md-6">
                   <input
-                    type="text"
+                    // type="text"
                     id="user_name"
                     className="form-control"
                     name="username"
@@ -126,7 +156,7 @@ const CreateJobportal = () => {
                    Salary Range
                 </label>
                 <div className="col-md-6">
-                  <input type="text" id="phone_number" className="form-control" />
+                  <input  id="phone_number" className="form-control" />
                 </div>
               </div>
               <div className="form-group row">
@@ -138,7 +168,7 @@ const CreateJobportal = () => {
                 </label>
                 <div className="col-md-6">
                   <input
-                    type="text"
+                    // type="text"
                     id="present_address"
                     className="form-control"
                   />
@@ -171,7 +201,7 @@ const CreateJobportal = () => {
       </div>
     </div>
   </div>
-  <ManageJobportal/>
+ 
   <PublicUserFooter/>
   </>
   )

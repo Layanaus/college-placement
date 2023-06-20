@@ -26,7 +26,7 @@ const Adsearchvacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
+        {/* <div className="card-header text text-center">Python Developer</div> */}
         <div className="card-body text-center">
           <h5 className="card-title">Special title treatment</h5>
           <p className="card-text">
@@ -43,7 +43,7 @@ const Adsearchvacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
+        {/* <div className="card-header text text-center">Python Developer</div> */}
         <div className="card-body text-center">
           <h5 className="card-title">Special title treatment</h5>
           <p className="card-text">
@@ -60,7 +60,7 @@ const Adsearchvacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
+        {/* <div className="card-header text text-center">Python Developer</div> */}
         <div className="card-body text-center">
           <h5 className="card-title">Special title treatment</h5>
           <p className="card-text">
@@ -77,7 +77,7 @@ const Adsearchvacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
+        {/* <div className="card-header text text-center">Python Developer</div> */}
         <div className="card-body text-center">
           <h5 className="card-title">Special title treatment</h5>
           <p className="card-text">

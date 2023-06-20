@@ -57,6 +57,7 @@ import Appliedjobs from '../../Pages/User/Appliedjobs'
 import ViewAppliedstudents from '../PlacementOfficer/ViewAppliedstudents'
 import Colleges from '../Company/Colleges'
 import Viewrequests from '../PlacementOfficer/Viewrequests'
+import ManageJobportal from '../PlacementOfficer/ManageJobportal'
 
 const MainRouter = () => {
   return (
@@ -118,6 +119,7 @@ const MainRouter = () => {
             <Route path="viewstudents" element={<ViewAppliedstudents/>}/>
             <Route path="companycolleges" element={<Colleges/>}/>
             <Route path="viewrequests" element={<Viewrequests/>}/>
+            <Route path="manageportal" element={<ManageJobportal/>}/>
 
           
 

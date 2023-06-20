@@ -146,7 +146,7 @@ const Adviewjobs = () => {
           <div className="card">
             <div className="card-header">Others</div>
             <div className="card-body">
-              <h5 className="card-title">Special title treatment</h5>
+              <h5 className="card-title">50 Companies</h5>
               <p className="card-text">
               150+ Vaccancies
               </p>

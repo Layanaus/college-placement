@@ -62,9 +62,27 @@ const Placementofficernav = () => {
           <a href="Placementofficer" className="nav-item nav-link active">
              Home
             </a>
-            <a href="Pjobportal" className="nav-item nav-link active">
-              Create job portal
+            {/* <a href="Pjobportal" className="nav-item nav-link active">
+               job portal
+            </a> */}
+            <div className="nav-item dropdown">
+            <a
+              href=""
+              className="nav-link dropdown-toggle active"
+              data-toggle="dropdown"
+            >
+              Job portal
             </a>
+            <div className="dropdown-menu m-0">
+            <a href="Pjobportal" className="dropdown-item">
+              Create portal
+            </a>
+            <a href="manageportal" className="dropdown-item">
+              View portal
+            </a>
+            </div>
+            </div>
+            
             {/* <a href="course.html" class="nav-item nav-link">Courses</a> */}
             <a href="studentmanage" className="nav-item nav-link active">
               Manage user

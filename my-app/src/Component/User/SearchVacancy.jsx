@@ -26,7 +26,7 @@ const SearchVacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Salesman</div>
+        {/* <div className="card-header text text-center">Salesman</div> */}
         <div className="card-body text-center">
           <h5 className="card-title">My life style pvt</h5> 
           <p className="card-text">
@@ -42,7 +42,7 @@ const SearchVacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Electrical Maintenance</div>
+        {/* <div className="card-header text text-center">Electrical Maintenance</div> */}
         <div className="card-body text-center">
           <h5 className="card-title">Thomson Industries</h5>
           <p className="card-text">
@@ -58,7 +58,7 @@ const SearchVacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Supervisor</div>
+        {/* <div className="card-header text text-center">Supervisor</div> */}
         <div className="card-body text-center">
           <h5 className="card-title">Ikea</h5>
           <p className="card-text">
@@ -75,7 +75,7 @@ const SearchVacancy = () => {
   <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Marketing Manager</div>
+        {/* <div className="card-header text text-center">Marketing Manager</div> */}
         <div className="card-body text-center">
           <h5 className="card-title">Ikea</h5>
           <p className="card-text">

@@ -247,9 +247,9 @@ const Jobdetails = () => {
             <input
               required=""
               name="name"
-              type="text"
+              // type="text"
               className="form-control"
-              placeholder="Type your full name"
+              placeholder="Enter your full name"
             />
           </label>
           <label className="d-block mb-4">
@@ -262,7 +262,7 @@ const Jobdetails = () => {
   />
 </label>
 <label className="d-block mb-4">
-  <span className="d-block mb-2">Date Of Birth</span>
+  <span className="d-block mb-2">Address</span>
   <textarea
     name="address"
     type="text"
@@ -294,7 +294,7 @@ const Jobdetails = () => {
             <input
               required=""
               name="education"
-              type="text"
+              // type="text"
               className="form-control"
               placeholder="Type your current educational level"
             />
@@ -303,7 +303,7 @@ const Jobdetails = () => {
             <span className="d-block mb-2">Enter Your Skills</span>
             <input
               name="skill"
-              type="text"
+              // type="text"
               className="form-control"
               placeholder="Type your Skills"
             />
@@ -332,13 +332,19 @@ const Jobdetails = () => {
           
           
               
-          <div className="d-block text-right">
+          {/* <div className="d-block text-right">
             <div className="mb-3">
-              <button type="submit" className="btn btn-primary px-3">
+              <button type="submit" className="btn btn-primary px-3" >
                 Apply
               </button>
             </div>
-          </div>
+          </div> */}
+          <div className="d-flex justify-content-center">
+  <button type="submit" className="btn btn-primary px-3">
+    Apply
+  </button>
+</div>
+
         </form>
             </div>
           </div>

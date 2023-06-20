@@ -1,8 +1,11 @@
 import React from 'react'
+import Placementofficernav from './Placementofficernav'
+import PublicUserFooter from '../Footer/PublicUserFooter'
 
 const ManageJobportal = () => {
   return (
     <>
+    <Placementofficernav/>
     <div className="container">
   <h3 className="pb-3 mb-5 font-italic border-bottom mt-5">
     <i className="fa fa-book-reader" />
@@ -199,6 +202,7 @@ const ManageJobportal = () => {
     </nav>
   </div>
 </div>
+<PublicUserFooter/>
 </>
   )
 }
