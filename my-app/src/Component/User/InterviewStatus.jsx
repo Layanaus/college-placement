@@ -41,6 +41,7 @@ const InterviewStatus = () => {
               our exclusive interview.Bear in mind that it will be conducted on
               12/09/2022 between 10.30 and 12.00 pm
             </p>
+            <button className='btn btn-primary'><a href="noticeboard">checkout Status</a></button>
           </div>
     
           <div className="notify errorbox">
@@ -49,6 +50,7 @@ const InterviewStatus = () => {
               You did not set for the job that you have applied for.keep
               retrying..Please fill out the fields and then submit the form.
             </p>
+            <button className='btn btn-primary'><a href="noticeboard">checkout Status</a></button>
           </div>
         </div>
         {/* @end #content */}

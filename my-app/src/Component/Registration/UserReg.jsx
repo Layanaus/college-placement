@@ -109,11 +109,9 @@ const UserReg = () => {
             <div className="form-row  form-row-3" style={{textAlign:'center',}}>
               <input
                 type="text"
-                name="register number"
-               
-                
+                name="regnumber"
                 placeholder="Stud-Reg-No"
-                value={inputs.year ||""}
+                value={inputs.regnumber ||""}
                   onChange={setRegister}
                 
                 style={{ textAlign: "left" }}

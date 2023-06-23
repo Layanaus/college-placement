@@ -74,42 +74,42 @@ const Adviewjobs = () => {
       <div className="row">
         <div className="col-md-4 mb-5">
           <div className="card">
-            <div className="card-header">IT JOBSs</div>
+            <div className="card-header">IT Jobs</div>
             <div className="card-body">
               <h5 className="card-title">14 MNC Companies Hiring you..</h5>
               <p className="card-text">
                 1000+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Search Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>
         </div>
         <div className="col-md-4">
           <div className="card">
-            <div className="card-header">ENGINEERING JOBS</div>
+            <div className="card-header">Engineering Jobs</div>
             <div className="card-body">
               <h5 className="card-title">200 International Companies</h5>
               <p className="card-text">
                 540+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Search Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>
         </div>
         <div className="col-md-4 mb-5">
           <div className="card">
-            <div className="card-header">Sales and marketing JOBSs</div>
+            <div className="card-header">Sales and arketing Jobs</div>
             <div className="card-body">
               <h5 className="card-title">110 Companies</h5>
               <p className="card-text">
                 1000+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Search Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>
@@ -123,7 +123,7 @@ const Adviewjobs = () => {
                 540+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Search Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>
@@ -137,7 +137,7 @@ const Adviewjobs = () => {
               50+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Search Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>
@@ -151,7 +151,7 @@ const Adviewjobs = () => {
               150+ Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
-                Search Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>

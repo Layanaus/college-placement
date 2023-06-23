@@ -19,7 +19,7 @@ const Applyjobs = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Enter Your Keywords"
+                  placeholder="Enter Keywords"
                   id="keywords"
                 />
               </div>

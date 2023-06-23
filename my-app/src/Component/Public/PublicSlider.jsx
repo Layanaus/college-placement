@@ -21,7 +21,7 @@ const PublicSlider = () => {
             </div>
           </div>
           {/* Login Form */}
-          <form>
+          <form className='ne'>
 
             <input
               type="text"
@@ -211,6 +211,7 @@ are online platforms that connect job seekers with employers.
     </div>
   </div>
 </section>
+
 
 </>
 

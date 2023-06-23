@@ -62,9 +62,44 @@ const Companynav = () => {
           <a href="Company" className="nav-item nav-link active">
               Home
             </a>
-            <a href="Createjob" className="nav-item nav-link active">
+            {/* <a href="Createjob" className="nav-item nav-link active">
+              Deals
+            </a> */}
+            <div className="nav-item dropdown">
+            <a
+              href=""
+              className="nav-link dropdown-toggle active"
+              data-toggle="dropdown"
+            >
               Deals
             </a>
+            <div className="dropdown-menu m-0">
+            <a href="CreateJob" className="dropdown-item">
+              Create vacancy
+            </a>
+            <a href="Viewjob" className="dropdown-item">
+              opened vaccancy
+            </a>
+            </div>
+            </div>
+           
+            <div className="nav-item dropdown">
+            <a
+              href=""
+              className="nav-link dropdown-toggle active"
+              data-toggle="dropdown"
+            >
+            Aptitude Test
+            </a>
+            <div className="dropdown-menu m-0">
+            <a href="Testresult" className="dropdown-item">
+              Test result
+            </a>
+            <a href="Questions" className="dropdown-item">
+              Questions
+            </a>
+            </div>
+            </div>
            
             {/* <a href="course.html" class="nav-item nav-link">Courses</a> */}
             {/* <a href="contact.html" class="nav-item nav-link">Contact</a> */}

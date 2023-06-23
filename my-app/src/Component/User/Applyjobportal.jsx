@@ -107,7 +107,7 @@ const Applyjobportal = () => {
           </label>
          
           
-          <div className="d-block text-right">
+          <div className="d-flex justify-content-center">
             <div className="mb-3">
               <button type="submit" className="btn btn-primary px-3">
                 Apply

@@ -58,6 +58,10 @@ import ViewAppliedstudents from '../PlacementOfficer/ViewAppliedstudents'
 import Colleges from '../Company/Colleges'
 import Viewrequests from '../PlacementOfficer/Viewrequests'
 import ManageJobportal from '../PlacementOfficer/ManageJobportal'
+import Testresult from '../Company/Testresult'
+import Viewjob from '../Company/Viewjob'
+import Questions from '../Company/Questions'
+import Noticeboard from '../Company/Noticeboard'
 
 const MainRouter = () => {
   return (
@@ -120,6 +124,13 @@ const MainRouter = () => {
             <Route path="companycolleges" element={<Colleges/>}/>
             <Route path="viewrequests" element={<Viewrequests/>}/>
             <Route path="manageportal" element={<ManageJobportal/>}/>
+            <Route path="testresult" element={<Testresult/>}/>
+            <Route path="viewjob" element={<Viewjob/>}/>
+            <Route path="testresult" element={<Testresult/>}/>
+            <Route path="questions" element={<Questions/>}/>
+            <Route path="noticeboard" element={<Noticeboard/>}/>
+           
+
 
           
 

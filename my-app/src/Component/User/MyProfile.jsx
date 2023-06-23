@@ -95,7 +95,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Address Line 2</label>
             <input
-              type=""
+              type="text"
               className="form-control"
               placeholder="enter address line 2"
               defaultValue=""
@@ -104,7 +104,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Postcode</label>
             <input
-              type=""
+              type="text"
               className="form-control"
               placeholder="enter Pincode"
               defaultValue=""
@@ -115,7 +115,7 @@ const MyProfile = () => {
           <div className="col-md-6">
             <label className="labels">Area</label>
             <input
-              type=""
+              type="text"
               className="form-control"
               placeholder="area"
               defaultValue=""
@@ -171,7 +171,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Email ID</label>
             <input
-              type=""
+              type="text"
               className="form-control"
               placeholder="enter email id"
               defaultValue=""
@@ -180,7 +180,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Alternative Email ID</label>
             <input
-              type=""
+              type="text"
               className="form-control"
               placeholder="enter email id"
               defaultValue=""
@@ -189,7 +189,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Mobile Number</label>
             <input
-              type=""
+              type="text"
               className="form-control"
               placeholder="enter phone number"
               defaultValue=""
@@ -198,7 +198,7 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Alternative Mobile Number</label>
             <input
-              type=""
+              type="text"
               className="form-control"
               placeholder="enter phone number"
               defaultValue=""
@@ -274,7 +274,7 @@ const MyProfile = () => {
     <div className="col-md-12">
             <label className="labels">Branch</label>
             <input  style={{width:'400px'}}
-              type=""
+              type="text"
               className="form-control"
               placeholder="enter branch"
               defaultValue=""

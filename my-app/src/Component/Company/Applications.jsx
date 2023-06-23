@@ -99,8 +99,9 @@ const Applications = () => {
         </tr>
       </tbody>
     </table>
+    <button className='btn btn-primary' style={{width:'100%'}}>Publish Interview Result</button>
   </div>
-  <div className="container"></div>
+  
   <PublicUserFooter/>
 </>
 

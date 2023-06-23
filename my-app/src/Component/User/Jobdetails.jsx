@@ -247,7 +247,7 @@ const Jobdetails = () => {
             <input
               required=""
               name="name"
-              // type="text"
+              type="text"
               className="form-control"
               placeholder="Enter your full name"
             />
@@ -294,7 +294,7 @@ const Jobdetails = () => {
             <input
               required=""
               name="education"
-              // type="text"
+              type="text"
               className="form-control"
               placeholder="Type your current educational level"
             />
@@ -303,7 +303,7 @@ const Jobdetails = () => {
             <span className="d-block mb-2">Enter Your Skills</span>
             <input
               name="skill"
-              // type="text"
+              type="text"
               className="form-control"
               placeholder="Type your Skills"
             />

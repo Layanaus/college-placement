@@ -1,5 +1,4 @@
 import React, {useState}from 'react'
-import Button from 'react-bootstrap/Button';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Companybody from './Companybody'
 import Companynav from './Companynav'

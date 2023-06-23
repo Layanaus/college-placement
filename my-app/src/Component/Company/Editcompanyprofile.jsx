@@ -7,7 +7,7 @@ const Editcompanyprofile = () => {
     <>
       <Companynav />
       <div className="container">
-        <h1 className="text-center">Edit Company Profile</h1>
+        <h1 className="text-center"> Company Profile</h1>
         <form>
           <div className="form-group row">
             <label htmlFor="companyName" className="col-sm-2 col-form-label">Company Name:</label>

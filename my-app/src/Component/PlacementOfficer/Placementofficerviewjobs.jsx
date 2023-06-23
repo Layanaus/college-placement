@@ -81,7 +81,7 @@ const Placementofficerviewjobs = () => {
                 content.
               </p>
               <a href="POsearchvacancy2" className="btn btn-primary">
-                Seach Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>
@@ -96,7 +96,7 @@ const Placementofficerviewjobs = () => {
                 content.
               </p>
               <a href="POsearchvacancy2" className="btn btn-primary">
-                Seach Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>
@@ -111,7 +111,7 @@ const Placementofficerviewjobs = () => {
                 content.
               </p>
               <a href="POsearchvacancy" className="btn btn-primary">
-                Seach Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>
@@ -126,7 +126,7 @@ const Placementofficerviewjobs = () => {
                 content.
               </p>
               <a href="POsearchvacancy2" className="btn btn-primary">
-                Seach Vaccancy
+                View vaccancies
               </a>
             </div>
           </div>
