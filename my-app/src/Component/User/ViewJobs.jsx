@@ -1,57 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Usernav from './Usernav'
 
 const ViewJobs = () => {
+  const headings = ['Unlock endless career possibilities with our job portal - where dreams meet opportunities', 
+  'Discover your next adventure. Find the perfect job with our powerful job portal', 
+  'Your gateway to success. Let our job portal open doors to your dreamcareer', 
+  'Our cutting-edge job portal revolutionizes the way you find employment'];
+  const [currentHeadingIndex, setCurrentHeadingIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeadingIndex((prevIndex) => (prevIndex + 1) % headings.length);
+    }, 5000); // Change the interval duration (in milliseconds) as per your needs
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
    <Usernav/>
      <div className="container">
-    <div
-  id="carouselExampleControls"
-  className="carousel2 slide2 mb-5"
-  data-ride="carousel2"
->
-  <div className="carousel-inner">
-    <div className="carousel-item active">
-      <div className="carousel-caption">
-        <h3>
-          "Unlock endless career possibilities with our job portal - where
-          dreams meet opportunities!"
-        </h3>
-      </div>
-    </div>
-    <div className="carousel-item">
-      <div className="carousel-caption">
-        <h3>
-          "Discover your next adventure. Find the perfect job with our powerful
-          job portal."
-        </h3>
-      </div>
-    </div>
-    <div className="carousel-item">
-      <div className="carousel-caption">
-        <h3>
-          "Your gateway to success. Let our job portal open doors to your dream
-          career."
-        </h3>
-      </div>
-    </div>
-    <div className="carousel-item">
-      <div className="carousel-caption">
-        <h3>""Navigate your career path with confidence""</h3>
-      </div>
-    </div>
-    <div className="carousel2-item">
-      <div className="carousel2-caption">
-        <h3>
-          "Our cutting-edge job portal revolutionizes the way you find
-          employment."
-        </h3>
-      </div>
-    </div>
-  </div>
-</div>
+     <h1>{headings[currentHeadingIndex]}</h1>
 </div> 
     <div className="container">
     <div className="row justify-content-center mb-5">

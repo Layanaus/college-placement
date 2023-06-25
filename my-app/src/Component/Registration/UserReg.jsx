@@ -2,11 +2,11 @@ import React from 'react'
 import { useState } from 'react';
 
 const UserReg = () => {
-  const [inputs,setinputs]=useState([]);
-  const setRegister =(event)=>{
-    const name=event.target.name;
-    const value=event.target.value;
-    setinputs({...inputs,[name]:value});
+const [inputs,setinputs]=useState([]);
+const setRegister =(event)=>{
+const name=event.target.name;
+const value=event.target.value;
+setinputs({...inputs,[name]:value});
     
 
   };

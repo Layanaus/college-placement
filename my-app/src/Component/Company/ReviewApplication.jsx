@@ -7,10 +7,14 @@ const ReviewApplication = () => {
   const [showInterviewPassed, setShowInterviewPassed] = useState(false);
   const [showInterviewFailed, setShowInterviewFailed] = useState(false);
 
- 
-
   const handleInformButtonClick = () => {
-    // Handle the button click event
+    if (document.getElementById('myCheckbox1').checked) {
+      setShowInterviewPassed(true);
+      setShowInterviewFailed(true);
+    } else {
+      setShowInterviewPassed(false);
+      setShowInterviewFailed(false);
+    }
   };
   return (
     <>
@@ -80,7 +84,6 @@ const ReviewApplication = () => {
           id="myCheckbox1"
           name="myCheckbox1"
           defaultValue="checked"
- 
         />
         <label htmlFor="myCheckbox1">Eligible for attend Interview</label>
       </div>
@@ -91,7 +94,7 @@ const ReviewApplication = () => {
           name="myCheckbox2"
           defaultValue="checked"
         />
-        <label htmlFor="myCheckbox2"> Not Eligible </label>
+        <label htmlFor="myCheckbox2">Not Eligible</label>
       </div>
       {showInterviewPassed && (
         <div className="col-md-3">

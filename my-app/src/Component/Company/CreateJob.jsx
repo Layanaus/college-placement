@@ -39,12 +39,60 @@ const CreateJob = () => {
                     />
                   </div>
                 </div>
-                <div className="form-group row">
+                {/* <div className="form-group row">
                   <label
                     htmlFor="email_address"
                     className="col-md-4 col-form-label text-md-right"
                   >
                     Experience
+                  </label>
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      id="email_address"
+                      className="form-control"
+                      name="email-address"
+                    />
+                  </div>
+                </div> */}
+                <div className="form-group row">
+                  <label
+                    htmlFor="email_address"
+                    className="col-md-4 col-form-label text-md-right"
+                  >
+                    Job name
+                  </label>
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      id="email_address"
+                      className="form-control"
+                      name="email-address"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label
+                    htmlFor="email_address"
+                    className="col-md-4 col-form-label text-md-right"
+                  >
+                    Job decription
+                  </label>
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      id="email_address"
+                      className="form-control"
+                      name="email-address"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label
+                    htmlFor="email_address"
+                    className="col-md-4 col-form-label text-md-right"
+                  >
+                    Job category
                   </label>
                   <div className="col-md-6">
                     <input
@@ -92,6 +140,21 @@ const CreateJob = () => {
                     className="col-md-4 col-form-label text-md-right"
                   >
                     Branch
+                  </label>
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      id="present_address"
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label
+                    htmlFor="present_address"
+                    className="col-md-4 col-form-label text-md-right"
+                  >
+                    Last date
                   </label>
                   <div className="col-md-6">
                     <input

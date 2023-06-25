@@ -44,7 +44,7 @@ const ManageJobportal = () => {
             With supporting text below as a natural lead-in to additional
             content.
           </p>
-          <a href="viewstudents" className="btn btn-primary mr-2">
+          <a href="jobportalviewstudents" className="btn btn-primary mr-2">
   View Applied Students
 </a>
         </div>
@@ -83,47 +83,7 @@ const ManageJobportal = () => {
             With supporting text below as a natural lead-in to additional
             content.
           </p>
-          <a href="viewstudents" className="btn btn-primary mr-2">
-  View Applied Students
-</a>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <div className="row justify-content-center">
-    <div className="col-md-8 mb-5">
-      <div className="card">
-      <div className="card-header text text-center d-flex justify-content-between">
-            
-
-            <div>Python Developer</div>
-            <div className="dropdown">
- <button className="dropbtn">
-   <svg
-     xmlns="http://www.w3.org/2000/svg"
-     width={16}
-     height={16}
-     fill="currentColor"
-     className="bi bi-three-dots-vertical"
-     viewBox="0 0 16 16"
-   >
-     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-   </svg>
- </button>
- <div className="dropdown-content">
- <a href="#">Edit</a>
-   <a href="#">Remove</a>
- </div>
-</div> 
-             </div>
-        <div className="card-body text-center">
-          <h5 className="card-title">Special title treatment</h5>
-          <p className="card-text">
-            With supporting text below as a natural lead-in to additional
-            content.
-          </p>
-          <a href="viewstudents" className="btn btn-primary mr-2">
+          <a href="jobportalviewstudents" className="btn btn-primary mr-2">
   View Applied Students
 </a>
 
@@ -163,7 +123,47 @@ const ManageJobportal = () => {
             With supporting text below as a natural lead-in to additional
             content.
           </p>
-          <a href="viewstudents" className="btn btn-primary mr-2">
+          <a href="jobportalviewstudents" className="btn btn-primary mr-2">
+  View Applied Students
+</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div className="row justify-content-center">
+    <div className="col-md-8 mb-5">
+      <div className="card">
+      <div className="card-header text text-center d-flex justify-content-between">
+            
+
+            <div>Python Developer</div>
+            <div className="dropdown">
+ <button className="dropbtn">
+   <svg
+     xmlns="http://www.w3.org/2000/svg"
+     width={16}
+     height={16}
+     fill="currentColor"
+     className="bi bi-three-dots-vertical"
+     viewBox="0 0 16 16"
+   >
+     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+   </svg>
+ </button>
+ <div className="dropdown-content">
+ <a href="#">Edit</a>
+   <a href="#">Remove</a>
+ </div>
+</div> 
+             </div>
+        <div className="card-body text-center">
+          <h5 className="card-title">Special title treatment</h5>
+          <p className="card-text">
+            With supporting text below as a natural lead-in to additional
+            content.
+          </p>
+          <a href="jobportalviewstudents" className="btn btn-primary mr-2">
   View Applied Students
 </a>
         </div>

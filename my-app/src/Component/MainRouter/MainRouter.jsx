@@ -62,6 +62,9 @@ import Testresult from '../Company/Testresult'
 import Viewjob from '../Company/Viewjob'
 import Questions from '../Company/Questions'
 import Noticeboard from '../Company/Noticeboard'
+import JobPortalviewstudents from '../PlacementOfficer/JobPortalviewstudents'
+import MovingHeadings from '../User/Test'
+
 
 const MainRouter = () => {
   return (
@@ -129,6 +132,10 @@ const MainRouter = () => {
             <Route path="testresult" element={<Testresult/>}/>
             <Route path="questions" element={<Questions/>}/>
             <Route path="noticeboard" element={<Noticeboard/>}/>
+            <Route path="jobportalviewstudents" element={<JobPortalviewstudents/>}/>
+
+            <Route path="test" element={<MovingHeadings/>}/>
+
            
 
 

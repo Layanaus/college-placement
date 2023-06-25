@@ -1,12 +1,12 @@
 import React from 'react'
-import Companynav from './Companynav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
-import Usernav from '../User/Usernav'
+import Placementofficernav from './Placementofficernav'
 
-const Noticeboard = () => {
+
+const JobPortalviewstudents = () => {
   return (
     <>
-    <Usernav/>
+    <Placementofficernav/>
     <div className='container'>
       <h1 className='title' style={{textAlign:'center'}}>Applicant's Job Status</h1>
       <div className="input-group" style={{marginTop:'50px',marginBottom:'30px'}}>
@@ -28,7 +28,7 @@ const Noticeboard = () => {
           <th scope="col">Name</th>
           <th scope="col">Address</th>
           <th scope="col">Mobile No</th>
-          <th scope="col">College</th>
+          
           <th scope="col">Applied Job Status</th>
           
     
@@ -40,7 +40,7 @@ const Noticeboard = () => {
           <td>Layana</td>
           <td>Urath House, Edappal</td>
           <td>9895666255</td>
-          <td>CCSIT Kuttippuram</td>
+         
           <td>Eligible for Aptitude Test</td>
 
          
@@ -51,7 +51,7 @@ const Noticeboard = () => {
           <td>Shamliya</td>
           <td>mangattil house, tirur</td>
           <td>7034939989</td>
-          <td>CCSIT Kuttippuram</td>      
+             
           <td>In Eligible</td>                    
         </tr>
         <tr>
@@ -59,7 +59,7 @@ const Noticeboard = () => {
           <td>Shana</td>
           <td>pk house, kuttippuram</td>
           <td>9946191742</td>
-          <td>CCSIT Kuttippuram</td>
+          
           <td>Interview Failed</td>         
         </tr>
         <tr>
@@ -67,7 +67,7 @@ const Noticeboard = () => {
           <td>Jacob</td>
           <td>hg House, calicut</td>
           <td>7592915905</td>
-                <td>CCSIT Kuttippuram</td>
+                
                 <td>Interview Failed</td>
         </tr>
         <tr>
@@ -112,4 +112,4 @@ const Noticeboard = () => {
   )
 }
 
-export default Noticeboard
+export default JobPortalviewstudents

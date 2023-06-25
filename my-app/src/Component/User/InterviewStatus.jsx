@@ -34,12 +34,14 @@ const InterviewStatus = () => {
           {/* Icons source http://dribbble.com/shots/913555-Flat-Web-Elements */}
     
           <div className="notify successbox">
-            <h4>Jws Steels</h4>
+            <h4>Company Name</h4>
             <p>
-              Thanks so much for your intrest to aplly for an job in our company.
+              Python Developer<br/>
+              Job Description
+              {/* Thanks so much for your intrest to aplly for an job in our company.
               We are very glad to ionform you that you are eliginle for attending
               our exclusive interview.Bear in mind that it will be conducted on
-              12/09/2022 between 10.30 and 12.00 pm
+              12/09/2022 between 10.30 and 12.00 pm */}
             </p>
             <button className='btn btn-primary'><a href="noticeboard">checkout Status</a></button>
           </div>

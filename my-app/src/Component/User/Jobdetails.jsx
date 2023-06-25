@@ -151,6 +151,36 @@ import PublicUserFooter from '../Footer/PublicUserFooter';
 import Usernav from './Usernav';
 
 const Jobdetails = () => {
+  const [inputs,setinputs]=useState([]);
+  const setRegister =(event)=>{
+    const name=event.target.name;
+    const value=event.target.value;
+    setinputs({...inputs,[name]:value});
+    
+
+  };
+  const Registersubmit =(event)=>{
+    event.preventDefault();
+
+    console.log("data",inputs);
+  }
+  console.log(inputs);
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setinputs({ ...inputs, [name]: value });
+  };
+
+  const handleReset = () => {
+    setinputs({});
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('data', inputs);
+    // Perform additional actions here, such as making API requests or updating the database
+  }
   const [showForm, setShowForm] = useState(false);
   const [showDetails, setShowDetails] = useState(true);
 
@@ -239,26 +269,30 @@ const Jobdetails = () => {
             <form
           method="POST"
           className="w-100 rounded p-4 border bg-light"
+          onSubmit={Registersubmit}
           action="https://herotofu.com/start"
           encType="multipart/form-data"
         >
           <label className="d-block mb-4">
             <span className="d-block mb-2">Your name</span>
             <input
-              required=""
               name="name"
               type="text"
               className="form-control"
               placeholder="Enter your full name"
+              value={inputs.name || ""}
+              onChange={setRegister}
             />
           </label>
           <label className="d-block mb-4">
   <span className="d-block mb-2">Date Of Birth</span>
   <input
-    name="DOB"
+    name="dob"
     type="date"
     className="form-control"
     placeholder="Enter your Date of Birth"
+    value={inputs.dob || ""}
+    onChange={setRegister}
   />
 </label>
 <label className="d-block mb-4">
@@ -268,6 +302,8 @@ const Jobdetails = () => {
     type="text"
     className="form-control"
     placeholder="Enter your Address"
+    value={inputs.address || ""}
+    onChange={setRegister}
   />
 </label>
 <label className="d-block mb-4">
@@ -277,6 +313,8 @@ const Jobdetails = () => {
               type="number"
               className="form-control"
               placeholder="Enter your Phone No"
+              value={inputs.phone || ""}
+              onChange={setRegister}
             />
           </label>
           <label className="d-block mb-4">
@@ -287,6 +325,8 @@ const Jobdetails = () => {
               type="email"
               className="form-control"
               placeholder="Enter your Email"
+              value={inputs.email || ""}
+              onChange={setRegister}
             />
           </label>
           <label className="d-block mb-4">
@@ -297,6 +337,8 @@ const Jobdetails = () => {
               type="text"
               className="form-control"
               placeholder="Type your current educational level"
+              value={inputs.education || ""}
+              onChange={setRegister}
             />
           </label>
           <label className="d-block mb-4">
@@ -306,9 +348,11 @@ const Jobdetails = () => {
               type="text"
               className="form-control"
               placeholder="Type your Skills"
+              value={inputs.skill || ""}
+              onChange={setRegister}
             />
           </label>
-          <label className="d-block mb-4">
+          {/* <label className="d-block mb-4">
             <span className="d-block mb-2">Years of experience</span>
             <select name="experience" className="custom-select">
               <option>Less than a year</option>
@@ -318,7 +362,7 @@ const Jobdetails = () => {
               <option>7 - 10 years</option>
               <option>10+ years</option>
             </select>
-          </label>
+          </label> */}
           <label className="d-block mb-4">
             <span className="d-block mb-2">Tell us more about yourself</span>
             <textarea
@@ -326,7 +370,8 @@ const Jobdetails = () => {
               className="form-control"
               rows={3}
               placeholder="What motivates you?"
-              defaultValue={""}
+              value={inputs.message || ""}
+              onChange={setRegister}
             />
           </label>
           

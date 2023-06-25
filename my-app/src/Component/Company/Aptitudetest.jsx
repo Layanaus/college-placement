@@ -22,18 +22,18 @@ function Aptitudetest() {
   const nextQuestion = () => {
     if (currentQuestion < totalQuestions - 1) {
       setCurrentQuestion((prevQuestion) => prevQuestion + 1);
-    }
-    if(currentQuestion == totalQuestions -1)
-    {
-      setShowContainer(false)
+    } else {
+      setShowContainer(false);
       setShowCongratulations(true);
     }
   };
 
-  const submitForm = () => {
+  const submitForm = (e) => {
+    e.preventDefault();
     setShowContainer(false);
     setShowCongratulations(true);
   };
+
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
@@ -41,136 +41,66 @@ function Aptitudetest() {
     const formattedSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
     return formattedMinutes + ':' + formattedSeconds;
   };
+
   return (
-<>
-    <Companynav />
-    {showContainer && (
-    <div className="container text-center">
-      <h1>Aptitude Test</h1>
-      <hr />
-      <div id="timer" className="text-center">
-        <h2 id="countdown">{formatTime(countdown)}</h2>
-      </div>
-      <hr />
-      <form id="quiz-form" onSubmit={submitForm}>
-        <div id="questions" className="carousel slide" data-ride="false">
-          <div className="carousel-inner">
-            {/* Question 1 */}
-            <div className={`carousel-item ${currentQuestion === 0 ? 'active' : ''}`}>
-              <div className="question-section bg-light rounded p-4">
-                <h4>Question 1:</h4>
-                <p>What is the capital of France?</p>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q1" id="q1a" value="a" />
-                  <label className="form-check-label" htmlFor="q1a">
-                    a) Paris
-                  </label>
-                  </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q1" id="q1b" value="b" />
-                  <label className="form-check-label" htmlFor="q1b">
-                    b) London
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q1" id="q1c" value="c" />
-                  <label className="form-check-label" htmlFor="q1c">
-                    c) Madrid
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q1" id="q1d" value="d" />
-                  <label className="form-check-label" htmlFor="q1d">
-                    d) Rome
-                  </label>
-                </div>
-              </div>
-            </div>
-                {/* Question 2 */}
-            <div className={`carousel-item ${currentQuestion === 1 ? 'active' : ''}`}>
-              <div className="question-section bg-light rounded p-4">
-                <h4>Question 2:</h4>
-                <p>What is the square root of 64?</p>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q2" id="q2a" value="a" />
-                  <label className="form-check-label" htmlFor="q2a">
-                    a) 4
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q2" id="q2b" value="b" />
-                  <label className="form-check-label" htmlFor="q2b">
-                    b) 8
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q2" id="q2c" value="c" />
-                  <label className="form-check-label" htmlFor="q2c">
-                    c) 16
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q2" id="q2d" value="d" />
-                  <label className="form-check-label" htmlFor="q2d">
-                    d) 2
-                  </label>
-                  </div>
-              </div>
-            </div>
-
-            {/* Question 3 */}
-            <div className={`carousel-item ${currentQuestion === 2 ? 'active' : ''}`}>
-              <div className="question-section bg-light rounded p-4">
-                <h4>Question 3:</h4>
-                <p>What is the capital of France?</p>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q3" id="q3a" value="a" />
-                  <label className="form-check-label" htmlFor="q3a">
-                    a) Paris
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q3" id="q3b" value="b" />
-                  <label className="form-check-label" htmlFor="q3b">
-                    b) London
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q3" id="q3c" value="c" />
-                  <label className="form-check-label" htmlFor="q3c">
-                    c) Madrid
-                  </label>
-                </div>
-                <div className="form-check">
-                  <input className="form-check-input" type="radio" name="q3" id="q3d" value="d" />
-                  <label className="form-check-label" htmlFor="q3d">
-                    d) Rome
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            {/* Add more questions here */}
+    <>
+      <Companynav />
+      {showContainer && (
+        <div className="container text-center">
+          <h1>Aptitude Test</h1>
+          <hr />
+          <div id="timer" className="text-center">
+            <h2 id="countdown">{formatTime(countdown)}</h2>
           </div>
+          <hr />
+          <form id="quiz-form" onSubmit={submitForm}>
+            <div id="questions" className="carousel slide" data-ride="false">
+              <div className="carousel-inner">
+                {/* Question */}
+                {Array.from(Array(totalQuestions), (_, index) => (
+                  <div key={index} className={`carousel-item ${currentQuestion === index ? 'active' : ''}`}>
+                    <div className="question-section bg-light rounded p-4">
+                      <h4>Question {index + 1}:</h4>
+                      <p>{`Question ${index + 1} text goes here`}</p>
+                      <div class="options">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name={`q${index + 1}`} id={`q${index + 1}a`} value="a" />
+    <label class="form-check-label" for={`q${index + 1}a`}>a) Option A</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name={`q${index + 1}`} id={`q${index + 1}b`} value="b" />
+    <label class="form-check-label" for={`q${index + 1}b`}>b) Option B</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name={`q${index + 1}`} id={`q${index + 1}c`} value="c" />
+    <label class="form-check-label" for={`q${index + 1}c`}>c) Option C</label>
+  </div>
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name={`q${index + 1}`} id={`q${index + 1}d`} value="d" />
+    <label class="form-check-label" for={`q${index + 1}d`}>d) Option D</label>
+  </div>
+</div>
+
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <button type="button" className="btn btn-primary" onClick={nextQuestion} style={{ width: '100%' }}>
+              {currentQuestion < totalQuestions - 1 ? 'Next' : 'Finish'}
+            </button>
+          </form>
         </div>
-
-        <button type="button" className="btn btn-primary" onClick={nextQuestion} style={{ width: '100%' }}>
-          {currentQuestion < totalQuestions - 1 ? 'Next' : 'Finish'}
-        </button>
-
-      </form>
- </div>
-
-)}
-{showCongratulations && (
-        <div className="container text-center" style={{marginTop:'10%'}}>
+      )}
+      {showCongratulations && (
+        <div className="container text-center" style={{ marginTop: '10%' }}>
           <h1>Congratulations!</h1>
           <p>You have completed the aptitude test.</p>
         </div>
       )}
-    <PublicUserFooter/>
+      <PublicUserFooter />
     </>
   );
 }
 
-export default Aptitudetest;
+export default Aptitudetest;

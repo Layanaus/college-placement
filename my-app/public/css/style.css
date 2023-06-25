@@ -22301,3 +22301,128 @@ ul {
   color: #1c4966;
 }
 
+
+
+
+/* Questions */
+.qucontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quform-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.faq-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  text-align: center;
+}
+
+.question-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f5f5f5;
+}
+
+.question-card h3 {
+  margin-top: 0;
+}
+
+.question-card ol {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.question-card li {
+  margin-bottom: 5px;
+}
+
+.delete-button {
+  color: red;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  text-decoration: underline;
+}
+
+.quform-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.quform-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.quform-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.quform-input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.quform-submit {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+ 
+}
+
+.quform-submit:hover {
+  background-color: #45a049;
+  }
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+
+.text-carousel {
+  animation: slide-in-out infinite 6s;
+  white-space: nowrap;
+}
+
+@keyframes slide-in-out {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+
+  20%, 80% {
+    transform: translateX(0);
+  }
+}
+
+
+
+

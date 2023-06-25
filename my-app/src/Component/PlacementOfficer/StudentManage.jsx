@@ -61,7 +61,7 @@ const StudentManage = () => {
       </div>
     </div>
   </div>
-  <div className="row justify-content-center">
+  <div className="row justify-content-center" style={{marginTop:'30px'}}>
     <nav aria-label="Page navigation justify-content-center">
       <ul className="pagination">
         <li className="page-item">
