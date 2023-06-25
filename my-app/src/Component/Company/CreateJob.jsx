@@ -1,9 +1,39 @@
 import React from 'react'
-
+import { useState } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Companynav from './Companynav'
 
 const CreateJob = () => {
+  const [inputs,setinputs]=useState([]);
+  const setRegister =(event)=>{
+    const name=event.target.name;
+    const value=event.target.value;
+    setinputs({...inputs,[name]:value});
+    
+
+  };
+  const Registersubmit =(event)=>{
+    event.preventDefault();
+
+    console.log("data",inputs);
+  }
+  console.log(inputs);
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setinputs({ ...inputs, [name]: value });
+  };
+
+  const handleReset = () => {
+    setinputs({});
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('data', inputs);
+    // Perform additional actions here, such as making API requests or updating the database
+  }
   return (
     <>
     <Companynav/>
@@ -19,26 +49,9 @@ const CreateJob = () => {
             <div className="card-body">
               <form
                 name="my-form"
-                onsubmit="return validform()"
-                action="success.php"
-                method=""
+                onSubmit={Registersubmit}
               >
-                <div className="form-group row">
-                  <label
-                    htmlFor="full_name"
-                    className="col-md-4 col-form-label text-md-right"
-                  >
-                    Vaccancy
-                  </label>
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      id="full_name"
-                      className="form-control"
-                      name="full-name"
-                    />
-                  </div>
-                </div>
+
                 {/* <div className="form-group row">
                   <label
                     htmlFor="email_address"
@@ -57,7 +70,7 @@ const CreateJob = () => {
                 </div> */}
                 <div className="form-group row">
                   <label
-                    htmlFor="email_address"
+                    htmlFor="jobname"
                     className="col-md-4 col-form-label text-md-right"
                   >
                     Job name
@@ -65,15 +78,17 @@ const CreateJob = () => {
                   <div className="col-md-6">
                     <input
                       type="text"
-                      id="email_address"
+                      // id="email_address"
                       className="form-control"
-                      name="email-address"
+                      name="jobname"
+                      value={inputs.jobname || ""}
+                      onChange={setRegister}
                     />
                   </div>
                 </div>
                 <div className="form-group row">
                   <label
-                    htmlFor="email_address"
+                    htmlFor="description"
                     className="col-md-4 col-form-label text-md-right"
                   >
                     Job decription
@@ -81,15 +96,17 @@ const CreateJob = () => {
                   <div className="col-md-6">
                     <input
                       type="text"
-                      id="email_address"
+                      // id="email_address"
                       className="form-control"
-                      name="email-address"
+                      name="description"
+                      value={inputs.description || ""}
+                      onChange={setRegister}
                     />
                   </div>
                 </div>
                 <div className="form-group row">
                   <label
-                    htmlFor="email_address"
+                    htmlFor="category"
                     className="col-md-4 col-form-label text-md-right"
                   >
                     Job category
@@ -97,15 +114,35 @@ const CreateJob = () => {
                   <div className="col-md-6">
                     <input
                       type="text"
-                      id="email_address"
+                      // id="email_address"
                       className="form-control"
-                      name="email-address"
+                      name="category"
+                      value={inputs.category || ""}
+                      onChange={setRegister}
                     />
                   </div>
                 </div>
                 <div className="form-group row">
                   <label
-                    htmlFor="user_name"
+                    htmlFor="vaccancy"
+                    className="col-md-4 col-form-label text-md-right"
+                  >
+                    Vaccancy
+                  </label>
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      // id="full_name"
+                      className="form-control"
+                      name="vaccancy"
+                      value={inputs.vaccancy || ""}
+                      onChange={setRegister}
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label
+                    htmlFor="qualification"
                     className="col-md-4 col-form-label text-md-right"
                   >
                     Qualification
@@ -113,15 +150,17 @@ const CreateJob = () => {
                   <div className="col-md-6">
                     <input
                       type="text"
-                      id="user_name"
+                      // id="user_name"
                       className="form-control"
-                      name="username"
+                      name="qualification"
+                      value={inputs.qualification || ""}
+                      onChange={setRegister}
                     />
                   </div>
                 </div>
                 <div className="form-group row">
                   <label
-                    htmlFor="phone_number"
+                    htmlFor="salary"
                     className="col-md-4 col-form-label text-md-right"
                   >
                     Expected Salary
@@ -129,14 +168,17 @@ const CreateJob = () => {
                   <div className="col-md-6">
                     <input
                       type="text"
-                      id="phone_number"
+                      // id="phone_number"
                       className="form-control"
+                      name="salary"
+                      value={inputs.salary || ""}
+                      onChange={setRegister}
                     />
                   </div>
                 </div>
                 <div className="form-group row">
                   <label
-                    htmlFor="present_address"
+                    htmlFor="branch"
                     className="col-md-4 col-form-label text-md-right"
                   >
                     Branch
@@ -144,26 +186,31 @@ const CreateJob = () => {
                   <div className="col-md-6">
                     <input
                       type="text"
-                      id="present_address"
+                      // id="present_address"
                       className="form-control"
+                      name="branch"
+                      value={inputs.branch || ""}
+                      onChange={setRegister}
                     />
                   </div>
                 </div>
                 <div className="form-group row">
-                  <label
-                    htmlFor="present_address"
-                    className="col-md-4 col-form-label text-md-right"
-                  >
-                    Last date
-                  </label>
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      id="present_address"
-                      className="form-control"
-                    />
-                  </div>
+                <label
+                  htmlFor="lastdate"
+                  className="col-md-4 col-form-label text-md-right"
+                >
+                  Last Date
+                </label>
+                <div className="col-md-6">
+                  <input
+                    type="date"
+                   name="lastdate"
+                    className="form-control"
+                    value={inputs.lastdate || ""}
+                    onChange={setRegister}
+                  />
                 </div>
+              </div>
                 <div className="col-md-6 offset-md-4">
                   <button type="submit" className="btn btn-primary">
                     Send Job Alert
