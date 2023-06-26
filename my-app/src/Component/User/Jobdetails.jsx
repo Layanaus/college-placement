@@ -274,7 +274,7 @@ const Jobdetails = () => {
           encType="multipart/form-data"
         >
           <label className="d-block mb-4">
-            <span className="d-block mb-2">Your name</span>
+            <span className="d-block mb-2">Your Name</span>
             <input
               name="name"
               type="text"
@@ -330,7 +330,7 @@ const Jobdetails = () => {
             />
           </label>
           <label className="d-block mb-4">
-            <span className="d-block mb-2">Enter Your Education</span>
+            <span className="d-block mb-2"> Education</span>
             <input
               required=""
               name="education"
@@ -342,7 +342,7 @@ const Jobdetails = () => {
             />
           </label>
           <label className="d-block mb-4">
-            <span className="d-block mb-2">Enter Your Skills</span>
+            <span className="d-block mb-2">Skills</span>
             <input
               name="skill"
               type="text"

@@ -1,6 +1,36 @@
 import React from 'react'
-
+import { useState } from 'react';
 const PublicSlider = () => {
+  const [inputs,setinputs]=useState([]);
+const setRegister =(event)=>{
+const name=event.target.name;
+const value=event.target.value;
+setinputs({...inputs,[name]:value});
+    
+
+  };
+  const Registersubmit =(event)=>{
+    event.preventDefault();
+
+    console.log("data",inputs);
+  }
+  console.log(inputs);
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setinputs({ ...inputs, [name]: value });
+  };
+
+  const handleReset = () => {
+    setinputs({});
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('data', inputs);
+    // Perform additional actions here, such as making API requests or updating the database
+  }
   return (
     <>
     <div
@@ -21,21 +51,24 @@ const PublicSlider = () => {
             </div>
           </div>
           {/* Login Form */}
-          <form className='ne'>
+          <form className='ne'onSubmit={Registersubmit}>
 
             <input
               type="text"
-              id="login"
               className="fadeIn second"
               name="login"
               placeholder="Username"
+              value={inputs.login ||""}
+              onChange={setRegister}
             />
             <input
               type="text"
-              id="password"
               className="fadeIn third"
-              name="login"
+              name="password"
               placeholder="password"
+              value={inputs.password ||""}
+              onChange={setRegister}
+
             />
       
 

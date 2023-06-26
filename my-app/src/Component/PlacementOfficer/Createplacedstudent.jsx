@@ -1,9 +1,40 @@
 import React from 'react'
+import { useState } from 'react';
 import Placementofficernav from './Placementofficernav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import ManageJobportal from './ManageJobportal'
 
 const Createplacedstudent = () => {
+  const [inputs,setinputs]=useState([]);
+const setRegister =(event)=>{
+const name=event.target.name;
+const value=event.target.value;
+setinputs({...inputs,[name]:value});
+    
+
+  };
+  const Registersubmit =(event)=>{
+    event.preventDefault();
+
+    console.log("data",inputs);
+  }
+  console.log(inputs);
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setinputs({ ...inputs, [name]: value });
+  };
+
+  const handleReset = () => {
+    setinputs({});
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('data', inputs);
+    // Perform additional actions here, such as making API requests or updating the database
+  }
   return (
     <>
     <Placementofficernav/>
@@ -26,7 +57,7 @@ const Createplacedstudent = () => {
            
               <div className="form-group row">
                 <label
-                  htmlFor="jobtype"
+                  htmlFor="studentname"
                   className="col-md-4 col-form-label text-md-right"
                 >
                   Student Name
@@ -35,7 +66,9 @@ const Createplacedstudent = () => {
                   <input
                     type="text"
                     className="form-control"
-                    name="description"
+                    name="studentname"
+                    value={inputs.studentname ||""}
+                    onChange={setRegister}
                   />
                 </div>
               </div>
@@ -49,9 +82,10 @@ const Createplacedstudent = () => {
                 <div className="col-md-6">
                   <input
                     type="text"
-                    id="description"
                     className="form-control"
                     name="description"
+                    value={inputs.description ||""}
+                    onChange={setRegister}
                   />
                 </div>
               </div>
@@ -62,9 +96,10 @@ const Createplacedstudent = () => {
   <div className="col-md-6">
     <input
       type="file"
-      id="image"
       className="form-control-file"
       name="image"
+      value={inputs.image ||""}
+      onChange={setRegister}
     />
   </div>
 </div>

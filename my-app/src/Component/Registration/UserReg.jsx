@@ -61,8 +61,19 @@ setinputs({...inputs,[name]:value});
               
                 placeholder="DOB"
                 value={inputs.dob ||""}
-                  onChange={setRegister}
+                onChange={setRegister}
               />
+            </div>
+            <div className="form-row">
+              <select name="position" onChange={setRegister}>
+                <option value="choose college">Gender</option>
+                <option >Male</option>
+                <option >Female</option>
+                <option >Others</option>
+              </select>
+              <span className="select-btn">
+                <i className="zmdi zmdi-chevron-down" />
+              </span>
             </div>
             <div class="form-row">
   <label className="labels">Applicant Image</label>

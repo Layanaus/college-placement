@@ -4,6 +4,33 @@ import Placementofficernav from './Placementofficernav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 
 const Sendplacementrequest = () => {
+  const [inputs,setinputs]=useState([]);
+const setRegister =(event)=>{
+const name=event.target.name;
+const value=event.target.value;
+setinputs({...inputs,[name]:value});
+    
+
+  };
+  const Registersubmit =(event)=>{
+    event.preventDefault();
+
+    console.log("data",inputs);
+  }
+  console.log(inputs);
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setinputs({ ...inputs, [name]: value });
+  };
+
+  const handleReset = () => {
+    setinputs({});
+  };
+
+ 
+    
   const [showModal, setShowModal] = useState(false);
 
   const handleClick = () => {
@@ -16,6 +43,8 @@ const Sendplacementrequest = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('data', inputs);
+
     // Perform form submission logic here
     alert('Placement request submitted!');
     handleCloseModal();
@@ -322,23 +351,27 @@ const Sendplacementrequest = () => {
                 </button>
               </div>
               <div className="modal-body">
-                <form onSubmit={handleSubmit}>
+                <form  onSubmit={Registersubmit}>
                   <div className="form-group">
                     <label htmlFor="name">Subject Name</label>
                     <input
                       type="text"
+                      name="subject"
                       className="form-control"
-                      id="name"
                       placeholder="Enter your Subject"
+                      value={inputs.subject ||""}
+                      onChange={setRegister}
                     />
                   </div>
                   <div className="form-group">
                     <label htmlFor="message">Message</label>
                     <textarea
+                      name="message"
                       className="form-control"
-                      id="message"
                       rows="3"
                       placeholder="Enter your message"
+                      value={inputs.message ||""}
+                      onChange={setRegister}
                     ></textarea>
                   </div>
                   <button type="submit" className="btn btn-primary">

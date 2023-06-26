@@ -3,6 +3,36 @@ import PublicUserFooter from '../Footer/PublicUserFooter'
 import Usernav from './Usernav'
 
 const MyProfile = () => {
+  const [inputs,setinputs]=useState([]);
+  const setRegister =(event)=>{
+    const name=event.target.name;
+    const value=event.target.value;
+    setinputs({...inputs,[name]:value});
+    
+
+  };
+  const Registersubmit =(event)=>{
+    event.preventDefault();
+
+    console.log("data",inputs);
+  }
+  console.log(inputs);
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setinputs({ ...inputs, [name]: value });
+  };
+
+  const handleReset = () => {
+    setinputs({});
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('data', inputs);
+    // Perform additional actions here, such as making API requests or updating the database
+  }
   const [skills, setSkills] = useState(['']); // State to store the array of skills
 
   const handleSkillChange = (index, value) => {
@@ -20,7 +50,7 @@ const MyProfile = () => {
     <Usernav/>
     <div className="container rounded bg-white mt-5 mb-5">
   <div className="row">
-    <div className="col-md-3 border-right">
+    <div className="col-md-3 border-right" >
       <div className="d-flex flex-column align-items-center text-center p-3 py-5">
         <img
           className="rounded-circle mt-5"
@@ -41,23 +71,28 @@ const MyProfile = () => {
 
         
 
-        <div className="row mt-2">
+        <div className="row mt-2" onSubmit={Registersubmit}>
           <div className="col-md-6">
             <label className="labels">First Name</label>
             <input
-              type=""
+              name="firstname"
+              type="text"
               className="form-control"
               placeholder="first name"
-              defaultValue=""
+              value={inputs.firstname || ""}
+              onChange={setRegister}
+             
             />
           </div>
           <div className="col-md-6">
             <label className="labels">Last Name</label>
             <input
-              type=""
+              name="lastname"
+              type="text"
               className="form-control"
-              defaultValue=""
               placeholder="lastname"
+              value={inputs.lastname || ""}
+              onChange={setRegister}
             />
           </div>
         </div>
@@ -65,15 +100,19 @@ const MyProfile = () => {
         <div className="col-md-12">
   <label className="labels">Date of Birth</label>
   <input
-    type=""
+    name="dob"
+    type="date"
     className="form-control"
     placeholder="select date of birth"
+    value={inputs.dob || ""}
+    onChange={setRegister}
   style={{width:'350px'}}
   />
 </div>
 <div className="col-md-12">
   <label className="labels">Gender</label>
-  <select className="form-control" style={{width:'350px'}}>
+  <select className="form-control" style={{width:'350px'}} name="gender" value={inputs.gender || ""}
+    onChange={setRegister}>
     <option value="" disabled>Select gender</option>
     <option value="male">Male</option>
     <option value="female">Female</option>
@@ -86,48 +125,61 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels" >Address Line 1</label>
             <input
-              type=""
+              name="address1"
+              type="text"
               className="form-control"
               placeholder="enter address line 1"
-              defaultValue=""
+              value={inputs.address1 || ""}
+              onChange={setRegister}
+             
             />
           </div>
           <div className="col-md-12">
             <label className="labels">Address Line 2</label>
             <input
+              name="address2"
               type="text"
               className="form-control"
               placeholder="enter address line 2"
-              defaultValue=""
+              value={inputs.address2 || ""}
+              onChange={setRegister}
             />
           </div>
           <div className="col-md-12">
             <label className="labels">Postcode</label>
             <input
+              name="postcode"
               type="text"
               className="form-control"
               placeholder="enter Pincode"
-              defaultValue=""
+              value={inputs.postcode || ""}
+              onChange={setRegister}
+              
             />
           </div>
          
           <div className="row mt-3">
           <div className="col-md-6">
-            <label className="labels">Area</label>
+            <label className="labels">Location</label>
             <input
+              name="location"
               type="text"
               className="form-control"
-              placeholder="area"
-              defaultValue=""
+              placeholder="location"
+              value={inputs.location || ""}
+              onChange={setRegister}
+              
             />
           </div>
           <div className="col-md-6">
             <label className="labels">District</label>
             <input
-              type=""
+              name="district"
+              type="text"
               className="form-control"
-              defaultValue=""
               placeholder="district"
+              value={inputs.district || ""}
+              onChange={setRegister}
             />
           </div>
           
@@ -171,37 +223,46 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Email ID</label>
             <input
+              name="email"
               type="text"
               className="form-control"
               placeholder="enter email id"
-              defaultValue=""
+              value={inputs.email || ""}
+              onChange={setRegister}
+              
             />
           </div>
           <div className="col-md-12">
             <label className="labels">Alternative Email ID</label>
             <input
+              name="altemail"
               type="text"
               className="form-control"
               placeholder="enter email id"
-              defaultValue=""
+              value={inputs.altemail || ""}
+              onChange={setRegister}
             />
           </div>
           <div className="col-md-12">
             <label className="labels">Mobile Number</label>
             <input
+              name="mobileno"
               type="text"
               className="form-control"
               placeholder="enter phone number"
-              defaultValue=""
+              value={inputs.mobileno || ""}
+              onChange={setRegister}
             />
           </div>
           <div className="col-md-12">
             <label className="labels">Alternative Mobile Number</label>
             <input
+              name="altmobile"
               type="text"
               className="form-control"
               placeholder="enter phone number"
-              defaultValue=""
+              value={inputs.altmobile || ""}
+              onChange={setRegister}
             />
           </div>
           
@@ -263,7 +324,8 @@ const MyProfile = () => {
 
     <div className="col-md-12">
       <label className="labels">Education</label>
-      <select className="form-control input-lg select-lg" name="position"style={{ width: '400px' }}>
+      <select className="form-control input-lg select-lg" name="position" style={{ width: '400px' }} value={inputs.position || ""}
+    onChange={setRegister} >
         <option value="qualification">Qualification</option>
         <option value="Post Graduated">Post Graduated</option>
         <option value="Graduated">Graduated</option>
@@ -274,21 +336,24 @@ const MyProfile = () => {
     <div className="col-md-12">
             <label className="labels">Branch</label>
             <input  style={{width:'400px'}}
+              name="branch"
               type="text"
               className="form-control"
               placeholder="enter branch"
-              defaultValue=""
+              value={inputs.branch || ""}
+              onChange={setRegister}
             />
           </div>
           <div className="col-md-12">
       <label className="labels">Year</label>
-      <select className="form-control input-lg select-lg" name="position"style={{ width: '400px' }}>
-        <option value="qualification">Year-level</option>
-        <option value="Post Graduated">1st Year</option>
-        <option value="Graduated">2nd Year</option>
-        <option value="Higher Studies">3rd Year</option>
-        <option value="Higher Studies">4th Year</option>
-        <option value="Higher Studies">5th Year</option>
+      <select className="form-control input-lg select-lg" name="yearlevel"style={{ width: '400px' }}value={inputs.yearlevel || ""}
+    onChange={setRegister}>
+        <option value="Year-level">Year-level</option>
+        <option value="1st Year">1st Year</option>
+        <option value="2nd Year">2nd Year</option>
+        <option value="3rd Year">3rd Year</option>
+        <option value="4th Year">4th Year</option>
+        <option value="5th Year">5th Year</option>
       </select>
     </div>
     <br />
@@ -300,17 +365,22 @@ const MyProfile = () => {
       <label className="labels">Experience(optional)</label>
       <input
         style={{ width: '400px',marginBottom:'10px' }}
-        // type="text"
+        name="experience"
+        type="text"
         className="form-control input-lg"
         placeholder="job type"
-        defaultValue=""
+        value={inputs.experience || ""}
+        onChange={setRegister}
       />
-       <input
-        style={{ width: '400px' }}
-        // type="text"
+      <label className="labels">Year</label>
+      <input
+        style={{ width: '400px',marginBottom:'10px' }}
+        name="pyear"
+        type="number"
         className="form-control input-lg"
-        placeholder="year"
-        defaultValue=""
+        placeholder="Year"
+        value={inputs.pyear || ""}
+        onChange={setRegister}
       />
     </div>
     <br />
@@ -321,7 +391,8 @@ const MyProfile = () => {
           <label className="labels">Additional Skill {index + 1}</label>
           <input
             style={{ width: '400px' }}
-            type=""
+            name="additionalskill"
+            type="text"
             className="form-control input-lg"
             placeholder={`Skill ${index + 1}`}
             value={skill}
@@ -333,7 +404,8 @@ const MyProfile = () => {
     </div>
     <div className="col-md-12">
       <label className="labels">CV Upload</label>
-      <input type="file" className="form-control-file" name="file4" />
+      <input type="file" className="form-control-file" name="file4" 
+         />
     </div>
   </div>
 </div>

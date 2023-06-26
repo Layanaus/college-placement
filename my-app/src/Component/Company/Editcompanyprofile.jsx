@@ -1,23 +1,55 @@
 // import React from 'react';
+import { useState } from 'react';
 import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 
 const Editcompanyprofile = () => {
+  const [inputs,setinputs]=useState([]);
+const setRegister =(event)=>{
+const name=event.target.name;
+const value=event.target.value;
+setinputs({...inputs,[name]:value});
+    
+
+  };
+  const Registersubmit =(event)=>{
+    event.preventDefault();
+
+    console.log("data",inputs);
+  }
+  console.log(inputs);
+
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setinputs({ ...inputs, [name]: value });
+  };
+
+  const handleReset = () => {
+    setinputs({});
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('data', inputs);
+    // Perform additional actions here, such as making API requests or updating the database
+  }
   return (
     <>
       <Companynav />
       <div className="container">
         <h1 className="text-center"> Company Profile</h1>
         <form>
-          <div className="form-group row">
+          <div className="form-group row" onSubmit={Registersubmit}>
             <label htmlFor="companyName" className="col-sm-2 col-form-label">Company Name:</label>
             <div className="col-sm-10">
               <input
                 type="text"
                 className="form-control custom-input"
-                id="companyName"
-                name="companyName"
-                placeholder="Company name"
+                name="companyname"
+                placeholder="Companyname"
+                value={inputs.companyname ||""}
+                onChange={setRegister}
               />
             </div>
           </div>
@@ -27,9 +59,10 @@ const Editcompanyprofile = () => {
               <input
                 type="text"
                 className="form-control custom-input"
-                id="address"
-                name="address"
+                name="location"
                 placeholder="Location"
+                value={inputs.location ||""}
+                onChange={setRegister}
               />
             </div>
           </div>
@@ -39,8 +72,10 @@ const Editcompanyprofile = () => {
               <input
                 type="text"
                 className="form-control custom-input"
-                name="e-mail"
+                name="email"
                 placeholder="E-mail"
+                value={inputs.email ||""}
+                onChange={setRegister}
               />
             </div>
           </div>
@@ -53,6 +88,8 @@ const Editcompanyprofile = () => {
                 className="form-control custom-input"
                 name="phone"
                 placeholder="Phone"
+                value={inputs.phone ||""}
+                onChange={setRegister}
               />
             </div>
           </div>
@@ -64,6 +101,8 @@ const Editcompanyprofile = () => {
                 className="form-control custom-input"
                 name="website"
                 placeholder="Website Address"
+                value={inputs.website ||""}
+                onChange={setRegister}
               />
             </div>
           </div>
@@ -75,6 +114,8 @@ const Editcompanyprofile = () => {
                 className="form-control custom-input"
                 name="username"
                 placeholder="Username"
+                value={inputs.username ||""}
+                onChange={setRegister}
               />
             </div>
           </div>
