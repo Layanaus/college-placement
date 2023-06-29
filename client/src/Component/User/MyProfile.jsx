@@ -1,49 +1,34 @@
 import React,{useState} from 'react'
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Usernav from './Usernav'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const MyProfile = () => {
-  const [inputs,setinputs]=useState([]);
-  const setRegister =(event)=>{
+  const navigate = useNavigate()
+  const[inputs, setinputs]=useState({});
+  console.log("value==>",inputs);
+  const setRegister=(event)=>{
     const name=event.target.name;
     const value=event.target.value;
     setinputs({...inputs,[name]:value});
-    
-
-  };
-  const Registersubmit =(event)=>{
-    event.preventDefault();
-
-    console.log("data",inputs);
-  }
-  console.log(inputs);
-
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setinputs({ ...inputs, [name]: value });
-  };
-
+    console.log(inputs);  
+  }
   const handleReset = () => {
     setinputs({});
   };
 
-  const handleSubmit = (event) => {
+  const Registersubmit = (event) => {
     event.preventDefault();
-    console.log('data', inputs);
-    // Perform additional actions here, such as making API requests or updating the database
+    axios.post('http://localhost:5000/profile/myprofile',inputs).then((response)=>{
+      navigate('/user')
+    })
+      
   }
-  const [skills, setSkills] = useState(['']); // State to store the array of skills
-
-  const handleSkillChange = (index, value) => {
-    const updatedSkills = [...skills];
-    updatedSkills[index] = value;
-    setSkills(updatedSkills);
-  };
-
-  const handleAddSkill = () => {
-    setSkills([...skills, '']);
-  };
+  
+  
+  
 
   return (
     <>
@@ -71,7 +56,7 @@ const MyProfile = () => {
 
         
 
-        <div className="row mt-2" onSubmit={Registersubmit}>
+        <div className="row mt-2" >
           <div className="col-md-6">
             <label className="labels">First Name</label>
             <input
@@ -125,11 +110,11 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels" >Address Line 1</label>
             <input
-              name="address1"
+              name="addressline1"
               type="text"
               className="form-control"
               placeholder="enter address line 1"
-              value={inputs.address1 || ""}
+              value={inputs.addressline1 || ""}
               onChange={setRegister}
              
             />
@@ -137,11 +122,11 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Address Line 2</label>
             <input
-              name="address2"
+              name="addressline2"
               type="text"
               className="form-control"
               placeholder="enter address line 2"
-              value={inputs.address2 || ""}
+              value={inputs.addressline2|| ""}
               onChange={setRegister}
             />
           </div>
@@ -235,33 +220,33 @@ const MyProfile = () => {
           <div className="col-md-12">
             <label className="labels">Alternative Email ID</label>
             <input
-              name="altemail"
+              name="alternativeemail"
               type="text"
               className="form-control"
               placeholder="enter email id"
-              value={inputs.altemail || ""}
+              value={inputs.alternativeemail|| ""}
               onChange={setRegister}
             />
           </div>
           <div className="col-md-12">
             <label className="labels">Mobile Number</label>
             <input
-              name="mobileno"
+              name="mobile"
               type="text"
               className="form-control"
               placeholder="enter phone number"
-              value={inputs.mobileno || ""}
+              value={inputs.mobile || ""}
               onChange={setRegister}
             />
           </div>
           <div className="col-md-12">
             <label className="labels">Alternative Mobile Number</label>
             <input
-              name="altmobile"
+              name="alternativemobile"
               type="text"
               className="form-control"
               placeholder="enter phone number"
-              value={inputs.altmobile || ""}
+              value={inputs.alternativemobile || ""}
               onChange={setRegister}
             />
           </div>
@@ -272,7 +257,7 @@ const MyProfile = () => {
         
         </div>
         <div className="mt-5 text-center">
-          <button className="btn btn-primary profile-button" type="button">
+          <button className="btn btn-primary profile-button"type="button" onClick={Registersubmit}>
             Save Profile
           </button>
         </div>
@@ -324,7 +309,7 @@ const MyProfile = () => {
 
     <div className="col-md-12">
       <label className="labels">Education</label>
-      <select className="form-control input-lg select-lg" name="position" style={{ width: '400px' }} value={inputs.position || ""}
+      <select className="form-control input-lg select-lg" name="education" style={{ width: '400px' }} value={inputs.education || ""}
     onChange={setRegister} >
         <option value="qualification">Qualification</option>
         <option value="Post Graduated">Post Graduated</option>
@@ -346,7 +331,7 @@ const MyProfile = () => {
           </div>
           <div className="col-md-12">
       <label className="labels">Year</label>
-      <select className="form-control input-lg select-lg" name="yearlevel"style={{ width: '400px' }}value={inputs.yearlevel || ""}
+      <select className="form-control input-lg select-lg" name="year"style={{ width: '400px' }}value={inputs.year || ""}
     onChange={setRegister}>
         <option value="Year-level">Year-level</option>
         <option value="1st Year">1st Year</option>
@@ -375,36 +360,32 @@ const MyProfile = () => {
       <label className="labels">Year</label>
       <input
         style={{ width: '400px',marginBottom:'10px' }}
-        name="pyear"
+        name="experienceyear"
         type="number"
         className="form-control input-lg"
         placeholder="Year"
-        value={inputs.pyear || ""}
+        value={inputs.experienceyear || ""}
         onChange={setRegister}
       />
     </div>
     <br />
+    <div className="col-md-12">
+            <label className="labels">Skill</label>
+            <input  style={{width:'400px'}}
+              name="skill"
+              type="text"
+              className="form-control"
+              placeholder="enter skill"
+              value={inputs.skill || ""}
+              onChange={setRegister}
+            />
+          </div>
 
-    <div>
-      {skills.map((skill, index) => (
-        <div className="col-md-12" key={index}>
-          <label className="labels">Additional Skill {index + 1}</label>
-          <input
-            style={{ width: '400px' }}
-            name="additionalskill"
-            type="text"
-            className="form-control input-lg"
-            placeholder={`Skill ${index + 1}`}
-            value={skill}
-            onChange={(e) => handleSkillChange(index, e.target.value)}
-          />
-        </div>
-      ))}
-      <button  className='btn btn-success' onClick={handleAddSkill}style={{marginLeft:'400px'}} >+</button> {/* Plus button to add more input fields */}
-    </div>
+    
     <div className="col-md-12">
       <label className="labels">CV Upload</label>
-      <input type="file" className="form-control-file" name="file4" 
+      <input type="file" className="form-control-file" name="cv" value={inputs.cv || ""}
+        onChange={setRegister}
          />
     </div>
   </div>

@@ -4,9 +4,10 @@ const loginRouter = require('./src/routes/loginRouter')
 const userregRouter = require('./src/routes/userregRouter')
 const bodyParser = require('body-parser')
 const companycreatejobRouter = require('./src/routes/companycreatejobRouter')
-const collegecreatejobRouter = require('./src/routes/collegecreatejobRouter')
 const companyjobapplicationRouter = require('./src/routes/companyjobapplicationRouter')
 const collegejobapplicationRouter = require('./src/routes/collegejobapplicationRouter')
+const usermyprofileRouter = require('./src/routes/usermyprofileRouter')
+const collegecreatejobRouter = require('./src/routes/collegecreatejobRouter')
 
 const app = express()
 
@@ -32,6 +33,7 @@ app.use('/register',companycreatejobRouter)
 app.use('/register',collegecreatejobRouter)
 app.use('/register',companyjobapplicationRouter)
 app.use('/apply',collegejobapplicationRouter)
+app.use('/profile', usermyprofileRouter)
 
 
 

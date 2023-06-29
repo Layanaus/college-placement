@@ -1,10 +1,38 @@
 const express = require('express');
 const collegeJobApplicationModel = require('../models/collegeJobApplicationModel');
-collegeJobApplicationModel
 
 
 
 const collegejobapplicationRouter = express.Router();
+
+
+collegejobapplicationRouter.get('/view-collegeapplication',async(req,res)=>{
+  try {
+      const users = await collegeJobApplicationModel.find()
+      if(users[0]!=undefined){
+          return res.status(200).json({
+              success:true,
+              error:false,
+              data:users
+          })
+      }else{
+          return res.status(400).json({
+              success:false,
+              error:true,
+              message:"No data found"
+          })
+      }
+  } catch (error) {
+      return res.status(400).json({
+          success:false,
+          error:true,
+          message:"Something went wrong",
+          details:error
+      })
+  }
+  })
+
+
 
 collegejobapplicationRouter.post('/jobportal_application', async (req, res) => {
   try {

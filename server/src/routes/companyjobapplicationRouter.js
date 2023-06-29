@@ -6,6 +6,34 @@ const companyJobApplicationModel = require('../models/companyJobApplicationModel
 
 const companyjobapplicationRouter = express.Router();
 
+companyjobapplicationRouter.get('/view-companyapplication',async(req,res)=>{
+  try {
+      const users = await companyJobApplicationModel.find()
+      if(users[0]!=undefined){
+          return res.status(200).json({
+              success:true,
+              error:false,
+              data:users
+          })
+      }else{
+          return res.status(400).json({
+              success:false,
+              error:true,
+              message:"No data found"
+          })
+      }
+  } catch (error) {
+      return res.status(400).json({
+          success:false,
+          error:true,
+          message:"Something went wrong",
+          details:error
+      })
+  }
+  })
+
+
+
 companyjobapplicationRouter.post('/job_application', async (req, res) => {
   try {
     const data = {

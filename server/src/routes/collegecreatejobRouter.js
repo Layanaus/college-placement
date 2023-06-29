@@ -1,8 +1,41 @@
 const express = require('express');
-const collegeCreateJobModel = require('../models/collegeCreateJobModel');
+const collegeCreateJobModel = require('../models/collegeCreateJobModel')
+
 
 
 const collegecreatejobRouter = express.Router();
+
+
+collegecreatejobRouter.get('/view-jobportal',async(req,res)=>{
+  try {
+      const users = await collegeCreateJobModel.find()
+      if(users[0]!=undefined){
+          return res.status(200).json({
+              success:true,
+              error:false,
+              data:users
+          })
+      }else{
+          return res.status(400).json({
+              success:false,
+              error:true,
+              message:"No data found"
+          })
+      }
+  } catch (error) {
+      return res.status(400).json({
+          success:false,
+          error:true,
+          message:"Something went wrong",
+          details:error
+      })
+  }
+  })
+
+
+
+
+
 
 collegecreatejobRouter.post('/create_jobportal', async (req, res) => {
   try {

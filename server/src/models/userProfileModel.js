@@ -16,6 +16,7 @@ const userProfileSchema=new schema({
     email:{type:String},
     alternativeemail:{type:String},
     mobile:{type:String},
+    alternativemobile:{type:String},
     education:{type:String},
     branch:{type:String},
     year:{type:String},
