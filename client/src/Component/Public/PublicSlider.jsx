@@ -1,35 +1,43 @@
-import React from 'react'
-import { useState } from 'react';
+import axios from 'axios';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 const PublicSlider = () => {
-  const [inputs,setinputs]=useState([]);
-const setRegister =(event)=>{
-const name=event.target.name;
-const value=event.target.value;
-setinputs({...inputs,[name]:value});
-    
-
-  };
-  const Registersubmit =(event)=>{
-    event.preventDefault();
-
-    console.log("data",inputs);
-  }
-  console.log(inputs);
-
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
+  const navigate= useNavigate()
+  const [inputs, setinputs] = useState([]);
+  console.log("value==>", inputs);
+  const setRegister = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
     setinputs({ ...inputs, [name]: value });
-  };
-
-  const handleReset = () => {
-    setinputs({});
-  };
-
-  const handleSubmit = (event) => {
+    console.log(inputs);
+  }
+  const registersubmit = (event) => {
     event.preventDefault();
-    console.log('data', inputs);
-    // Perform additional actions here, such as making API requests or updating the database
+    console.log(inputs);
+    axios.post('http://localhost:5000/login/login', inputs).then((data) => {
+      console.log(data);
+      if(data.data.role=='1'){
+        localStorage.setItem('user_id',data.data.user_id)
+        localStorage.setItem('login_id',data.data.login_id)
+        localStorage.setItem('role',data.data.role)
+        navigate('/User')
+      }else if(data.data.role=='2'){
+        localStorage.setItem('company_id',data.data.company_id)
+        localStorage.setItem('login_id',data.data.login_id)
+        localStorage.setItem('role',data.data.role)
+        navigate('/Company')
+      }else if(data.data.role=='3'){
+        localStorage.setItem('college_id',data.data.college_id)
+        localStorage.setItem('login_id',data.data.login_id)
+        localStorage.setItem('role',data.data.role)
+        navigate('/placementofficer')
+      }
+      
+      
+    }).catch((error) => {
+
+    })
+
   }
   return (
     <>
@@ -51,14 +59,14 @@ setinputs({...inputs,[name]:value});
             </div>
           </div>
           {/* Login Form */}
-          <form className='ne'onSubmit={Registersubmit}>
+          <form className='ne'onSubmit={registersubmit}>
 
             <input
               type="text"
               className="fadeIn second"
               name="username"
               placeholder="Username"
-              value={inputs.username ||""}
+             
               onChange={setRegister}
             />
             <input
@@ -66,7 +74,7 @@ setinputs({...inputs,[name]:value});
               className="fadeIn third"
               name="password"
               placeholder="password"
-              value={inputs.password ||""}
+             
               onChange={setRegister}
 
             />

@@ -38,6 +38,7 @@ const Applyjobportal = () => {
           action="https://herotofu.com/start"
           encType="multipart/form-data"
         >
+          <h3>Application Form</h3>
           <label className="d-block mb-4">
             <span className="d-block mb-2">Your Name</span>
             <input

@@ -68,9 +68,9 @@ const Registersubmit = (event) => {
   onChange={setRegister}
 >
   <option value="">Company Category</option>
-  <option value="option1">IT Company</option>
-  <option value="option2">Engineering</option>
-  <option value="option3">Sales and Marketing</option>
+  <option value="IT Company">IT Company</option>
+  <option value="Engineering">Engineering</option>
+  <option value="Sales and Marketing">Sales and Marketing</option>
 </select>
 </div>
 

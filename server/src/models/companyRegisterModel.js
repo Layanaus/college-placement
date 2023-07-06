@@ -10,11 +10,6 @@ const companyRegisterSchema=new schema({
     email:{type:String},
     phone:{type:String},
     websiteaddress:{type:String},
-    qualification:{type:String},
-    regno:{type:String},
-    email:{type:String},
-    phone:{type:String},
-    websiteaddress:{type:String},
     
     
 })

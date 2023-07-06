@@ -2,38 +2,30 @@ import React from 'react'
 import { useState } from 'react';
 import Placementofficernav from './Placementofficernav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
-import ManageJobportal from './ManageJobportal'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Createplacedstudent = () => {
-  const [inputs,setinputs]=useState([]);
-const setRegister =(event)=>{
-const name=event.target.name;
-const value=event.target.value;
-setinputs({...inputs,[name]:value});
-    
 
-  };
-  const Registersubmit =(event)=>{
-    event.preventDefault();
-
-    console.log("data",inputs);
-  }
-  console.log(inputs);
-
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setinputs({ ...inputs, [name]: value });
-  };
-
+  const navigate = useNavigate()
+  const[inputs, setinputs]=useState({});
+  console.log("value==>",inputs);
+  const setRegister=(event)=>{
+    const name=event.target.name;
+    const value=event.target.value;
+    setinputs({...inputs,[name]:value});
+    console.log(inputs);  
+  }
   const handleReset = () => {
     setinputs({});
   };
 
-  const handleSubmit = (event) => {
+  const Registersubmit = (event) => {
     event.preventDefault();
-    console.log('data', inputs);
-    // Perform additional actions here, such as making API requests or updating the database
+    axios.post('http://localhost:5000/create/create_placedstudent',inputs).then((response)=>{
+      navigate('/placementofficer')
+    })
+      
   }
   return (
     <>
@@ -49,10 +41,7 @@ setinputs({...inputs,[name]:value});
           <div className="card-header">Add Placed Students in Our College</div>
           <div className="card-body">
             <form
-              name="my-form"
-              onsubmit="return validform()"
-              action="success.php"
-              method=""
+              onSubmit={Registersubmit}
             >
            
               <div className="form-group row">

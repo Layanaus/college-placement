@@ -6,7 +6,7 @@ const createjobSchema=new schema({
     login_id:{type:mongoose.Types.ObjectId,ref:"login_tb"},
     jobname:{type:String},
     jobdescription:{type:String},
-    jobcategory:{type:String},
+    jobcategory:{type:mongoose.Types.ObjectId,ref:"job_category_tb"},
     vaccancy:{type:String},
     qualification:{type:String},
     expectedsalary:{type:String},

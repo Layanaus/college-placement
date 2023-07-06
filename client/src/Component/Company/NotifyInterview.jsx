@@ -2,37 +2,29 @@ import React from 'react';
 import { useState } from 'react';
 import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const NotifyInterview = () => {
-  const [inputs,setinputs]=useState([]);
-const setRegister =(event)=>{
-const name=event.target.name;
-const value=event.target.value;
-setinputs({...inputs,[name]:value});
-    
-
-  };
-  const Registersubmit =(event)=>{
-    event.preventDefault();
-
-    console.log("data",inputs);
-  }
-  console.log(inputs);
-
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setinputs({ ...inputs, [name]: value });
-  };
-
+  const navigate = useNavigate()
+  const[inputs, setinputs]=useState({});
+  console.log("value==>",inputs);
+  const setRegister=(event)=>{
+    const name=event.target.name;
+    const value=event.target.value;
+    setinputs({...inputs,[name]:value});
+    console.log(inputs);  
+  }
   const handleReset = () => {
     setinputs({});
   };
 
-  const handleSubmit = (event) => {
+  const Registersubmit = (event) => {
     event.preventDefault();
-    console.log('data', inputs);
-    // Perform additional actions here, such as making API requests or updating the database
+    axios.post('http://localhost:5000/notify/create_interview',inputs).then((response)=>{
+      navigate('/placementofficer')
+    })
+      
   }
   return (
     <>

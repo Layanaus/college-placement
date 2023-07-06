@@ -2,33 +2,31 @@
 import React, { useState } from 'react';
 import Placementofficernav from './Placementofficernav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const Sendplacementrequest = () => {
-  const [inputs,setinputs]=useState([]);
-const setRegister =(event)=>{
-const name=event.target.name;
-const value=event.target.value;
-setinputs({...inputs,[name]:value});
-    
-
-  };
-  const Registersubmit =(event)=>{
-    event.preventDefault();
-
-    console.log("data",inputs);
-  }
-  console.log(inputs);
-
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setinputs({ ...inputs, [name]: value });
-  };
-
+  const navigate = useNavigate()
+  const[inputs, setinputs]=useState({});
+  console.log("value==>",inputs);
+  const setRegister=(event)=>{
+    const name=event.target.name;
+    const value=event.target.value;
+    setinputs({...inputs,[name]:value});
+    console.log(inputs);  
+  }
   const handleReset = () => {
     setinputs({});
   };
 
+  const Registersubmit = (event) => {
+    event.preventDefault();
+    axios.post('http://localhost:5000/request/create_placementrequest',inputs).then((response)=>{
+      navigate('/placementofficer')
+    })
+      
+  }
  
     
   const [showModal, setShowModal] = useState(false);

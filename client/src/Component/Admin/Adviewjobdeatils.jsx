@@ -7,7 +7,7 @@ const Adviewjobdeatils = () => {
     <>
     <AdminNav/>
   <div className="container">
-    <h2>Job Details</h2>
+    <h1>Job Details</h1>
     <ul>
       <li>
         A Python developer might work as a Software Engineer, Data Analyst, Data

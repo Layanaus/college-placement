@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
+import Usernav from '../User/Usernav';
 
 function Aptitudetest() {
   const totalQuestions = 3; // Update this value if you add more questions
@@ -44,7 +44,7 @@ function Aptitudetest() {
 
   return (
     <>
-      <Companynav />
+      <Usernav />
       {showContainer && (
         <div className="container text-center">
           <h1>Aptitude Test</h1>
@@ -103,4 +103,4 @@ function Aptitudetest() {
   );
 }
 
-export default Aptitudetest;
+export default Aptitudetest;

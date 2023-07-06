@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import AdminNav from './AdminNav'
 
 const Adviewjobs = () => {
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/jobcategory/view-jobcategory')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setCategory(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
   return (
     <>
    <AdminNav/>
@@ -72,13 +86,14 @@ const Adviewjobs = () => {
   </div>
   
       <div className="row">
-        <div className="col-md-4 mb-5">
+      {category.map((job) => (
+        <div className="col-md-4 mb-5" key={job._id}>
           <div className="card">
-            <div className="card-header">IT Jobs</div>
+            <div className="card-header">{job.jobcategory}</div>
             <div className="card-body">
-              <h5 className="card-title">14 MNC Companies Hiring you..</h5>
+            
               <p className="card-text">
-                1000+ Vaccancies
+             + Vaccancies
               </p>
               <a href="adsearchjob" className="btn btn-primary">
                 View vaccancies
@@ -86,78 +101,42 @@ const Adviewjobs = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-header">Engineering Jobs</div>
-            <div className="card-body">
-              <h5 className="card-title">200 International Companies</h5>
-              <p className="card-text">
-                540+ Vaccancies
-              </p>
-              <a href="adsearchjob" className="btn btn-primary">
-                View vaccancies
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4 mb-5">
-          <div className="card">
-            <div className="card-header">Sales and arketing Jobs</div>
-            <div className="card-body">
-              <h5 className="card-title">110 Companies</h5>
-              <p className="card-text">
-                1000+ Vaccancies
-              </p>
-              <a href="adsearchjob" className="btn btn-primary">
-                View vaccancies
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-header">Digital Marketing</div>
-            <div className="card-body">
-              <h5 className="card-title">200 Companies</h5>
-              <p className="card-text">
-                540+ Vaccancies
-              </p>
-              <a href="adsearchjob" className="btn btn-primary">
-                View vaccancies
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-header">Management</div>
-            <div className="card-body">
-              <h5 className="card-title">20 Companies</h5>
-              <p className="card-text">
-              50+ Vaccancies
-              </p>
-              <a href="adsearchjob" className="btn btn-primary">
-                View vaccancies
-              </a>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <div className="card">
-            <div className="card-header">Others</div>
-            <div className="card-body">
-              <h5 className="card-title">50 Companies</h5>
-              <p className="card-text">
-              150+ Vaccancies
-              </p>
-              <a href="adsearchjob" className="btn btn-primary">
-                View vaccancies
-              </a>
-            </div>
-          </div>
-        </div>
+        ))}
+        
       </div>
     </div>
+    <div className="row justify-content-center" style={{marginTop:'30px'}}>
+    <nav aria-label="Page navigation justify-content-center">
+      <ul className="pagination">
+        <li className="page-item">
+          <a className="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">«</span>
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            1
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            2
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#">
+            3
+          </a>
+        </li>
+        <li className="page-item">
+          <a className="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">»</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  
   
     <PublicUserFooter/>
   </>

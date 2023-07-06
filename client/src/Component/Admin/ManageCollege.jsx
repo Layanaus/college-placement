@@ -1,8 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import AdminNav from './AdminNav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
+import axios from 'axios';
+
 
 const  ManageCollege = () => {
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+ useEffect(() => {
+   fetch('http://localhost:5000/register/view-college')
+     .then((response) => response.json())
+     .then((data) => {
+       if (data.success) {
+         setUsers(data.data);
+       }
+     })
+     .catch((error) => {
+       console.error('Error fetching users:', error);
+     });
+ }, []);
+ const usersPerPage = 10;
+ const totalPages = Math.ceil(users.length / usersPerPage);
+
+ const handlePageClick = (pageNumber) => {
+   setCurrentPage(pageNumber);
+ };
+
+ const indexOfLastUser = currentPage * usersPerPage;
+ const indexOfFirstUser = indexOfLastUser - usersPerPage;
+ const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+ const approve = (id) => {
+  axios
+    .get(`http://localhost:5000/register/approve/${id}`)
+    .then((response) => {
+      console.log(response.data);
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const reject = (id) => {
+  axios
+    .get(`http://localhost:5000/register/reject/${id}`)
+    .then((response) => {
+      console.log(response.data);
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+ 
   return (
     <>
     <AdminNav/>
@@ -11,7 +62,7 @@ const  ManageCollege = () => {
     <div className="col-lg-10 offset-md-1">
       <div className="card panel-table">
         <div className="card-header" style={{textAlign:"center",}}>
-          <h2 >Manage College</h2>
+          <h3>Manage College</h3>
           <div className="row" />
         </div>
         <div className="card-body">
@@ -31,73 +82,92 @@ const  ManageCollege = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>John Doe</td>
-                <td>John Doe</td>
-
-                <td>johndoe@example.com</td>
-                <td>9072823381</td>
-               
-                {/* <td align="center">
-                  {" "}
-                  <a className="btn btn-secondary">
-                    <em className="fa fa-check" />
-                  </a>
-                  <a className="btn btn-danger">
-
-                    <em className="fa fa-close" />
-                  </a>
-                </td> */}
-           
-           <td align="center">
-  <a className="btn btn-success" style={{marginRight:'5px'}}>
-    <em className="fa fa-check" />
-  </a>
-  <a className="btn btn-danger">
-    <em className="fa fa-times" />
-  </a>
-</td>
-
-
-              </tr>
-            </tbody>
+            {currentUsers.length > 0 ? (
+              currentUsers.map((user, index) => (
+                <tr key={user._id}>
+                  <th scope="row">{(currentPage - 1) * usersPerPage + index + 1}</th>
+                  <td>{user.collegename}</td>
+                  <td>{user.collegeaddress}</td>
+                  <td>{user.email}</td>
+                  <td>{user.phone}</td>
+                  
+                  
+                  <td align="center">
+                            {user.status === '0' ? (
+                              <>
+                                <a
+                                  className="btn btn-success"
+                                  onClick={() => {
+                                    approve(user.login_id);
+                                  }}
+                                  style={{ marginRight: '5px' }}
+                                >
+                                  <em className="fa fa-check" />
+                                </a>
+                                <a
+                                  className="btn btn-danger"
+                                  onClick={() => {
+                                    reject(user.login_id);
+                                  }}
+                                >
+                                  <em className="fa fa-times" />
+                                </a>
+                              </>
+                            ) : (
+                              <a className="btn btn-success" style={{ marginRight: '5px' }}>
+                                <em className="fa fa-check" />
+                              </a>
+                            )}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="9" className="text-center">
+                          No users found
+                        </td>
+                      </tr>
+                    )}          </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-  <div className="row justify-content-center">
-        <nav aria-label="Page navigation justify-content-center">
-          <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">«</span>
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">»</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        </div>
+  <div className="row justify-content-center" style={{marginTop:'30px'}}>
+  <nav aria-label="Page navigation justify-content-center">
+  <ul className="pagination">
+    <li className="page-item">
+      <a
+        className="page-link"
+        href="#"
+        aria-label="Previous"
+        onClick={() => handlePageClick(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        <span aria-hidden="true">«</span>
+      </a>
+    </li>
+    {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+      <li className={`page-item ${currentPage === page ? 'active' : ''}`} key={page}>
+        <a className="page-link" href="#" onClick={() => handlePageClick(page)}>
+          {page}
+        </a>
+      </li>
+    ))}
+    <li className="page-item">
+      <a
+        className="page-link"
+        href="#"
+        aria-label="Next"
+        onClick={() => handlePageClick(currentPage + 1)}
+        disabled={currentPage === totalPages}
+      >
+        <span aria-hidden="true">»</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+</div>
 </div>
 <PublicUserFooter/>
     </>

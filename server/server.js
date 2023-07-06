@@ -8,6 +8,11 @@ const companyjobapplicationRouter = require('./src/routes/companyjobapplicationR
 const collegejobapplicationRouter = require('./src/routes/collegejobapplicationRouter')
 const usermyprofileRouter = require('./src/routes/usermyprofileRouter')
 const collegecreatejobRouter = require('./src/routes/collegecreatejobRouter')
+const placedstudentRouter = require('./src/routes/placedstudentRouter')
+const companynotifyinterviewRouter = require('./src/routes/companynotifyinterviewRouter')
+const companyrequestRouter = require('./src/routes/companyrequestRouter')
+const companyquestionRouter = require('./src/routes/companyquestionRouter')
+const jobcategoryRouter = require('./src/routes/jobcategoryRouter')
 
 const app = express()
 
@@ -34,10 +39,11 @@ app.use('/register',collegecreatejobRouter)
 app.use('/register',companyjobapplicationRouter)
 app.use('/apply',collegejobapplicationRouter)
 app.use('/profile', usermyprofileRouter)
-
-
-
-
+app.use('/create', placedstudentRouter)
+app.use('/notify', companynotifyinterviewRouter)
+app.use('/request', companyrequestRouter)
+app.use('/add',companyquestionRouter)
+app.use('/jobcategory',jobcategoryRouter)
 
 const mongoDBurl='mongodb+srv://uslayana:uslayana@cluster0.q9rrp41.mongodb.net/collegeplacement?retryWrites=true&w=majority'
 

@@ -74,6 +74,9 @@ const AdminNav = () => {
           <a href="managecollege" className="nav-item nav-link active">
             Manage Placement Officer
           </a>
+          <a href="category" className="nav-item nav-link active">
+            Job Category
+          </a>
         
           <div className="nav-item dropdown">
             <a

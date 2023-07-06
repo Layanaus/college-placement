@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Usernav from './Usernav'
 
 const SearchVacancy = () => {
+  const [viewJobs, setViewJobs] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/register/view-companyjobs')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setViewJobs(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
   return (
     <>
     <Usernav/>
@@ -23,14 +37,19 @@ const SearchVacancy = () => {
       </div>
     </div>
   </div>
+  
   <div className="row justify-content-center">
-    <div className="col-md-8 mb-5">
+  {viewJobs.map((job) => (
+    <div className="col-md-8 mb-5" key={job._id}>
       <div className="card">
-        <div className="card-header text text-center">Salesman</div>
+        <div className="card-header text text-center">{job.jobname}</div>
         <div className="card-body text-center">
-          <h5 className="card-title">My life style pvt</h5> 
+          <h5 className="card-title">Job Description:{job.jobdescription}</h5>
+          <h6 className="card-title">Required Qualification:{job.qualification}</h6>
+          <h6 className="card-title">Applied Lastdate:{job.lastdate}</h6>
+
           <p className="card-text">
-           Looking for freshers
+          {job.branch}
           </p>
           <a href="Jobdetails" className="btn btn-primary">
             View Salary &amp; More Info
@@ -38,55 +57,7 @@ const SearchVacancy = () => {
         </div>
       </div>
     </div>
-  </div>
-  <div className="row justify-content-center">
-    <div className="col-md-8 mb-5">
-      <div className="card">
-        <div className="card-header text text-center">Electrical Maintenance</div>
-        <div className="card-body text-center">
-          <h5 className="card-title">Thomson Industries</h5>
-          <p className="card-text">
-           Minimum three year experiencce
-          </p>
-          <a href="Jobdetails" className="btn btn-primary">
-            View Salary &amp; More Info
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div className="row justify-content-center">
-    <div className="col-md-8 mb-5">
-      <div className="card">
-        <div className="card-header text text-center">Supervisor</div>
-        <div className="card-body text-center">
-          <h5 className="card-title">Ikea</h5>
-          <p className="card-text">
-            Both for freshers and experience
-            
-          </p>
-          <a href="Jobdetails" className="btn btn-primary">
-            View Salary &amp; More Info
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div className="row justify-content-center">
-    <div className="col-md-8 mb-5">
-      <div className="card">
-        <div className="card-header text text-center">Marketing Manager</div>
-        <div className="card-body text-center">
-          <h5 className="card-title">Ikea</h5>
-          <p className="card-text">
-           Required much communication skill
-          </p>
-          <a href="Jobdetails" className="btn btn-primary">
-            View Salary &amp; More Info
-          </a>
-        </div>
-      </div>
-    </div>
+          ))}
   </div>
 </div>
 <PublicUserFooter/>

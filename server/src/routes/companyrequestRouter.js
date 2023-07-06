@@ -1,19 +1,19 @@
 const express = require('express');
-const collegeCreateJobModel = require('../models/collegeCreateJobModel')
+const companyRequestModel = require('../models/companyRequestModel');
 
 
 
-const collegecreatejobRouter = express.Router();
+const companyrequestRouter = express.Router();
 
 
-collegecreatejobRouter.get('/view-jobportal',async(req,res)=>{
+companyrequestRouter.get('/view-placementrequest',async(req,res)=>{
   try {
-      const users = await collegeCreateJobModel.find()
-      if(users[0]!=undefined){
+      const request = await companyRequestModel.find()
+      if(request[0]!=undefined){
           return res.status(200).json({
               success:true,
               error:false,
-              data:users
+              data:request
           })
       }else{
           return res.status(400).json({
@@ -37,21 +37,15 @@ collegecreatejobRouter.get('/view-jobportal',async(req,res)=>{
 
 
 
-collegecreatejobRouter.post('/create_jobportal', async (req, res) => {
+  companyrequestRouter.post('/create_placementrequest', async (req, res) => {
   try {
     const data = {
       login_id:req.body. login_id,
-    companyname:req.body.companyname,
-    companylocation:req.body.companylocation,
-    jobname:req.body.jobname,
-    jobdescription:req.body.jobdescription,
-    jobcategory_id:req.body.jobcategory_id,
-    Requiredqualification:req.body.qualification,
-    salaryrange:req.body.salaryrange,
-    companycontact:req.body.companycontact,
-    lastdate:req.body.lastdate,
+      subject:req.body.subject,
+      message:req.body.message,
+   
     };
-    const savedData = await collegeCreateJobModel(data).save();
+    const savedData = await companyRequestModel(data).save();
 
     if (savedData) {
       return res.status(200).json({
@@ -71,4 +65,4 @@ collegecreatejobRouter.post('/create_jobportal', async (req, res) => {
   }
 });
 
-module.exports = collegecreatejobRouter;
+module.exports = companyrequestRouter;

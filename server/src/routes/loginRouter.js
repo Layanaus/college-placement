@@ -10,7 +10,7 @@ const loginRouter = express.Router()
 
 loginRouter.post('/login', async (req, res) => {
     try {
-        const oldUser = await loginModel.findOne({ username: req.body.UserName })
+        const oldUser = await loginModel.findOne({ username: req.body.username })
         if (!oldUser) {
             return res.status(400).json({
                 success: false,
@@ -18,11 +18,13 @@ loginRouter.post('/login', async (req, res) => {
                 message: "User not found !"
             })
         }
-        if (oldUser.password == req.body.Password) {
+        if (oldUser.password == req.body.password) {
             if (oldUser.role == 0) {
                 return res.status(200).json({
                     success: true,
                     error: false,
+                    role:oldUser.role,
+                    admin_id:admin._id,
                     login_id: oldUser._id,
                     details: oldUser
                 })
@@ -33,6 +35,7 @@ loginRouter.post('/login', async (req, res) => {
                     return res.status(200).json({
                         success: true,
                         error: false,
+                        role:oldUser.role,
                         login_id: oldUser._id,
                         user_id: user._id,
                         status: oldUser.status,
@@ -41,12 +44,13 @@ loginRouter.post('/login', async (req, res) => {
                 }
 
             }
-            if (oldUser.role === 2) {
+            if (oldUser.role == 2) {
                 const company = await companyRegisterModel.findOne({ login_id: oldUser._id });
                 if (company) {
                   return res.status(200).json({
                     success: true,
                     error: false,
+                    role:oldUser.role,
                     login_id: oldUser._id,
                     company_id: company._id,
                     status: oldUser.status,
@@ -54,12 +58,13 @@ loginRouter.post('/login', async (req, res) => {
                   })
                 }
               }
-              if (oldUser.role === 3) {
+              if (oldUser.role == 3) {
                 const college = await collegeRegisterModel.findOne({ login_id: oldUser._id });
                 if (college) {
                   return res.status(200).json({
                     success: true,
                     error: false,
+                    role:oldUser.role,
                     login_id: oldUser._id,
                     college_id: college._id,
                     status: oldUser.status,

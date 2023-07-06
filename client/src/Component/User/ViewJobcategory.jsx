@@ -1,6 +1,20 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 
 const ViewJobcategory = () => {
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/jobcategory/view-jobcategory')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setCategory(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
   return (
     <>
     <div className='container'>
@@ -10,64 +24,19 @@ const ViewJobcategory = () => {
     </div>
    
     <div className="job-listings">
-      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+    {category.map((job) => (
+      <div className="job-item" key={job._id} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
       <div>
-    <h1> IT Field</h1>
+    <h1>{job.jobcategory}</h1>
     <p>100+ Vacancy</p>
   </div>
   <div>
+  
         <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
       </div>
       </div>
-      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-      <div>
-    <h1>Non IT Field</h1>
-    <p>100+ Vacancy</p>
-  </div>
-  <div>
-        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
-      </div>
-      </div>
-      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-      <div>
-    <h1>Digital Marketing</h1>
-    <p>100+ Vacancy</p>
-  </div>
-  <div>
-        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
-      </div>
-      </div>
-    </div>
-
-    
-    <div className="job-listings">
-      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-      <div>
-    <h1>Sales and Marketing</h1>
-    <p>100+ Vacancy</p>
-  </div>
-  <div>
-        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
-      </div>
-      </div>
-      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-      <div>
-    <h1>Health care</h1>
-    <p>100+ Vacancy</p>
-  </div>
-  <div>
-        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
-      </div>
-      </div>
-      <div className="job-item"style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-      <div>
-    <h1>Others</h1>
-    <p>100+ Vacancy</p>
-  </div>
-  <div>
-        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
-      </div>
-      </div>
+      ))}
+      
     </div>
    </>
   

@@ -64,6 +64,7 @@ import Questions from '../Company/Questions'
 import Noticeboard from '../Company/Noticeboard'
 import JobPortalviewstudents from '../PlacementOfficer/JobPortalviewstudents'
 import MovingHeadings from '../User/Test'
+import Createcategory from '../Admin/Createcategory'
 
 
 const MainRouter = () => {
@@ -133,10 +134,10 @@ const MainRouter = () => {
             <Route path="questions" element={<Questions/>}/>
             <Route path="noticeboard" element={<Noticeboard/>}/>
             <Route path="jobportalviewstudents" element={<JobPortalviewstudents/>}/>
+             <Route path="test" element={<MovingHeadings/>}/>
+            <Route path="category" element={<Createcategory/>}/>
 
-            <Route path="test" element={<MovingHeadings/>}/>
-
-           
+        
 
 
           

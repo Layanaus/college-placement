@@ -39,7 +39,7 @@ companycreatejobRouter.post('/create_job', async (req, res) => {
     jobname:req.body.jobname,
     jobdescription:req.body.jobdescription,
     jobcategory:req.body.jobcategory,
-    vaccancy:req.body. vaccancy,
+    vaccancy:req.body.vaccancy,
     qualification:req.body.qualification,
     expectedsalary:req.body.expectedsalary,
     branch:req.body.branch,

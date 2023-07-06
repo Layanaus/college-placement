@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import AdminNav from './AdminNav'
 
 const Adsearchvacancy = () => {
+  const [category, setCategory] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/register/view-companyjobs')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setCategory(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
   return (
     <>
     <AdminNav/>
@@ -24,13 +38,20 @@ const Adsearchvacancy = () => {
     </div>
   </div>
   <div className="row justify-content-center">
-    <div className="col-md-8 mb-5">
+  {category.map((job) => (
+    <div className="col-md-8 mb-5" key={job._id}>
       <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
+        <div className="card-header text text-center">{job.jobname}</div>
         <div className="card-body text-center">
-          <h5 className="card-title">Tata Consultancy Services</h5>
+          <h5 className="card-title">Company Name</h5>
+          <h6 className="card-title">Company Location</h6>
+          <h6 className="card-title">{job.vaccancy}+vaccancy</h6>
+          <h6 className="card-title">Required qualification:{job.qualification}</h6>
+          <h6 className="card-title">Expected salary:{job.expectedsalary}</h6>
+          <h6 className="card-title">Location:{job.branch}</h6>
+          <h6 className="card-title">Last date:{job.lastdate}</h6>
           <p className="card-text">
-            Looking for freshers
+           
           </p>
           <a href="adminjobdetails" className="btn btn-primary">
             View Salary &amp; More Info
@@ -38,54 +59,7 @@ const Adsearchvacancy = () => {
         </div>
       </div>
     </div>
-  </div>
-  <div className="row justify-content-center">
-    <div className="col-md-8 mb-5">
-      <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
-        <div className="card-body text-center">
-          <h5 className="card-title">IBM</h5>
-          <p className="card-text">
-            Minimum three year experience
-          </p>
-          <a href="adminjobdetails" className="btn btn-primary">
-            View Salary &amp; More Info
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div className="row justify-content-center">
-    <div className="col-md-8 mb-5">
-      <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
-        <div className="card-body text-center">
-          <h5 className="card-title">Ikea</h5>
-          <p className="card-text">
-            Both for freshers and experience
-          </p>
-          <a href="adminjobdetails" className="btn btn-primary">
-            View Salary &amp; More Info
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div className="row justify-content-center">
-    <div className="col-md-8 mb-5">
-      <div className="card">
-        <div className="card-header text text-center">Python Developer</div>
-        <div className="card-body text-center">
-          <h5 className="card-title">Thomson Industries</h5>
-          <p className="card-text">
-            Required much communication skill
-          </p>
-          <a href="adminjobdetails" className="btn btn-primary">
-            View Salary &amp; More Info
-          </a>
-        </div>
-      </div>
-    </div>
+     ))}
   </div>
 </div>
 <PublicUserFooter/>

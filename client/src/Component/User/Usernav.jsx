@@ -1,6 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Usernav = () => {
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.removeItem('user_id')
+    localStorage.removeItem('login_id')
+    localStorage.removeItem('role')
+    navigate('/')
+  }
+  useEffect(() => {
+    const student_id = localStorage.getItem('user_id')
+    if (!student_id) {
+      navigate('/')
+    }
+  }, [])
   return (
     <>
   <div className="container-fluid bg-dark">
@@ -122,7 +136,7 @@ const Usernav = () => {
               <a href="Uchangepassword" className="dropdown-item">
                 Change Password
               </a>
-              <a href="vm.html" className="dropdown-item">
+              <a onClick={logout} className="dropdown-item">
                 log out
               </a>
               

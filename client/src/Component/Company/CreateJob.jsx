@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Companynav from './Companynav'
@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateJob = () => {
   const navigate = useNavigate()
+  const [jobcategory, setjobCategory] = useState([]);
+
   const[inputs, setinputs]=useState({});
   console.log("value==>",inputs);
   const setRegister=(event)=>{
@@ -26,6 +28,19 @@ const CreateJob = () => {
     })
       
   }
+  const jobcategory_id = inputs.jobcategory; 
+  const updatedInputs = { ...inputs, jobcategory_id };
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/jobcategory/view-jobcategory')
+      .then((response) => {
+        setjobCategory(response.data.data);
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+
   return (
     <>
     <Companynav/>
@@ -97,23 +112,20 @@ const CreateJob = () => {
                   </div>
                 </div>
                 <div className="form-group row">
-                  <label
-                    htmlFor="category"
-                    className="col-md-4 col-form-label text-md-right"
-                  >
-                    Job category
-                  </label>
-                  <div className="col-md-6">
-                    <input
-                      type="text"
-                      // id="email_address"
-                      className="form-control"
-                      name="jobcategory"
-                      value={inputs.jobcategory || ""}
-                      onChange={setRegister}
-                    />
-                  </div>
-                </div>
+  <label htmlFor="category" className="col-md-4 col-form-label text-md-right">
+    Job Category
+  </label>
+  <div className="col-md-6" >
+    <select id="category" className="form-control" name="jobcategory" value={inputs.jobcategory || ""}
+    onChange={setRegister}>
+      <option value="">Select job category</option>
+                {jobcategory.map((data)=>(
+                  <option value={data._id}>{data.jobcategory}</option>
+                ))}
+
+    </select>
+  </div>
+</div>
                 <div className="form-group row">
                   <label
                     htmlFor="vaccancy"
@@ -173,7 +185,7 @@ const CreateJob = () => {
                     htmlFor="branch"
                     className="col-md-4 col-form-label text-md-right"
                   >
-                    Branch
+                    Location
                   </label>
                   <div className="col-md-6">
                     <input

@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 const UserReg = () => {
   const navigate = useNavigate()
   const[inputs, setinputs]=useState({});
+  const [college,setCollege] = useState([]);
   console.log("value==>",inputs);
   const setRegister=(event)=>{
     const name=event.target.name;
@@ -22,6 +22,15 @@ const UserReg = () => {
   const handleReset = () => {
     setinputs({});
   };
+  useEffect(() => {
+    axios.get('http://localhost:5000/register/view-college2')
+      .then((response) => {
+        setCollege(response.data.data);
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
 
   const Registersubmit = (event) => {
     event.preventDefault();
@@ -41,6 +50,7 @@ const UserReg = () => {
       
     })
   }
+  
 
   return (
     <>
@@ -109,9 +119,9 @@ const UserReg = () => {
             <div className="form-row">
               <select name="college" value={inputs.college ||""} onChange={setRegister}>
                 <option value="choose college">Choose College</option>
-                <option >College name1 </option>
-                <option >College name2 </option>
-                <option >College name2  </option>
+                {college.map((data)=>(
+                  <option value={data._id}>{data.collegename}</option>
+                ))}
               </select>
               <span className="select-btn">
                 <i className="zmdi zmdi-chevron-down" />

@@ -9,7 +9,7 @@ const userRegisterSchema=new schema({
     gender:{type:String},
     applicantimage:{type:String},
     address:{type:String},
-    choosecollege:{type:String},
+    choosecollege:{type:mongoose.Types.ObjectId,ref:"pofficer_register_tb"},
     qualification:{type:String},
     regno:{type:String},
     email:{type:String},

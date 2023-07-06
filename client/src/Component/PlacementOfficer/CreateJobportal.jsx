@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import Placementofficernav from './Placementofficernav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 const CreateJobportal = () => {
   const navigate = useNavigate()
+  const [jobcategory, setjobCategory] = useState([]);
+
   const[inputs, setinputs]=useState({});
   console.log("value==>",inputs);
   const setRegister=(event)=>{
@@ -23,9 +25,20 @@ const CreateJobportal = () => {
     event.preventDefault();
     axios.post('http://localhost:5000/register/create_jobportal',inputs).then((response)=>{
       navigate('/placementofficer')
-    })
-      
+    }) 
   }
+  const jobcategory_id = inputs.jobcategory; 
+  const updatedInputs = { ...inputs, jobcategory_id };
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/jobcategory/view-jobcategory')
+      .then((response) => {
+        setjobCategory(response.data.data);
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
   return (
     <>
     <Placementofficernav/>
@@ -136,10 +149,10 @@ const CreateJobportal = () => {
   <div className="col-md-6" >
     <select id="category" className="form-control" name="jobcategory" value={inputs.jobcategory || ""}
     onChange={setRegister}>
-      <option value="">Select Job Category</option>
-      <option value="category1">Category 1</option>
-      <option value="category2">Category 2</option>
-      <option value="category3">Category 3</option>
+    <option value="">Select job category</option>
+                {jobcategory.map((data)=>(
+                  <option value={data._id}>{data.jobcategory}</option>
+                ))}
     </select>
   </div>
 </div>

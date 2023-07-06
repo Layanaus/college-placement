@@ -103,7 +103,7 @@ const Placementofficerviewjobs = () => {
         </div>
         <div className="col-md-6">
           <div className="card">
-            <div className="card-header">IT JOBSs</div>
+            <div className="card-header">IT JOBS</div>
             <div className="card-body">
               <h5 className="card-title">Special title treatment</h5>
               <p className="card-text">

@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+
 
 const Placementofficernav = () => {
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.removeItem('college_id')
+    localStorage.removeItem('login_id')
+    localStorage.removeItem('role')
+    navigate('/')
+  }
+  useEffect(() => {
+    const student_id = localStorage.getItem('college_id')
+    if (!student_id) {
+      navigate('/')
+    }
+  }, [])
   return (
     <>
     <div className="container-fluid bg-dark">
@@ -164,7 +179,7 @@ const Placementofficernav = () => {
               <a href="Placementchange" className="dropdown-item">
                 Change Password
               </a>
-              <a href="vm.html" className="dropdown-item">
+              <a  onClick={logout} className="dropdown-item">
                 log out
               </a>
               

@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+
 
 const Companynav = () => {
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.removeItem('company_id')
+    localStorage.removeItem('login_id')
+    localStorage.removeItem('role')
+    navigate('/')
+  }
+  useEffect(() => {
+    const cmpny_id = localStorage.getItem('company_id')
+    if (!cmpny_id) {
+      navigate('/')
+    }
+  }, [])
   return (
     <>
     <div className="container-fluid bg-dark">
@@ -135,7 +150,7 @@ const Companynav = () => {
               <a href="Cmpchangepwd" className="dropdown-item">
                 Change Password
               </a>
-              <a href="vm.html" className="dropdown-item">
+              <a onClick={logout} className="dropdown-item">
                 log out
               </a>
               
