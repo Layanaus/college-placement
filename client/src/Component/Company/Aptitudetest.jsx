@@ -94,7 +94,7 @@ function Aptitudetest() {
       )}
       {showCongratulations && (
         <div className="container text-center" style={{ marginTop: '10%' }}>
-          <h1>Congratulations!</h1>
+          <h1>Congratulations!!!</h1>
           <p>You have completed the aptitude test.</p>
         </div>
       )}

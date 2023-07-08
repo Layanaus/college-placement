@@ -67,6 +67,8 @@ import MovingHeadings from '../User/Test'
 import Createcategory from '../Admin/Createcategory'
 
 
+
+
 const MainRouter = () => {
   return (
     
@@ -95,7 +97,7 @@ const MainRouter = () => {
             <Route path="Uchangepassword" element={<Userchangepassword/>}/>
             <Route path="UserProfile" element={<MyProfile/>}/>
             <Route path="user" element={<ViewJobs/>}/>
-            <Route path="Jobdetails" element={<Jobdetails/>}/>
+            <Route path="Jobdetails/:id" element={<Jobdetails/>}/>
             <Route path="Usernotification" element={<Usernotification/>}/>
             <Route path="Viewrequest" element={<Viewrequest/>}/>
             <Route path="Editcompanyprofile" element={<Editcompanyprofile/>}/>
@@ -109,11 +111,11 @@ const MainRouter = () => {
             <Route path="Reviewapplication" element={<ReviewApplication/>}/>
             <Route path="POviewjobs" element={<Placementofficerviewjobs/>}/>
             <Route path="POsearchvacancy2" element={<POsearchvacancy/>}/>
-            <Route path="searchvacancy" element={<SearchVacancy/>}/>
+            <Route path="searchvacancy/:id" element={<SearchVacancy/>}/>
             <Route path="Pojobdetails" element={<POjobdetails/>}/>
             <Route path="adminviewjobs" element={<Adviewjobs/>}/>
-            <Route path="adsearchjob" element={<Adsearchvacancy/>}/>
-            <Route path="adminjobdetails" element={<Adviewjobdeatils/>}/>
+            <Route path="adsearchjob/:id" element={<Adsearchvacancy/>}/>
+            <Route path="adminjobdetails/:id" element={<Adviewjobdeatils/>}/>
             <Route path="viewjobcategory" element={<ViewJobcategory/>}/>
             <Route path="jobportalhome" element={<UJobportalhome/>}/>
             <Route path="applyjobs" element={<Applyjobs/>}/>
@@ -136,6 +138,7 @@ const MainRouter = () => {
             <Route path="jobportalviewstudents" element={<JobPortalviewstudents/>}/>
              <Route path="test" element={<MovingHeadings/>}/>
             <Route path="category" element={<Createcategory/>}/>
+            
 
         
 

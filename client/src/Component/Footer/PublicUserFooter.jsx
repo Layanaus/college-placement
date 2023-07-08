@@ -12,10 +12,11 @@ const PublicUserFooter = () => {
         <div className="col-md-6 mb-5">
           <a href="home" className="navbar-brand">
             <h1 className="mt-n2 text-uppercase text-white">
-              <img src="img\lg - Copy.jpg" width="50px" />
-              Placement cell
+              {/* <img src="img\lg - Copy.jpg" width="50px" /> */}
+              About Us
             </h1>
           </a>
+        
           <p className="m-0">
             Accusam nonumy clita sed rebum kasd eirmod elitr. Ipsum ea lorem at
             et diam est, tempor rebum ipsum sit ea tempor stet et consetetur

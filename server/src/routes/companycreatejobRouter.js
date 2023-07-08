@@ -5,9 +5,10 @@ const companyCreateJobModel = require('../models/companyCreateJobModel');
 const companycreatejobRouter = express.Router();
 
 
-companycreatejobRouter.get('/view-companyjobs',async(req,res)=>{
+companycreatejobRouter.get('/view-companyjobs/:id',async(req,res)=>{
   try {
-      const users = await companyCreateJobModel.find()
+      const id=req.params.id;
+      const users = await companyCreateJobModel.find({jobcategory:id});
       if(users[0]!=undefined){
           return res.status(200).json({
               success:true,

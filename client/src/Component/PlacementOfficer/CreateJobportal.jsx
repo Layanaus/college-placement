@@ -110,22 +110,22 @@ const CreateJobportal = () => {
                 </div>
               </div>
               <div className="form-group row">
-                <label
-                  htmlFor="description"
-                  className="col-md-4 col-form-label text-md-right"
-                >
-                  Job Description
-                </label>
-                <div className="col-md-6">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="jobdescription"
-                    value={inputs.jobdescription || ""}
-                    onChange={setRegister}
-                  />
-                </div>
-              </div>
+             <label
+             htmlFor="jobname"
+             className="col-md-4 col-form-label text-md-right"
+             >
+            Job description
+            </label>
+            <div className="col-md-6">
+            <textarea
+            // id="email_address"
+           className="form-control"
+           name="jobdescription"
+           value={inputs.jobdescription|| ""}
+           onChange={setRegister}
+           ></textarea>
+           </div>
+           </div>
               {/* <div className="form-group row">
                 <label
                   htmlFor="category"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 import Usernav from './Usernav';
+import { Link } from 'react-router-dom';
 
 const ViewJobs = () => {
   const [category, setCategory] = useState([]);
@@ -67,9 +68,9 @@ const ViewJobs = () => {
               <p className="card-text">
              + Vaccancies
               </p>
-              <a href="searchvacancy" className="btn btn-primary">
-                View vaccancies
-              </a>
+             <Link to={`/searchvacancy/${job._id}`} className="btn btn-primary">
+              View vaccancies
+              </Link>
             </div>
           </div>
         </div>

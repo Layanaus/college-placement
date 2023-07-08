@@ -7,8 +7,8 @@ const Commonheader = () => {
     style={{ marginBottom: 90 }}
   >
     <div className="container text-center my-5 py-5">
-      <h1 className="text-white mt-4 mb-4">Welcome To Your</h1>
-      <h1 className="text-white display-1 mb-5">Career Stepping stone</h1>
+      <h1 className="text-white mt-4 mb-4">Welcome</h1>
+      <h1 className="text-white display-1 mb-5">Administrator</h1>
       <div className="mx-auto mb-5" style={{ width: "100%", maxWidth: 600 }}>
         <div className="input-group">
           <div className="input-group-prepend">

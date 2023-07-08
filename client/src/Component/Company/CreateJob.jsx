@@ -93,7 +93,7 @@ const CreateJob = () => {
                     />
                   </div>
                 </div>
-                <div className="form-group row">
+                {/* <div className="form-group row">
                   <label
                     htmlFor="description"
                     className="col-md-4 col-form-label text-md-right"
@@ -110,7 +110,25 @@ const CreateJob = () => {
                       onChange={setRegister}
                     />
                   </div>
-                </div>
+                </div> */}
+                <div className="form-group row">
+  <label
+    htmlFor="jobname"
+    className="col-md-4 col-form-label text-md-right"
+  >
+    Job description
+  </label>
+  <div className="col-md-6">
+    <textarea
+      // id="email_address"
+      className="form-control"
+      name="jobdescription"
+      value={inputs.jobdescription|| ""}
+      onChange={setRegister}
+    ></textarea>
+  </div>
+</div>
+
                 <div className="form-group row">
   <label htmlFor="category" className="col-md-4 col-form-label text-md-right">
     Job Category

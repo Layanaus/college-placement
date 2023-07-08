@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Placementofficernav from './Placementofficernav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 import axios from 'axios';
@@ -7,6 +7,20 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Sendplacementrequest = () => {
+  const [company, setCompany] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/register/view-company')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setCompany(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
   const navigate = useNavigate()
   const[inputs, setinputs]=useState({});
   console.log("value==>",inputs);
@@ -74,13 +88,15 @@ const Sendplacementrequest = () => {
         </div>
 
         <div className="row mb-4">
-          <div className="col-lg-3 col-md-6 mb-4">
+        {company.map((name) => (
+          <div className="col-lg-3 col-md-6 mb-4" key={name._id}>
             <div className="card hover-lift hover-shadow-xl shadow-sm border-0">
               <div className="card-body p-4">
                 <div className="d-flex mb-2 align-items-center">
                   <div className="col">
                     <div className="ml-2">
-                      <h5>Wipro</h5>
+                      <h5>{name.companyname}</h5>
+                     
                     </div>
                   </div>
                   <div className="col">
@@ -95,209 +111,19 @@ const Sendplacementrequest = () => {
                     </div>
                   </div>
                 </div>
-                <p className="mb-0 text-muted">14 Jobs opportunities</p>
-              </div>
-              <button className="btn btn-primary" onClick={handleClick}>
-                Send Request
-              </button>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6 mb-4">
-            <div className="card hover-lift hover-shadow-xl shadow-sm border-0">
-              <div className="card-body p-4">
-                <div className="d-flex mb-2 align-items-center">
-                  <div className="col">
-                    <div className="ml-2">
-                      <h5>Wipro</h5>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="ml-3">
-                      <div className="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                          className="img-fluid"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
+                <div className="d-flex align-items-baseline">
+                <p className="mb-0 text-muted">Location:</p>
+                <p className="mb-0 text-muted location-line">{name.companylocation}</p>
                 </div>
-                <p className="mb-0 text-muted">14 Jobs opportunities</p>
+
               </div>
               <button className="btn btn-primary" onClick={handleClick}>
                 Send Request
               </button>
             </div>
           </div>
-          <div className="col-lg-3 col-md-6 mb-4">
-            <div className="card hover-lift hover-shadow-xl shadow-sm border-0">
-              <div className="card-body p-4">
-                <div className="d-flex mb-2 align-items-center">
-                  <div className="col">
-                    <div className="ml-2">
-                      <h5>Wipro</h5>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="ml-3">
-                      <div className="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                          className="img-fluid"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p className="mb-0 text-muted">14 Jobs opportunities</p>
-              </div>
-              <button className="btn btn-primary" onClick={handleClick}>
-                Send Request
-              </button>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6 mb-4">
-            <div className="card hover-lift hover-shadow-xl shadow-sm border-0">
-              <div className="card-body p-4">
-                <div className="d-flex mb-2 align-items-center">
-                  <div className="col">
-                    <div className="ml-2">
-                      <h5>Wipro</h5>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="ml-3">
-                      <div className="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                          className="img-fluid"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p className="mb-0 text-muted">14 Jobs opportunities</p>
-              </div>
-              <button className="btn btn-primary" onClick={handleClick}>
-                Send Request
-              </button>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6 mb-4">
-            <div className="card hover-lift hover-shadow-xl shadow-sm border-0">
-              <div className="card-body p-4">
-                <div className="d-flex mb-2 align-items-center">
-                  <div className="col">
-                    <div className="ml-2">
-                      <h5>Wipro</h5>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="ml-3">
-                      <div className="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                          className="img-fluid"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p className="mb-0 text-muted">14 Jobs opportunities</p>
-              </div>
-              <button className="btn btn-primary" onClick={handleClick}>
-                Send Request
-              </button>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6 mb-4">
-            <div className="card hover-lift hover-shadow-xl shadow-sm border-0">
-              <div className="card-body p-4">
-                <div className="d-flex mb-2 align-items-center">
-                  <div className="col">
-                    <div className="ml-2">
-                      <h5>Wipro</h5>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="ml-3">
-                      <div className="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                          className="img-fluid"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p className="mb-0 text-muted">14 Jobs opportunities</p>
-              </div>
-              <button className="btn btn-primary" onClick={handleClick}>
-                Send Request
-              </button>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6 mb-4">
-            <div className="card hover-lift hover-shadow-xl shadow-sm border-0">
-              <div className="card-body p-4">
-                <div className="d-flex mb-2 align-items-center">
-                  <div className="col">
-                    <div className="ml-2">
-                      <h5>Wipro</h5>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="ml-3">
-                      <div className="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                          className="img-fluid"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p className="mb-0 text-muted">14 Jobs opportunities</p>
-              </div>
-              <button className="btn btn-primary" onClick={handleClick}>
-                Send Request
-              </button>
-            </div>
-          </div>
-          <div className="col-lg-3 col-md-6 mb-4">
-            <div className="card hover-lift hover-shadow-xl shadow-sm border-0">
-              <div className="card-body p-4">
-                <div className="d-flex mb-2 align-items-center">
-                  <div className="col">
-                    <div className="ml-2">
-                      <h5>Wipro</h5>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="ml-3">
-                      <div className="width-5x height-5x p-2 bg-white shadow-sm position-relative flex-center rounded-circle border">
-                        <img
-                          src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                          className="img-fluid"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <p className="mb-0 text-muted">14 Jobs opportunities</p>
-              </div>
-              <button className="btn btn-primary" onClick={handleClick}>
-                Send Request
-              </button>
-            </div>
-          </div>
+              ))}
+       
           
           {/* Other company cards */}
         </div>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Usernav from './Usernav'
+import { Link, useParams } from 'react-router-dom';
 
 const SearchVacancy = () => {
   const [viewJobs, setViewJobs] = useState([]);
-
+const {id} = useParams()
   useEffect(() => {
-    fetch('http://localhost:5000/register/view-companyjobs')
+    fetch(`http://localhost:5000/register/view-companyjobs/${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -44,16 +45,17 @@ const SearchVacancy = () => {
       <div className="card">
         <div className="card-header text text-center">{job.jobname}</div>
         <div className="card-body text-center">
-          <h5 className="card-title">Job Description:{job.jobdescription}</h5>
-          <h6 className="card-title">Required Qualification:{job.qualification}</h6>
-          <h6 className="card-title">Applied Lastdate:{job.lastdate}</h6>
+        <h5 className="card-title">Job Description:{job.jobdescription}</h5>
+        <h5 className="card-title">Job Vaccancy:{job.vaccancy}</h5>
+        <h5 className="card-title">Expected Salary:{job.expectedsalary}</h5>
+        <h6 className="card-title">Required Qualification:{job.qualification}</h6>
+        <h6 className="card-title">Applied Lastdate:{job.lastdate}</h6>
 
           <p className="card-text">
-          {job.branch}
+          Location:{job.branch}
           </p>
-          <a href="Jobdetails" className="btn btn-primary">
-            View Salary &amp; More Info
-          </a>
+          <Link to={`/Jobdetails/${job._id}`} className="btn btn-primary">View Salary &amp; More Info</Link>
+
         </div>
       </div>
     </div>

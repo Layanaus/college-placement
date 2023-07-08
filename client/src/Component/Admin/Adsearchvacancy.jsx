@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
-import AdminNav from './AdminNav'
+import { Link, useParams } from 'react-router-dom';
+import Placementofficernav from '../PlacementOfficer/Placementofficernav';
+
+
 
 const Adsearchvacancy = () => {
   const [category, setCategory] = useState([]);
+  const {id} = useParams()
 
   useEffect(() => {
-    fetch('http://localhost:5000/register/view-companyjobs')
+   
+    fetch(`http://localhost:5000/register/view-companyjobs/${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -19,7 +24,7 @@ const Adsearchvacancy = () => {
   }, []);
   return (
     <>
-    <AdminNav/>
+    <Placementofficernav/>
 <div className="container">
   <div className="row justify-content-center mb-5">
     <div className="col-md-4">
@@ -53,9 +58,10 @@ const Adsearchvacancy = () => {
           <p className="card-text">
            
           </p>
-          <a href="adminjobdetails" className="btn btn-primary">
-            View Salary &amp; More Info
-          </a>
+          <Link to={`/adminjobdetails/${job._id}`} className="btn btn-primary">
+              View salary & More info
+              </Link>
+          
         </div>
       </div>
     </div>
