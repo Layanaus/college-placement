@@ -7,7 +7,7 @@ const Jobportaljobdetails = () => {
     <>
     <Usernav/>
     <div className="container">
-    <h2>Job Details</h2>
+    <h3>Job Details</h3>
     <ul>
   <li>
     A Python developer might work as a Software Engineer, Data Analyst, Data

@@ -45,11 +45,17 @@ const {id} = useParams()
       <div className="card">
         <div className="card-header text text-center">{job.jobname}</div>
         <div className="card-body text-center">
-        <h5 className="card-title">Job Description:{job.jobdescription}</h5>
-        <h5 className="card-title">Job Vaccancy:{job.vaccancy}</h5>
-        <h5 className="card-title">Expected Salary:{job.expectedsalary}</h5>
+        <h5 className="card-title">Company Name</h5>
+        <h6 className="card-title">Company Location</h6>
+        <h6 className="card-title">{job.vaccancy}+vaccancy</h6>
         <h6 className="card-title">Required Qualification:{job.qualification}</h6>
-        <h6 className="card-title">Applied Lastdate:{job.lastdate}</h6>
+        {/* <h5 className="card-title">Job Description:{job.jobdescription}</h5>
+        <h5 className="card-title">Job Vaccancy:{job.vaccancy}</h5> */}
+        <h5 className="card-title">Expected Salary:{job.expectedsalary}</h5>
+        <h6 className="card-title">Location:{job.branch}</h6>
+        <h6 className="card-title">Last date:{job.lastdate}</h6>
+        {/* <h6 className="card-title">Required Qualification:{job.qualification}</h6>
+        <h6 className="card-title">Applied Lastdate:{job.lastdate}</h6> */}
 
           <p className="card-text">
           Location:{job.branch}

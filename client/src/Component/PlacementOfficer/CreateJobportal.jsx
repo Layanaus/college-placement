@@ -4,6 +4,9 @@ import Placementofficernav from './Placementofficernav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const CreateJobportal = () => {
   const navigate = useNavigate()
@@ -24,9 +27,19 @@ const CreateJobportal = () => {
   const Registersubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:5000/register/create_jobportal',inputs).then((response)=>{
-      navigate('/placementofficer')
-    }) 
+      console.log(response.data);
+        toast.success('job successfully added');
+        setinputs({});
+     
+    })
+    .catch((error) =>{
+    console.log('Error:', error);
+        toast.error('Failed to add job');
+      });
   }
+     
+  
+  
   const jobcategory_id = inputs.jobcategory; 
   const updatedInputs = { ...inputs, jobcategory_id };
 
@@ -43,6 +56,7 @@ const CreateJobportal = () => {
     <>
     <Placementofficernav/>
     <div className="container">
+      <ToastContainer/>
     <h3 className="pb-3 mb-5 font-italic border-bottom mt-5">
       <i className="fa fa-book-reader" />
       Create job portal
@@ -72,6 +86,7 @@ const CreateJobportal = () => {
                     name="companyname"
                     value={inputs.companyname || ""}
                     onChange={setRegister}
+                    required
                   />
                 </div>
               </div>
@@ -89,6 +104,7 @@ const CreateJobportal = () => {
                     name="companylocation"
                     value={inputs.companylocation || ""}
                     onChange={setRegister}
+                    required
                   />
                 </div>
               </div>
@@ -106,6 +122,7 @@ const CreateJobportal = () => {
                     name="jobname"
                     value={inputs.jobname || ""}
                     onChange={setRegister}
+                    required
                   />
                 </div>
               </div>
@@ -123,6 +140,7 @@ const CreateJobportal = () => {
            name="jobdescription"
            value={inputs.jobdescription|| ""}
            onChange={setRegister}
+           required
            ></textarea>
            </div>
            </div>
@@ -149,6 +167,7 @@ const CreateJobportal = () => {
   <div className="col-md-6" >
     <select id="category" className="form-control" name="jobcategory" value={inputs.jobcategory || ""}
     onChange={setRegister}>
+      required
     <option value="">Select job category</option>
                 {jobcategory.map((data)=>(
                   <option value={data._id}>{data.jobcategory}</option>
@@ -187,6 +206,7 @@ const CreateJobportal = () => {
                     name="qualification"
                     value={inputs.qualification || ""}
                     onChange={setRegister}
+                    required
                   />
                 </div>
               </div>
@@ -200,7 +220,8 @@ const CreateJobportal = () => {
                 </label>
                 <div className="col-md-6">
                   <input  id="salaryrange" className="form-control" name="salaryrange" value={inputs.salaryrange || ""}
-                    onChange={setRegister}/>
+                    onChange={setRegister} required/>
+                    
                 </div>
               </div>
               <div className="form-group row">
@@ -217,6 +238,7 @@ const CreateJobportal = () => {
                     className="form-control"
                     value={inputs.companycontact || ""}
                     onChange={setRegister}
+                    required
                     
                   />
                 </div>
@@ -236,6 +258,7 @@ const CreateJobportal = () => {
                     className="form-control"
                     value={inputs.lastdate || ""}
                     onChange={setRegister}
+                    required
                   />
                 </div>
               </div>

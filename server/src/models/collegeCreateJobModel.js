@@ -8,7 +8,7 @@ const createjobportalSchema=new schema({
     companylocation:{type:String},
     jobname:{type:String},
     jobdescription:{type:String},
-    jobcategory_id:{type:mongoose.Types.ObjectId,ref:"job_category_tb"},
+    jobcategory:{type:mongoose.Types.ObjectId,ref:"job_category_tb"},
     Requiredqualification:{type:String},
     salaryrange:{type:String},
     companycontact:{type:String},

@@ -16,6 +16,10 @@ const Companynav = () => {
       navigate('/')
     }
   }, [])
+  const company_id=localStorage.getItem('company_id')
+  if (!company_id) {
+    navigate('/')
+  }                                                     
   return (
     <>
     <div className="container-fluid bg-dark">

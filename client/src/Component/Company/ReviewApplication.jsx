@@ -85,7 +85,7 @@ const ReviewApplication = () => {
           name="myCheckbox1"
           defaultValue="checked"
         />
-        <label htmlFor="myCheckbox1">Eligible for attend Interview</label>
+        <label htmlFor="myCheckbox1">Eligible for aptitudetest</label>
       </div>
       <div className="col-md-3">
         <input

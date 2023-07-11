@@ -1,44 +1,67 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 const PublicSlider = () => {
-  const navigate= useNavigate()
-  const [inputs, setinputs] = useState([]);
-  console.log("value==>", inputs);
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    username: '',
+    password: '',
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  useEffect(() => {
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      axios.post('http://localhost:5000/login/login', inputs)
+        .then((data) => {
+          console.log(data);
+          if (data.data.role === '1') {
+            localStorage.setItem('user_id', data.data.user_id);
+            localStorage.setItem('login_id', data.data.login_id);
+            localStorage.setItem('role', data.data.role);
+            navigate('/User');
+          } else if (data.data.role === '2') {
+            localStorage.setItem('company_id', data.data.company_id);
+            localStorage.setItem('login_id', data.data.login_id);
+            localStorage.setItem('role', data.data.role);
+            navigate('/Company');
+          } else if (data.data.role === '3') {
+            localStorage.setItem('college_id', data.data.college_id);
+            localStorage.setItem('login_id', data.data.login_id);
+            localStorage.setItem('role', data.data.role);
+            navigate('/placementofficer');
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [formErrors, inputs, isSubmit, navigate]);
+
   const setRegister = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setinputs({ ...inputs, [name]: value });
-    console.log(inputs);
-  }
-  const registersubmit = (event) => {
+    setInputs({ ...inputs, [name]: value });
+  };
+  const validate = (values) => {
+    let errors = {};
+    if (!values.username) {
+      errors.username = 'username';
+    }
+    if (!values.password) {
+      errors.password = 'password';
+    }
+    return errors;
+  };
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputs);
-    axios.post('http://localhost:5000/login/login', inputs).then((data) => {
-      console.log(data);
-      if(data.data.role=='1'){
-        localStorage.setItem('user_id',data.data.user_id)
-        localStorage.setItem('login_id',data.data.login_id)
-        localStorage.setItem('role',data.data.role)
-        navigate('/User')
-      }else if(data.data.role=='2'){
-        localStorage.setItem('company_id',data.data.company_id)
-        localStorage.setItem('login_id',data.data.login_id)
-        localStorage.setItem('role',data.data.role)
-        navigate('/Company')
-      }else if(data.data.role=='3'){
-        localStorage.setItem('college_id',data.data.college_id)
-        localStorage.setItem('login_id',data.data.login_id)
-        localStorage.setItem('role',data.data.role)
-        navigate('/placementofficer')
-      }
-      
-      
-    }).catch((error) => {
+    setFormErrors(validate(inputs));
+    setIsSubmit(true);
+  };
 
-    })
-
-  }
   return (
     <>
     <div
@@ -59,22 +82,23 @@ const PublicSlider = () => {
             </div>
           </div>
           {/* Login Form */}
-          <form className='ne'onSubmit={registersubmit}>
-
+          <form className='ne'onSubmit={handleSubmit}>
+          <span style={{ color: formErrors.username ? 'red' : '' }}>{formErrors.username}</span>
             <input
               type="text"
               className="fadeIn second"
               name="username"
               placeholder="Username"
-             
+              onClick={() => setFormErrors({ ...formErrors, username: '' })}
               onChange={setRegister}
             />
+            <span style={{ color: formErrors.password ? 'red' : '' }}>{formErrors.password}</span>
             <input
               type="text"
               className="fadeIn third"
               name="password"
               placeholder="password"
-             
+              onClick={() => setFormErrors({ ...formErrors, password: '' })}
               onChange={setRegister}
 
             />

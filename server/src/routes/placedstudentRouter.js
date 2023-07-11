@@ -1,12 +1,24 @@
 const express = require('express');
 const PlacedStudentModel = require('../models/PlacedStudentModel');
-
+const multer = require('multer');
 
 
 
 const placedstudentRouter = express.Router();
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, "../client/public/upload")
+  },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname)
+  }
+})
 
+var upload = multer({ storage: storage })
+placedstudentRouter.post('/upload', upload.single("file"), (req, res) => {
+  return res.json("file uploaded")
+})
 placedstudentRouter.get('/view-placedstudent',async(req,res)=>{
   try {
       const student = await PlacedStudentModel.find()
@@ -45,7 +57,7 @@ placedstudentRouter.get('/view-placedstudent',async(req,res)=>{
       login_id:req.body. login_id,
       studentname:req.body.studentname,
       description:req.body.description,
-      uploadimage:req.body.image,
+      uploadimage:req.body.studentimage,
    
     };
     const savedData = await PlacedStudentModel(data).save();

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
@@ -8,8 +8,18 @@ import { useNavigate } from 'react-router-dom';
 
 const PlacementOfficerReg = () => {
   const navigate = useNavigate()
-  const[inputs, setinputs]=useState({});
+  const[inputs, setinputs]=useState({
+    collegename:"",
+    collegeaddress:"",
+    email:"",
+    phone:"",
+    username:"",
+    password:"",
+    cnf_password:"",
+  });
   console.log("value==>",inputs);
+  const [formErrors, setFormErrors] = useState({});
+  const [isSubmit, setIsSubmit] = useState(false);
   const setRegister=(event)=>{      
     const name=event.target.name;
     const value=event.target.value;
@@ -20,8 +30,68 @@ const PlacementOfficerReg = () => {
   const handleReset = () => {
     setinputs({});
   };
+  useEffect(() => {
+    console.log(formErrors);
+    
+    console.log("key", Object.keys(formErrors).length);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(inputs);
+    }
+  }, [formErrors]);
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    var phoneno = /^[6-9]\d{9}$/;
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+     
+   
+    if (!values.collegename) {
+      errors.collegename= "College Name is required!";
+    }
+    if (!values.collegeaddress) {
+      errors.collegeaddress = "College Address is required!";
+    }
+    if (!values.email) {
+      errors.email = "Email is required!";
+    }
+    
+    if (!values.username) {
+      errors.username = "User Name is required!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required!";
+    }
+    
+    if (!values.phone) {
+      errors.phone = "Contact Number is required!";
+    }else if(!phoneno.test(values.phone)){
+      errors.phone = "Enter valid Contact Number !";
+    }
+    
+    if (!values.email) {
+      errors.email = "email is required!";
+    }
+     else if (!regex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.password) {
+      errors.password = "Password is required";
+    }
+    if (!values.cpassword) {
+      errors.cpassword = "Confirmation Password is required";
+    }
+     
+    if(values.password!==values.cpassword){
+      errors.cpassword = "Enter same password";
+    }
+    return errors;
+  };
+  
   const Registersubmit = (event) => {
     event.preventDefault();
+    setFormErrors(validate(inputs));
+    setIsSubmit(true);
+    if(Object.keys(formErrors).length === 0 && isSubmit){
     axios.post('http://localhost:5000/register/collegereg',inputs).then((response)=>{
       navigate('/')
     }).catch((error)=>{
@@ -36,7 +106,7 @@ const PlacementOfficerReg = () => {
         theme: "colored",
         });
       
-    })
+    })}
   }
 
 
@@ -55,6 +125,7 @@ const PlacementOfficerReg = () => {
               <h2>College Registration</h2>
             </center>
             <div className="form-row">
+            <span className='errormsg' style={{ color: 'red' }}>{formErrors.collegename}</span>
               <input
                 type="text"
                 name="collegename"
@@ -68,6 +139,7 @@ const PlacementOfficerReg = () => {
               />
             </div>
             <div className="form-row  form-row-3">
+            <span className='errormsg' style={{ color: 'red' }}>{formErrors.collegeaddress}</span>
               <input
                 type="text"
                 name="collegeaddress"
@@ -80,6 +152,7 @@ const PlacementOfficerReg = () => {
             </div>
   
             <div className="form-row">
+            <span className='errormsg' style={{ color: 'red' }}>{formErrors.email}</span>
               <input
                 type="email"
                 name="email"
@@ -91,6 +164,7 @@ const PlacementOfficerReg = () => {
               />
             </div>
             <div className="form-row">
+            <span className='errormsg' style={{ color: 'red' }}>{formErrors.phone}</span>
               <input
                 type="tel"
                 name="phone"
@@ -102,6 +176,7 @@ const PlacementOfficerReg = () => {
               />
             </div>
             <div className="form-row">
+            <span className='errormsg' style={{ color: 'red' }}>{formErrors.username}</span>
               <input
                 type="text"
                 name="username"
@@ -116,6 +191,7 @@ const PlacementOfficerReg = () => {
             
         
             <div className="form-row">
+            <span className='errormsg' style={{ color: 'red' }}>{formErrors.password}</span>
               <input
                 type="password"
                 name="password"
@@ -128,13 +204,14 @@ const PlacementOfficerReg = () => {
               />
             </div>
             <div className="form-row">
+            <span className='errormsg' style={{ color: 'red' }}>{formErrors.cpassword}</span>
               <input
                 type="password"
-                name="cnf_password"
+                name="cpassword"
                 
                
                 placeholder="Confirm-Password"
-                value={inputs.cnf_password ||""}
+                value={inputs.cpassword ||""}
                   onChange={setRegister}
                 
               />

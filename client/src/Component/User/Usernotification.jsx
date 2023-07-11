@@ -31,23 +31,36 @@ const Usernotification = () => {
     <div id="w">
       <div id="content">
       <div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">Well done!</h4>
-  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+  <h4 class="alert-heading">Wipro</h4>
+  <p>We hope this message finds you well. We are delighted to inform you that you have been selected for an interview for an exciting opportunity that aligns with your skills and interests. Congratulations on reaching this stage!
 
-  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+We were impressed by your [mention specific qualities, achievements, or experiences that stood out] and believe you have the potential to contribute significantly to the [organization/event/program] we represent.</p>
+
+  <p class="mb-0">Interview Details:
+Date: [Date of the interview]
+Time: [Time of the interview]
+Location: [Physical location or virtual platform]</p>
 </div>
         {/* Icons source http://dribbble.com/shots/913555-Flat-Web-Elements */}
         <div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">Well done!</h4>
-  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+  <h4 class="alert-heading">Infosys</h4>
+  <p>We hope this message finds you well. We are delighted to inform you that you have been selected for an interview for an exciting opportunity that aligns with your skills and interests. Congratulations on reaching this stage!
 
-  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+We were impressed by your [mention specific qualities, achievements, or experiences that stood out] and believe you have the potential to contribute significantly to the [organization/event/program] we represent.</p>
+
+  <p class="mb-0">Interview Details:
+Date: [Date of the interview]
+Time: [Time of the interview]
+Location: [Physical location or virtual platform]</p>
 </div>
 <div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">Well done!</h4>
-  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+  <h4 class="alert-heading">Global</h4>
+  <p>We hope this message finds you well. We are delighted to inform you that you have been selected for an interview for an exciting opportunity that aligns with your skills and interests. Congratulations on reaching this stage!We were impressed by your [mention specific qualities, achievements, or experiences that stood out] and believe you have the potential to contribute significantly to the [organization/event/program] we represent.</p>
 
-  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+  <p class="mb-0">Interview Details:
+Date: [Date of the interview]
+Time: [Time of the interview]
+Location: [Physical location or virtual platform]</p>
 </div>
 </div>
       {/* @end #content */}

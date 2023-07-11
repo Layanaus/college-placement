@@ -1,51 +1,64 @@
-
 import React, { useEffect, useState } from 'react';
 import Placementofficernav from './Placementofficernav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
 const Sendplacementrequest = () => {
   const [company, setCompany] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/register/view-company')
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchCompanies = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/register/view-company');
+        const data = response.data;
         if (data.success) {
           setCompany(data.data);
+        } else {
+          setError(data.message);
         }
-      })
-      .catch((error) => {
-        console.log('Error:', error);
-      });
+      } catch (error) {
+        setError('Failed to fetch companies');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCompanies();
   }, []);
-  const navigate = useNavigate()
-  const[inputs, setinputs]=useState({});
-  console.log("value==>",inputs);
-  const setRegister=(event)=>{
-    const name=event.target.name;
-    const value=event.target.value;
-    setinputs({...inputs,[name]:value});
-    console.log(inputs);  
-  }
-  const handleReset = () => {
-    setinputs({});
+
+  const navigate = useNavigate();
+  const user_id = localStorage.getItem('user_id');
+  const [inputs, setInputs] = useState({
+    user_id: user_id,
+    company_id: '',
+    subject: '',
+    message: ''
+  });
+
+  const setRegister = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs({ ...inputs, [name]: value });
   };
 
-  const Registersubmit = (event) => {
-    event.preventDefault();
-    axios.post('http://localhost:5000/request/create_placementrequest',inputs).then((response)=>{
-      navigate('/placementofficer')
-    })
-      
-  }
- 
-    
-  const [showModal, setShowModal] = useState(false);
+  const handleReset = () => {
+    setInputs({
+      user_id: user_id,
+      company_id: '',
+      subject: '',
+      message: ''
+    });
+    setSelectedCompanyId('');
+  };
 
-  const handleClick = () => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedCompanyId, setSelectedCompanyId] = useState('');
+
+  const handleClick = (companyId) => {
+    setSelectedCompanyId(companyId);
     setShowModal(true);
   };
 
@@ -53,14 +66,33 @@ const Sendplacementrequest = () => {
     setShowModal(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('data', inputs);
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-    // Perform form submission logic here
-    alert('Placement request submitted!');
-    handleCloseModal();
+    const requestData = {
+      user_id: inputs.user_id,
+      company_id: selectedCompanyId,
+      subject: inputs.subject,
+      message: inputs.message
+    };
+
+    axios
+      .post('http://localhost:5000/request/create_placementrequest', requestData)
+      .then((response) => {
+        navigate('/placementofficer');
+      })
+      .catch((error) => {
+        // Handle error
+      });
   };
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <>
@@ -117,9 +149,10 @@ const Sendplacementrequest = () => {
                 </div>
 
               </div>
-              <button className="btn btn-primary" onClick={handleClick}>
-                Send Request
-              </button>
+              <button className="btn btn-primary" onClick={() => handleClick(name._id)}>
+  Send Request
+</button>
+
             </div>
           </div>
               ))}
@@ -175,7 +208,7 @@ const Sendplacementrequest = () => {
                 </button>
               </div>
               <div className="modal-body">
-                <form  onSubmit={Registersubmit}>
+                <form  onSubmit={ handleSubmit}>
                   <div className="form-group">
                     <label htmlFor="name">Subject Name</label>
                     <input
@@ -185,6 +218,7 @@ const Sendplacementrequest = () => {
                       placeholder="Enter your Subject"
                       value={inputs.subject ||""}
                       onChange={setRegister}
+                      required
                     />
                   </div>
                   <div className="form-group">
@@ -196,6 +230,7 @@ const Sendplacementrequest = () => {
                       placeholder="Enter your message"
                       value={inputs.message ||""}
                       onChange={setRegister}
+                      required
                     ></textarea>
                   </div>
                   <button type="submit" className="btn btn-primary">

@@ -1,12 +1,14 @@
 import React from 'react'
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import AdminNav from './AdminNav'
+import PlacementOfficerReg from '../Registration/PlacementOfficerReg'
 import Placementofficernav from '../PlacementOfficer/Placementofficernav'
+
 
 const Adviewjobdeatils = () => {
   return (
     <>
-    <Placementofficernav/>
+    <AdminNav/>
   <div className="container">
     <h1>Job Details</h1>
     <ul>

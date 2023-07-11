@@ -3,9 +3,11 @@ const schema=mongoose.Schema
 
 
 const companyrequestSchema=new schema({
-    login_id:{type:mongoose.Types.ObjectId,ref:"login_tb"},
+    user_id:{type:mongoose.Types.ObjectId,ref:"pofficer_register_tb"},
+    company_id:{type:mongoose.Types.ObjectId,ref:"company_register_tb"},
     subject:{type:String},
     message:{type:String},
+    status:{type:String},
     
     
 })

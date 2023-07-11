@@ -40,9 +40,11 @@ companyrequestRouter.get('/view-placementrequest',async(req,res)=>{
   companyrequestRouter.post('/create_placementrequest', async (req, res) => {
   try {
     const data = {
-      login_id:req.body. login_id,
+      user_id:req.body.user_id,
+      company_id:req.body.company_id,
       subject:req.body.subject,
       message:req.body.message,
+      status:0
    
     };
     const savedData = await companyRequestModel(data).save();

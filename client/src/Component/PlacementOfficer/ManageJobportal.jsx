@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import Placementofficernav from './Placementofficernav'
-import PublicUserFooter from '../Footer/PublicUserFooter'
+import Placementofficernav from './Placementofficernav';
+import PublicUserFooter from '../Footer/PublicUserFooter';
 
 const ManageJobportal = () => {
   const [category, setCategory] = useState([]);
@@ -17,6 +17,23 @@ const ManageJobportal = () => {
         console.log('Error:', error);
       });
   }, []);
+
+  const handleDeleteJob = (jobId) => {
+    fetch(`http://localhost:5000/register/delete-job/${jobId}`, {
+      method: 'DELETE'
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // Job deleted successfully, update the state or perform any necessary actions
+        } else {
+          // Handle error case
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  };
   return (
     <>
     <Placementofficernav/>
@@ -49,7 +66,7 @@ const ManageJobportal = () => {
  </button>
  <div className="dropdown-content">
  <a href="#">Edit</a>
-   <a href="#">Remove</a>
+    <button onClick={() => handleDeleteJob(job._id)}>Delete</button>
  </div>
 </div> 
              </div>

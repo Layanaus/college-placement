@@ -66,6 +66,7 @@ const MyProfile = () => {
               placeholder="first name"
               value={inputs.firstname || ""}
               onChange={setRegister}
+              required
              
             />
           </div>
@@ -78,6 +79,7 @@ const MyProfile = () => {
               placeholder="lastname"
               value={inputs.lastname || ""}
               onChange={setRegister}
+              required
             />
           </div>
         </div>
@@ -91,13 +93,14 @@ const MyProfile = () => {
     placeholder="select date of birth"
     value={inputs.dob || ""}
     onChange={setRegister}
+    required
   style={{width:'350px'}}
   />
 </div>
 <div className="col-md-12">
   <label className="labels">Gender</label>
   <select className="form-control" style={{width:'350px'}} name="gender" value={inputs.gender || ""}
-    onChange={setRegister}>
+    onChange={setRegister} required>
     <option value="" disabled>Select gender</option>
     <option value="male">Male</option>
     <option value="female">Female</option>
@@ -116,6 +119,7 @@ const MyProfile = () => {
               placeholder="enter address line 1"
               value={inputs.addressline1 || ""}
               onChange={setRegister}
+              required
              
             />
           </div>
@@ -128,6 +132,7 @@ const MyProfile = () => {
               placeholder="enter address line 2"
               value={inputs.addressline2|| ""}
               onChange={setRegister}
+              required
             />
           </div>
           <div className="col-md-12">
@@ -139,6 +144,7 @@ const MyProfile = () => {
               placeholder="enter Pincode"
               value={inputs.postcode || ""}
               onChange={setRegister}
+              required
               
             />
           </div>
@@ -153,6 +159,7 @@ const MyProfile = () => {
               placeholder="location"
               value={inputs.location || ""}
               onChange={setRegister}
+              required
               
             />
           </div>
@@ -165,6 +172,7 @@ const MyProfile = () => {
               placeholder="district"
               value={inputs.district || ""}
               onChange={setRegister}
+              required
             />
           </div>
           
@@ -214,6 +222,7 @@ const MyProfile = () => {
               placeholder="enter email id"
               value={inputs.email || ""}
               onChange={setRegister}
+              required
               
             />
           </div>
@@ -226,6 +235,7 @@ const MyProfile = () => {
               placeholder="enter email id"
               value={inputs.alternativeemail|| ""}
               onChange={setRegister}
+              required
             />
           </div>
           <div className="col-md-12">
@@ -237,6 +247,7 @@ const MyProfile = () => {
               placeholder="enter phone number"
               value={inputs.mobile || ""}
               onChange={setRegister}
+              required
             />
           </div>
           <div className="col-md-12">
@@ -248,6 +259,7 @@ const MyProfile = () => {
               placeholder="enter phone number"
               value={inputs.alternativemobile || ""}
               onChange={setRegister}
+              required
             />
           </div>
           
@@ -310,7 +322,7 @@ const MyProfile = () => {
     <div className="col-md-12">
       <label className="labels">Education</label>
       <select className="form-control input-lg select-lg" name="education" style={{ width: '400px' }} value={inputs.education || ""}
-    onChange={setRegister} >
+    onChange={setRegister} required>
         <option value="qualification">Qualification</option>
         <option value="Post Graduated">Post Graduated</option>
         <option value="Graduated">Graduated</option>
@@ -327,12 +339,13 @@ const MyProfile = () => {
               placeholder="enter branch"
               value={inputs.branch || ""}
               onChange={setRegister}
+              required
             />
           </div>
           <div className="col-md-12">
       <label className="labels">Year</label>
       <select className="form-control input-lg select-lg" name="year"style={{ width: '400px' }}value={inputs.year || ""}
-    onChange={setRegister}>
+    onChange={setRegister} required>
         <option value="Year-level">Year-level</option>
         <option value="1st Year">1st Year</option>
         <option value="2nd Year">2nd Year</option>
@@ -356,6 +369,7 @@ const MyProfile = () => {
         placeholder="job type"
         value={inputs.experience || ""}
         onChange={setRegister}
+        required
       />
       <label className="labels">Year</label>
       <input
@@ -366,6 +380,7 @@ const MyProfile = () => {
         placeholder="Year"
         value={inputs.experienceyear || ""}
         onChange={setRegister}
+        required
       />
     </div>
     <br />
@@ -378,6 +393,7 @@ const MyProfile = () => {
               placeholder="enter skill"
               value={inputs.skill || ""}
               onChange={setRegister}
+              required
             />
           </div>
 
@@ -386,6 +402,7 @@ const MyProfile = () => {
       <label className="labels">CV Upload</label>
       <input type="file" className="form-control-file" name="cv" value={inputs.cv || ""}
         onChange={setRegister}
+        required
          />
     </div>
   </div>

@@ -36,7 +36,7 @@ usermyprofileRouter.get('/view-profile',async(req,res)=>{
 usermyprofileRouter.post('/myprofile', async (req, res) => {
   try {
     const data = {
-    login_id: req.body.login_id,
+    user_id: req.body.user_id,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     dob: req.body.dob,

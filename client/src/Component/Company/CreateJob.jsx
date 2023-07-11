@@ -4,6 +4,9 @@ import PublicUserFooter from '../Footer/PublicUserFooter'
 import Companynav from './Companynav'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const CreateJob = () => {
   const navigate = useNavigate()
@@ -24,9 +27,15 @@ const CreateJob = () => {
   const Registersubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:5000/register/create_job',inputs).then((response)=>{
-      navigate('/company')
+      console.log(response.data);
+        toast.success('job successfully added');
+        setinputs({});
+     
     })
-      
+    .catch((error) =>{
+    console.log('Error:', error);
+        toast.error('Failed to add job');
+      });
   }
   const jobcategory_id = inputs.jobcategory; 
   const updatedInputs = { ...inputs, jobcategory_id };
@@ -45,6 +54,7 @@ const CreateJob = () => {
     <>
     <Companynav/>
     <div className="container">
+      <ToastContainer/>
       <h3 className="pb-3 mb-5 font-italic border-bottom mt-5">
         <i className="fa fa-book-reader" />
         Open Job Vaccancy Announcement
@@ -90,6 +100,7 @@ const CreateJob = () => {
                       name="jobname"
                       value={inputs.jobname || ""}
                       onChange={setRegister}
+                      required
                     />
                   </div>
                 </div>
@@ -123,8 +134,10 @@ const CreateJob = () => {
       // id="email_address"
       className="form-control"
       name="jobdescription"
+      rows='5'
       value={inputs.jobdescription|| ""}
       onChange={setRegister}
+      required
     ></textarea>
   </div>
 </div>
@@ -136,6 +149,7 @@ const CreateJob = () => {
   <div className="col-md-6" >
     <select id="category" className="form-control" name="jobcategory" value={inputs.jobcategory || ""}
     onChange={setRegister}>
+      required
       <option value="">Select job category</option>
                 {jobcategory.map((data)=>(
                   <option value={data._id}>{data.jobcategory}</option>
@@ -159,6 +173,7 @@ const CreateJob = () => {
                       name="vaccancy"
                       value={inputs.vaccancy || ""}
                       onChange={setRegister}
+                      required
                     />
                   </div>
                 </div>
@@ -177,6 +192,7 @@ const CreateJob = () => {
                       name="qualification"
                       value={inputs.qualification || ""}
                       onChange={setRegister}
+                      required
                     />
                   </div>
                 </div>
@@ -195,6 +211,7 @@ const CreateJob = () => {
                       name="expectedsalary"
                       value={inputs.expectedsalary || ""}
                       onChange={setRegister}
+                      required
                     />
                   </div>
                 </div>
@@ -213,6 +230,7 @@ const CreateJob = () => {
                       name="branch"
                       value={inputs.branch || ""}
                       onChange={setRegister}
+                      required
                     />
                   </div>
                 </div>
@@ -230,6 +248,7 @@ const CreateJob = () => {
                     className="form-control"
                     value={inputs.lastdate || ""}
                     onChange={setRegister}
+                    required
                   />
                 </div>
               </div>
@@ -243,6 +262,7 @@ const CreateJob = () => {
           </div>
         </div>
       </div>
+   
     </div>
     {/* <div className="container">
       <h3 className="pb-3 mb-5 font-italic border-bottom mt-5">
@@ -433,6 +453,7 @@ const CreateJob = () => {
       
     </div> */}
     <PublicUserFooter/>
+
   </>
   
   )

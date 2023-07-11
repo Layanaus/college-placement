@@ -13,7 +13,7 @@ const Placementofficernav = () => {
   useEffect(() => {
     const student_id = localStorage.getItem('college_id')
     if (!student_id) {
-      navigate('/')
+      navigate('/login')
     }
   }, [])
   return (

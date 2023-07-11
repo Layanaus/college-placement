@@ -1,11 +1,27 @@
 const express = require('express')
 
+
 const companyRegisterModel = require('../models/companyRegisterModel')
 const collegeRegisterModel = require('../models/collegeRegisterModel')
 const loginModel = require('../Models/loginModel')
 const userRegisterModel = require('../models/userRegisterModel')
+const multer = require('multer');
 
 const userregRouter = express.Router()
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, "../client/public/upload")
+  },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname)
+  }
+})
+
+var upload = multer({ storage: storage })
+userregRouter.post('/upload', upload.single("file"), (req, res) => {
+  return res.json("file uploaded")
+})
+
 userregRouter.get('/approve/:id', async (req, res) => {
   try {
     const id = req.params.id;
@@ -33,6 +49,7 @@ userregRouter.get('/approve/:id', async (req, res) => {
     });
   }
 });
+
 userregRouter.get('/reject/:id', async (req, res) => {
   try {
     const id = req.params.id;
@@ -155,7 +172,7 @@ userregRouter.post('/userreg', async (req, res) => {
         firstname: req.body.first_name,
         dob: req.body.dob,
         gender: req.body.gender,
-        applicantimage: req.body.file4,
+        applicantimage: req.body.image,
         address: req.body.address,
         choosecollege: req.body.college,
         qualification: req.body.qualification,
@@ -441,5 +458,10 @@ userregRouter.post('/collegereg', async function (req, res) {
 
 
 })
+
+
+
+
+
 
 module.exports = userregRouter

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import { Link, useParams } from 'react-router-dom';
+import AdminNav from './AdminNav';
 import Placementofficernav from '../PlacementOfficer/Placementofficernav';
+
 
 
 
@@ -24,7 +26,7 @@ const Adsearchvacancy = () => {
   }, []);
   return (
     <>
-    <Placementofficernav/>
+    <AdminNav/>
 <div className="container">
   <div className="row justify-content-center mb-5">
     <div className="col-md-4">

@@ -11,10 +11,14 @@ const Usernav = () => {
   }
   useEffect(() => {
     const student_id = localStorage.getItem('user_id')
-    if (!student_id) {
-      navigate('/')
-    }
+                  if (!student_id) {
+                    navigate('/')
+                  }
   }, [])
+  const user_id=localStorage.getItem('user_id')
+  if (!user_id) {
+    navigate('/')
+  }
   return (
     <>
   <div className="container-fluid bg-dark">

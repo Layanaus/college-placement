@@ -92,28 +92,28 @@ const Manageuser = () => {
                           <td align="center">
                             {user.status === '0' ? (
                               <>
-                                <a
+                                <button
                                   className="btn btn-success"
                                   onClick={() => {
                                     approve(user.login_id);
                                   }}
                                   style={{ marginRight: '5px' }}
                                 >
-                                  <em className="fa fa-check" />
-                                </a>
-                                <a
+                                 Approve
+                                </button>
+                                <button
                                   className="btn btn-danger"
                                   onClick={() => {
                                     reject(user.login_id);
                                   }}
                                 >
-                                  <em className="fa fa-times" />
-                                </a>
+                                 Reject
+                                </button>
                               </>
                             ) : (
-                              <a className="btn btn-success" style={{ marginRight: '5px' }}>
-                                <em className="fa fa-check" />
-                              </a>
+                              <button className="btn btn-success" style={{ marginRight: '5px' }}>
+                               Approved
+                              </button>
                             )}
                           </td>
                         </tr>

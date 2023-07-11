@@ -48,6 +48,7 @@ const Applyjobportal = () => {
               placeholder="Type your full name"
               value={inputs.name || ""}
               onChange={setRegister}
+              required
             />
           </label>
           <label className="d-block mb-4">
@@ -59,6 +60,7 @@ const Applyjobportal = () => {
     placeholder="Enter your Date of Birth"
     value={inputs.dateofbirth || ""}
     onChange={setRegister}
+    required
   />
 </label>
 
@@ -71,6 +73,7 @@ const Applyjobportal = () => {
               placeholder="Enter your Address"
               value={inputs.address || ""}
               onChange={setRegister}
+              required
             />
           </label>
           <label className="d-block mb-4">
@@ -82,6 +85,7 @@ const Applyjobportal = () => {
               placeholder="Enter your Phone Number"
               value={inputs.phonenumber|| ""}
               onChange={setRegister}
+              required
             />
           </label>
           <label className="d-block mb-4">
@@ -93,6 +97,7 @@ const Applyjobportal = () => {
               placeholder="Enter your Email"
               value={inputs.emailaddress || ""}
               onChange={setRegister}
+              required
             />
           </label>
           <label className="d-block mb-4">
@@ -105,6 +110,7 @@ const Applyjobportal = () => {
               placeholder="Type your Current Education Level"
               value={inputs.education || ""}
               onChange={setRegister}
+              required
             />
           </label>
           <label className="d-block mb-4">
@@ -116,6 +122,7 @@ const Applyjobportal = () => {
               placeholder="Type your Skills"
               value={inputs.skills || ""}
               onChange={setRegister}
+              required
             />
           </label>
 
@@ -128,6 +135,7 @@ const Applyjobportal = () => {
               placeholder="What motivates you?"
               value={inputs.aboutyourself || ""}
               onChange={setRegister}
+              required
             />
           </label>
           

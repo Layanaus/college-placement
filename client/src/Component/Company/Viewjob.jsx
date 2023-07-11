@@ -59,7 +59,7 @@ const Viewjob = () => {
           <div className="card-header text text-center d-flex justify-content-between">
             
 
-            <div>Python Developer</div>
+            <div>Teaching</div>
             <div className="dropdown">
  <button className="dropbtn">
    <svg
@@ -87,7 +87,7 @@ const Viewjob = () => {
           <b style={{color:'red'}}>   Invite Them to Attend a Aptitude Test</b> 
               </p>
               <a href="Application" className="btn btn-primary mr-2">
-  View Applicants
+              View Applicants
 </a>
 
      
@@ -106,7 +106,7 @@ const Viewjob = () => {
           <div className="card-header text text-center d-flex justify-content-between">
             
 
-            <div>Python Developer</div>
+            <div>Clerk</div>
             <div className="dropdown">
  <button className="dropbtn">
    <svg

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 
 const ViewJobcategory = () => {
   const [category, setCategory] = useState([]);
@@ -31,8 +33,8 @@ const ViewJobcategory = () => {
     <p>100+ Vacancy</p>
   </div>
   <div>
-  
-        <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a>
+  <Link className='btn btn-primary  d-flex justify-content-end' to ={`/applyjobs/${job._id}`}><i class="fa fa-arrow-right"></i></Link>
+        {/* <a href="applyjobs" className="btn btn-primary  d-flex justify-content-end"><i class="fa fa-arrow-right"></i></a> */}
       </div>
       </div>
       ))}

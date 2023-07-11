@@ -41,6 +41,7 @@ const NotifyInterview = () => {
               name="message"
               value={inputs.message ||""}
               onChange={setRegister}
+              required
               rows={5}
 
             />
@@ -48,7 +49,7 @@ const NotifyInterview = () => {
           <div className="form-group">
             <label htmlFor="interviewDate">Date:</label>
             <input type="date" className="form-control"  name="interviewdate"  value={inputs.interviewdate ||""}
-            onChange={setRegister} />
+            onChange={setRegister} required />
           </div>
           <button type="submit" className="btn btn-primary">
             Send

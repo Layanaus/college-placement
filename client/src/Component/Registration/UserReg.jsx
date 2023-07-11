@@ -7,14 +7,19 @@ import { useNavigate } from 'react-router-dom';
 
 const UserReg = () => {
   const navigate = useNavigate()
+  const [file, setFile] = useState('');
+
   const[inputs, setinputs]=useState({});
   const [college,setCollege] = useState([]);
-  console.log("value==>",inputs);
+
+  console.log('value==>', inputs);
+  console.log("value==>",file.name);
+  console.log("value==>",file);
   const setRegister=(event)=>{
     const name=event.target.name;
-    const value=event.target.value;
-    setinputs({...inputs,[name]:value});
-    console.log(inputs);  
+    const value = event.target.value;
+    setinputs({ ...inputs, [name]: value });
+    console.log(inputs);
   }
   
 
@@ -34,6 +39,19 @@ const UserReg = () => {
 
   const Registersubmit = (event) => {
     event.preventDefault();
+    if (file) {
+      const data = new FormData();
+      const filename = file.name
+      data.append('file', file);
+      data.append('name', filename);
+      axios.post('http://localhost:5000/register/upload', data)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
     axios.post('http://localhost:5000/register/userreg',inputs).then((response)=>{
       navigate('/')
     }).catch((error)=>{
@@ -99,8 +117,12 @@ const UserReg = () => {
             </div>
             <div class="form-row">
   <label className="labels">Applicant Image</label>
-  <input type="file" class="form-control-file" name="file4"   value={inputs.file4 ||""}
-                  onChange={setRegister}/>
+  <input type="file" class="form-control-file" name="image"  
+   onChange={(e) => {
+    setFile(e.target.files[0]);
+    console.log(e.target.files[0].name);
+    setinputs({ ...inputs,image: e.target.files[0].name });
+              }}/>
 </div>
 
               <div className="form-row  form-row-3" style={{textAlign:'center',}}>
