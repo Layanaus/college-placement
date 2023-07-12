@@ -3,7 +3,7 @@ import React from 'react';
 const PublicUserFooter = () => {
   return (
     <>
-      <div className="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style={{ marginTop: 90, }}>
+      <div className="container-fluid position-relative overlay-top bg-dark text-white-50 py-5" style={{ marginTop:'30px', }}>
         <div className="container mt-5 pt-5">
           <div className="row">
             <div className="col-md-4 mb-5 pl-4">
@@ -17,7 +17,7 @@ const PublicUserFooter = () => {
                 Welcome to the College Placement Cell! We, at the College Placement Cell, are dedicated to empowering our students and bridging the gap between academia and the professional world. Our mission is to facilitate successful career opportunities for our students and provide a platform for esteemed organizations to recruit top talent from our institution. 
               </p>
             </div>
-            <div className="col-md-4 mb-5 mt-4">
+            <div className="col-md-4 mb-5 mt-4" style={{textAlign:"center",}} >
               <h3 className="text-white mb-4">Get In Touch</h3>
               <p>
                 <i className="fa fa-map-marker-alt mr-2" />
@@ -31,9 +31,9 @@ const PublicUserFooter = () => {
                 <i className="fa fa-envelope mr-2" />
                 info@web.com
               </p>
-              <div className="d-flex justify-content-start mt-4">
-                <a className="text-white mr-4" href="#">
-                  <i className="fab fa-2x fa-twitter" />
+              <div className="d-flex justify-content-start mt-4"  >
+                <a className="text-white mr-4" href="#" style={{marginLeft:"90px",}}>
+                  <i className="fab fa-2x fa-twitter"   />
                 </a>
                 <a className="text-white mr-4" href="#">
                   <i className="fab fa-2x fa-facebook-f" />
@@ -46,7 +46,7 @@ const PublicUserFooter = () => {
                 </a>
               </div>
             </div>
-            <div className="col-md-4 mb-5">
+            <div className="col-md-4 mb-5" style={{marginTop:'25px',}} >
               <h3 className="text-white mb-4">Navigation</h3>
               <div className="d-flex flex-column justify-content-start">
                 <a className="text-white-50 mb-2" href="#">

@@ -50,7 +50,7 @@ function Aptitudetest() {
           <h1>Aptitude Test</h1>
           <hr />
           <div id="timer" className="text-center">
-            <h2 id="countdown">{formatTime(countdown)}</h2>
+            <h3 id="countdown">{formatTime(countdown)}</h3>
           </div>
           <hr />
           <form id="quiz-form" onSubmit={submitForm}>

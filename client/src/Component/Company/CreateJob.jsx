@@ -90,6 +90,44 @@ const CreateJob = () => {
                     htmlFor="jobname"
                     className="col-md-4 col-form-label text-md-right"
                   >
+                    Company name
+                  </label>
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      // id="email_address"
+                      className="form-control"
+                      name="companyname"
+                      value={inputs.companyname || ""}
+                      onChange={setRegister}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label
+                    htmlFor="jobname"
+                    className="col-md-4 col-form-label text-md-right"
+                  >
+                    Company location
+                  </label>
+                  <div className="col-md-6">
+                    <input
+                      type="text"
+                      // id="email_address"
+                      className="form-control"
+                      name="companylocation"
+                      value={inputs.companylocation || ""}
+                      onChange={setRegister}
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label
+                    htmlFor="jobname"
+                    className="col-md-4 col-form-label text-md-right"
+                  >
                     Job name
                   </label>
                   <div className="col-md-6">

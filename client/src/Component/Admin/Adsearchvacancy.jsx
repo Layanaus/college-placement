@@ -23,10 +23,10 @@ const Adsearchvacancy = () => {
       .catch((error) => {
         console.log('Error:', error);
       });
-  }, []);
+  }, []);console.log(category);
   return (
     <>
-    <AdminNav/>
+    <Placementofficernav/>
 <div className="container">
   <div className="row justify-content-center mb-5">
     <div className="col-md-4">

@@ -72,7 +72,7 @@ const AdminNav = () => {
             Manage user
           </a>
           <a href="managecollege" className="nav-item nav-link active">
-            Manage Placement Officer
+            Manage Placement details
           </a>
           <a href="category" className="nav-item nav-link active">
             Job Category

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Placementofficernav from './Placementofficernav'
+import axios from 'axios';
 
 const StudentManage = () => {
   const [users, setUsers] = useState([]);
@@ -27,6 +28,30 @@ const StudentManage = () => {
  const indexOfLastUser = currentPage * usersPerPage;
  const indexOfFirstUser = indexOfLastUser - usersPerPage;
  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+ const approve = (id) => {
+  axios
+    .get(`http://localhost:5000/register/approve/${id}`)
+    .then((response) => {
+      console.log(response.data);
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+const reject = (id) => {
+  axios
+    .get(`http://localhost:5000/register/reject/${id}`)
+    .then((response) => {
+      console.log(response.data);
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
  
   return (
     <>
@@ -64,14 +89,41 @@ const StudentManage = () => {
                   <td>{user.phone}</td>
                   
                   
-           <td align="center">
+           {/* <td align="center">
   <a className="btn btn-success" style={{marginRight:'5px'}}>
     <em className="fa fa-check" />
   </a>
   <a className="btn btn-danger">
     <em className="fa fa-times" />
   </a>
-</td>
+</td> */}
+{user.status === '0' ? (
+                              <>
+                                <button
+                                  className="btn btn-success"
+                                  onClick={() => {
+                                    approve(user.login_id);
+                                  }}
+                                  style={{ marginRight: '5px' }}
+                                >
+                                 Approve
+                                </button>
+                                <button
+                                  className="btn btn-danger"
+                                  onClick={() => {
+                                    reject(user.login_id);
+                                  }}
+                                  
+                                >
+                                 Reject
+                                </button>
+                              </>
+                            ) : (
+                              <button className="btn btn-success" style={{ marginRight: '5px' }}>
+                               Approved
+                              </button>
+                            )}
+                     
 
 
 </tr>

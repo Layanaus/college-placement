@@ -99,7 +99,7 @@ const Createcategory = () => {
             <div className="col-lg-10 offset-md-1">
               <div className="card panel-table">
                 <div className="card-header" style={{ textAlign: 'center' }}>
-                  <h2>Manage Job Category</h2>
+                  <h3>Manage Job Category</h3>
                   <div className="row" />
                 </div>
                 <div className="card-body">
