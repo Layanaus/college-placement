@@ -30,7 +30,7 @@ const NotifyInterview = () => {
     <>
       <Companynav />
       <div className="container">
-        <h2>Notify Interview Date</h2>
+        <h3>Notify Interview Date</h3>
         <form onSubmit={Registersubmit}>
          
           <div className="form-group">

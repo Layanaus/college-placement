@@ -5,7 +5,8 @@ const schema=mongoose.Schema
 const collegeplacementSchema=new schema({
     login_id:{type:mongoose.Types.ObjectId,ref:"login_tb"},
     college_id:{type:mongoose.Types.ObjectId,ref:"pofficer_register_tb"},
-    request:{type:String},
+    message:{type:String},
+    status:{type:String},
     
     
     

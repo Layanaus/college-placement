@@ -5,7 +5,32 @@ const collegeCreateJobModel = require('../models/collegeCreateJobModel')
 
 const collegecreatejobRouter = express.Router();
 
-
+collegecreatejobRouter.get('/view-jobportal_description/:id',async(req,res)=>{
+  try {
+      const id=req.params.id;
+      const users = await collegeCreateJobModel.find({_id:id});
+      if(users[0]!=undefined){
+          return res.status(200).json({
+              success:true,
+              error:false,
+              data:users
+          })
+      }else{
+          return res.status(400).json({
+              success:false,
+              error:true,
+              message:"No data found"
+          })
+      }
+  } catch (error) {
+      return res.status(400).json({
+          success:false,
+          error:true,
+          message:"Something went wrong",
+          details:error
+      })
+  }
+  })
 collegecreatejobRouter.get('/view-jobportal/:id',async(req,res)=>{
   try {
     const id = req.params.id;

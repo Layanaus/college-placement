@@ -112,14 +112,14 @@ const MainRouter = () => {
             <Route path="POviewjobs" element={<Placementofficerviewjobs/>}/>
             <Route path="POsearchvacancy2" element={<POsearchvacancy/>}/>
             <Route path="searchvacancy/:id" element={<SearchVacancy/>}/>
-            <Route path="Pojobdetails" element={<POjobdetails/>}/>
+            <Route path="Pojobdetails/:id" element={<POjobdetails/>}/>
             <Route path="adminviewjobs" element={<Adviewjobs/>}/>
             <Route path="adsearchjob/:id" element={<Adsearchvacancy/>}/>
             <Route path="adminjobdetails/:id" element={<Adviewjobdeatils/>}/>
             <Route path="viewjobcategory" element={<ViewJobcategory/>}/>
             <Route path="jobportalhome" element={<UJobportalhome/>}/>
             <Route path="applyjobs/:id" element={<Applyjobs/>}/>
-            <Route path="PJobdetails/:id" element={<Jobportaljobdetails/>}/>
+            <Route path="/PJobdetails/:id" element={<Jobportaljobdetails/>}/>
             <Route path="applyjobportal" element={<Applyjobportal/>}/>
             <Route path="companyresponse" element={<Viewcompanyresponse/>}/>
             <Route path="adviewjobportal" element={<Adviewjobportal/>}/>

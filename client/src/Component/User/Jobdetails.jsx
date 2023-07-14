@@ -156,6 +156,7 @@ import { Link, useParams } from 'react-router-dom';
 
 const Jobdetails = () => {
   const [viewJobs, setViewJobs] = useState([]);
+  const [category, setCategory] = useState([]);
   const {id} = useParams()
   const navigate = useNavigate()
   const[inputs, setinputs]=useState({});
@@ -173,6 +174,7 @@ const handleReset = () => {
 
 const Registersubmit = (event) => {
   event.preventDefault();
+  
   axios.post('http://localhost:5000/register/job_application',inputs).then((response)=>{
     navigate('/user')
   })
@@ -191,11 +193,11 @@ const Registersubmit = (event) => {
 
   };
   useEffect(() => {
-    fetch(`http://localhost:5000/register/view-companyjobs/${id}`)
+    fetch(`http://localhost:5000/register/view-jobdescription/${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setViewJobs(data.data);
+          setCategory(data.data);
         }
       })
       .catch((error) => {
@@ -209,74 +211,49 @@ const Registersubmit = (event) => {
       <div className="container">
   {showDetails && (
     <>
-      <h3>Job Details</h3>
-      <ul>
-      <li>
-    A Python developer might work as a Software Engineer, Data Analyst, Data
-    Scientist, Machine Learning Engineer, or Web developer. Python
-    programmers help businesses with their technology infrastructure. They
-    keep an eye on how data moves between servers and users. Python
-    developers use the Python programming language to carry out tasks or
-    respond to inquiries. They are able to crunch data, create the back ends
-    of online applications, and automate processes. Python programmers can
-    work as independent contractors for an organisation.
-  </li>
-  <li>
-    Python Developer Skills And Qualifications Python developer should have
-    in-depth knowledge of the programming language.
-  </li>
-  <li>
-    Python Developer Salary Expectations Python developers salaries in India
-    have increased dramatically after Data Science came into the picture. A
-    Python developer’s average annual salary in India is ₹8,15,153.
-    According to the years of experience, the salary ranges between ₹2 Lakhs
-    to ₹9 Lakhs.
-  </li>
-  <li>
-    <table>
-      <tr>
-        <td>Job Location</td>
-        <td>calicut</td>
-      </tr>
-      <tr>
-        <td>Job Type</td>
-     <td>python Developer</td>
-      </tr>
-      <tr>
-        <td>Duration</td>
-     <td>12 hrs</td>
-      </tr>
-      <tr>
-        <td>Qualifications</td>
-     <td>bca</td>
-      </tr>
-      <tr>
-        <td>Benefits</td>
-     <td>high demosation</td>
-      </tr>
-      <tr>
-        <td>Salary or Compensation</td>
-     <td>50 k</td>
-      </tr>
-      <tr>
-        <td>Application Deadline</td>
-     <td>12/25/2022</td>
-      </tr>
-    </table>
-    </li>
-</ul>
-        {viewJobs.map((job) => (
-          <li key={job._id}>
-            
-            <p>{job.jobdescription}</p>
-            <p>Job Category: {job.jobcategory}</p>
-            <p>Vacancy: {job.vacancy}</p>
-            <p>Qualification: {job.qualification}</p>
-            <p>Expected Salary: {job.expectedsalary}</p>
-            <p>Branch: {job.branch}</p>
-            <p>Last Date: {job.lastdate}</p>
+     <h1>Job Details</h1>
+        <ul>
+          {category.map((job, index) => (
+            <li key={index}>{job.jobdescription}</li>
+          ))}
+        </ul>
+        <ul>
+         
+          
+          <li>
+            {/* <table>
+              <tr>
+                <td>Job Location</td>
+                <td>calicut</td>
+              </tr>
+              <tr>
+                <td>Job Type</td>
+                <td>python Developer</td>
+              </tr>
+              <tr>
+                <td>Duration</td>
+                <td>12 hrs</td>
+              </tr>
+              <tr>
+                <td>Qualifications</td>
+                <td>bca</td>
+              </tr>
+              <tr>
+                <td>Benefits</td>
+                <td>high demosation</td>
+              </tr>
+              <tr>
+                <td>Salary or Compensation</td>
+                <td>50 k</td>
+              </tr>
+              <tr>
+                <td>Application Deadline</td>
+                <td>12/25/2022</td>
+              </tr>
+            </table> */}
           </li>
-        ))}
+        </ul>
+     
       
     </>
   )}

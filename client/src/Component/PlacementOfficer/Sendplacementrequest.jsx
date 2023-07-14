@@ -30,9 +30,9 @@ const Sendplacementrequest = () => {
   }, []);
 
   const navigate = useNavigate();
-  const user_id = localStorage.getItem('user_id');
+  const college_id = localStorage.getItem('college_id')
   const [inputs, setInputs] = useState({
-    user_id: user_id,
+    college_id: college_id,
     company_id: '',
     subject: '',
     message: ''
@@ -46,7 +46,7 @@ const Sendplacementrequest = () => {
 
   const handleReset = () => {
     setInputs({
-      user_id: user_id,
+      college_id: college_id,
       company_id: '',
       subject: '',
       message: ''
@@ -70,7 +70,7 @@ const Sendplacementrequest = () => {
     event.preventDefault();
 
     const requestData = {
-      user_id: inputs.user_id,
+      college_id: college_id,
       company_id: selectedCompanyId,
       subject: inputs.subject,
       message: inputs.message
@@ -82,7 +82,7 @@ const Sendplacementrequest = () => {
         navigate('/placementofficer');
       })
       .catch((error) => {
-        // Handle error
+        console.log(error)
       });
   };
 

@@ -37,8 +37,9 @@ companyjobapplicationRouter.get('/view-companyapplication',async(req,res)=>{
 companyjobapplicationRouter.post('/job_application', async (req, res) => {
   try {
     const data = {
-     
-    name:req.body. name,
+    login_id:req.body.login_id,
+    job_id:req.body.job_id,
+    name:req.body.name,
     dateofbirth:req.body.dateofbirth,
     address:req.body.address,
     phonenumber:req.body.phonenumber,

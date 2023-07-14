@@ -97,18 +97,7 @@ const reject = (id) => {
     <em className="fa fa-times" />
   </a>
 </td> */}
-{user.status === '0' ? (
-                              <>
-                                <button
-                                  className="btn btn-success"
-                                  onClick={() => {
-                                    approve(user.login_id);
-                                  }}
-                                  style={{ marginRight: '5px' }}
-                                >
-                                 Approve
-                                </button>
-                                <button
+<button
                                   className="btn btn-danger"
                                   onClick={() => {
                                     reject(user.login_id);
@@ -117,22 +106,12 @@ const reject = (id) => {
                                 >
                                  Reject
                                 </button>
-                              </>
-                            ) : (
-                              <button className="btn btn-success" style={{ marginRight: '5px' }}>
-                               Approved
-                              </button>
-                            )}
-                     
-
 
 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="9" className="text-center">
-                  No users found
-                </td>
+                
               </tr>
             )}
           </tbody>

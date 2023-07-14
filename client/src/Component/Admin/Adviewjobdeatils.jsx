@@ -24,7 +24,7 @@ const Adviewjobdeatils = () => {
 
   return (
     <>
-      <Placementofficernav />
+      <AdminNav />
       <div className="container">
         <h1>Job Details</h1>
         <ul>

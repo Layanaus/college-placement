@@ -253,7 +253,7 @@ const CreateJob = () => {
                     />
                   </div>
                 </div>
-                <div className="form-group row">
+                {/* <div className="form-group row">
                   <label
                     htmlFor="branch"
                     className="col-md-4 col-form-label text-md-right"
@@ -271,7 +271,7 @@ const CreateJob = () => {
                       required
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="form-group row">
                 <label
                   htmlFor="lastdate"
