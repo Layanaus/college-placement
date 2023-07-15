@@ -120,7 +120,7 @@ const MainRouter = () => {
             <Route path="jobportalhome" element={<UJobportalhome/>}/>
             <Route path="applyjobs/:id" element={<Applyjobs/>}/>
             <Route path="/PJobdetails/:id" element={<Jobportaljobdetails/>}/>
-            <Route path="applyjobportal" element={<Applyjobportal/>}/>
+            <Route path="applyjobportal/:id" element={<Applyjobportal/>}/>
             <Route path="companyresponse" element={<Viewcompanyresponse/>}/>
             <Route path="adviewjobportal" element={<Adviewjobportal/>}/>
             <Route path="placedstudent" element={<Createplacedstudent/>}/>

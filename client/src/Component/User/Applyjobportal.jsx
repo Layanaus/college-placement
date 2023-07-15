@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import Usernav from './Usernav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Applyjobportal = () => {
+  const login_id=localStorage.getItem('login_id');
   const navigate = useNavigate()
-  const[inputs, setinputs]=useState({});
+  const {id} = useParams()
+  const[inputs, setinputs]=useState({
+    login_id:id,
+  });
+  console.log(login_id);
   console.log("value==>",inputs);
   const setRegister=(event)=>{
     const name=event.target.name;
@@ -20,6 +25,7 @@ const Applyjobportal = () => {
 
   const Registersubmit = (event) => {
     event.preventDefault();
+ 
     axios.post('http://localhost:5000/apply/jobportal_application',inputs).then((response)=>{
       navigate('/user')
     })

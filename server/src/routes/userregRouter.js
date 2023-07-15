@@ -6,6 +6,7 @@ const collegeRegisterModel = require('../models/collegeRegisterModel')
 const loginModel = require('../Models/loginModel')
 const userRegisterModel = require('../models/userRegisterModel')
 const multer = require('multer');
+const userProfileModel = require('../models/userProfileModel')
 
 const userregRouter = express.Router()
 var storage = multer.diskStorage({
@@ -21,6 +22,32 @@ var upload = multer({ storage: storage })
 userregRouter.post('/upload', upload.single("file"), (req, res) => {
   return res.json("file uploaded")
 })
+userregRouter.get('/view-single-user/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await userRegisterModel.findOne({_id:id });
+    if (user) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data:medicine,
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: 'No data found',
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: 'Something went wrong',
+      details: error,
+    });
+    }
+  });
 
 userregRouter.get('/approve/:id', async (req, res) => {
   try {

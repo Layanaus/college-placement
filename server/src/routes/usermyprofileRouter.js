@@ -1,42 +1,45 @@
 const express = require('express');
 const userProfileModel = require('../models/userProfileModel');
+const userRegisterModel = require('../models/userRegisterModel');
 
 
 
 const usermyprofileRouter = express.Router();
 
-
-usermyprofileRouter.get('/view-profile',async(req,res)=>{
+usermyprofileRouter.get('/view-single-user/:id', async (req, res) => {
   try {
-      const users = await userProfileModel.find()
-      if(users[0]!=undefined){
-          return res.status(200).json({
-              success:true,
-              error:false,
-              data:users
-          })
-      }else{
-          return res.status(400).json({
-              success:false,
-              error:true,
-              message:"No data found"
-          })
-      }
-  } catch (error) {
+    const login_id=req.params.id
+    const student = await userRegisterModel.find({login_id})
+    if (student[0] != undefined) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: student
+      })
+    } else {
       return res.status(400).json({
-          success:false,
-          error:true,
-          message:"Something went wrong",
-          details:error
-      })
+        success: false,
+        error: true,
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    })
   }
-  })
+})
+
+
 
 
 usermyprofileRouter.post('/myprofile', async (req, res) => {
   try {
     const data = {
-    user_id: req.body.user_id,
+    login_id: req.body.login_id,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     dob: req.body.dob,

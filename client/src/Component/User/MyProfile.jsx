@@ -1,34 +1,61 @@
-import React,{useState} from 'react'
-import PublicUserFooter from '../Footer/PublicUserFooter'
-import Usernav from './Usernav'
+import React, { useState, useEffect } from 'react';
+import PublicUserFooter from '../Footer/PublicUserFooter';
+import Usernav from './Usernav';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 
 const MyProfile = () => {
-  const navigate = useNavigate()
-  const[inputs, setinputs]=useState({});
-  console.log("value==>",inputs);
-  const setRegister=(event)=>{
-    const name=event.target.name;
-    const value=event.target.value;
-    setinputs({...inputs,[name]:value});
-    console.log(inputs);  
-  }
+  const login_id = localStorage.getItem('login_id');
+  const [category, setCategory] = useState([]);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [inputs, setInputs] = useState({
+    login_id: id,
+  });
+
+  console.log(login_id);
+  console.log("value==>", category);
+
+  const setRegister = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs({ ...inputs, [name]: value });
+    console.log(inputs);
+  };
+
   const handleReset = () => {
-    setinputs({});
+    setInputs({});
   };
 
   const Registersubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:5000/profile/myprofile',inputs).then((response)=>{
-      navigate('/user')
-    })
-      
-  }
-  
-  
-  
+    axios.post('http://localhost:5000/profile/myprofile', inputs)
+      .then((response) => {
+        navigate('/user');
+      })
+      .catch((error) => {
+        // Handle error if needed
+      });
+  };
+  useEffect(() => {
+    fetch(`http://localhost:5000/profile/view-single-user/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          setCategory(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+
+  useEffect(() => {
+    // Update the inputs state with the login_id from localStorage
+    setInputs({ ...inputs, login_id: login_id });
+  }, [login_id]);
 
   return (
     <>
@@ -37,11 +64,12 @@ const MyProfile = () => {
   <div className="row">
     <div className="col-md-3 border-right" >
       <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-        <img
-          className="rounded-circle mt-5"
-          width="150px"
-          src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-        />
+      <img
+  className="rounded-circle mt-5"
+  width="150px"
+  src={`/upload/${category.applicantimage}`}
+/>
+
         <span className="font-weight-bold">Edogaru</span>
         <span className="text-black-50">edogaru@mail.com.my</span>
         <span> </span>

@@ -155,11 +155,15 @@ import { Link, useParams } from 'react-router-dom';
 
 
 const Jobdetails = () => {
+  const login_id=localStorage.getItem('login_id');
   const [viewJobs, setViewJobs] = useState([]);
   const [category, setCategory] = useState([]);
   const {id} = useParams()
   const navigate = useNavigate()
-  const[inputs, setinputs]=useState({});
+  const[inputs, setinputs]=useState({
+    login_id:id,
+  });
+  console.log(login_id);
   console.log("value==>",inputs);
   const setRegister=(event)=>{
     const name=event.target.name;
@@ -174,8 +178,10 @@ const handleReset = () => {
 
 const Registersubmit = (event) => {
   event.preventDefault();
-  
-  axios.post('http://localhost:5000/register/job_application',inputs).then((response)=>{
+
+  const job_id = category.length > 0 ? category[0]._id : null;
+  const updatedInputs = { ...inputs, job_id };
+  axios.post('http://localhost:5000/register/job_application',updatedInputs).then((response)=>{
     navigate('/user')
   })
     

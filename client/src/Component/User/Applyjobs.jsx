@@ -112,12 +112,12 @@ const Applyjobs = () => {
 <Link className='btn btn-light' to ={`/PJobdetails/${job._id} `}>More Details</Link>
                         </li>
                         <li>
-                          <a
-                            href="applyjobportal"
+                          <Link
+                           to={`/applyjobportal/${job._id} `}
                             className="btn d-block w-100 d-sm-inline-block btn-primary ml-4"
                           >
                             Apply now
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </div>
