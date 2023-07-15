@@ -1,20 +1,21 @@
 const express = require('express');
 const userProfileModel = require('../models/userProfileModel');
 const userRegisterModel = require('../models/userRegisterModel');
-
+const { default: mongoose } = require('mongoose');
+const obj = mongoose.Types.ObjectId
 
 
 const usermyprofileRouter = express.Router();
 
 usermyprofileRouter.get('/view-single-user/:id', async (req, res) => {
   try {
-    const login_id=req.params.id
+    const login_id=new obj(req.params.id)
     const student = await userRegisterModel.find({login_id})
     if (student[0] != undefined) {
       return res.status(200).json({
         success: true,
         error: false,
-        data: student
+        data: student[0]
       })
     } else {
       return res.status(400).json({

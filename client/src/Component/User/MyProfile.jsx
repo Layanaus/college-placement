@@ -15,7 +15,7 @@ const MyProfile = () => {
   });
 
   console.log(login_id);
-  console.log("value==>", category);
+  console.log("value==>",category);
 
   const setRegister = (event) => {
     const name = event.target.name;
@@ -39,7 +39,7 @@ const MyProfile = () => {
       });
   };
   useEffect(() => {
-    fetch(`http://localhost:5000/profile/view-single-user/${id}`)
+    fetch(`http://localhost:5000/profile/view-single-user/${login_id}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -64,14 +64,16 @@ const MyProfile = () => {
   <div className="row">
     <div className="col-md-3 border-right" >
       <div className="d-flex flex-column align-items-center text-center p-3 py-5">
-      <img
+      {category.applicantimage ? (<img
   className="rounded-circle mt-5"
   width="150px"
   src={`/upload/${category.applicantimage}`}
 />
-
-        <span className="font-weight-bold">Edogaru</span>
-        <span className="text-black-50">edogaru@mail.com.my</span>
+) : (
+  <p>No image available</p>
+)}
+        {/* <span className="font-weight-bold">Edogaru</span>
+        <span className="text-black-50">edogaru@mail.com.my</span> */}
         <span> </span>
       </div>
     </div>
