@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Companynav from './Companynav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
+
 
 const Viewjob = () => {
   return (

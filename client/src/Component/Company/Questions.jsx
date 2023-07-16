@@ -4,6 +4,8 @@ import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 
 function QuestionForm() {
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   const [question, setQuestion] = useState('');
   const [choices, setChoices] = useState(['', '', '']);
   const [correctAnswer, setCorrectAnswer] = useState('');
@@ -12,6 +14,13 @@ function QuestionForm() {
   useEffect(() => {
     fetchQuestions();
   }, []);
+  
+  const usersPerPage = 10;
+  const totalPages = Math.ceil(users.length / usersPerPage);
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const fetchQuestions = async () => {
     try {

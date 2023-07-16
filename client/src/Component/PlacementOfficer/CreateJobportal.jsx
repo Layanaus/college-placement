@@ -9,10 +9,13 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const CreateJobportal = () => {
+  const login_id=localStorage.getItem('login_id')
   const navigate = useNavigate()
   const [jobcategory, setjobCategory] = useState([]);
 
-  const[inputs, setinputs]=useState({});
+  const[inputs, setinputs]=useState({
+    login_id:login_id
+  });
   console.log("value==>",inputs);
   const setRegister=(event)=>{
     const name=event.target.name;
