@@ -3,9 +3,24 @@ const userProfileModel = require('../models/userProfileModel');
 const userRegisterModel = require('../models/userRegisterModel');
 const { default: mongoose } = require('mongoose');
 const obj = mongoose.Types.ObjectId
+const multer = require('multer');
+
 
 
 const usermyprofileRouter = express.Router();
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, "../client/public/upload")
+  },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname)
+  }
+})
+
+var upload = multer({ storage: storage })
+usermyprofileRouter.post('/upload', upload.single("file"), (req, res) => {
+  return res.json("file uploaded")
+  })
 
 usermyprofileRouter.get('/view-single-user/:id', async (req, res) => {
   try {
@@ -33,6 +48,36 @@ usermyprofileRouter.get('/view-single-user/:id', async (req, res) => {
     })
   }
 })
+
+
+usermyprofileRouter.get('/view-myprofile/:id', async (req, res) => {
+  try {
+  
+    const id=req.params.id;
+    const student = await userProfileModel.find({login_id:id}); // Use findOne instead of find
+
+    if (student) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: student
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    });
+  }
+});
 
 
 

@@ -6,8 +6,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const NotifyInterview = () => {
+  const login_id=localStorage.getItem('login_id');
   const navigate = useNavigate()
-  const[inputs, setinputs]=useState({});
+  const[inputs, setinputs]=useState({
+    login_id:login_id,
+  });
   console.log("value==>",inputs);
   const setRegister=(event)=>{
     const name=event.target.name;

@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 const MyProfile = () => {
   const login_id = localStorage.getItem('login_id');
+  const [file, setFile] = useState('');
   const [category, setCategory] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -16,6 +17,8 @@ const MyProfile = () => {
 
   console.log(login_id);
   console.log("value==>",category);
+  console.log("value==>",file.name);
+  console.log("value==>",file);
 
   const setRegister = (event) => {
     const name = event.target.name;
@@ -30,6 +33,19 @@ const MyProfile = () => {
 
   const Registersubmit = (event) => {
     event.preventDefault();
+    if (file) {
+      const data = new FormData();
+      const filename = file.name
+      data.append('file', file);
+      data.append('name', filename);
+      axios.post('http://localhost:5000/profile/upload', data)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+        }
     axios.post('http://localhost:5000/profile/myprofile', inputs)
       .then((response) => {
         navigate('/user');
@@ -72,8 +88,8 @@ const MyProfile = () => {
 ) : (
   <p>No image available</p>
 )}
-        {/* <span className="font-weight-bold">Edogaru</span>
-        <span className="text-black-50">edogaru@mail.com.my</span> */}
+        <span className="font-weight-bold">{category.firstname}</span>
+        <span className="text-black-50">{category.email}</span>
         <span> </span>
       </div>
     </div>
@@ -299,7 +315,7 @@ const MyProfile = () => {
         
         </div>
         <div className="mt-5 text-center">
-          <button className="btn btn-primary profile-button"type="button" onClick={Registersubmit}>
+          <button className="btn btn-primary profile-button"type="button" onClick={Registersubmit} encType="multipart/form-data">
             Save Profile
           </button>
         </div>
@@ -430,8 +446,12 @@ const MyProfile = () => {
     
     <div className="col-md-12">
       <label className="labels">CV Upload</label>
-      <input type="file" className="form-control-file" name="cv" value={inputs.cv || ""}
-        onChange={setRegister}
+      <input type="file" className="form-control-file" name="cv"
+        onChange={(e) => {
+          setFile(e.target.files[0]);
+          console.log(e.target.files[0].name);
+          setInputs({ ...inputs,cv: e.target.files[0].name });
+              }}
         required
          />
     </div>
