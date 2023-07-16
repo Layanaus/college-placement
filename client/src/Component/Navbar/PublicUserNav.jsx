@@ -7,7 +7,7 @@ const PublicUserNav = () => {
       <a href="home" className="navbar-brand ml-lg-3">
         <h1 className="m-0 text-uppercase text-primary">
           <img src="img\lg - Copy.jpg" width="50px" />
-          &nbsp;Placement cell
+          &nbsp;JOB FINDER
         </h1>
       </a>
       <button

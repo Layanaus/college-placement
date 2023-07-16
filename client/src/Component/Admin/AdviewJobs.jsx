@@ -19,10 +19,28 @@ const Adviewjobs = () => {
         console.log('Error:', error);
       });
   }, []);
+  const headings = [
+    'Unlock endless career possibilities with our job portal - where dreams meet opportunities',
+    'Discover your next adventure. Find the perfect job with our powerful job portal',
+    'Your gateway to success. Let our job portal open doors to your dream career',
+    'Our cutting-edge job portal revolutionizes the way you find employment',
+  ];
+  const [currentHeadingIndex, setCurrentHeadingIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeadingIndex((prevIndex) => (prevIndex + 1) % headings.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
    <AdminNav/>
-     <div className="container">
+   <div className="container">
+        <h1>{headings[currentHeadingIndex]}</h1>
+      </div>
+     {/* <div className="container">
     <div
   id="carouselExampleControls"
   className="carousel2 slide2 mb-5"
@@ -68,7 +86,7 @@ const Adviewjobs = () => {
     </div>
   </div>
 </div>
-</div> 
+</div>  */}
     <div className="container">
     <div className="row justify-content-center mb-5">
     <div className="col-md-4">
