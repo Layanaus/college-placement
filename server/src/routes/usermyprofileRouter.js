@@ -22,6 +22,7 @@ usermyprofileRouter.post('/upload', upload.single("file"), (req, res) => {
   return res.json("file uploaded")
   })
 
+
 usermyprofileRouter.get('/view-single-user/:id', async (req, res) => {
   try {
     const login_id=new obj(req.params.id)
@@ -48,6 +49,7 @@ usermyprofileRouter.get('/view-single-user/:id', async (req, res) => {
     })
   }
 })
+
 
 
 usermyprofileRouter.get('/view-myprofile/:id', async (req, res) => {
@@ -78,10 +80,6 @@ usermyprofileRouter.get('/view-myprofile/:id', async (req, res) => {
     });
   }
 });
-
-
-
-
 usermyprofileRouter.post('/myprofile', async (req, res) => {
   try {
     const data = {
@@ -126,5 +124,8 @@ usermyprofileRouter.post('/myprofile', async (req, res) => {
     });
   }
 });
+
+
+
 
 module.exports = usermyprofileRouter;

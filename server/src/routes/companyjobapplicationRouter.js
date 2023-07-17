@@ -32,12 +32,61 @@ companyjobapplicationRouter.get('/view-companyapplication',async(req,res)=>{
   }
   })
 
-
-
+  companyjobapplicationRouter.get('/view-applicants', async (req, res) => {
+    try {
+      const users = await companyJobApplicationModel.aggregate([
+  
+  
+        {
+          '$lookup': {
+            'from': 'job_register_tbs', 
+            'localField': 'job_id', 
+            'foreignField': '_id', 
+            'as': 'job'
+          }
+        },
+        
+        {
+          "$unwind": "$job"
+        },
+        
+        {
+          "$group": {
+            '_id': "$_id",
+            'firstname': { "$first":"$name" },
+            'jobname': { "$first": "$job.jobname" },
+            
+          }
+        }
+      ])
+      if (users[0] != undefined) {
+        return res.status(200).json({
+          success: true,
+          error: false,
+          data: users
+        })
+      } else {
+        return res.status(400).json({
+          success: false,
+          error: true,
+          message: "No data found"
+        })
+      }
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "Something went wrong",
+        details: error
+      })
+    }
+  })
+  
 companyjobapplicationRouter.post('/job_application', async (req, res) => {
   try {
     const data = {
     login_id:req.body.login_id,
+    company_id:req.body.company_id,
     job_id:req.body.job_id,
     name:req.body.name,
     dateofbirth:req.body.dateofbirth,

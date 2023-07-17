@@ -10,6 +10,8 @@ function Aptitudetest() {
   const [showContainer, setShowContainer] = useState(true);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
+  const [Answers, setAnswers] = useState([]);
+  console.log('question',selectedAnswers);
   const [score, setScore] = useState(0);
   const [totalMarks, setTotalMarks] = useState(0);
   const [passed, setPassed] = useState(false);
@@ -131,8 +133,8 @@ function Aptitudetest() {
                             type="radio"
                             name={`q${index + 1}`}
                             id={`q${index + 1}a`}
-                            value="a"
-                            checked={selectedAnswers[currentQuestion] === 'a'}
+                            value="option1"
+                            checked={selectedAnswers[currentQuestion] === 'option1'}
                             onChange={handleAnswerSelection}
                           />
                           <label className="form-check-label" htmlFor={`q${index + 1}a`}>
@@ -145,8 +147,8 @@ function Aptitudetest() {
                             type="radio"
                             name={`q${index + 1}`}
                             id={`q${index + 1}b`}
-                            value="b"
-                            checked={selectedAnswers[currentQuestion] === 'b'}
+                            value="option2"
+                            checked={selectedAnswers[currentQuestion] === 'option2'}
                             onChange={handleAnswerSelection}
                           />
                           <label className="form-check-label" htmlFor={`q${index + 1}b`}>
@@ -159,8 +161,8 @@ function Aptitudetest() {
                             type="radio"
                             name={`q${index + 1}`}
                             id={`q${index + 1}c`}
-                            value="c"
-                            checked={selectedAnswers[currentQuestion] === 'c'}
+                            value="option3"
+                            checked={selectedAnswers[currentQuestion] === 'option3'}
                             onChange={handleAnswerSelection}
                           />
                           <label className="form-check-label" htmlFor={`q${index + 1}c`}>
@@ -173,8 +175,8 @@ function Aptitudetest() {
                             type="radio"
                             name={`q${index + 1}`}
                             id={`q${index + 1}d`}
-                            value="d"
-                            checked={selectedAnswers[currentQuestion] === 'd'}
+                            value="option4"
+                            checked={selectedAnswers[currentQuestion] === 'option4'}
                             onChange={handleAnswerSelection}
                           />
                           <label className="form-check-label" htmlFor={`q${index + 1}d`}>

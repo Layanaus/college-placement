@@ -156,12 +156,14 @@ import { Link, useParams } from 'react-router-dom';
 
 const Jobdetails = () => {
   const login_id=localStorage.getItem('login_id');
+  const company_id=localStorage.getItem('company_id');
   const [viewJobs, setViewJobs] = useState([]);
   const [category, setCategory] = useState([]);
   const {id} = useParams()
   const navigate = useNavigate()
   const[inputs, setinputs]=useState({
-    login_id:id,
+    login_id:login_id,
+    company_id:company_id,
   });
   console.log(login_id);
   console.log("value==>",inputs);

@@ -9,19 +9,19 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const CreateJob = () => {
-  const login_id=localStorage.getItem('login_id')
+  const login_id = localStorage.getItem('login_id');
   const navigate = useNavigate()
   const [jobcategory, setjobCategory] = useState([]);
 
   const[inputs, setinputs]=useState({
-    login_id:login_id
+    login_id:login_id,
   });
   console.log("value==>",inputs);
   const setRegister=(event)=>{
     const name=event.target.name;
     const value=event.target.value;
     setinputs({...inputs,[name]:value});
-    console.log(inputs);  
+    console.log(inputs);          
   }
   const handleReset = () => {
     setinputs({});
@@ -40,9 +40,10 @@ const CreateJob = () => {
         toast.error('Failed to add job');
       });
   }
-  const jobcategory_id = inputs.jobcategory; 
+  const jobcategory_id = inputs.jobcategory;
+ 
   const updatedInputs = { ...inputs, jobcategory_id };
-
+ 
   useEffect(() => {
     axios.get('http://localhost:5000/jobcategory/view-jobcategory')
       .then((response) => {
@@ -88,7 +89,7 @@ const CreateJob = () => {
                     />
                   </div>
                 </div> */}
-                <div className="form-group row">
+                {/* <div className="form-group row">
                   <label
                     htmlFor="jobname"
                     className="col-md-4 col-form-label text-md-right"
@@ -125,7 +126,7 @@ const CreateJob = () => {
                       required
                     />
                   </div>
-                </div>
+                </div> */}
                 <div className="form-group row">
                   <label
                     htmlFor="jobname"

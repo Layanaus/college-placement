@@ -1,9 +1,25 @@
-import React, { useEffect } from 'react'
-import Companynav from './Companynav'
-import PublicUserFooter from '../Footer/PublicUserFooter'
+import React, { useEffect, useState } from 'react';
+import Companynav from './Companynav';
+import PublicUserFooter from '../Footer/PublicUserFooter';
 
 
 const Viewjob = () => {
+const id=localStorage.getItem('login_id')
+  const [category, setCategory] = useState([]);
+console.log(category);
+  useEffect(() => {
+    fetch(`http://localhost:5000/register/view-jobs/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setCategory(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+
   return (
     <>
     <Companynav/>
@@ -12,12 +28,13 @@ const Viewjob = () => {
         <i className="fa fa-book-reader" /> Opened Job Announcements
       </h3>
       <div className="row justify-content-center">
-        <div className="col-md-8 mb-5">
+      {category.map((job) => (
+        <div className="col-md-8 mb-5" key={job._id}>
           <div className="card">
           <div className="card-header text text-center d-flex justify-content-between">
             
 
-            <div>Python Developer</div>
+            <div>{job.jobname}</div>
             <div className="dropdown">
  <button className="dropbtn">
    <svg
@@ -52,9 +69,9 @@ const Viewjob = () => {
 
             </div>
           </div>
-        </div>
+        </div>))}
       </div>
-      <div className="row justify-content-center">
+      {/* <div className="row justify-content-center">
         <div className="col-md-8 mb-5">
           <div className="card">
           <div className="card-header text text-center d-flex justify-content-between">
@@ -146,7 +163,7 @@ const Viewjob = () => {
           </div>
         </div>
         
-      </div>
+      </div> */}
       <div className="row justify-content-center">
     <nav aria-label="Page navigation justify-content-center">
       <ul className="pagination">

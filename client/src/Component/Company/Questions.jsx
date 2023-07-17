@@ -21,6 +21,7 @@ function QuestionForm() {
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+  
 
   const fetchQuestions = async () => {
     try {
@@ -189,6 +190,7 @@ const handleDeleteQuestion = async (index) => {
         <div className="faq-container">
           {faqData.map((faq, index) => (
             <div className="question-card" key={index}>
+              
               <h3>
                 Question {index + 1}: {faq.question}
               </h3>

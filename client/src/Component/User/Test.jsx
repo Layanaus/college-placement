@@ -213,3 +213,8 @@ const UserReg = () => {
 }
 
 export default UserReg
+
+
+
+
+

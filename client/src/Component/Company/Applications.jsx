@@ -3,6 +3,7 @@ import PublicUserFooter from '../Footer/PublicUserFooter'
 import Companynav from './Companynav'
 
 const Applications = () => {
+  
   return (
     <>
     <Companynav/>

@@ -16,7 +16,7 @@ const MyProfile = () => {
   });
 
   console.log(login_id);
-  console.log("value==>",category);
+  console.log("value==>",inputs);
   console.log("value==>",file.name);
   console.log("value==>",file);
 
@@ -54,6 +54,19 @@ const MyProfile = () => {
         // Handle error if needed
       });
   };
+  useEffect(() => {
+    fetch(`http://localhost:5000/profile/view-myprofile/${login_id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("pppp",data.data[0]);
+        if (data.success) {
+          setInputs(data.data[0]);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
   useEffect(() => {
     fetch(`http://localhost:5000/profile/view-single-user/${login_id}`)
       .then((response) => response.json())
