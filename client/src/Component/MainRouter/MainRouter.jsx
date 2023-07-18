@@ -97,7 +97,6 @@ const MainRouter = () => {
             <Route path="Uchangepassword" element={<Userchangepassword/>}/>
             <Route path="UserProfile" element={<MyProfile/>}/>
             <Route path="user" element={<ViewJobs/>}/>
-            <Route path="Jobdetails/:id" element={<Jobdetails/>}/>
             <Route path="Usernotification" element={<Usernotification/>}/>
             <Route path="Viewrequest" element={<Viewrequest/>}/>
             <Route path="Editcompanyprofile" element={<Editcompanyprofile/>}/>

@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Viewrequest = () => {
   const navigate = useNavigate()
+  const [users, setUsers] = useState([]);
   const [category, setCategory] = useState([]);
   console.log(category);
   const company_id = localStorage.getItem('company_id')
@@ -24,6 +25,31 @@ const Viewrequest = () => {
         console.log('Error:', error);
       });
   }, []);
+  const accept = (id) => {console.log(id.data);
+    axios
+      .get(`http://localhost:5000/register/accept/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  
+
+  const reject = (id) => {
+    axios
+      .get(`http://localhost:5000/register/reject/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
 
   const Registersubmit = (event) => {
     event.preventDefault();
@@ -54,10 +80,16 @@ const Viewrequest = () => {
                 <div className="d-flex w-100 justify-content-center">
                   {data.status==0 ?  
                   <>
-                  <button className="btn btn-primary mr-5" onclick="redirectToPage()">
+                  <button className="btn btn-primary mr-5"  onClick={() => {
+                                    accept(data.login_id);
+                                  }}>
                     Accept
                   </button>
-                  <button className="btn btn-danger mr-5" onclick="redirectToPage()">
+                  
+                  
+                  <button className="btn btn-danger mr-5" onClick={() => {
+                                    reject(data.login_id);
+                                  }}>
                     Reject
                   </button>
                   </>
@@ -116,4 +148,4 @@ const Viewrequest = () => {
   )
 }
 
-export default Viewrequest
+export default Viewrequest

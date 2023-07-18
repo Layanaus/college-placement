@@ -76,7 +76,9 @@ const Manageuser = () => {
                       <th>Register Number</th>
                       <th>Email</th>
                       <th>Phone</th>
-                      <th>Action</th>
+                      <th>
+                        Action
+                        </th>
                     </tr>
                   </thead>
                   <tbody>

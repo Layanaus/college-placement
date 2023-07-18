@@ -7,6 +7,62 @@ const objectId= mongoose.Types.ObjectId
 
 const companyrequestRouter = express.Router();
 
+companyrequestRouter.get('/accept/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const approve = await companyRequestModel.updateOne({ _id: id }, { $set: { status: 1 } });
+
+    if (approve && approve.modifiedCount === 1) {
+      return res.status(200).json({
+        success: true,
+        message: 'User approved',
+      });
+    } else if (approve && approve.modifiedCount === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'User not found or already approved',
+      });
+    } else {
+      throw new Error('Error updating user');
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: 'Something went wrong',
+      details: error.message,
+    });
+  }
+});
+
+companyrequestRouter.get('/reject/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const reject = await companyRequestModel.deleteOne({ _id: id });
+
+    if (reject && reject.deletedCount === 1) {
+      return res.status(200).json({
+        success: true,
+        message: 'User rejected',
+      });
+    } else if (reject && reject.deletedCount === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'User not found or already rejected',
+      });
+    } else {
+      throw new Error('Error deleting user');
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: 'Something went wrong',
+      details: error.message,
+    });
+  }
+});
+
 
 companyrequestRouter.get('/view-placementrequest/:id',async(req,res)=>{
   try {

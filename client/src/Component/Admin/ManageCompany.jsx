@@ -105,7 +105,7 @@ const ManageCompany = () => {
                                   onClick={() => {
                                     approve(user.login_id);
                                   }}
-                                  style={{ marginRight: '5px' }}
+                                  style={{ margintop: '5px' }}
                                 >
                                   Approve
                                 </button>
@@ -114,6 +114,7 @@ const ManageCompany = () => {
                                   onClick={() => {
                                     reject(user.login_id);
                                   }}
+                                  style={{ marginTop: '10px' }}
                                 >
                                   Reject
                                 </button>
