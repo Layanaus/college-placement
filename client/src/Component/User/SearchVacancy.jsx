@@ -7,7 +7,7 @@ const SearchVacancy = () => {
   const [viewJobs, setViewJobs] = useState([]);
 const {id} = useParams()
   useEffect(() => {
-    fetch(`http://localhost:5000/register/view-companyjobs/${id}`)
+    fetch('http://localhost:5000/register/view-vaccancy')
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -40,26 +40,22 @@ const {id} = useParams()
   </div>
   
   <div className="row justify-content-center">
-  {viewJobs.map((job) => (
+  {viewJobs.filter(job => job.jobcategory === id).map((job) => (
     <div className="col-md-8 mb-5" key={job._id}>
       <div className="card">
         <div className="card-header text text-center">{job.jobname}</div>
         <div className="card-body text-center">
-        <h5 className="card-title">Company Name</h5>
-        <h6 className="card-title">Company Location</h6>
+        <h5 className="card-title">{job.companyname}</h5>
+        <h6 className="card-title">{job.companylocation}</h6>
         <h6 className="card-title">{job.vaccancy}+vaccancy</h6>
         <h6 className="card-title">Required Qualification:{job.qualification}</h6>
         {/* <h5 className="card-title">Job Description:{job.jobdescription}</h5>
         <h5 className="card-title">Job Vaccancy:{job.vaccancy}</h5> */}
         <h5 className="card-title">Expected Salary:{job.expectedsalary}</h5>
-        <h6 className="card-title">Location:{job.branch}</h6>
         <h6 className="card-title">Last date:{job.lastdate}</h6>
         {/* <h6 className="card-title">Required Qualification:{job.qualification}</h6>
         <h6 className="card-title">Applied Lastdate:{job.lastdate}</h6> */}
 
-          <p className="card-text">
-          Location:{job.branch}
-          </p>
           <Link to={`/Jobdetails/${job._id}`} className="btn btn-primary">View Salary &amp; More Info</Link>
 
         </div>
