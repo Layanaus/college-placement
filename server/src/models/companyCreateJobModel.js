@@ -15,7 +15,10 @@ const createjobSchema=new schema({
     qualification:{type:String},
     expectedsalary:{type:String},
     branch:{type:String},
+    date:{type:String},
     lastdate:{type:String},
+    status:{type:String},
+
    
 })
 

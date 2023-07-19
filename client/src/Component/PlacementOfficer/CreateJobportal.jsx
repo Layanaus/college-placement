@@ -83,14 +83,14 @@ const CreateJobportal = () => {
                   Company Name
                 </label>
                 <div className="col-md-6">
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="companyname"
-                    value={inputs.companyname || ""}
-                    onChange={setRegister}
-                    required
-                  />
+                <select id="category" className="form-control" name="jobcategory" value={inputs.jobcategory || ""}
+    onChange={setRegister}>
+      required
+    <option value="">Select Company</option>
+                {jobcategory.map((data)=>(
+                  <option value={data._id}>{data.jobcategory}</option>
+                ))}
+    </select>
                 </div>
               </div>
               <div className="form-group row">

@@ -30,6 +30,32 @@ jobcategoryRouter.get('/view-jobcategory', async (req, res) => {
   }
 });
 
+jobcategoryRouter.get('/view-companies', async (req, res) => {
+  try {
+    const companies = await companyRegisterModel.find();
+    if (companies.length > 0) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: companies,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: 'No job categories found',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: 'Something went wrong',
+      details: error,
+    });
+  }
+});
+
 // POST create a new job category
 jobcategoryRouter.post('/add_jobcategory', async (req, res) => {
   try {

@@ -56,7 +56,7 @@ const {id} = useParams()
         {/* <h6 className="card-title">Required Qualification:{job.qualification}</h6>
         <h6 className="card-title">Applied Lastdate:{job.lastdate}</h6> */}
 
-          <Link to={`/Jobdetails/${job._id}`} className="btn btn-primary">View Salary &amp; More Info</Link>
+          <Link to={`/Jobdetails/${job._id}/${job.company_id}`} className="btn btn-primary">View Salary &amp; More Info</Link>
 
         </div>
       </div>

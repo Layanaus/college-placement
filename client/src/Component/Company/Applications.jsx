@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Companynav from './Companynav'
 
 const Applications = () => {
-  
+  const company_id=localStorage.getItem('login_id');
+  console.log(company_id);
+  const [applicants, setApplicants] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/register/view-applicants')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setApplicants(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+
+
   return (
     <>
     <Companynav/>
@@ -19,17 +36,19 @@ const Applications = () => {
         </tr>
       </thead>
       <tbody>
+      {applicants.filter(job => job.company_id === company_id).map((job) => (
       <tr>
           <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Java</td>
+          <td>{job.firstname}</td>
+          <td>{job.jobname}</td>
           <td>
             <a href="Reviewapplication">View Cv &amp; More Detail</a>
           </td>
-          <td>interview passed</td>
+          <td>{job.application_status}</td>
           
         </tr>
-        <tr>
+        ))}
+        {/* <tr>
           <th scope="row">1</th>
           <td>Mark</td>
           <td>Java</td>
@@ -48,8 +67,8 @@ const Applications = () => {
           </td>
           <td>Not Examined</td>
           
-        </tr>
-        <tr>
+        </tr> */}
+        {/* <tr>
           <th scope="row">2</th>
           <td>Jacob</td>
           <td>Graphics Design</td>
@@ -57,8 +76,8 @@ const Applications = () => {
             <a href="Reviewapplication">View Cv &amp; More Detail</a>
           </td>
           <td>Eligible For Test</td>
-        </tr>
-        <tr>
+        </tr> */}
+        {/* <tr>
           <th scope="row">3</th>
           <td>Larry</td>
           <td>Php Developer</td>
@@ -97,7 +116,7 @@ const Applications = () => {
           </td>
           <td>ineligible for interview</td>
           
-        </tr>
+        </tr> */}
       </tbody>
     </table>
     <button className='btn btn-primary' style={{width:'100%'}}>Publish Interview Result</button>

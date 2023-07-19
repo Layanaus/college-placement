@@ -86,7 +86,7 @@ const MainRouter = () => {
             <Route path="Placementofficer" element={< Placementofficer/>}/>        
             <Route path="Jobportal" element={< Jobportalpage/>}/>
             <Route path="Jobopening" element={< Jobopeningpage/>}/>
-            <Route path="Jobdetails/:id" element={< Jobdetails/>}/>
+            <Route path="Jobdetails/:id/:company_id" element={< Jobdetails/>}/>
             <Route path="manageuser" element={<Manageuser/>}/>
             <Route path="managecompany" element={<ManageCompany/>}/>
             <Route path="managecollege" element={<ManageCollege/>}/>

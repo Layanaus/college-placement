@@ -1,14 +1,15 @@
 const express = require('express');
 const companyCreateJobModel = require('../models/companyCreateJobModel');
+const companyJobApplicationModel = require('../models/companyJobApplicationModel');
 
 
 const companycreatejobRouter = express.Router();
-
 companycreatejobRouter.get('/view-jobs/:id', async (req, res) => {
   try {
-  const id=req.params.id;
-    const users = await companyCreateJobModel.find({login_id:id});
-    if (users[0] !== undefined) {
+    const id = req.params.id;
+    const users = await companyCreateJobModel.find({ login_id: id });
+
+    if (users[0]!=undefined) {
       return res.status(200).json({
         success: true,
         error: false,
@@ -19,6 +20,7 @@ companycreatejobRouter.get('/view-jobs/:id', async (req, res) => {
         success: false,
         error: true,
         message: 'No data found',
+        numMatches: 0, // If no data is found, set the count of matches to 0 in the response
       });
     }
   } catch (error) {
@@ -30,6 +32,7 @@ companycreatejobRouter.get('/view-jobs/:id', async (req, res) => {
     });
   }
 });
+
 
 
 companycreatejobRouter.get('/view-companyjobs/:id',async(req,res)=>{
@@ -99,7 +102,9 @@ companycreatejobRouter.post('/create_job', async (req, res) => {
     qualification:req.body.qualification,
     expectedsalary:req.body.expectedsalary,
     branch:req.body.branch,
+    date:new Date(),
     lastdate:req.body.lastdate,
+    status:'Applications Recieving..',
     };
     const savedData = await companyCreateJobModel(data).save();
 
@@ -142,7 +147,9 @@ companycreatejobRouter.get('/view-vaccancy', async (req, res) => {
       {
         "$group": {
           '_id': "$_id",
+
           'companyname': { "$first": "$company.companyname" },
+          'company_id': { "$first": "$company.login_id" },
           'companylocation': { "$first": "$company.companylocation" },
           'jobname': { "$first": "$jobname" },
           'jobdescription': { "$first": "$jobdescription" },
@@ -168,6 +175,40 @@ companycreatejobRouter.get('/view-vaccancy', async (req, res) => {
         success: false,
         error: true,
         message: 'No data found',
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: 'Something went wrong',
+      details: error,
+    });
+  }
+});
+
+
+
+companycreatejobRouter.get('/get-applications/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const users = await companyJobApplicationModel.find({ company_id: id });
+
+    const numMatches = users.length;
+
+    if (numMatches > 0) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: users,
+        numMatches: numMatches,
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: 'No data found',
+        numMatches: 0, // If no data is found, set the count of matches to 0 in the response
       });
     }
   } catch (error) {

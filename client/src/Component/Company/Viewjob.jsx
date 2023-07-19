@@ -6,6 +6,7 @@ import PublicUserFooter from '../Footer/PublicUserFooter';
 const Viewjob = () => {
 const id=localStorage.getItem('login_id')
   const [category, setCategory] = useState([]);
+  const [numMatches, setNumMatches] = useState([]);
 console.log(category);
   useEffect(() => {
     fetch(`http://localhost:5000/register/view-jobs/${id}`)
@@ -19,6 +20,23 @@ console.log(category);
         console.log('Error:', error);
       });
   }, []);
+
+  
+  
+  useEffect(() => {
+    fetch(`http://localhost:5000/register/get-applications/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setNumMatches(data.numMatches);
+          console.log('okkkkk');
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+
 
   return (
     <>
@@ -55,9 +73,12 @@ console.log(category);
 </div> 
              </div>
             <div className="card-body text-center">
-              <h5 className="card-title">1400 Applications Received</h5>
+              <h5 className="card-title">{numMatches} Applications Received</h5>
               <p className="card-text">
-              Aptitude Test in Ongoing..
+             Created On:{job.date}
+              </p>
+              <p className="card-text">
+              {job.status}
               </p>
               <a href="Application" className="btn btn-primary mr-2">
   View Applicants

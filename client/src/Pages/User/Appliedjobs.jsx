@@ -1,7 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Usernav from '../../Component/User/Usernav'
 import PublicUserFooter from '../../Component/Footer/PublicUserFooter'
+
 const Appliedjobs = () => {
+  const login_id=localStorage.getItem('login_id');
+  const [appliedjobs, setAppliedjobs] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/register/view-applicants')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setAppliedjobs(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+
+
+
   return (
     <>
     <Usernav/>
@@ -21,13 +40,14 @@ const Appliedjobs = () => {
     </div>
   
   <div className="row justify-content-center">
+  {appliedjobs.filter(job => job.login_id === login_id).map((job) => (
     <div className="col-md-8 mb-5">
       <div className="card">
-        <div className="card-header text text-center">Netwok architect</div>
+        <div className="card-header text text-center">{job.jobname}</div>
         <div className="card-body text-center">
-          <h5 className="card-title">IBM Limited</h5>
+          <h5 className="card-title">{job.companyname}</h5>
           <p className="card-text">
-          Applied on 12/08/2022
+          Applied on: {job.date}
           </p>
           <a href="Jobdetails" className="btn btn-primary">
          Not Examined
@@ -35,8 +55,9 @@ const Appliedjobs = () => {
         </div>
       </div>
     </div>
+     ))}
   </div>
-  <div className="row justify-content-center">
+  {/* <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
         <div className="card-header text text-center">Python Developer</div>
@@ -51,8 +72,8 @@ const Appliedjobs = () => {
         </div>
       </div>
     </div>
-  </div>
-  <div className="row justify-content-center">
+  </div> */}
+  {/* <div className="row justify-content-center">
     <div className="col-md-8 mb-5">
       <div className="card">
         <div className="card-header text text-center">HR officer</div>
@@ -84,7 +105,7 @@ const Appliedjobs = () => {
         </div>
       </div>
     </div>
-  </div>
+  </div> */}
 </div>
 <div className="row justify-content-center" style={{marginTop:'30px'}}>
     <nav aria-label="Page navigation justify-content-center">

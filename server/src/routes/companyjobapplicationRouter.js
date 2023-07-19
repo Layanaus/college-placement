@@ -35,26 +35,42 @@ companyjobapplicationRouter.get('/view-companyapplication',async(req,res)=>{
   companyjobapplicationRouter.get('/view-applicants', async (req, res) => {
     try {
       const users = await companyJobApplicationModel.aggregate([
-  
-  
+          
         {
           '$lookup': {
             'from': 'job_register_tbs', 
-            'localField': 'job_id', 
-            'foreignField': '_id', 
+            'localField': 'company_id', 
+            'foreignField': 'login_id', 
             'as': 'job'
           }
+        },
+          {
+            '$lookup': {
+              'from': 'company_register_tbs', 
+              'localField': 'company_id', 
+              'foreignField': 'login_id', 
+              'as': 'company'
+            }
         },
         
         {
           "$unwind": "$job"
         },
+        {
+          "$unwind": "$company"
+        },
         
         {
           "$group": {
             '_id': "$_id",
+            'login_id': { "$first":"$login_id" },
             'firstname': { "$first":"$name" },
             'jobname': { "$first": "$job.jobname" },
+            'date': { "$first": "$date" },
+            'companyname': { "$first": "$company.companyname" },
+            'company_id': { "$first": "$company.login_id" },
+            'application_status': { "$first": "$application_status" },
+            
             
           }
         }
@@ -88,6 +104,7 @@ companyjobapplicationRouter.post('/job_application', async (req, res) => {
     login_id:req.body.login_id,
     company_id:req.body.company_id,
     job_id:req.body.job_id,
+    date: new Date().toISOString(), 
     name:req.body.name,
     dateofbirth:req.body.dateofbirth,
     address:req.body.address,
@@ -96,6 +113,7 @@ companyjobapplicationRouter.post('/job_application', async (req, res) => {
     education:req.body.education,
     skills:req.body.skills,
     aboutyourself:req.body.aboutyourself,
+    application_status:'Applied',
     };
     const savedData = await companyJobApplicationModel(data).save();
 
@@ -116,5 +134,7 @@ companyjobapplicationRouter.post('/job_application', async (req, res) => {
     });
   }
 });
+
+
 
 module.exports = companyjobapplicationRouter;
