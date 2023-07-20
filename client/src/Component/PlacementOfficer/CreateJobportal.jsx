@@ -12,6 +12,7 @@ const CreateJobportal = () => {
   const login_id=localStorage.getItem('login_id')
   const navigate = useNavigate()
   const [jobcategory, setjobCategory] = useState([]);
+  const [company, setcompany] = useState([]);
 
   const[inputs, setinputs]=useState({
     login_id:login_id
@@ -55,6 +56,15 @@ const CreateJobportal = () => {
         console.log('Error:', error);
       });
   }, []);
+  useEffect(() => {
+    axios.get('http://localhost:5000/register/view-company')
+      .then((response) => {
+        setcompany(response.data.data);
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
   return (
     <>
     <Placementofficernav/>
@@ -87,8 +97,8 @@ const CreateJobportal = () => {
     onChange={setRegister}>
       required
     <option value="">Select Company</option>
-                {jobcategory.map((data)=>(
-                  <option value={data._id}>{data.jobcategory}</option>
+                {company.map((cmp)=>(
+                  <option value={cmp.login_id}>{cmp.companyname}</option>
                 ))}
     </select>
                 </div>

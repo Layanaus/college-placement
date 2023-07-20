@@ -124,6 +124,7 @@ collegecreatejobRouter.post('/create_jobportal', async (req, res) => {
   try {
     const data = {
     login_id:req.body. login_id,
+    company_id:req.body. company_id,
     companyname:req.body.companyname,
     companylocation:req.body.companylocation,
     jobname:req.body.jobname,

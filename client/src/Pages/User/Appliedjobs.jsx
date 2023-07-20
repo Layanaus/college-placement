@@ -49,8 +49,8 @@ const Appliedjobs = () => {
           <p className="card-text">
           Applied on: {job.date}
           </p>
-          <a href="Jobdetails" className="btn btn-primary">
-         Not Examined
+          <a href="aptitudetst" className="btn btn-primary">
+         Attend Test
           </a>
         </div>
       </div>
