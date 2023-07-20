@@ -45,7 +45,9 @@ const CreateJobportal = () => {
   
   
   const jobcategory_id = inputs.jobcategory; 
-  const updatedInputs = { ...inputs, jobcategory_id };
+  const company_id = inputs.company_id; 
+  
+  const updatedInputs = { ...inputs, jobcategory_id,company_id };
 
   useEffect(() => {
     axios.get('http://localhost:5000/jobcategory/view-jobcategory')
@@ -93,7 +95,7 @@ const CreateJobportal = () => {
                   Company Name
                 </label>
                 <div className="col-md-6">
-                <select id="category" className="form-control" name="jobcategory" value={inputs.jobcategory || ""}
+                <select id="category" className="form-control" name="company_id" value={inputs.company_id || ""}
     onChange={setRegister}>
       required
     <option value="">Select Company</option>

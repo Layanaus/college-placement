@@ -1,6 +1,9 @@
 const express = require('express');
 const companyJobApplicationModel = require('../models/companyJobApplicationModel');
+const { default: mongoose } = require('mongoose');
+const userProfileModel = require('../models/userProfileModel');
 
+const objectId= mongoose.Types.ObjectId
 
 
 
@@ -32,6 +35,54 @@ companyjobapplicationRouter.get('/view-companyapplication',async(req,res)=>{
   }
   })
 
+
+ companyjobapplicationRouter.get('/view-userprofile/:login_id', async (req, res) => {
+  try {
+    const loginId = req.params.login_id;
+
+    const users = await companyJobApplicationModel.aggregate([
+      {
+        '$match': {
+          'login_id': new objectId(loginId) // Filter based on the login ID received in the request
+        }
+      },
+      {
+        '$lookup': {
+          'from':'user_profile_tbs', 
+          'localField': 'login_id', 
+          'foreignField': 'login_id', 
+          'as': 'job'
+        }
+      },
+      {
+        "$unwind": "$job"
+      }
+    ]);
+
+    if (users.length > 0) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: users
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: "User profile not found for the provided login ID."
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    });
+  }
+});
+
+  
   companyjobapplicationRouter.get('/view-applicants', async (req, res) => {
     try {
       const users = await companyJobApplicationModel.aggregate([

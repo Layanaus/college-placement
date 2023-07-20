@@ -1,9 +1,11 @@
-import React, {useState}from 'react'
+import React, { useEffect, useState } from 'react'
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Companybody from './Companybody'
 import Companynav from './Companynav'
+import { useParams } from 'react-router-dom'
 
 const ReviewApplication = () => {
+  const id = useParams()
   const [showInterviewPassed, setShowInterviewPassed] = useState(false);
   const [showInterviewFailed, setShowInterviewFailed] = useState(false);
 
@@ -16,6 +18,25 @@ const ReviewApplication = () => {
       setShowInterviewFailed(false);
     }
   };
+
+  const [biodata, setBiodata] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/register/view-userprofile/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setBiodata(data.data);
+          console.log('fetched');
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+        console.log('not fetching');
+      });
+  }, []);
+
+
   return (
     <>
     <Companynav/>

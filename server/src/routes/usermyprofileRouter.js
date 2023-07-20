@@ -2,8 +2,10 @@ const express = require('express');
 const userProfileModel = require('../models/userProfileModel');
 const userRegisterModel = require('../models/userRegisterModel');
 const { default: mongoose } = require('mongoose');
+
 const obj = mongoose.Types.ObjectId
 const multer = require('multer');
+const companyJobApplicationModel = require('../models/companyJobApplicationModel');
 
 
 
@@ -52,6 +54,8 @@ usermyprofileRouter.get('/view-single-user/:id', async (req, res) => {
 
 
 
+
+
 usermyprofileRouter.get('/view-myprofile/:id', async (req, res) => {
   try {
   
@@ -83,7 +87,7 @@ usermyprofileRouter.get('/view-myprofile/:id', async (req, res) => {
 usermyprofileRouter.post('/myprofile', async (req, res) => {
   try {
     const data = {
-    login_id: req.body.login_id,
+    login_id:req.body.login_id,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     dob: req.body.dob,

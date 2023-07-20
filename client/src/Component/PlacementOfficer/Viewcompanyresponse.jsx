@@ -1,8 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Placementofficernav from './Placementofficernav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
+import { useParams } from 'react-router-dom'
 
 const Viewcompanyresponse = () => {
+  const {id}=useParams()
+const college_id=localStorage.getItem('college_id')
+console.log(college_id);
+  const [users, setUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+ useEffect(() => {
+   fetch(`http://localhost:5000/request/view-response/${college_id}`)
+     .then((response) => response.json())
+     .then((data) => {
+       if (data.success) {
+         setUsers(data.data);
+       }
+     })
+     .catch((error) => {
+       console.error('Error fetching users:', error);
+     });
+ }, []);
+ const usersPerPage = 10;
+ const totalPages = Math.ceil(users.length / usersPerPage);
+
+ const handlePageClick = (pageNumber) => {
+   setCurrentPage(pageNumber);
+ };
+
+ const indexOfLastUser = currentPage * usersPerPage;
+ const indexOfFirstUser = indexOfLastUser - usersPerPage;
+ const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
   return (
     <>
     <Placementofficernav/>
@@ -11,10 +39,15 @@ const Viewcompanyresponse = () => {
     <div className="col-lg-12">
       <div className="main-box clearfix">
         <div className="table-responsive">
-          <table className="table user-list">
-            <thead>
+        <table className="table user-list">
+<thead>
               <tr>
+              <th>
+                  
+                  <span>Sl No</span>
+                </th>
                 <th>
+
                   <span>Company Name</span>
                 </th>
                 <th>
@@ -26,201 +59,37 @@ const Viewcompanyresponse = () => {
                 <th>
                   <span>Email</span>
                 </th>
+                <th>
+                  <span>Phone</span>
+                </th>
                 <th><span>Action</span></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>
-                 
-                  <span className="user-subhead">Admin</span>
-                </td>
-                <td>2013/08/08</td>
-                <td className="text-center">
-                  <span className="label label-default">Approved</span>
-                </td>
-                <td>
-                  <a href="#">mila@kunis.com</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
+<tbody>
+  {currentUsers.length > 0 ? (
+    currentUsers.map((user, index) => (
+      <tr key={user._id}>
+        <th scope="row">{(currentPage - 1) * usersPerPage + index + 1}</th>
+        <td>{user.companyname}</td>
+        <td>{user.date}</td>
+       
+        <td>{user.status}</td>
+        <td>{user.email}</td>
+        <td>{user.phone}</td>
+        <td>
+        <button className="btn btn-danger danger-button">Delete</button>
         </td>
+        
               </tr>
-              <tr>
-                <td>
-                 
-                 
-                  <span className="user-subhead">Member</span>
-                </td>
-                <td>2013/08/12</td>
-                <td className="text-center">
-                  <span className="label label-success">Reject</span>
-                </td>
-                <td>
-                  <a href="#">marlon@brando.com</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
-        </td>
-
-              </tr>
-              <tr>
-                <td>
-                 
-                
-                  <span className="user-subhead">Registered</span>
-                </td>
-                <td>2013/03/03</td>
-                <td className="text-center">
-                  <span className="label label-danger">Approved</span>
-                </td>
-                <td>
-                  <a href="#">jack@nicholson</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
-        </td>
-              </tr>
-              <tr>
-                <td>
-                
-                  <span className="user-subhead">Registered</span>
-                </td>
-                <td>2004/01/24</td>
-                <td className="text-center">
-                  <span className="label label-warning">Reject</span>
-                </td>
-                <td>
-                  <a href="#">humphrey@bogart.com</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
-        </td>
-              </tr>
-              <tr>
-                <td>
-                  
-                
-                  <span className="user-subhead">Admin</span>
-                </td>
-                <td>2013/12/31</td>
-                <td className="text-center">
-                  <span className="label label-success">Approved</span>
-                </td>
-                <td>
-                  <a href="#">spencer@tracy</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
-        </td>
-              </tr>
-              <tr>
-                <td>
-                
-                 
-                  <span className="user-subhead">Admin</span>
-                </td>
-                <td>2013/08/08</td>
-                <td className="text-center">
-                  <span className="label label-default">Reject</span>
-                </td>
-                <td>
-                  <a href="#">mila@kunis.com</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
-        </td>
-              </tr>
-              <tr>
-                <td>
-                  
-              
-                  <span className="user-subhead">Member</span>
-                </td>
-                <td>2013/08/12</td>
-                <td className="text-center">
-                  <span className="label label-success">Approved</span>
-                </td>
-                <td>
-                  <a href="#">marlon@brando.com</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
-        </td>
-              </tr>
-              <tr>
-                <td>
-                 
-                
-                  <span className="user-subhead">Registered</span>
-                </td>
-                <td>2013/03/03</td>
-                <td className="text-center">
-                  <span className="label label-danger">Reject</span>
-                </td>
-                <td>
-                  <a href="#">jack@nicholson</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
-        </td>
-              </tr>
-              <tr>
-                <td>
-                 
-               
-                  <span className="user-subhead">Registered</span>
-                </td>
-                <td>2004/01/24</td>
-                <td className="text-center">
-                  <span className="label label-warning">Approved</span>
-                </td>
-                <td>
-                  <a href="#">humphrey@bogart.com</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
-        </td>
-              </tr>
-              <tr>
-                <td>
-                 
-                 
-                  <span className="user-subhead">Admin</span>
-                </td>
-                <td>2013/12/31</td>
-                <td className="text-center">
-                  <span className="label label-success">Reject</span>
-                </td>
-                <td>
-                  <a href="#">spencer@tracy</a>
-                </td>
-                <td>
-          <a href="#" class="btn btn-success btn-sm">
-            <i class="fas fa-trash"></i> Delete
-          </a>
-        </td>
-              </tr>
-            </tbody>
-          </table>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="9" className="text-center">
+                No users found
+              </td>
+            </tr>
+          )}          </tbody>
+</table>
         </div>
         <div className="row justify-content-center">
     <nav aria-label="Page navigation justify-content-center">

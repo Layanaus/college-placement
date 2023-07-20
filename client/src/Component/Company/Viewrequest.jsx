@@ -25,40 +25,37 @@ const Viewrequest = () => {
         console.log('Error:', error);
       });
   }, []);
-  const accept = (id) => {console.log(id.data);
-    axios
-      .get(`http://localhost:5000/register/accept/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
   
-
-  const reject = (id) => {
-    axios
-      .get(`http://localhost:5000/register/reject/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-
   const Registersubmit = (event) => {
     event.preventDefault();
     axios.get('http://localhost:5000/request/create_placementrequest').then((response) => {
       navigate('/placementofficer')
     })
-
+   
   }
+  const accept = (id) => {
+    axios
+      .get(`http://localhost:5000/request/approve/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  const reject = (id) => {
+    axios
+      .get(`http://localhost:5000/request/reject/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
 
     <>
@@ -78,12 +75,13 @@ const Viewrequest = () => {
               <p>{data.message}</p>
               <div>
                 <div className="d-flex w-100 justify-content-center">
-                  {data.status==0 ?  
+                  {/* {data.status===0 ?  
                   <>
                   <button className="btn btn-primary mr-5"  onClick={() => {
                                     accept(data.login_id);
                                   }}>
                     Accept
+                    
                   </button>
                   
                   
@@ -93,12 +91,58 @@ const Viewrequest = () => {
                     Reject
                   </button>
                   </>
-                  :
-                  <button className="btn btn-success mr-5" disabled>
+                  : 
+                  <button className="btn btn-success mr-5" onClick={() => {
+                            accept(data.login_id);
+                                  }}>
                     Accepted
                   </button>
                   
-                  }
+                  } */}
+
+        {data.status === '0' ? (
+                              <>
+                                <button
+                                  className="btn btn-success"
+                                  onClick={() => {
+                                    accept(data._id);
+                                  }}
+                                  style={{ marginRight: '5px' }}
+                                >
+                                 Accept
+                                </button>
+                                <button
+                                  className="btn btn-danger"
+                                  onClick={() => {
+                                    reject(data._id);
+                                  }}
+                                >
+                                 Reject
+                                </button>
+                              </>
+                            ) : (
+                              <button className="btn btn-success" style={{ marginRight: '5px' }}>
+                               Accepted
+                              </button>
+                            )}
+                             {data.status === '1' ? (
+                              <>
+                             
+                                <button
+                                  className="btn btn-danger"
+                                  onClick={() => {
+                                    reject(data._id);
+                                  }}
+                                >
+                                 Reject
+                                </button>
+                              </>
+                            ) : (
+                              <button className="btn btn-success" style={{ marginRight: '5px' }}>
+                               rejected
+                              </button>
+                              
+                            )} 
                  
                 </div>
               </div>

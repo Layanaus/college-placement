@@ -108,7 +108,7 @@ const MainRouter = () => {
             <Route path="Createjob" element={<CreateJob/>}/>
             <Route path="Application" element={<Applications/>}/>
             <Route path="Notifyinterview" element={<NotifyInterview/>}/>
-            <Route path="Reviewapplication" element={<ReviewApplication/>}/>
+            <Route path="Reviewapplication/:id" element={<ReviewApplication/>}/>
             <Route path="POviewjobs" element={<Placementofficerviewjobs/>}/>
             <Route path="POsearchvacancy2" element={<POsearchvacancy/>}/>
             <Route path="searchvacancy/:id" element={<SearchVacancy/>}/>

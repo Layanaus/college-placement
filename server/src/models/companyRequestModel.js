@@ -7,6 +7,7 @@ const companyrequestSchema=new schema({
     company_id:{type:mongoose.Types.ObjectId,ref:"company_register_tb"},
     subject:{type:String},
     message:{type:String},
+    date:{type:Date},
     status:{type:String},
     
     

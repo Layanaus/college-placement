@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PublicUserFooter from '../Footer/PublicUserFooter'
 import Companynav from './Companynav'
+import { Link } from 'react-router-dom'
 
 const Applications = () => {
   const company_id=localStorage.getItem('login_id');
@@ -41,8 +42,10 @@ const Applications = () => {
           <th scope="row">1</th>
           <td>{job.firstname}</td>
           <td>{job.jobname}</td>
+        
           <td>
-            <a href="Reviewapplication">View Cv &amp; More Detail</a>
+            {/* <a href="Reviewapplication">View Cv &amp; More Detail</a> */}
+            <Link to={`/Reviewapplication/${job.login_id}`}>View Cv &amp; More Detail</Link>
           </td>
           <td>{job.application_status}</td>
           

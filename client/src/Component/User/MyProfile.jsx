@@ -9,10 +9,9 @@ const MyProfile = () => {
   const login_id = localStorage.getItem('login_id');
   const [file, setFile] = useState('');
   const [category, setCategory] = useState([]);
-  const { id } = useParams();
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
-    login_id: id,
+    login_id:login_id,
   });
 
   console.log(login_id);
@@ -54,32 +53,32 @@ const MyProfile = () => {
         // Handle error if needed
       });
   };
-  useEffect(() => {
-    fetch(`http://localhost:5000/profile/view-myprofile/${login_id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("pppp",data.data[0]);
-        if (data.success) {
-          setInputs(data.data[0]);
-        }
-      })
-      .catch((error) => {
-        console.log('Error:', error);
-      });
-  }, []);
-  useEffect(() => {
-    fetch(`http://localhost:5000/profile/view-single-user/${login_id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.success) {
-          setCategory(data.data);
-        }
-      })
-      .catch((error) => {
-        console.log('Error:', error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/profile/view-myprofile/${login_id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("pppp",data.data[0]);
+  //       if (data.success) {
+  //         setInputs(data.data[0]);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error:', error);
+  //     });
+  // }, []);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/profile/view-single-user/${login_id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       if (data.success) {
+  //         setCategory(data.data);
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log('Error:', error);
+  //     });
+  // }, []);
 
   useEffect(() => {
     // Update the inputs state with the login_id from localStorage
