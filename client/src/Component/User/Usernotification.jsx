@@ -1,8 +1,26 @@
-import React from 'react'
-import Usernav from './Usernav'
-import PublicUserFooter from '../Footer/PublicUserFooter'
+import React, { useEffect, useState } from 'react';
+import Usernav from './Usernav';
+import PublicUserFooter from '../Footer/PublicUserFooter';
 
 const Usernotification = () => {
+  const login_id = localStorage.getItem('login_id');
+  const [notice, setNotice] = useState([]);
+
+  console.log(notice);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/notify/view-notify-interview?login_id=${login_id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          const filteredData = data.data.filter((notification) => notification.application_status === 'Test Completed');
+          setNotice(filteredData);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, [login_id]);
   return (
     <>
     <Usernav/>
@@ -30,42 +48,26 @@ const Usernotification = () => {
   <div className="container-fluid">
     <div id="w">
       <div id="content">
-      <div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">Wipro</h4>
-  <p>We hope this message finds you well. We are delighted to inform you that you have been selected for an interview for an exciting opportunity that aligns with your skills and interests. Congratulations on reaching this stage!
+      {notice.map((notification) => (
+              <div className="alert alert-success" role="alert" key={notification._id}>
+                <h4 className="alert-heading">{notification.companyname}</h4>
+                <p>
+                  {notification.message}
+                </p>
+                <p className="mb-0">
+                 <p> <b>Interview Details:</b></p>
+                 Interview Date: {notification.date},
+              Location: {notification.companylocation}
+                </p>
+                <p style={{marginLeft:'800px'}}>Aptitude{notification.application_status}</p>
+              </div>
+            ))}
+          </div>
+       
 
-We were impressed by your [mention specific qualities, achievements, or experiences that stood out] and believe you have the potential to contribute significantly to the [organization/event/program] we represent.</p>
-
-  <p class="mb-0">Interview Details:
-Date: [Date of the interview]
-Time: [Time of the interview]
-Location: [Physical location or virtual platform]</p>
-</div>
-        {/* Icons source http://dribbble.com/shots/913555-Flat-Web-Elements */}
-        <div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">Infosys</h4>
-  <p>We hope this message finds you well. We are delighted to inform you that you have been selected for an interview for an exciting opportunity that aligns with your skills and interests. Congratulations on reaching this stage!
-
-We were impressed by your [mention specific qualities, achievements, or experiences that stood out] and believe you have the potential to contribute significantly to the [organization/event/program] we represent.</p>
-
-  <p class="mb-0">Interview Details:
-Date: [Date of the interview]
-Time: [Time of the interview]
-Location: [Physical location or virtual platform]</p>
-</div>
-<div class="alert alert-success" role="alert">
-  <h4 class="alert-heading">Global</h4>
-  <p>We hope this message finds you well. We are delighted to inform you that you have been selected for an interview for an exciting opportunity that aligns with your skills and interests. Congratulations on reaching this stage!We were impressed by your [mention specific qualities, achievements, or experiences that stood out] and believe you have the potential to contribute significantly to the [organization/event/program] we represent.</p>
-
-  <p class="mb-0">Interview Details:
-Date: [Date of the interview]
-Time: [Time of the interview]
-Location: [Physical location or virtual platform]</p>
-</div>
-</div>
-      {/* @end #content */}
+    
     </div>
-    {/* @end #w */}
+  
   </div>
   <PublicUserFooter/>
 </>

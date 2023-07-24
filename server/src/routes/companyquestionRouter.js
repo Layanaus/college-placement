@@ -8,9 +8,7 @@ const companyquestionRouter = express.Router();
 companyquestionRouter.delete('/delete-question/:id', async (req, res) => {
     try {
       const questionId = req.params.id;
-  
-      // Find the question by ID and delete it
-      const deletedQuestion = await companyQuestionModel.findByIdAndDelete(questionId);
+        const deletedQuestion = await companyQuestionModel.findByIdAndDelete(questionId);
   
       if (deletedQuestion) {
         return res.status(200).json({

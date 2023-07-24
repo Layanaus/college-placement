@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
+import { Link } from 'react-router-dom';
 
 
 const Viewjob = () => {
 const id=localStorage.getItem('login_id')
   const [category, setCategory] = useState([]);
+  const [job, setJob] = useState([]);
+
   const [numMatches, setNumMatches] = useState([]);
 console.log(category);
   useEffect(() => {
@@ -14,6 +17,18 @@ console.log(category);
       .then((data) => {
         if (data.success) {
           setCategory(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+  useEffect(() => {
+    fetch(`http://localhost:5000/register/viewjobportal-jobs`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setJob(data.data);
         }
       })
       .catch((error) => {
@@ -80,13 +95,70 @@ console.log(category);
               <p className="card-text">
               {job.status}
               </p>
-              <a href="Application" className="btn btn-primary mr-2">
+              {/* <a href="Application" className="btn btn-primary mr-2">
   View Applicants
-</a>
+</a> */}
+<Link className='btn btn-primary mr-2' to ={`/Application/${job._id}`}> View Applicants</Link>
 
-<a href="Notifyinterview" className="btn btn-primary">
+<Link className='btn btn-primary' to ={`/Notifyinterview/${job._id}`}> Notify Interview</Link>
+{/* <a href="Notifyinterview/${job._id}" className="btn btn-primary">
   Notify Interview
-</a>
+</a> */}
+
+            </div>
+          </div>
+        </div>))}
+      </div>
+
+
+
+      <div className="row justify-content-center">
+      {job .filter((job) => job.company_id === id).map((jobs) => (
+        <div className="col-md-8 mb-5" key={jobs._id}>
+          <div className="card">
+          <div className="card-header text text-center d-flex justify-content-between">
+  
+
+            <div>{jobs.jobname}</div>
+            <div className="dropdown">
+ <button className="dropbtn">
+   <svg
+     xmlns="http://www.w3.org/2000/svg"
+     width={16}
+     height={16}
+     fill="currentColor"
+     className="bi bi-three-dots-vertical"
+     viewBox="0 0 16 16"
+   >
+     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+   </svg>
+ </button>
+ <div className="dropdown-content">
+ <a href="#">Edit</a>
+   <a href="#">Remove</a>
+ </div>
+</div> 
+             </div>
+            <div className="card-body text-center">
+              <h5 className="card-title">{numMatches} Applications Received</h5>
+              <p className="card-text">
+             Created On:{jobs.date}
+              </p>
+              <p className="card-text">
+             Created by:{jobs.collegename}
+              </p>
+              <p className="card-text">
+              {jobs.status}
+              </p>
+              {/* <a href="Application" className="btn btn-primary mr-2">
+  View Applicants
+</a> */}
+<Link className='btn btn-primary mr-2' to ={`/Application/${jobs._id}`}> View Applicants</Link>
+
+<Link className='btn btn-primary' to ={`/Notifyinterview/${jobs._id}`}> Notify Interview</Link>
+{/* <a href="Notifyinterview/${job._id}" className="btn btn-primary">
+  Notify Interview
+</a> */}
 
             </div>
           </div>

@@ -6,6 +6,34 @@ const collegeRequestedCompaniesModel = require('../models/collegeRequestedCompan
 
 const collegeRequestedCompaniesRouter = express.Router();
 
+collegeRequestedCompaniesRouter.get('/approve/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const approve = await collegeRequestedCompaniesModel.updateOne({ _id: id }, { $set: { status: 1 } });
+
+    if (approve && approve.modifiedCount === 1) {
+      return res.status(200).json({
+        success: true,
+        message: 'User approved',
+      });
+    } else if (approve && approve.modifiedCount === 0) {
+      return res.status(400).json({
+        success: false,
+        message: 'User not found or already approved',
+      });
+    } else {
+      throw new Error('Error updating user');
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: 'Something went wrong',
+      details: error.message,
+    });
+  }
+});
+
 
 collegeRequestedCompaniesRouter.get('/view-companyplacementrequest',async(req,res)=>{
   try {
@@ -42,9 +70,9 @@ collegeRequestedCompaniesRouter.get('/view-companyplacementrequest',async(req,re
   try {
     const data = {
       
+      login_id:req.body.login_id,
       college_id:req.body.college_id,
-      subject:req.body.subject,
-      message:req.body.message,
+      subject:'conduct placement request',
       status:0
    
     };

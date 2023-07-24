@@ -3,13 +3,15 @@ import { useState } from 'react';
 import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const NotifyInterview = () => {
+  const {id}=useParams();
   const login_id=localStorage.getItem('login_id');
   const navigate = useNavigate()
   const[inputs, setinputs]=useState({
     login_id:login_id,
+    job_id:id,
   });
   console.log("value==>",inputs);
   const setRegister=(event)=>{
@@ -25,7 +27,7 @@ const NotifyInterview = () => {
   const Registersubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:5000/notify/create_interview',inputs).then((response)=>{
-      navigate('/placementofficer')
+      
     })
       
   }

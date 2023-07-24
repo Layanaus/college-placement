@@ -73,7 +73,16 @@ console.log(college_id);
         <td>{user.companyname}</td>
         <td>{user.date}</td>
        
-        <td>{user.status}</td>
+        <td>
+  {user.status === '1' ? (
+    <span className="text-success">Accepted</span>
+  ) : user.status === '2' ? (
+    <span className="text-danger">Rejected</span>
+  ) : user.status === '0' ? (
+    <span className="text-primary">Pending</span>
+  ) : null}
+</td>
+
         <td>{user.email}</td>
         <td>{user.phone}</td>
         <td>

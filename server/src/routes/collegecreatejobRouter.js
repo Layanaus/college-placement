@@ -1,10 +1,148 @@
 const express = require('express');
 const collegeCreateJobModel = require('../models/collegeCreateJobModel')
-
-
-
+const mongoose = require('mongoose');
 const collegecreatejobRouter = express.Router();
+const objectId= mongoose.Types.ObjectId
+// collegecreatejobRouter.get('/viewjobportal-jobs/:id', async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     const users = await collegeCreateJobModel.find({company_id:id });
 
+//     if (users[0]!=undefined) {
+//       return res.status(200).json({
+//         success: true,
+//         error: false,
+//         data: users,
+//       });
+//     } else {
+//       return res.status(400).json({
+//         success: false,
+//         error: true,
+//         message: 'No data found',
+//         numMatches: 0, // If no data is found, set the count of matches to 0 in the response
+//       });
+//     }
+//   } catch (error) {
+//     return res.status(400).json({
+//       success: false,
+//       error: true,
+//       message: 'Something went wrong',
+//       details: error,
+//     });
+//   }
+// });
+collegecreatejobRouter.get('/viewjobportal-jobs', async (req, res) => {
+  try {
+    const users = await collegeCreateJobModel.aggregate([
+
+
+      {
+        '$lookup': {
+          'from': 'pofficer_register_tbs',
+          'localField': 'login_id',
+          'foreignField': 'login_id',
+          'as': 'portal'
+        }
+      },
+      
+     
+      {
+        "$unwind": "$portal"
+      },
+      {
+        "$group": {
+          '_id': "$_id",
+          'jobname': { "$first": "$jobname" },
+          'collegename': { "$first": "$portal.collegename" },
+          'company_id': { "$first": "$company_id" },
+          'login_id': { "$first": "$login_id" },
+        }
+      }
+    ])
+    if (users[0] != undefined) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: users
+      })
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    })
+  }
+})
+collegecreatejobRouter.get('/applied_jobs', async (req, res) => {
+  try {
+    const id=req.params.id;
+    const users = await collegeCreateJobModel.aggregate([
+
+
+      {
+        '$lookup': {
+          'from': 'company_register_tbs',
+          'localField': 'company_id',
+          'foreignField': 'login_id',
+          'as': 'company'
+        }
+      },
+     
+     
+      {
+        "$unwind": "$company"
+      },
+//       {
+//         $match: { 'jobcategory':new mongoose.Types.ObjectId(id) },
+//       },
+      
+      {
+        "$group": {
+          '_id': "$_id",
+          'login_id': { "$first": "$login_id" },
+          'company_id': { "$first": "$company_id" },
+          'companylocation': { "$first": "$companylocation" },
+          'jobname': { "$first": "$jobname" },
+          'jobcategory': { "$first": "$jobcategory" },
+          'jobdescription': { "$first": "$jobdescription" },
+          'Requiredqualification': { "$first": "$Requiredqualification" },
+          'salaryrange': { "$first": "$salaryrange" },
+          'companyname': { "$first": "$company.companyname" },
+        }
+      }
+
+     
+    ])
+    if (users[0] != undefined) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: users
+      })
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    })
+  }
+})
 collegecreatejobRouter.get('/view-jobportal_description/:id',async(req,res)=>{
   try {
       const id=req.params.id;
@@ -31,6 +169,32 @@ collegecreatejobRouter.get('/view-jobportal_description/:id',async(req,res)=>{
       })
   }
   })
+  collegecreatejobRouter.get('/collegeviewjobs',async(req,res)=>{
+    try {
+      
+        const users = await collegeCreateJobModel.find();
+        if(users[0]!=undefined){
+            return res.status(200).json({
+                success:true,
+                error:false,
+                data:users
+            })
+        }else{
+            return res.status(400).json({
+                success:false,
+                error:true,
+                message:"No data found"
+            })
+        }
+    } catch (error) {
+        return res.status(400).json({
+            success:false,
+            error:true,
+            message:"Something went wrong",
+            details:error
+        })
+    }
+    })
 collegecreatejobRouter.get('/view-jobportal/:id',async(req,res)=>{
   try {
     const id = req.params.id;
@@ -57,10 +221,10 @@ collegecreatejobRouter.get('/view-jobportal/:id',async(req,res)=>{
       })
   }
   })
-  collegecreatejobRouter.get('/view-jobportal',async(req,res)=>{
+  collegecreatejobRouter.get('/view-portal/:id',async(req,res)=>{
     try {
-     
-        const users = await collegeCreateJobModel.find();
+     const id=req.params.id;
+        const users = await collegeCreateJobModel.find({login_id:id});
         if(users[0]!=undefined){
             return res.status(200).json({
                 success:true,
@@ -83,6 +247,8 @@ collegecreatejobRouter.get('/view-jobportal/:id',async(req,res)=>{
         })
     }
     })
+
+ 
     collegecreatejobRouter.delete('/delete-job/:id', async (req, res) => {
       try {
         const jobId = req.params.id;

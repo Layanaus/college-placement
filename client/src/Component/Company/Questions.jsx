@@ -4,6 +4,7 @@ import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 
 function QuestionForm() {
+  const login_id=localStorage.getItem('login_id')
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [question, setQuestion] = useState('');
@@ -62,28 +63,29 @@ const handleDeleteQuestion = async (index) => {
   }
 };
   
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      const newQuestion = {
-        question,
-        option1: choices[0],
-        option2: choices[1],
-        option3: choices[2],
-        option4: choices[3],
-        answer: correctAnswer,
-      };
+const handleSubmit = async (event) => {
+  event.preventDefault();
+  try {
+    const newQuestion = {
+      login_id: login_id, 
+      question,
+      option1: choices[0],
+      option2: choices[1],
+      option3: choices[2],
+      option4: choices[3],
+      answer: correctAnswer,
+    };
 
-      await axios.post('http://localhost:5000/add/create_question', newQuestion);
-      fetchQuestions();
+    await axios.post('http://localhost:5000/add/create_question', newQuestion);
+    fetchQuestions();
 
-      setQuestion('');
-      setChoices(['', '', '', '']);
-      setCorrectAnswer('');
-    } catch (error) {
-      console.error('Error creating question:', error);
-    }
-  };
+    setQuestion('');
+    setChoices(['', '', '', '']);
+    setCorrectAnswer('');
+  } catch (error) {
+    console.error('Error creating question:', error);
+  }
+};
 
   return (
     <>

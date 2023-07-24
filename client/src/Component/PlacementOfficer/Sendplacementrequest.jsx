@@ -32,7 +32,7 @@ const Sendplacementrequest = () => {
   const navigate = useNavigate();
   const college_id = localStorage.getItem('college_id')
   const [inputs, setInputs] = useState({
-    college_id: college_id,
+    college_id:college_id,
     company_id: '',
     subject: '',
     message: ''

@@ -80,9 +80,10 @@ const ManageCompany = () => {
                 <th>Website Address</th>
               
 
-                <th>
-                 Action
-                </th>
+                <th style={{ width: '200px' }}>
+  Action
+</th>
+
               </tr>
             </thead>
             <tbody>
@@ -105,7 +106,7 @@ const ManageCompany = () => {
                                   onClick={() => {
                                     approve(user.login_id);
                                   }}
-                                  style={{ margintop: '5px' }}
+                                  style={{ marginRight: '5px' }}
                                 >
                                   Approve
                                 </button>
@@ -114,7 +115,7 @@ const ManageCompany = () => {
                                   onClick={() => {
                                     reject(user.login_id);
                                   }}
-                                  style={{ marginTop: '10px' }}
+                                 
                                 >
                                   Reject
                                 </button>

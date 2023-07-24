@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 import Usernav from '../User/Usernav';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function Aptitudetest() {
+  const login_id=localStorage.getItem('login_id')
+  const {id}=useParams();
+  const {c_id}=useParams();
+  const {j_id}=useParams();
+
+  console.log(id);
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [countdown, setCountdown] = useState(5 * 60); // 5 minutes in seconds
@@ -14,7 +21,7 @@ function Aptitudetest() {
   console.log('question',selectedAnswers);
   const [score, setScore] = useState(0);
   const [totalMarks, setTotalMarks] = useState(0);
-  const [passed, setPassed] = useState(false);
+  const [passed, setPassed] = useState();
   const [evaluationResults, setEvaluationResults] = useState(null);
 
   useEffect(() => {
@@ -37,7 +44,7 @@ function Aptitudetest() {
       const { data } = response.data;
       setQuestions(data);
       setTotalMarks(data.length);
-      setSelectedAnswers(Array(data.length).fill('')); // Initialize selected answers array
+      setSelectedAnswers(Array(data.length).fill('')); 
     } catch (error) {
       console.error('Error fetching questions:', error);
     }
@@ -66,11 +73,27 @@ function Aptitudetest() {
       setShowContainer(false);
 
       const resultMessage = `${message} Your score is ${score}/${totalMarks}.`;
-
-      // Scroll to the top of the page
+       
+      try {
+        const t =axios.get(
+          `http://localhost:5000/register/update_appstatus/${login_id}`,);
+        const response = await axios.post('http://localhost:5000/result/add-result', {
+        login_id:login_id,
+        application_id:id,
+        job_id:j_id,
+        company_id:c_id,
+        selectedAnswers,
+          score,
+          totalMarks,
+          passed,
+        });
+      } catch (error) {
+        console.error('Error storing evaluation results:', error);
+      }
+  
       window.scrollTo(0, 0);
 
-      // Display the evaluation results
+    
       const evaluationResults = (
         <div className="container text-center" style={{ marginTop: '10%' }}>
           <h1>Congratulations!!!</h1>
@@ -85,11 +108,20 @@ function Aptitudetest() {
     }
   };
 
+  const updatestatus = async () => {
+    try {
+     
+    } catch (error) {
+      console.error('Error updating app status:', error);
+    }
+  };
   const submitForm = (e) => {
     e.preventDefault();
     setShowContainer(false);
     evaluateAnswers();
+    updatestatus();
   };
+
 
   const handleAnswerSelection = (e) => {
     const { name, value } = e.target;
@@ -105,6 +137,8 @@ function Aptitudetest() {
     const formattedSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
     return formattedMinutes + ':' + formattedSeconds;
   };
+
+
 
   return (
     <>

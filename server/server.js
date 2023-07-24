@@ -14,6 +14,7 @@ const companyrequestRouter = require('./src/routes/companyrequestRouter')
 const companyquestionRouter = require('./src/routes/companyquestionRouter')
 const jobcategoryRouter = require('./src/routes/jobcategoryRouter')
 const collegeRequestedCompaniesRouter = require('./src/routes/collegeRequestedCompaniesRouter')
+const aptitudetestRouter = require('./src/routes/aptitudetestRouter')
 
 const app = express()
 
@@ -45,7 +46,10 @@ app.use('/notify', companynotifyinterviewRouter)
 app.use('/request', companyrequestRouter)
 app.use('/add',companyquestionRouter)
 app.use('/jobcategory',jobcategoryRouter)
+app.use('/result',aptitudetestRouter)
 app.use('/comapanyrequest',collegeRequestedCompaniesRouter)
+
+
 const mongoDBurl='mongodb+srv://uslayana:uslayana@cluster0.q9rrp41.mongodb.net/collegeplacement?retryWrites=true&w=majority'
 
   mongoose.connect(mongoDBurl).then(() =>{

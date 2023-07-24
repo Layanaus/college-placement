@@ -1,8 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Placementofficernav from './Placementofficernav'
 import PublicUserFooter from '../Footer/PublicUserFooter'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
 
 const Viewrequests = () => {
+  const navigate = useNavigate()
+  const [users, setUsers] = useState([]);
+  const [category, setCategory] = useState([]);
+  console.log(category);
+  const company_id = localStorage.getItem('company_id')
+  useEffect(() => {
+    fetch(`http://localhost:5000/request/view-placementrequest/${company_id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setCategory(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+  
+  const Registersubmit = (event) => {
+    event.preventDefault();
+    axios.get('http://localhost:5000/request/create_placementrequest').then((response) => {
+      navigate('/placementofficer')
+    })
+   
+  }
+  const accept = (id) => {
+    axios
+      .get(`http://localhost:5000/request/approve/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const reject = (id) => {
+    axios
+      .get(`http://localhost:5000/request/reject/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
    <>
    <Placementofficernav/>

@@ -2,11 +2,15 @@ import React, { useEffect, useState } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 import AdminNav from './AdminNav';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const Adviewjobportal = () => {
+  const login_id = localStorage.getItem('login_id');
   const [viewJobs, setViewJobs] = useState([]);
   const [showCards, setShowCards] = useState(false);
   const [college, setCollege] = useState([]);
+  const [collegeid, setCollegeid] = useState([]);
+  const [selectedCollegeName, setSelectedCollegeName] = useState('');
 
   const handleButtonClick = () => {
     setShowCards(true);
@@ -24,17 +28,23 @@ const Adviewjobportal = () => {
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:5000/register/view-jobportal')
+    fetch(`http://localhost:5000/register/collegeviewjobs`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
           setViewJobs(data.data);
+          setCollegeid(data.data.college_id);
         }
+        console.log(collegeid);
       })
       .catch((error) => {
         console.log('Error:', error);
       });
   }, []);
+
+  useEffect(() => {
+    console.log('Selected college name:', selectedCollegeName);
+  }, [selectedCollegeName]);
 
   return (
     <>
@@ -47,19 +57,21 @@ const Adviewjobportal = () => {
           <div className="col-md-8 mb-5">
             <div className="form-group">
               <label htmlFor="job1">University Colleges:</label>
-              <select className="form-control" id="job1">
+              <select
+                className="form-control"
+                id="job1"
+                onChange={(e) => setSelectedCollegeName(e.target.value)}
+              >
                 {college.map((data) => (
-                  <option value={data._id}>{data.collegename}</option>
+                  <option key={data._id} value={data.collegename}>
+                    {data.collegename}
+                  </option>
                 ))}
               </select>
             </div>
             <div className="form-group">
               <div className="text-center">
-                <input
-                  type="button"
-                  value="Submit"
-                  onClick={handleButtonClick}
-                />
+                <input type="button" value="Submit" onClick={handleButtonClick} />
               </div>
             </div>
           </div>
@@ -67,41 +79,42 @@ const Adviewjobportal = () => {
         {showCards && (
           <>
             <div className="row justify-content-center">
-              {viewJobs.map((job) => (
-                <div className="col-md-8 mb-5" key={job._id}>
-                  <div className="card job-card">
-                    <div className="card-header text-center">{job.jobname}</div>
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-md-6">
-                          <p>
-                            <strong>Company Location:</strong> {job.companylocation}
-                          </p>
-                          <p>
-                            <strong>Job Category:</strong> {job.jobcategory}
-                          </p>
-                          <p>
-                            <strong>Required Qualification:</strong> {job.qualification}
-                          </p>
+              {viewJobs
+                .filter((job) => job.login_id === collegeid)
+                .map((job) => (
+                  <div className="col-md-8 mb-5" key={job._id}>
+                    <div className="card job-card">
+                      <div className="card-header text-center">{collegeid}</div>
+                      <div className="card-body">
+                        <div className="row">
+                          <div className="col-md-6">
+                            <p>
+                              <strong>Company Location:</strong> {job.companylocation}
+                            </p>
+                            <p>
+                              <strong>Job Category:</strong> {job.jobcategory}
+                            </p>
+                            <p>
+                              <strong>Required Qualification:</strong> {job.qualification}
+                            </p>
+                          </div>
+                          <div className="col-md-6">
+                            <p>
+                              <strong>Salary Range:</strong> {job.salaryrange} (per month)
+                            </p>
+                            <p>
+                              <strong>Company Contact:</strong> {job.companycontact}
+                            </p>
+                          </div>
                         </div>
-                        <div className="col-md-6">
-                          <p>
-                            <strong>Salary Range:</strong> {job.salaryrange} (per month)
-                          </p>
-                          <p>
-                            <strong>Company Contact:</strong> {job.companycontact}
-                          </p>
+                        <div className="mt-3">
+                          <h5>Job Description:</h5>
+                          <p>{job.jobdescription}</p>
                         </div>
                       </div>
-                      <div className="mt-3">
-                        <h5>Job Description:</h5>
-                        <p>{job.jobdescription}</p>
-                      </div>
-                      
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </>
         )}

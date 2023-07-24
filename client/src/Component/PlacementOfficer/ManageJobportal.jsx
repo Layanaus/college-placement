@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Placementofficernav from './Placementofficernav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
+import { useParams } from 'react-router-dom';
 
 const ManageJobportal = () => {
+  
+const id=localStorage.getItem('login_id')
   const [category, setCategory] = useState([]);
-
+console.log(category);
   useEffect(() => {
-    fetch('http://localhost:5000/register/view-jobportal')
+    fetch(`http://localhost:5000/register/view-portal/${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

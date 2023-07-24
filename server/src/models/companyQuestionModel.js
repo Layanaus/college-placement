@@ -4,6 +4,7 @@ const schema=mongoose.Schema
 
 const QuestionSchema=new schema({
     login_id:{type:mongoose.Types.ObjectId,ref:"login_tb"},
+    application_id:{type:mongoose.Types.ObjectId,ref:"jobapplication_register_tb"},
     question:{type:String},
     option1:{type:String},
     option2:{type:String},

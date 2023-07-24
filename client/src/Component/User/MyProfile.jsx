@@ -6,15 +6,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 
 const MyProfile = () => {
-  const login_id = localStorage.getItem('login_id');
+  const id = localStorage.getItem('login_id');
   const [file, setFile] = useState('');
   const [category, setCategory] = useState([]);
   const navigate = useNavigate();
   const [inputs, setInputs] = useState({
-    login_id:login_id,
+    login_id:id,
   });
 
-  console.log(login_id);
   console.log("value==>",inputs);
   console.log("value==>",file.name);
   console.log("value==>",file);
@@ -50,40 +49,46 @@ const MyProfile = () => {
         navigate('/user');
       })
       .catch((error) => {
-        // Handle error if needed
       });
+      axios
+      .put(`http://localhost:5000/profile/edit-profile/${id}`, inputs)
+      .then((response) => {
+        console.log(response.data);
+        setInputs(response.data.data[0] || {});
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
   };
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/profile/view-myprofile/${login_id}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log("pppp",data.data[0]);
-  //       if (data.success) {
-  //         setInputs(data.data[0]);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error:', error);
-  //     });
-  // }, []);
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/profile/view-single-user/${login_id}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       if (data.success) {
-  //         setCategory(data.data);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log('Error:', error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(`http://localhost:5000/profile/view-myprofile/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("pppp",data.data[0]);
+        if (data.success) {
+          setInputs(data.data[0]);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, [id]);
+
 
   useEffect(() => {
-    // Update the inputs state with the login_id from localStorage
-    setInputs({ ...inputs, login_id: login_id });
-  }, [login_id]);
+    fetch(`http://localhost:5000/profile/view-single-user/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          setCategory(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+
 
   return (
     <>
@@ -104,7 +109,7 @@ const MyProfile = () => {
         <span className="text-black-50">{category.email}</span>
         <span> </span>
       </div>
-    </div>
+    </div> 
     <div className="col-md-5 border-right">
       <div className="p-3 py-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
@@ -112,7 +117,7 @@ const MyProfile = () => {
         </div>
         
 
-        
+       
 
         <div className="row mt-2" >
           <div className="col-md-6">

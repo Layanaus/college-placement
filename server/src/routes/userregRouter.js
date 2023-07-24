@@ -7,6 +7,8 @@ const loginModel = require('../Models/loginModel')
 const userRegisterModel = require('../models/userRegisterModel')
 const multer = require('multer');
 const userProfileModel = require('../models/userProfileModel')
+const { default: mongoose } = require('mongoose');
+const objectId= mongoose.Types.ObjectId
 
 const userregRouter = express.Router()
 var storage = multer.diskStorage({
@@ -232,7 +234,43 @@ userregRouter.post('/userreg', async (req, res) => {
 
 
 })
+userregRouter.put('/edit-companyprofile/:id', async (req, res) => {
+  try {
+    const login_id = req.params.id;
+    const updatedData = {
+      companyname: req.body.companyname,
+      companycategory: req.body.companycategory,
+      companylocation: req.body.companylocation,
+      email: req.body.email,
+      phone: req.body.phone,
+      websiteaddress: req.body.websiteaddress,
+    };
 
+    const updatedmyprofile = await companyRegisterModel.updateOne({login_id:login_id}, {$set:updatedData});
+
+    if (updatedmyprofile) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        message: 'Profile updated successfully',
+        data: updatedmyprofile,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: 'Profile not found',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: 'Something went wrong',
+      details: error,
+    });
+     }
+      });
 userregRouter.get('/view-company', async (req, res) => {
   try {
     const users = await companyRegisterModel.aggregate([
@@ -285,6 +323,66 @@ userregRouter.get('/view-company', async (req, res) => {
     })
   }
 })
+userregRouter.get('/view-company-profile/:id', async (req, res) => {
+  try {
+    const id=req.params.id;
+    const users = await companyRegisterModel.aggregate([
+
+
+      {
+        '$lookup': {
+          'from': 'login_tbs',
+          'localField': 'login_id',
+          'foreignField': '_id',
+          'as': 'login'
+        }
+      },
+      {
+        "$unwind": "$login"
+      },
+      {
+        '$match':{
+        'login_id':new objectId(id)
+      }
+    },
+      {
+        "$group": {
+          '_id': "$_id",
+          'companyname': { "$first": "$companyname" },
+          'companycategory': { "$first": "$companycategory" },
+          'companylocation': { "$first": "$companylocation" },
+          'email': { "$first": "$email" },
+          'phone': { "$first": "$phone" },
+          'websiteaddress': { "$first": "$websiteaddress" },
+          'status': { "$first": "$login.status" },
+          'login_id': { "$first": "$login._id" },
+        }
+      }
+    ])
+    if (users[0] != undefined) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: users
+      })
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    })
+  }
+})
+
+
 
 userregRouter.post('/companyreg', async function (req, res) {
   try {

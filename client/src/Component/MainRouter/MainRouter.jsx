@@ -106,8 +106,8 @@ const MainRouter = () => {
             <Route path="ViewPlacementstudent" element={<ViewPlacementstudent/>}/>
             <Route path="Viewinterviewstatus" element={<InterviewStatus/>}/>
             <Route path="Createjob" element={<CreateJob/>}/>
-            <Route path="Application" element={<Applications/>}/>
-            <Route path="Notifyinterview" element={<NotifyInterview/>}/>
+            <Route path="Application/:id" element={<Applications/>}/>
+            <Route path="Notifyinterview/:id" element={<NotifyInterview/>}/>
             <Route path="Reviewapplication/:id" element={<ReviewApplication/>}/>
             <Route path="POviewjobs" element={<Placementofficerviewjobs/>}/>
             <Route path="POsearchvacancy2" element={<POsearchvacancy/>}/>
@@ -120,11 +120,11 @@ const MainRouter = () => {
             <Route path="jobportalhome" element={<UJobportalhome/>}/>
             <Route path="applyjobs/:id" element={<Applyjobs/>}/>
             <Route path="/PJobdetails/:id" element={<Jobportaljobdetails/>}/>
-            <Route path="applyjobportal/:id" element={<Applyjobportal/>}/>
+            <Route path="applyjobportal/:id/:c_id" element={<Applyjobportal/>}/>
             <Route path="companyresponse" element={<Viewcompanyresponse/>}/>
             <Route path="adviewjobportal" element={<Adviewjobportal/>}/>
             <Route path="placedstudent" element={<Createplacedstudent/>}/>
-            <Route path="aptitudetst" element={<Aptitudetest/>}/>
+            <Route path="aptitudetst/:id/:c_id/:j_id" element={<Aptitudetest/>}/>
             <Route path="appliedjobs" element={<Appliedjobs/>}/>
             <Route path="viewstudents" element={<ViewAppliedstudents/>}/>
             <Route path="companycolleges" element={<Colleges/>}/>

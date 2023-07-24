@@ -5,6 +5,7 @@ const schema=mongoose.Schema
 const createjobsapplicationSchema=new schema({
     login_id:{type:mongoose.Types.ObjectId,ref:"login_tb"},
     job_id:{type:mongoose.Types.ObjectId,ref:"jobportal_register_tb"},
+    company_id:{type:mongoose.Types.ObjectId,ref:"company_register_tb"},
     name:{type:String},
     dateofbirth:{type:String},
     address:{type:String},
@@ -13,6 +14,8 @@ const createjobsapplicationSchema=new schema({
     education:{type:String},
     skills:{type:String},
     aboutyourself:{type:String},
+    application_status:{type:String},
+   
     
 })
 

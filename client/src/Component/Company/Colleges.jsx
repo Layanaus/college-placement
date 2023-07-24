@@ -5,10 +5,13 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Colleges = () => {
+  const id=localStorage.getItem('login_id');
   const [college, setCollege] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const [inputs, setInputs] = useState({
+    login_id:id,
+    
+    
+  });
   useEffect(() => {
     const fetchColleges = async () => {
       try {
@@ -16,81 +19,28 @@ const Colleges = () => {
         const data = response.data;
         if (data.success) {
           setCollege(data.data);
-        } else {
-          setError(data.message);
-        }
+        } 
       } catch (error) {
-        setError('Failed to fetch colleges');
-      } finally {
-        setLoading(false);
-      }
+        
+      } 
     };
 
     fetchColleges();
   }, []);
 
-  const navigate = useNavigate();
-  const user_id = localStorage.getItem('user_id');
-  const [inputs, setInputs] = useState({
-    user_id: user_id,
-    company_id: '',
-    subject: '',
-    message: '',
-  });
-
   const setRegister = (event) => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs({ ...inputs, [name]: value });
-  };
-
-  const handleReset = () => {
-    setInputs({
-      user_id: user_id,
-      company_id: '',
-      subject: '',
-      message: '',
-    });
-    setSelectedCompanyId('');
-  };
-
-  const [showModal, setShowModal] = useState(false);
-  const [selectedCompanyId, setSelectedCompanyId] = useState('');
-
-  const handleClick = (companyId) => {
-    setSelectedCompanyId(companyId);
-    setShowModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
+  }
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    const requestData = {
-      user_id: inputs.user_id,
-      company_id: selectedCompanyId,
-      subject: inputs.subject,
-      message: inputs.message,
-    };
-  
-    try {
-      const response = await axios.post(
-        'http://localhost:5000/companyrequest/company_placementrequest',
-        requestData
-      );
-  
-      if (response.data.success) {
-        navigate('/company');
-      } else {
-        setError(response.data.message);
+     axios.post(
+        'http://localhost:5000/comapanyrequest/company_placementrequest',inputs)
       }
-    } catch (error) {
-      setError('Failed to submit the request');
-    }
-  };
+        
+     
   
   return (
     <>
@@ -116,7 +66,7 @@ const Colleges = () => {
               <p>Conduct Placement Request</p>
               <button
           className='btn btn-primary'
-          onClick={() => handleClick(name._id)}
+         onClick={handleSubmit}
           >
           Request
           </button>

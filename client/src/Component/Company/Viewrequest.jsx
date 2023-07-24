@@ -99,50 +99,41 @@ const Viewrequest = () => {
                   </button>
                   
                   } */}
+{data.status === '0' ? (
+  <>
+    <button
+      className="btn btn-success"
+      onClick={() => {
+        accept(data._id);
+       
+      }}
+      style={{ marginRight: '5px' }}
+    >
+      Accept
+    </button>
+    <button
+      className="btn btn-danger"
+      onClick={() => {
+        reject(data._id);
+      
+      }}
+    >
+      Reject
+    </button>
+  </>
+) : (
+  data.status === '1' ? (
+    <button className="btn btn-success" style={{ marginRight: '5px' }}>
+      Accepted
+    </button>
+  ) : ( 
+    <button className="btn btn-danger" style={{ marginRight: '5px' }}>
+      Rejected
+    </button>
+  )
+)}
 
-        {data.status === '0' ? (
-                              <>
-                                <button
-                                  className="btn btn-success"
-                                  onClick={() => {
-                                    accept(data._id);
-                                  }}
-                                  style={{ marginRight: '5px' }}
-                                >
-                                 Accept
-                                </button>
-                                <button
-                                  className="btn btn-danger"
-                                  onClick={() => {
-                                    reject(data._id);
-                                  }}
-                                >
-                                 Reject
-                                </button>
-                              </>
-                            ) : (
-                              <button className="btn btn-success" style={{ marginRight: '5px' }}>
-                               Accepted
-                              </button>
-                            )}
-                             {data.status === '1' ? (
-                              <>
-                             
-                                <button
-                                  className="btn btn-danger"
-                                  onClick={() => {
-                                    reject(data._id);
-                                  }}
-                                >
-                                 Reject
-                                </button>
-                              </>
-                            ) : (
-                              <button className="btn btn-success" style={{ marginRight: '5px' }}>
-                               rejected
-                              </button>
-                              
-                            )} 
+
                  
                 </div>
               </div>

@@ -7,9 +7,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Applyjobportal = () => {
   const login_id=localStorage.getItem('login_id');
   const navigate = useNavigate()
-  const {id} = useParams()
+  const {id,c_id} = useParams()
   const[inputs, setinputs]=useState({
-    login_id:id,
+    login_id:login_id,
+    job_id:id,
+    company_id:c_id,
   });
   console.log(login_id);
   console.log("value==>",inputs);

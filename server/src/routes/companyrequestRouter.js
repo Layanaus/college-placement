@@ -94,7 +94,7 @@ companyrequestRouter.get('/reject/:id', async (req, res) => {
   try {
     const id = req.params.id;
 
-    const reject = await companyRequestModel.updateOne({ _id: id }, { $set: { status: 0 } });
+    const reject = await companyRequestModel.updateOne({ _id: id }, { $set: { status: 2 } });
 
     if (reject && reject.modifiedCount === 0) {
       return res.status(200).json({

@@ -1,46 +1,59 @@
-// import React from 'react';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
-
+import axios from 'axios';
 const Editcompanyprofile = () => {
-  const [inputs,setinputs]=useState([]);
-const setRegister =(event)=>{
-const name=event.target.name;
-const value=event.target.value;
-setinputs({...inputs,[name]:value});
-    
+  const id = localStorage.getItem('login_id');
 
-  };
-  const Registersubmit =(event)=>{
-    event.preventDefault();
+  const [inputs, setInputs] = useState({
+    login_id: id,
+  });
 
-    console.log("data",inputs);
-  }
-  console.log(inputs);
-
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setinputs({ ...inputs, [name]: value });
+  const setRegister = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs({ ...inputs, [name]: value });
   };
 
   const handleReset = () => {
-    setinputs({});
+    setInputs({});
   };
 
-  const handleSubmit = (event) => {
+  const registersubmit = (event) => {
     event.preventDefault();
     console.log('data', inputs);
-    // Perform additional actions here, such as making API requests or updating the database
-  }
+    axios
+    .put(`http://localhost:5000/register/edit-companyprofile/${id}`, inputs)
+    .then((response) => {
+      console.log(response.data);
+      setInputs(response.data.data[0] || {});
+    })
+    .catch((error) => {
+      console.log('Error:', error);
+      });
+  };
+
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/register/view-company-profile/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setInputs(data.data[0]); 
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, [id]);
   return (
     <>
       <Companynav />
       <div className="container">
         <h1 className="text-center"> Company Profile</h1>
-        <form>
-          <div className="form-group row" onSubmit={Registersubmit}>
+        <form onSubmit={registersubmit}>
+          <div className="form-group row" >
             <label htmlFor="companyName" className="col-sm-2 col-form-label">Company Name:</label>
             <div className="col-sm-10">
               <input

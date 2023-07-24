@@ -11,7 +11,7 @@ const Applyjobs = () => {
   const [jobList, setJobList] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/register/view-jobportal/${id}`)
+    fetch(`http://localhost:5000/register/applied_jobs`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -71,7 +71,7 @@ const Applyjobs = () => {
                 <p className="mb-30 ff-montserrat">
                   Total Job Openings: {jobList.length}
                 </p>
-                {jobList.map((job) => (
+                {jobList.filter((job) => job.jobcategory === id).map((job) => (
                   <div
                     className="job-box d-md-flex align-items-center justify-content-between mb-30"
                     key={job._id}
@@ -85,7 +85,10 @@ const Applyjobs = () => {
                           {job.jobname}
                         </h5>
                         <ul className="d-md-flex flex-wrap text-capitalize ff-open-sans">
-                          <li className="mr-md-4">
+                        <li className="mr-md-4">
+                            <i className="zmdi zmdi-pin mr-2" />{' '}
+                            company:{job.companyname}
+                          </li><li className="mr-md-4">
                             <i className="zmdi zmdi-pin mr-2" />{' '}
                             Location:{job.companylocation}
                           </li>
@@ -113,7 +116,7 @@ const Applyjobs = () => {
                         </li>
                         <li>
                           <Link
-                           to={`/applyjobportal/${job._id} `}
+                           to={`/applyjobportal/${job._id}/${job.company_id}`}
                             className="btn d-block w-100 d-sm-inline-block btn-primary ml-4"
                           >
                             Apply now
