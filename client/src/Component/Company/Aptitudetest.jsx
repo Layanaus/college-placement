@@ -40,7 +40,7 @@ function Aptitudetest() {
 
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/add/view-question');
+      const response = await axios.get(`http://localhost:5000/add/view-question/${c_id}`);
       const { data } = response.data;
       setQuestions(data);
       setTotalMarks(data.length);
@@ -61,7 +61,7 @@ function Aptitudetest() {
 
   const evaluateAnswers = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/add/evaluate-answers', {
+      const response = await axios.post(`http://localhost:5000/add/evaluate-answers/${c_id}`, {
         selectedAnswers,
       });
 

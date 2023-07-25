@@ -8,7 +8,7 @@ const Manageuser = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    fetch('http://localhost:5000/result/view-aptitude-result')
+    fetch('http://localhost:5000/register/view-users')
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {

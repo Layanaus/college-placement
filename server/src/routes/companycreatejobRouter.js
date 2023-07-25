@@ -20,7 +20,7 @@ companycreatejobRouter.get('/view-jobs/:id', async (req, res) => {
         success: false,
         error: true,
         message: 'No data found',
-        numMatches: 0, // If no data is found, set the count of matches to 0 in the response
+        numMatches: 0, 
       });
     }
   } catch (error) {

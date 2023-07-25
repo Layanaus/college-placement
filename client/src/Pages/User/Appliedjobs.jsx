@@ -10,7 +10,7 @@ const Appliedjobs = () => {
 
 
   useEffect(() => {
-    fetch('http://localhost:5000/register/view-applicants')
+    fetch(`http://localhost:5000/register/view-applicants-chinnu/${login_id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -21,8 +21,9 @@ const Appliedjobs = () => {
         console.log('Error:', error);
       });
   }, []);
+
   useEffect(() => {
-    fetch('http://localhost:5000/apply/view-collegeapplication')
+    fetch(`http://localhost:5000/apply/view-applicants-vishnu/${login_id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -57,6 +58,32 @@ const Appliedjobs = () => {
         </div>
 
         <div className="row justify-content-center">
+          {jobportal
+            .filter((jobs) => jobs.login_id === login_id)
+            .map((jobs) => (
+              <div className="col-md-8 mb-5" key={jobs._id}>
+                <div className="card">
+                  <div className="card-header text text-center">{jobs.jobname}</div>
+                  <div className="card-body text-center">
+                    <h5 className="card-title">{jobs.companyname}</h5>
+                    <p className="card-text">Applied on: {jobs.date}</p>
+                    {jobs.application_status === 'Eligible for aptitudetest' ? (
+                      <Link className="btn btn-primary" to={`/aptitudetst/${jobs._id}/${jobs.company_id}/${jobs.job_id}`}>
+                        Attend Aptitude Test
+                      </Link>
+                    ) : (
+                      <button className="btn btn-primary" disabled>
+                        {jobs.application_status}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
+
+      <div className="row justify-content-center">
           {appliedjobs
             .filter((job) => job.login_id === login_id)
             .map((job) => (
@@ -80,7 +107,7 @@ const Appliedjobs = () => {
               </div>
             ))}
         </div>
-      </div>
+      
       <div className="row justify-content-center" style={{ marginTop: '30px' }}>
         <nav aria-label="Page navigation justify-content-center">
           <ul className="pagination">

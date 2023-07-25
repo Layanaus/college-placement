@@ -108,7 +108,7 @@ const MainRouter = () => {
             <Route path="Createjob" element={<CreateJob/>}/>
             <Route path="Application/:id" element={<Applications/>}/>
             <Route path="Notifyinterview/:id" element={<NotifyInterview/>}/>
-            <Route path="Reviewapplication/:id" element={<ReviewApplication/>}/>
+            <Route path="Reviewapplication/:id/:cid" element={<ReviewApplication/>}/>
             <Route path="POviewjobs" element={<Placementofficerviewjobs/>}/>
             <Route path="POsearchvacancy2" element={<POsearchvacancy/>}/>
             <Route path="searchvacancy/:id" element={<SearchVacancy/>}/>
@@ -134,8 +134,8 @@ const MainRouter = () => {
             <Route path="viewjob" element={<Viewjob/>}/>
             <Route path="testresult" element={<Testresult/>}/>
             <Route path="questions" element={<Questions/>}/>
-            <Route path="noticeboard" element={<Noticeboard/>}/>
-            <Route path="jobportalviewstudents" element={<JobPortalviewstudents/>}/>
+            <Route path="noticeboard/:id" element={<Noticeboard/>}/>
+            <Route path="jobportalviewstudents/:id" element={<JobPortalviewstudents/>}/>
              <Route path="test" element={<MovingHeadings/>}/>
             <Route path="category" element={<Createcategory/>}/>
             

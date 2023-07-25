@@ -13,6 +13,7 @@ const createjobsapplicationSchema=new schema({
     emailaddress:{type:String},
     education:{type:String},
     skills:{type:String},
+    date:{type:Date},
     aboutyourself:{type:String},
     application_status:{type:String},
    

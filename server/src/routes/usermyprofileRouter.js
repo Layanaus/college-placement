@@ -51,7 +51,57 @@ usermyprofileRouter.get('/view-single-user/:id', async (req, res) => {
     })
   }
 })
+usermyprofileRouter.put('/edit-student-profile/:id', async (req, res) => {
+  try {
+    const login_id = req.params.id;
+    const updatedData = {
+      firstname: req.body.firstname,
+    lastname: req.body.lastname,
+    dob: req.body.dob,
+    gender: req.body.gender,
+    addressline1: req.body.addressline1,
+    addressline2: req.body.addressline2,
+    postcode: req.body.postcode,
+    location: req.body.location,
+    district: req.body.district,
+    email: req.body.email,
+    alternativeemail: req.body.alternativeemail,
+    mobile: req.body.mobile,
+    alternativemobile: req.body.alternativemobile,
+    education: req.body.education,
+    branch: req.body. branch,
+    year: req.body.year,
+    experience: req.body.experience,
+    experienceyear: req.body.experienceyear,
+    skill: req.body.skill,
+    cv: req.body.cv,
+    };
 
+    const updatedmyprofile = await userProfileModel.updateOne({login_id:login_id}, {$set:updatedData});
+
+    if (updatedmyprofile) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        message: 'Profile updated successfully',
+        data: updatedmyprofile,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: 'Profile not found',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: 'Something went wrong',
+      details: error,
+    });
+     }
+      });
 
 
 
@@ -60,7 +110,7 @@ usermyprofileRouter.get('/view-myprofile/:id', async (req, res) => {
   try {
   
     const id=req.params.id;
-    const student = await userProfileModel.find({login_id:id}); // Use findOne instead of find
+    const student = await userProfileModel.findOne({login_id:id}); 
 
     if (student) {
       return res.status(200).json({

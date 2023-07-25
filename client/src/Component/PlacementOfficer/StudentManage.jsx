@@ -70,6 +70,8 @@ const reject = (id) => {
               <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>College Name</th>
+                <th>Register No</th>
                 <th>Email</th>
                 <th>Mob No</th>
                 <th>

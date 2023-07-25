@@ -35,9 +35,10 @@ companyquestionRouter.delete('/delete-question/:id', async (req, res) => {
   });
 
 
-companyquestionRouter.get('/view-question',async(req,res)=>{
+companyquestionRouter.get('/view-question/:id',async(req,res)=>{
   try {
-      const question = await companyQuestionModel.find()
+    const id=req.params.id;
+      const question = await companyQuestionModel.find({login_id:id})
       if(question[0]!=undefined){
           return res.status(200).json({
               success:true,
@@ -60,8 +61,31 @@ companyquestionRouter.get('/view-question',async(req,res)=>{
       })
   }
   })
-
-
+  companyquestionRouter.get('/view-question',async(req,res)=>{
+    try {
+        const question = await companyQuestionModel.find()
+        if(question[0]!=undefined){
+            return res.status(200).json({
+                success:true,
+                error:false,
+                data:question
+            })
+        }else{
+            return res.status(400).json({
+                success:false,
+                error:true,
+                message:"No data found"
+            })
+        }
+    } catch (error) {
+        return res.status(400).json({
+            success:false,
+            error:true,
+            message:"Something went wrong",
+            details:error
+        })
+    }
+    })
 
 
 
@@ -70,11 +94,11 @@ companyquestionRouter.get('/view-question',async(req,res)=>{
   try {
     const data = {
       login_id:req.body.login_id,
-      question:req.body. question,
-      option1:req.body. option1,
+      question:req.body.question,
+      option1:req.body.option1,
       option2:req.body.option2,
       option3:req.body.option3,
-      option4:req.body. option4,
+      option4:req.body.option4,
       answer:req.body.answer,
     };
     const savedData = await companyQuestionModel(data).save();
@@ -96,7 +120,7 @@ companyquestionRouter.get('/view-question',async(req,res)=>{
     });
   }
 });
-companyquestionRouter.post('/evaluate-answers', async (req, res) => {
+companyquestionRouter.post('/evaluate-answers/:id', async (req, res) => {
   try {
     const selectedAnswers = req.body.selectedAnswers;
 

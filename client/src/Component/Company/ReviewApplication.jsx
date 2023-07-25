@@ -5,10 +5,13 @@ import { useParams } from 'react-router-dom';
 
 const ReviewApplication = () => {
   const { id } = useParams();
+  const { cid } = useParams();
+
   const [showInterviewPassed, setShowInterviewPassed] = useState(false);
   const [showInterviewFailed, setShowInterviewFailed] = useState(false);
   const [biodata, setBiodata] = useState({});
   const [interviewStatus, setInterviewStatus] = useState('');
+  const [interview, setInterview] = useState('');
 
   const handleInformButtonClick = async () => {
     try {
@@ -33,7 +36,7 @@ const ReviewApplication = () => {
       const updateInterviewStatus = async (status) => {
         try {
           const response = await fetch(
-            `http://localhost:5000/register/update_status/${id}`,
+            `http://localhost:5000/register/update_status/${cid}`,
             {
               method: 'PUT',
               headers: {
@@ -54,6 +57,7 @@ const ReviewApplication = () => {
           console.error('Error updating interview status:', error);
         }
       };
+
       await updateInterviewStatus(newStatus);
       setInterviewStatus(newStatus);
       console.log('Status update successful!');
@@ -62,10 +66,10 @@ const ReviewApplication = () => {
     }
   };
 
-  const [category, setCategory] = useState([]);
 
+  const [category, setCategory] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/register/view-applicants/${id}`)
+    fetch(`http://localhost:5000/register/view-userpr/${id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -78,16 +82,93 @@ const ReviewApplication = () => {
       });
   }, [id]);
 
+  // College job applications
+
+  const [status, setStatus] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/apply/chinnumol/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setStatus(data.data);
+          setInterview(data.data.application_status);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, [id]);
+
+  const updateInterviewStatus = async (status) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/apply/update-chinnu/${cid}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ application_status: status }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        console.log('Interview status updated successfully!');
+      } else {
+        console.error('Failed to update interview status:', data.message);
+      }
+    } catch (error) {
+      console.error('Error updating interview status:', error);
+    }
+  };
+
+  const handleInformClick = async () => {
+    try {
+      const checkbox1 = document.getElementById('myCheckbox5');
+      const checkbox2 = document.getElementById('myCheckbox6');
+      const checkbox3 = document.getElementById('myCheckbox7');
+      const checkbox4 = document.getElementById('myCheckbox8');
+
+      let newStatus;
+      if (checkbox1.checked) {
+        newStatus = 'Eligible for aptitudetest';
+      } else if (checkbox2.checked) {
+        newStatus = 'Not Eligible';
+      } else if (checkbox3.checked) {
+        newStatus = 'Interview passed';
+        setShowInterviewPassed(true);
+        setShowInterviewFailed(false);
+      } else if (checkbox4.checked) {
+        newStatus = 'Interview failed';
+        setShowInterviewPassed(false);
+        setShowInterviewFailed(true);
+      } else {
+        console.error('No status selected!');
+        return;
+      }
+
+      await updateInterviewStatus(newStatus);
+      setInterview(newStatus);
+      console.log('Status update successful!');
+    } catch (error) {
+      console.error('Error updating status:', error);
+    }
+  };
+
   return (
+      
     <>
       <Companynav />
       <div className="container">
-        <h3 className="pb-3 mb-4 font-italic border-bottom">CV of John Doe</h3>
+        <h3 className="pb-3 mb-4 font-italic border-bottom">CV of Applicants</h3>
         <div className="row">
           {category.map((job, index) => (
-            <div className="col-md-6" style={{ height: 600, backgroundColor: 'whitesmoke' }} key={index}>
-              <h1>BIO Data</h1>
-              <div className="bio-box">
+            <React.Fragment key={index}>
+              <div className="col-md-6" style={{ height: 600, backgroundColor: 'whitesmoke' }}>
+                <h1>BIO Data</h1>
+                <div className="bio-box">
                 <p>
                   <strong>Name:</strong> {job.name}
                 </p>
@@ -113,18 +194,20 @@ const ReviewApplication = () => {
                   <strong>Tell us more about yourself:</strong>
                   {job.aboutyourself}
                 </p>
+                </div>
               </div>
-            </div>
+
+              <div className="col-md-6" style={{ height: '600px', backgroundColor: 'whitesmoke' }}>
+                <h1>CV -Resume Here</h1>
+                <img
+                  width="100%"
+                  height="500px"
+                  src={`/upload/${job.cv}`}
+                  alt=""
+                />
+              </div>
+            </React.Fragment>
           ))}
-          <div className="col-md-6" style={{ height: '600px', backgroundColor: 'whitesmoke' }}>
-            <h1>CV -Resume Here</h1>
-            <img
-              width="100%"
-              height="500px"
-              src="https://img.freepik.com/free-vector/minimalist-cv-template_23-2148899951.jpg?w=2000"
-              alt=""
-            />
-          </div>
         </div>
         <div className="row color-dark" style={{ marginLeft: '100px', marginTop: '50px' }}>
           <div className="col-md-3">
@@ -149,6 +232,80 @@ const ReviewApplication = () => {
          
           <div className="col-md-3">
             <button className="btn btn-primary" onClick={handleInformButtonClick}>
+              Inform
+            </button>
+          </div>
+        </div>
+
+        <div className="row">
+          {status.map((chinnu, index) => (
+            <React.Fragment key={index}>
+              <div className="col-md-6" style={{ height: 600, backgroundColor: 'whitesmoke' }}>
+                <h1>BIO Data</h1>
+                <div className="bio-box">
+                <p>
+                  <strong>Name:</strong> {chinnu.name}
+                </p>
+                <p>
+                  <strong>Date of Birth:</strong> {chinnu.dateofbirth}
+                </p>
+                <p>
+                  <strong>Address:</strong> {chinnu.address}
+                </p>
+                <p>
+                  <strong>Phone No:</strong> {chinnu.phonenumber}
+                </p>
+                <p>
+                  <strong>Email:</strong> {chinnu.emailaddress}
+                </p>
+                <p>
+                  <strong>Education:</strong> {chinnu.education}
+                </p>
+                <p>
+                  <strong>Skills:</strong> {chinnu.skills}
+                </p>
+                <p>
+                  <strong>Tell us more about yourself:</strong>
+                  {chinnu.aboutyourself}
+                </p>
+                </div>
+              </div>
+
+              <div className="col-md-6" style={{ height: '600px', backgroundColor: 'whitesmoke' }}>
+                <h1>CV -Resume Here</h1>
+                <img
+                  width="100%"
+                  height="500px"
+                  src={`/upload/${chinnu.cv}`}
+                  alt=""
+                />
+              </div>
+            </React.Fragment>
+          ))}
+        </div>
+        <div className="row color-dark" style={{ marginLeft: '100px', marginTop: '50px' }}>
+          <div className="col-md-3">
+            <input type="checkbox" id="myCheckbox5" name="myCheckbox5" defaultValue="checked" />
+            <label htmlFor="myCheckbox1">Eligible for aptitudetest</label>
+          </div>
+          <div className="col-md-3">
+            <input type="checkbox" id="myCheckbox6" name="myCheckbox6" defaultValue="checked" />
+            <label htmlFor="myCheckbox2">Not Eligible</label>
+          </div>
+
+            <div className="col-md-3">
+              <input type="checkbox" id="myCheckbox7" name="myCheckbox7" defaultValue="checked" />
+              <label htmlFor="myCheckbox3">Interview passed</label>
+            </div>
+          
+         
+            <div className="col-md-3">
+              <input type="checkbox" id="myCheckbox8" name="myCheckbox8" defaultValue="checked" />
+              <label htmlFor="myCheckbox4">Interview failed</label>
+            </div>
+         
+          <div className="col-md-3">
+            <button className="btn btn-primary" onClick={handleInformClick}>
               Inform
             </button>
           </div>

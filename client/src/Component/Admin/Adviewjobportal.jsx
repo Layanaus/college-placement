@@ -28,7 +28,7 @@ const Adviewjobportal = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/register/collegeviewjobs`)
+    fetch(`http://localhost:5000/register/viewjobportal-jobs`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -80,22 +80,26 @@ const Adviewjobportal = () => {
           <>
             <div className="row justify-content-center">
               {viewJobs
-                .filter((job) => job.login_id === collegeid)
+                .filter((job) => job.collegename === selectedCollegeName)
                 .map((job) => (
                   <div className="col-md-8 mb-5" key={job._id}>
                     <div className="card job-card">
-                      <div className="card-header text-center">{collegeid}</div>
+                      <div className="card-header text-center">{collegeid}{job.jobname}</div>
                       <div className="card-body">
                         <div className="row">
                           <div className="col-md-6">
+                          <p>
+                              <strong>Company Name:</strong> {job.companyname}
+                            </p>
                             <p>
                               <strong>Company Location:</strong> {job.companylocation}
                             </p>
                             <p>
-                              <strong>Job Category:</strong> {job.jobcategory}
+                            
+                            <strong>Job Category:</strong> {job.jobcategory} 
                             </p>
                             <p>
-                              <strong>Required Qualification:</strong> {job.qualification}
+                              <strong>Required Qualification:</strong> {job.Requiredqualification}
                             </p>
                           </div>
                           <div className="col-md-6">
@@ -104,6 +108,9 @@ const Adviewjobportal = () => {
                             </p>
                             <p>
                               <strong>Company Contact:</strong> {job.companycontact}
+                            </p>
+                            <p>
+                              <strong>Last Date:</strong> {job.lastdate}
                             </p>
                           </div>
                         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Placementofficernav from './Placementofficernav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const ManageJobportal = () => {
   
@@ -97,9 +97,11 @@ console.log(category);
           <h5 className="card-title">
          Lastdate:{job.lastdate}
           </h5>
-          <a href="jobportalviewstudents" className="btn btn-primary mr-2">
+          {/* <a href="jobportalviewstudents" className="btn btn-primary mr-2">
   View Applied Students
-</a>
+</a> */}
+      <Link className="btn btn-primary mr-2" to={`/jobportalviewstudents/${job._id}`} >View Applied Students</Link>
+
         </div>
       </div>
     </div>    ))}

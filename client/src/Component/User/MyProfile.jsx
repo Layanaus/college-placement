@@ -51,7 +51,7 @@ const MyProfile = () => {
       .catch((error) => {
       });
       axios
-      .put(`http://localhost:5000/profile/edit-profile/${id}`, inputs)
+      .put(`http://localhost:5000/profile/edit-student-profile/${id}`,inputs)
       .then((response) => {
         console.log(response.data);
         setInputs(response.data.data[0] || {});
@@ -60,13 +60,14 @@ const MyProfile = () => {
         console.log('Error:', error);
       });
   };
+
   useEffect(() => {
     fetch(`http://localhost:5000/profile/view-myprofile/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("pppp",data.data[0]);
+      console.log(data);
         if (data.success) {
-          setInputs(data.data[0]);
+          setInputs(data.data ||{});
         }
       })
       .catch((error) => {

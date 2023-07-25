@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PublicSlider = () => {
   const navigate = useNavigate();
@@ -33,9 +35,13 @@ const PublicSlider = () => {
             localStorage.setItem('role', data.data.role);
             navigate('/placementofficer');
           }
+          else {
+            toast.error('Incorrect username or password');
+          }
         })
         .catch((error) => {
           console.log(error);
+          toast.error('incorrect password or username');
         });
     }
   }, [formErrors, inputs, isSubmit, navigate]);
@@ -74,8 +80,7 @@ const PublicSlider = () => {
     <div className="mx-auto mb-5" style={{ width: "100%", maxWidth: 600 }}>
       <div className="wrapper fadeInDown">
         <div id="formContent">
-          {/* Tabs Titles
-          Icon */}
+        <ToastContainer />
           <div className="fadeIn first">
             <div style={{ fontWeight: "bold", fontSize: 26, marginTop: 30 }}>
               Login

@@ -8,13 +8,12 @@ const objectId= mongoose.Types.ObjectId
 
 const companynotifyinterviewRouter = express.Router();
 
+
 companynotifyinterviewRouter.get('/view-notify-interview', async (req, res) => {
   try {
-    const login_id = req.query.login_id; 
+    const login_id = req.query.login_id;
 
     const users = await companyNotifyInterviewModel.aggregate([
-
-
       {
         '$lookup': {
           'from': 'company_register_tbs',
@@ -24,16 +23,16 @@ companynotifyinterviewRouter.get('/view-notify-interview', async (req, res) => {
         }
       },
       {
-        '$lookup': {     
-          'from':'job_register_tbs',
+        '$lookup': {
+          'from': 'job_register_tbs',
           'localField': 'login_id',
           'foreignField': 'login_id',
           'as': 'job'
         }
       },
       {
-        '$lookup': {     
-          'from':'jobapplication_register_tbs',
+        '$lookup': {
+          'from': 'jobapplication_register_tbs',
           'localField': 'login_id',
           'foreignField': 'company_id',
           'as': 'data'
@@ -44,10 +43,10 @@ companynotifyinterviewRouter.get('/view-notify-interview', async (req, res) => {
       },
       {
         "$unwind": "$job"
-      },{
+      },
+      {
         "$unwind": "$data"
       },
-     
       {
         "$group": {
           '_id': "$_id",
@@ -63,19 +62,20 @@ companynotifyinterviewRouter.get('/view-notify-interview', async (req, res) => {
           'job_id': { "$first": "$job_id" },
         }
       }
-    ])
-    if (users[0] != undefined) {
+    ]);
+
+    if (users[0] !== undefined) {
       return res.status(200).json({
         success: true,
         error: false,
         data: users
-      })
+      });
     } else {
       return res.status(400).json({
         success: false,
         error: true,
         message: "No data found"
-      })
+      });
     }
   } catch (error) {
     return res.status(400).json({
@@ -83,9 +83,10 @@ companynotifyinterviewRouter.get('/view-notify-interview', async (req, res) => {
       error: true,
       message: "Something went wrong",
       details: error
-    })
+    });
   }
-})
+});
+
 companynotifyinterviewRouter.get('/view-interview',async(req,res)=>{
   try {
       const interview = await companyNotifyInterviewModel.find()

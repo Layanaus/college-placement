@@ -8,12 +8,13 @@ import Placementofficernav from '../PlacementOfficer/Placementofficernav';
 
 
 const Adsearchvacancy = () => {
+  const {id}=useParams()
   const [category, setCategory] = useState([]);
-  const {id} = useParams()
+ 
 
   useEffect(() => {
    
-    fetch(`http://localhost:5000/register/view-companyjobs/${id}`)
+    fetch(`http://localhost:5000/register/view-vaccancy`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -45,13 +46,13 @@ const Adsearchvacancy = () => {
     </div>
   </div>
   <div className="row justify-content-center">
-  {category.map((job) => (
+  {category.filter(job => job.jobcategory === id).map((job) => (
     <div className="col-md-8 mb-5" key={job._id}>
       <div className="card">
         <div className="card-header text text-center">{job.jobname}</div>
         <div className="card-body text-center">
-          <h5 className="card-title">Company Name</h5>
-          <h6 className="card-title">Company Location</h6>
+          <h5 className="card-title">{job.companyname}</h5>
+          <h6 className="card-title">{job.companylocation}</h6>
           <h6 className="card-title">{job.vaccancy}+vaccancy</h6>
           <h6 className="card-title">Required qualification:{job.qualification}</h6>
           <h6 className="card-title">Expected salary:{job.expectedsalary}</h6>

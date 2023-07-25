@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Companynav from './Companynav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
+import { useParams } from 'react-router-dom';
 
 function QuestionForm() {
+  const {id}=useParams();
   const login_id=localStorage.getItem('login_id')
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,7 +28,7 @@ function QuestionForm() {
 
   const fetchQuestions = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/add/view-question');
+      const response = await axios.get(`http://localhost:5000/add/view-question/${login_id}`);
       const { data } = response.data;
       setFaqData(data);
     } catch (error) {

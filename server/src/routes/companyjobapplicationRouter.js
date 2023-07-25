@@ -63,7 +63,7 @@ companyjobapplicationRouter.get('/view-companyapplication',async(req,res)=>{
   
 
 
- companyjobapplicationRouter.get('/view-userpr', async (req, res) => {
+ companyjobapplicationRouter.get('/view-userpr/:id', async (req, res) => {
   try {
     const id = req.params.id;
 
@@ -80,9 +80,9 @@ companyjobapplicationRouter.get('/view-companyapplication',async(req,res)=>{
       {
         "$unwind": "$job"
       },
-//       {
-//         $match: { 'login_id':new mongoose.Types.ObjectId(id) },
-//       },
+      {
+        $match: { 'login_id':new mongoose.Types.ObjectId(id) },
+      },
       {
         "$group": {
           '_id': "$_id",
@@ -95,6 +95,7 @@ companyjobapplicationRouter.get('/view-companyapplication',async(req,res)=>{
           'skills': { "$first":"$skills" },
           'aboutyourself': {"$first":"$aboutyourself" },
           'cv': {"$first":"$job.cv" },
+          'application_status': { "$first": "$application_status" },
           'login_id': { "$first":"$job.login._id" },
         }
       }
@@ -241,9 +242,9 @@ companyjobapplicationRouter.get('/view-chinnu/:id', async (req, res) => {
   }
 })
   
-  companyjobapplicationRouter.get('/view-applicants', async (req, res) => {
+  companyjobapplicationRouter.get('/view-applicants-chinnu/:id', async (req, res) => {
     try {
-      
+      const id=req.params.id;
       const users = await companyJobApplicationModel.aggregate([
           
         {
@@ -269,6 +270,9 @@ companyjobapplicationRouter.get('/view-chinnu/:id', async (req, res) => {
         {
           "$unwind": "$company"
         },
+        {
+          $match: { 'login_id':new mongoose.Types.ObjectId(id) },
+        },  
         
         
         {
@@ -278,8 +282,10 @@ companyjobapplicationRouter.get('/view-chinnu/:id', async (req, res) => {
             'firstname': { "$first":"$name" },
             'job_id': { "$first": "$job._id" },
             'jobname': { "$first": "$job.jobname" },
+            'jobdescription': { "$first": "$job.jobdescription" },
             'date': { "$first": "$date" },
             'companyname': { "$first": "$company.companyname" },
+            'phonenumber': { "$first": "$company.phonenumber" },
             'company_id': { "$first": "$company.login_id" },
             'application_status': { "$first": "$application_status" },
             
@@ -309,6 +315,8 @@ companyjobapplicationRouter.get('/view-chinnu/:id', async (req, res) => {
       })
     }
   })
+
+
   
 companyjobapplicationRouter.post('/job_application', async (req, res) => {
   try {
@@ -349,11 +357,19 @@ companyjobapplicationRouter.post('/job_application', async (req, res) => {
 
 companyjobapplicationRouter.put('/update_status/:id', async (req, res) => {
   try {
-    const id = req.params.id; 
+    const id = req.params.id;
+    if (!mongoose.isValidObjectId(id)) {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "Invalid application ID",
+      });
+    }
+
     const newStatus = req.body.application_status;
 
     const updatedApplication = await companyJobApplicationModel.findByIdAndUpdate(
-      id, 
+      id,
       { $set: { application_status: newStatus } },
       { new: true }
     );
@@ -373,11 +389,11 @@ companyjobapplicationRouter.put('/update_status/:id', async (req, res) => {
       });
     }
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       success: false,
       error: true,
       message: "Something went wrong",
-      details: error,
+      details: error.message,
     });
   }
 });
