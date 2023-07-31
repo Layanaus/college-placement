@@ -3,67 +3,95 @@ import Usernav from './Usernav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 import { Link, useParams } from 'react-router-dom';
 
-
-
-
 const Applyjobs = () => {
-  const {id}=useParams()
+  const login_id = localStorage.getItem('login_id');
+  const { id } = useParams();
   const [jobList, setJobList] = useState([]);
+  const [filteredJobList, setFilteredJobList] = useState([]);
+  const [selectedLocation, setSelectedLocation] = useState('');
+  const [selectedJobType, setSelectedJobType] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:5000/register/applied_jobs`)
+    fetch(`http://localhost:5000/register/applied_jobs/${login_id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
           setJobList(data.data);
+          setFilteredJobList(data.data);
         }
       })
       .catch((error) => {
         console.log('Error:', error);
       });
-  }, []);
+  }, [id]);
+
+  const handleSearch = () => {
+    let filteredJobs = jobList;
+
+    if (selectedLocation) {
+      filteredJobs = filteredJobs.filter((job) => job.companylocation === selectedLocation);
+    }
+
+    if (selectedJobType) {
+      filteredJobs = filteredJobs.filter((job) => job.jobname === selectedJobType);
+    }
+
+    setFilteredJobList(filteredJobs);
+  };
 
   return (
     <>
       <Usernav />
       <div className="container">
-      <div className="row">
-  <div className="col-lg-10 mx-auto">
-    <div className="career-search mb-60">
-      <form action="#" className="career-form mb-60">
-        {/* Search form code */}
         <div className="row">
-          <div className="col-md-6 col-lg-3 my-3">
-            <div className="select-container" style={{marginLeft:'50px',width:'250px'}}>
-              <select className="custom-select">
-                <option selected="">Location</option>
-                <option value={1}>Jaipur</option>
-                <option value={2}>Pune</option>
-                <option value={3}>Bangalore</option>
-              </select>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-3 my-3">
-            <div className="select-container">
-              <select className="custom-select" style={{marginLeft:'150px',width:'250px'}}>
-                <option selected="">Select Job Type</option>
-                <option value={1}>Ui designer</option>
-                <option value={2}>JS developer</option>
-                <option value={3}>Web developer</option>
-              </select>
-            </div>
-          </div>
-          <div className="col-md-6 col-lg-3 my-3"  style={{marginLeft:'200px',width:'200px'}}>
-            <button
-              type="button"
-              className="btn btn-lg btn-block btn-light btn-custom"
-              id="contact-submit"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </form>
+          <div className="col-lg-10 mx-auto">
+            <div className="career-search mb-60">
+              <form action="#" className="career-form mb-60">
+                <div className="row">
+                  <div className="col-md-6 col-lg-3 my-3">
+                    <div className="select-container" style={{ marginLeft: '50px', width: '250px' }}>
+                      <select
+                        className="custom-select"
+                        value={selectedLocation}
+                        onChange={(e) => setSelectedLocation(e.target.value)}
+                      >
+                        <option value="">Select Location</option>
+                        {jobList.map((cmp) => (
+                          <option key={cmp._id} value={cmp.companylocation}>
+                            {cmp.companylocation}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-6 col-lg-3 my-3">
+                    <div className="select-container" style={{marginLeft:'100px',width:'200px'}}>
+                      <select
+                        className="custom-select"
+                        value={selectedJobType}
+                        onChange={(e) => setSelectedJobType(e.target.value)}
+                      >
+                        <option value="">Select Job Type</option>
+                        {jobList.map((cmp) => (
+                          <option key={cmp._id} value={cmp.jobname}>
+                            {cmp.jobname}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  <div className="col-md-6 col-lg-3 my-3" style={{ marginLeft: '200px', width: '200px' }}>
+                    <button
+                      type="button"
+                      className="btn btn-lg btn-block btn-light btn-custom"
+                      id="contact-submit"
+                      onClick={handleSearch}
+                    >
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </form>
     
  
              
@@ -71,7 +99,9 @@ const Applyjobs = () => {
                 <p className="mb-30 ff-montserrat">
                   Total Job Openings: {jobList.length}
                 </p>
-                {jobList.filter((job) => job.jobcategory === id).map((job) => (
+                {filteredJobList
+                  .filter((job) => job.jobcategory === id)
+                  .map((job) => (
                   <div
                     className="job-box d-md-flex align-items-center justify-content-between mb-30"
                     key={job._id}

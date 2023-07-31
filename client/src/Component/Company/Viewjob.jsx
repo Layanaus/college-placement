@@ -52,7 +52,24 @@ console.log(category);
       });
   }, []);
 
-
+  const handleDeleteJob = (jobId) => {
+    fetch(`http://localhost:5000/register/job/${jobId}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          // If the job was deleted successfully, you can update the job list
+          setJob((prevJobs) => prevJobs.filter((job) => job._id !== jobId));
+          console.log('Job deleted successfully');
+        } else {
+          console.log('Failed to delete job:', data.message);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  };
   return (
     <>
     <Companynav/>
@@ -82,8 +99,9 @@ console.log(category);
    </svg>
  </button>
  <div className="dropdown-content">
- <a href="#">Edit</a>
-   <a href="#">Remove</a>
+ {/* <a  href="editcreatejob">Edit</a> */}
+ <Link to={`/editcreatejob/${job._id}`}>Edit</Link>
+ <button className="btn btn-danger" onClick={() => handleDeleteJob(job._id)}>Remove</button>
  </div>
 </div> 
              </div>
@@ -135,7 +153,7 @@ console.log(category);
  </button>
  <div className="dropdown-content">
  <a href="#">Edit</a>
-   <a href="#">Remove</a>
+ <button onClick={() => handleDeleteJob(jobs._id)}>Remove</button>
  </div>
 </div> 
              </div>

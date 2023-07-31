@@ -180,7 +180,12 @@ const Registersubmit = (event) => {
                 placeholder="Phone"
                 value={inputs.phone ||""}
                 onChange={setRegister}
-                
+                onKeyPress={(event) => {
+                  if (!/[0-9]/.test(event.key) || event.target.value.length >= 10) {
+                    event.preventDefault();
+                  }
+                }}
+              
               />
             </div>
             <div className="form-row">

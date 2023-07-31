@@ -119,9 +119,9 @@ const Placementofficernav = () => {
             <a href="companyresponse" className="dropdown-item">
               View response
             </a>
-            <a href="viewrequests" className="dropdown-item">
+            {/* <a href="viewrequests" className="dropdown-item">
               View Requests
-            </a>
+            </a> */}
               {/* <a href="company.html" className="dropdown-item">
                 Company
               </a>

@@ -3,9 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Carousel } from 'react-bootstrap';
 
 const PublicSlider = () => {
   const navigate = useNavigate();
+  const [category, setCategory] = useState([]);
   const [inputs, setInputs] = useState({
     username: '',
     password: '',
@@ -67,7 +69,27 @@ const PublicSlider = () => {
     setFormErrors(validate(inputs));
     setIsSubmit(true);
   };
+  useEffect(() => {
+    fetch(`http://localhost:5000/create/view-placedstudent`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setCategory(data.data);
+        }
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }, []);
+  const chunkArray = (arr, size) => {
+    const chunkedArr = [];
+    for (let i = 0; i < arr.length; i += size) {
+      chunkedArr.push(arr.slice(i, i + size));
+    }
+    return chunkedArr;
+  };
 
+  const testimonialRows = chunkArray(category, 3);
   return (
     <>
     <div
@@ -165,122 +187,57 @@ are online platforms that connect job seekers with employers.
   </div>
   </div>
 </div>
-<section className='mt-5 '>
-  <div className="row d-flex justify-content-center">
-    <div className="col-md-10 col-xl-8 text-center">
-      <h3 className="mb-4">Testimonials</h3>
-      <p className="mb-4 pb-2 mb-md-5 pb-md-0">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error
-        amet numquam iure provident voluptate esse quasi, veritatis totam
-        voluptas nostrum quisquam eum porro a pariatur veniam.
-      </p>
-    </div>
-  </div>
-  <div className="row text-center">
-    <div className="col-md-4 mb-5 mb-md-0">
-      <div className="d-flex justify-content-center mb-4">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
-          className="rounded-circle shadow-1-strong"
-          width={150}
-          height={150}
-        />
+<section className='mt-5'>
+      <div className="row d-flex justify-content-center">
+        <div className="col-md-10 col-xl-8 text-center">
+          <h3 className="mb-4">Testimonials</h3>
+          <p className="mb-4 pb-2 mb-md-5 pb-md-0">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error
+            amet numquam iure provident voluptate esse quasi, veritatis totam
+            voluptas nostrum quisquam eum porro a pariatur veniam.
+          </p>
+        </div>
       </div>
-      <h5 className="mb-3">Maria Smantha</h5>
-      <h6 className="text-primary mb-3">Web Developer</h6>
-      <p className="px-xl-3">
-        <i className="fas fa-quote-left pe-2" />
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod eos id
-        officiis hic tenetur quae quaerat ad velit ab hic tenetur.
-      </p>
-      <ul className="list-unstyled d-flex justify-content-center mb-0">
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star-half-alt fa-sm text-warning" />
-        </li>
-      </ul>
-    </div>
-    <div className="col-md-4 mb-5 mb-md-0">
-      <div className="d-flex justify-content-center mb-4">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
-          className="rounded-circle shadow-1-strong"
-          width={150}
-          height={150}
-        />
-      </div>
-      <h5 className="mb-3">Lisa Cudrow</h5>
-      <h6 className="text-primary mb-3">Graphic Designer</h6>
-      <p className="px-xl-3">
-        <i className="fas fa-quote-left pe-2" />
-        Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-        suscipit laboriosam, nisi ut aliquid commodi.
-      </p>
-      <ul className="list-unstyled d-flex justify-content-center mb-0">
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-      </ul>
-    </div>
-    <div className="col-md-4 mb-0">
-      <div className="d-flex justify-content-center mb-4">
-        <img
-          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp"
-          className="rounded-circle shadow-1-strong"
-          width={150}
-          height={150}
-        />
-      </div>
-      <h5 className="mb-3">John Smith</h5>
-      <h6 className="text-primary mb-3">Marketing Specialist</h6>
-      <p className="px-xl-3">
-        <i className="fas fa-quote-left pe-2" />
-        At vero eos et accusamus et iusto odio dignissimos ducimus qui
-        blanditiis praesentium voluptatum deleniti atque corrupti.
-      </p>
-      <ul className="list-unstyled d-flex justify-content-center mb-0">
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="fas fa-star fa-sm text-warning" />
-        </li>
-        <li>
-          <i className="far fa-star fa-sm text-warning" />
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
+      <Carousel interval={1000}>
+        {testimonialRows.map((row, rowIndex) => (
+          <Carousel.Item key={rowIndex}>
+            <div className="row text-center">
+              {row.map((testimonial, index) => (
+                <div className="col-md-4 mb-5 mb-md-0" key={index}>
+                  <div className="d-flex justify-content-center mb-4">
+                    <img
+                      src={`/upload/${testimonial.uploadimage}`} // Assuming you have an 'image' property in the fetched data
+                      className="rounded-circle shadow-1-strong"
+                      width={150}
+                      height={150}
+                      alt={testimonial.studentname}
+                    />
+                  </div>
+                  <h5 className="mb-3">{testimonial.studentname}</h5>
+                  <h6 className="text-primary mb-3">{testimonial.description}</h6>
+                  <p className="px-xl-3">
+                    <i className="fas fa-quote-left pe-2" />
+                    {testimonial.userexperience}
+                  </p>
+                  <ul className="list-unstyled d-flex justify-content-center mb-0">
+                    {Array.from({ length: Math.floor(testimonial.rating) }).map((_, i) => (
+                      <li key={i}>
+                        <i className="fas fa-star fa-sm text-warning" />
+                      </li>
+                    ))}
+                    {testimonial.rating % 1 !== 0 && (
+                      <li>
+                        <i className="fas fa-star-half-alt fa-sm text-warning" />
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </Carousel.Item>
+        ))}
+      </Carousel>
+    </section>
 
 
 </>

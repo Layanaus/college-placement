@@ -97,6 +97,22 @@ const Createplacedstudent = () => {
                 </div>
               </div>
               <div className="form-group row">
+                <label
+                  htmlFor="description"
+                  className="col-md-4 col-form-label text-md-right"
+                >
+                  User Experience
+                </label>
+              <div className="col-md-6">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="userexperience"
+                    value={inputs.userexperience ||""}
+                    onChange={setRegister}
+                  />
+                </div></div>
+              <div className="form-group row">
   <label htmlFor="image" className="col-md-4 col-form-label text-md-right">
     Upload Image
   </label>

@@ -58,7 +58,7 @@ placedstudentRouter.get('/view-placedstudent',async(req,res)=>{
       studentname:req.body.studentname,
       description:req.body.description,
       uploadimage:req.body.studentimage,
-   
+      userexperience:req.body.userexperience,
     };
     const savedData = await PlacedStudentModel(data).save();
 

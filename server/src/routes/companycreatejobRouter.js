@@ -125,6 +125,82 @@ companycreatejobRouter.post('/create_job', async (req, res) => {
     });
   }
 });
+companycreatejobRouter.put('/edit-job/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updatedData = {
+      jobname: req.body.jobname,
+      jobdescription: req.body.jobdescription,
+      jobcategory: req.body.jobcategory,
+      vaccancy: req.body.vaccancy,
+      qualification: req.body.qualification,
+      expectedsalary: req.body.expectedsalary,
+      branch: req.body.branch,
+      date: new Date(),
+      lastdate: req.body.lastdate,
+      status: 'Applications Receiving..',
+    };
+
+    const updatedJob = await companyCreateJobModel.findByIdAndUpdate(id, updatedData, {
+      new: true, 
+    });
+
+    if (updatedJob) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        message: 'Job updated successfully',
+        data: updatedJob,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: 'Job not found',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: 'Something went wrong',
+      details: error,
+    });
+  }
+});
+
+companycreatejobRouter.delete('/job/:id', async (req, res) => {
+  try {
+    const jobId = req.params.id;
+
+    const existingJob = await companyCreateJobModel.findById(jobId);
+
+    if (!existingJob) {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: "Job not found",
+        details: null
+      });
+    }
+
+    await companyCreateJobModel.findByIdAndRemove(jobId);
+
+    return res.status(200).json({
+      success: true,
+      error: false,
+      message: "Job deleted successfully",
+      details: existingJob
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    });
+  }
+});
 
 
 companycreatejobRouter.get('/view-vaccancy', async (req, res) => {

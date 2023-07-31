@@ -4,10 +4,11 @@ import Placementofficernav from './Placementofficernav'
 import axios from 'axios';
 
 const StudentManage = () => {
+  const id=localStorage.getItem('login_id')
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
  useEffect(() => {
-   fetch('http://localhost:5000/register/view-users')
+   fetch(`http://localhost:5000/register/view-student-manage/${id}`)
      .then((response) => response.json())
      .then((data) => {
        if (data.success) {
@@ -61,7 +62,7 @@ const reject = (id) => {
     <div className="col-lg-10 offset-md-1">
       <div className="card panel-table">
         <div className="card-header" style={{textAlign:"center",}}>
-          <h2 >Manage Student</h2>
+          <h3 >Manage Student</h3>
           <div className="row" />
         </div>
         <div className="card-body">

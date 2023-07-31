@@ -28,9 +28,7 @@ console.log(category);
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          // Job deleted successfully, update the state or perform any necessary actions
         } else {
-          // Handle error case
         }
       })
       .catch((error) => {
@@ -68,7 +66,7 @@ console.log(category);
    </svg>
  </button>
  <div className="dropdown-content">
- <a href="#">Edit</a>
+ <Link to={`/editjobportal/${job._id}`}>Edit</Link>
     <button onClick={() => handleDeleteJob(job._id)}>Delete</button>
  </div>
 </div> 

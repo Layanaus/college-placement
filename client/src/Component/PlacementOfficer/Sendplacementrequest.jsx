@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import Placementofficernav from './Placementofficernav';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const Sendplacementrequest = () => {
   const [company, setCompany] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredCompanies, setFilteredCompanies] = useState(company);
   useEffect(() => {
     const fetchCompanies = async () => {
       try {
@@ -29,6 +33,19 @@ const Sendplacementrequest = () => {
     fetchCompanies();
   }, []);
 
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setFilteredCompanies(company);
+    } else {
+      const lowerCaseSearchQuery = searchQuery.toLowerCase();
+      const filtered = company.filter((c) =>
+        c.companyname.toLowerCase().includes(lowerCaseSearchQuery) ||
+        c.companylocation.toLowerCase().includes(lowerCaseSearchQuery)
+      );
+      setFilteredCompanies(filtered);
+    }
+  }, [searchQuery, company]);
+  
   const navigate = useNavigate();
   const college_id = localStorage.getItem('college_id')
   const [inputs, setInputs] = useState({
@@ -75,17 +92,31 @@ const Sendplacementrequest = () => {
       subject: inputs.subject,
       message: inputs.message
     };
-
     axios
-      .post('http://localhost:5000/request/create_placementrequest', requestData)
-      .then((response) => {
-        navigate('/placementofficer');
-      })
-      .catch((error) => {
-        console.log(error)
+    .post('http://localhost:5000/request/create_placementrequest', requestData)
+    .then((response) => {
+      toast.success('Placement request sent successfully!', {
+        position: 'top-center',
+        autoClose: 3000, // 3 seconds
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false
       });
-  };
-
+      navigate('/placementofficer');
+    })
+    .catch((error) => {
+      toast.error('Failed to send placement request. Please try again.', {
+        position: 'top-center',
+        autoClose: 3000, // 3 seconds
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: false
+      });
+      console.log(error);
+    });
+};
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -98,29 +129,32 @@ const Sendplacementrequest = () => {
     <>
       <Placementofficernav />
       <div className="container">
+      <ToastContainer />
+
         <h3 className="pb-3 mb-5 font-italic border-bottom mt-5">
           <i className="fa fa-book-reader" />
           Top Hiring Companies
         </h3>
-        <div className="row justify-content-center mb-5">
-          <div className="col-md-4">
-            <div className="input-group">
-              <input
-                type="search"
-                className="form-control rounded"
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="search-addon"
-              />
-              <button type="button" className="btn btn-outline-primary">
-                search
-              </button>
-            </div>
-          </div>
-        </div>
+        <div className="col-md-4">
+  <div className="input-group">
+    <input
+      type="search"
+      className="form-control rounded"
+      placeholder="Search"
+      aria-label="Search"
+      aria-describedby="search-addon"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+    />
+    <button type="button" className="btn btn-outline-primary">
+      search
+    </button>
+  </div>
+</div>
+
 
         <div className="row mb-4">
-        {company.map((name) => (
+        {filteredCompanies.map((name) => (
           <div className="col-lg-3 col-md-6 mb-4" key={name._id}>
             <div className="card hover-lift hover-shadow-xl shadow-sm border-0">
               <div className="card-body p-4">

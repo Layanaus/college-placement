@@ -65,6 +65,10 @@ import Noticeboard from '../Company/Noticeboard'
 import JobPortalviewstudents from '../PlacementOfficer/JobPortalviewstudents'
 import MovingHeadings from '../User/Test'
 import Createcategory from '../Admin/Createcategory'
+import PublicContact from '../Public/PublicContact'
+import ManageContactus from '../Admin/ManageContactus'
+import Editcreatejob from '../Company/Editcreatejob'
+import Editjobportal from '../PlacementOfficer/Editjobportal'
 
 
 
@@ -74,6 +78,7 @@ const MainRouter = () => {
     
         <Routes>
             <Route path="/" element={<PublicUser/>}/>
+            <Route path="contact" element={<PublicContact/>}/>
             <Route path="home" element={<PublicUser/>}/>
             <Route path='PublicUser' element={<PublicUserAbout/>}/>
             <Route path="PublicUserContact" element={<PublicUserContact/>}/>
@@ -108,7 +113,7 @@ const MainRouter = () => {
             <Route path="Createjob" element={<CreateJob/>}/>
             <Route path="Application/:id" element={<Applications/>}/>
             <Route path="Notifyinterview/:id" element={<NotifyInterview/>}/>
-            <Route path="Reviewapplication/:id/:cid" element={<ReviewApplication/>}/>
+            <Route path="Reviewapplication/:id/:cid/:jid" element={<ReviewApplication/>}/>
             <Route path="POviewjobs" element={<Placementofficerviewjobs/>}/>
             <Route path="POsearchvacancy2" element={<POsearchvacancy/>}/>
             <Route path="searchvacancy/:id" element={<SearchVacancy/>}/>
@@ -136,9 +141,12 @@ const MainRouter = () => {
             <Route path="questions" element={<Questions/>}/>
             <Route path="noticeboard/:id" element={<Noticeboard/>}/>
             <Route path="jobportalviewstudents/:id" element={<JobPortalviewstudents/>}/>
-             <Route path="test" element={<MovingHeadings/>}/>
+          
             <Route path="category" element={<Createcategory/>}/>
-            
+            <Route path="contactus" element={<ManageContactus/>}/>
+
+            <Route path="editcreatejob/:id" element={<Editcreatejob/>}/>
+            <Route path="editjobportal/:id" element={<Editjobportal/>}/>
 
         
 

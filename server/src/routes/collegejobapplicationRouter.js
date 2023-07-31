@@ -30,33 +30,109 @@ collegejobapplicationRouter.get('/view-sudhee/:id', async (req, res) => {
     });
   }
 });
+// collegejobapplicationRouter.get('/view-layana/:id', async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     const wishlistItems = await collegeJobApplicationModel.find({_id:id});
+//     if (wishlistItems.length > 0) {
+//       return res.status(200).json({
+//         success: true,
+//         error: false,
+//         data: wishlistItems,
+//       });
+//     } else {
+//       return res.status(400).json({
+//         success: false,
+//         error: true,
+//         message: 'No items found in wishlist',
+//       });
+//     }
+//   } catch (error) {
+//     return res.status(400).json({
+//       success: false,
+//       error: true,
+//       message: 'Something went wrong',
+//       details: error,
+//     });
+//   }
+// });
 collegejobapplicationRouter.get('/view-layana/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const wishlistItems = await collegeJobApplicationModel.find({_id:id});
-    if (wishlistItems.length > 0) {
+
+    const users = await collegeJobApplicationModel.aggregate([
+     
+      {
+        '$lookup': {
+          'from':'user_register_tbs', 
+          'localField': 'login_id', 
+          'foreignField': 'login_id', 
+          'as': 'job'
+        }
+      },
+      {
+        '$lookup': {
+          'from':'pofficer_register_tbs', 
+          'localField': 'choosecollege', 
+          'foreignField': 'choosecollege', 
+          'as': 'college'
+        }
+      },
+      {
+        "$unwind": "$job"
+      },
+      {
+        "$unwind": "$college"
+      },
+      {
+        $match: { '_id':new mongoose.Types.ObjectId(id) },
+      },
+      {
+        "$group": {
+          '_id': "$_id",
+          'name': { "$first":"$name" },
+          'dateofbirth': {"$first":"$dateofbirth" },
+          'address': { "$first":"$address" },
+          'phonenumber': {"$first":"$phonenumber" },
+          'emailaddress': { "$first":"$emailaddress" },
+          'education': { "$first":"$education" },
+          'skills': { "$first":"$skills" },
+          'aboutyourself': {"$first":"$aboutyourself" },
+          'cv': {"$first":"$job.cv" },
+          'alternativeemail': {"$first":"$job.alternativeemail" },
+          'alternativemobile': {"$first":"$job.alternativemobile" },
+          'branch': {"$first":"$job.branch" },
+          'collegename': {"$first":"$college.collegename" },
+          'year': {"$first":"$job.year" },
+          'application_status': { "$first": "$application_status" },
+          'login_id': { "$first":"$job.login._id" },
+        }
+      }
+    ]);
+    
+
+    if (users.length > 0) {
       return res.status(200).json({
         success: true,
         error: false,
-        data: wishlistItems,
+        data: users
       });
     } else {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
         error: true,
-        message: 'No items found in wishlist',
+        message: "User profile not found for the provided login ID."
       });
     }
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       success: false,
       error: true,
-      message: 'Something went wrong',
-      details: error,
-    });
-  }
+      message: "Something went wrong",
+      details: error
+    });
+  }
 });
-
 collegejobapplicationRouter.get('/view-collegeapplication',async(req,res)=>{
   try {
     
@@ -308,6 +384,10 @@ collegejobapplicationRouter.get('/view-collegeapplication',async(req,res)=>{
             'skills': { "$first":"$skills" },
             'aboutyourself': {"$first":"$aboutyourself" },
             'cv': {"$first":"$job.cv" },
+            'alternativeemail': {"$first":"$job.alternativeemail" },
+            'alternativemobile': {"$first":"$job.alternativemobile" },
+            'branch': {"$first":"$job.branch" },
+            'year': {"$first":"$job.year" },
             'application_status': { "$first": "$application_status" },
             'login_id': { "$first":"$job.login._id" },
           }

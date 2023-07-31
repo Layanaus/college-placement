@@ -168,11 +168,15 @@ const PlacementOfficerReg = () => {
               <input
                 type="tel"
                 name="phone"
-                
-                
-                placeholder="phone"
+                 placeholder="phone"
                 value={inputs.phone ||""}
                 onChange={setRegister}
+                onKeyPress={(event) => {
+                  if (!/[0-9]/.test(event.key) || event.target.value.length >= 10) {
+                    event.preventDefault();
+                  }
+                }}
+              
               />
             </div>
             <div className="form-row">

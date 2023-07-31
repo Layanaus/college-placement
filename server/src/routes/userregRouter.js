@@ -107,6 +107,73 @@ userregRouter.get('/reject/:id', async (req, res) => {
   }
 });
 
+userregRouter.get('/view-student-manage/:id', async (req, res) => {
+  try {
+    const id=req.params.id;
+    const users = await userRegisterModel.aggregate([
+
+
+      {
+        '$lookup': {
+          'from': 'login_tbs',
+          'localField': 'login_id',
+          'foreignField': '_id',
+          'as': 'login'
+        }
+      },
+      {
+        '$lookup': {     
+          'from': 'pofficer_register_tbs',
+          'localField': 'choosecollege',
+          'foreignField': '_id',
+          'as': 'college'
+        }
+      },
+      {
+        "$unwind": "$login"
+      },
+      {
+        "$unwind": "$college"
+      },
+      {'$match':{
+        'college.login_id':new objectId(id)
+      }},
+      {
+        "$group": {
+          '_id': "$_id",
+          'firstname': { "$first": "$firstname" },
+          'college_id': { "$first": "$college.login_id" },
+          'choosecollege': { "$first": "$college.collegename" },
+          'regno': { "$first": "$regno" },
+          'email': { "$first": "$email" },
+          'phone': { "$first": "$phone" },
+          'status': { "$first": "$login.status" },
+          'login_id': { "$first": "$login._id" },
+        }
+      }
+    ])
+    if (users[0] != undefined) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: users
+      })
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    })
+  }
+})
 userregRouter.get('/view-users', async (req, res) => {
   try {
     const users = await userRegisterModel.aggregate([

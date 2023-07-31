@@ -31,6 +31,51 @@ collegecreatejobRouter.get('/viewjobportal-jobs/:id', async (req, res) => {
     });
   }
 });
+collegecreatejobRouter.put('/edit-jobportal/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const updatedData = {
+      login_id:req.body.login_id,
+      company_id:req.body.company_id,
+      companyname:req.body.companyname,
+      companylocation:req.body.companylocation,
+      jobname:req.body.jobname,
+      jobdescription:req.body.jobdescription,
+      jobcategory:req.body.jobcategory,
+      Requiredqualification:req.body.qualification,
+      alaryrange:req.body.salaryrange,
+      companycontact:req.body.companycontact,
+      lastdate:req.body.lastdate,
+      status: 'Applications Receiving..',
+    };
+
+    const updatedJob = await collegeCreateJobModel.findByIdAndUpdate(id, updatedData, {
+      new: true, 
+    });
+
+    if (updatedJob) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        message: 'Job updated successfully',
+        data: updatedJob,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: 'Job not found',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: 'Something went wrong',
+      details: error,
+    });
+  }
+});
 collegecreatejobRouter.get('/viewjobportal-jobs', async (req, res) => {
   try {
     const users = await collegeCreateJobModel.aggregate([
@@ -113,7 +158,7 @@ collegecreatejobRouter.get('/viewjobportal-jobs', async (req, res) => {
     })
   }
 })
-collegecreatejobRouter.get('/applied_jobs', async (req, res) => {
+collegecreatejobRouter.get('/applied_jobs/:id', async (req, res) => {
   try {
     const id=req.params.id;
     const users = await collegeCreateJobModel.aggregate([
@@ -127,20 +172,33 @@ collegecreatejobRouter.get('/applied_jobs', async (req, res) => {
           'as': 'company'
         }
       },
-     
+      {
+        '$lookup': {
+          'from': 'user_register_tbs',
+          'localField': 'login_id',
+          'foreignField': 'choosecollege',
+          'as': 'college'
+        }
+      },
+      
      
       {
         "$unwind": "$company"
       },
-//       {
-//         $match: { 'jobcategory':new mongoose.Types.ObjectId(id) },
-//       },
+      {
+        "$unwind": "$college"
+      },
+      {
+        $match: { 'college.login_id':new mongoose.Types.ObjectId(id) },
+      },
       
       {
         "$group": {
           '_id': "$_id",
           'login_id': { "$first": "$login_id" },
           'company_id': { "$first": "$company_id" },
+          'college_id': { "$first": "$college.choosecollege" },
+          'user_id': { "$first": "$college.login_id" },
           'companylocation': { "$first": "$companylocation" },
           'jobname': { "$first": "$jobname" },
           'jobcategory': { "$first": "$jobcategory" },

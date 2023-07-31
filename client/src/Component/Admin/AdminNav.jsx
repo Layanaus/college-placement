@@ -74,10 +74,13 @@ const AdminNav = () => {
           <a href="managecollege" className="nav-item nav-link active">
             Manage Placement details
           </a>
+
           <a href="category" className="nav-item nav-link active">
             Job Category
           </a>
-        
+        <a href="contactus" className="nav-item nav-link active">
+            Manage Public Contactus
+          </a>
           <div className="nav-item dropdown">
             <a
               href=""
@@ -114,7 +117,7 @@ const AdminNav = () => {
               <a href="changepassword" className="dropdown-item">
                 Change Password
               </a>
-              <a href="vm.html" className="dropdown-item">
+              <a href="/" className="dropdown-item">
                 log out
               </a>
               

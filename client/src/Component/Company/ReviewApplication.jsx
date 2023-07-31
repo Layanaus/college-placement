@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 const ReviewApplication = () => {
   const { id } = useParams();
   const { cid } = useParams();
+  const { jid } = useParams();
 
   const [showInterviewPassed, setShowInterviewPassed] = useState(false);
   const [showInterviewFailed, setShowInterviewFailed] = useState(false);
@@ -164,7 +165,9 @@ const ReviewApplication = () => {
       <div className="container">
         <h3 className="pb-3 mb-4 font-italic border-bottom">CV of Applicants</h3>
         <div className="row">
-          {category.map((job, index) => (
+          {category .map((job, index) => (
+                       
+
             <React.Fragment key={index}>
               <div className="col-md-6" style={{ height: 600, backgroundColor: 'whitesmoke' }}>
                 <h1>BIO Data</h1>
@@ -182,10 +185,22 @@ const ReviewApplication = () => {
                   <strong>Phone No:</strong> {job.phonenumber}
                 </p>
                 <p>
+                  <strong>Alternative Phone No:</strong> {job.alternativemobile}
+                </p>
+                <p>
                   <strong>Email:</strong> {job.emailaddress}
                 </p>
                 <p>
+                  <strong>Alternative Email:</strong> {job.alternativeemail}
+                </p>
+                <p>
                   <strong>Education:</strong> {job.education}
+                </p>
+                <p>
+                  <strong>Branch:</strong> {job.branch}
+                </p>
+                <p>
+                  <strong>Passing Year:</strong> {job.year}
                 </p>
                 <p>
                   <strong>Skills:</strong> {job.skills}
@@ -206,8 +221,8 @@ const ReviewApplication = () => {
                   alt=""
                 />
               </div>
-            </React.Fragment>
-          ))}
+         
+              </React.Fragment>))}
         </div>
         <div className="row color-dark" style={{ marginLeft: '100px', marginTop: '50px' }}>
           <div className="col-md-3">
@@ -233,12 +248,15 @@ const ReviewApplication = () => {
           <div className="col-md-3">
             <button className="btn btn-primary" onClick={handleInformButtonClick}>
               Inform
-            </button>
+            </button> 
+          
           </div>
         </div>
 
         <div className="row">
-          {status.map((chinnu, index) => (
+          {status  .filter((chinnu) => chinnu._id === jid) .map((chinnu, index) => (
+                      
+
             <React.Fragment key={index}>
               <div className="col-md-6" style={{ height: 600, backgroundColor: 'whitesmoke' }}>
                 <h1>BIO Data</h1>
@@ -256,10 +274,22 @@ const ReviewApplication = () => {
                   <strong>Phone No:</strong> {chinnu.phonenumber}
                 </p>
                 <p>
+                  <strong>Alternative Phone No:</strong> {chinnu.alternativemobile}
+                </p>
+                <p>
                   <strong>Email:</strong> {chinnu.emailaddress}
                 </p>
                 <p>
+                  <strong>Alternative Email:</strong> {chinnu.alternativeemail}
+                </p>
+                <p>
                   <strong>Education:</strong> {chinnu.education}
+                </p>
+                <p>
+                  <strong>Branch:</strong> {chinnu.branch}
+                </p>
+                <p>
+                  <strong>Passing Year:</strong> {chinnu.year}
                 </p>
                 <p>
                   <strong>Skills:</strong> {chinnu.skills}

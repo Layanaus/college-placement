@@ -7,7 +7,7 @@ const placedstudentSchema=new schema({
     studentname:{type:String},
     description:{type:String},
     uploadimage:{type:String},
-    
+    userexperience:{type:String},
     
     
 })

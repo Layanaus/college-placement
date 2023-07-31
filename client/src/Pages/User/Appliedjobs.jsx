@@ -7,7 +7,7 @@ const Appliedjobs = () => {
   const login_id = localStorage.getItem('login_id');
   const [appliedjobs, setAppliedjobs] = useState([]);
   const [jobportal, setJobportal] = useState([]);
-
+  const [selectedStatus, setSelectedStatus] = useState('All');
 
   useEffect(() => {
     fetch(`http://localhost:5000/register/view-applicants-chinnu/${login_id}`)
@@ -34,6 +34,7 @@ const Appliedjobs = () => {
         console.log('Error:', error);
       });
   }, []);
+
   return (
     <>
       <Usernav />
@@ -44,14 +45,17 @@ const Appliedjobs = () => {
               Search by status of application
             </button>
             <div className="dropdown-menu dropdown-menu-right">
-              <button className="dropdown-item" type="button">
+              <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('Eligible for Aptitude test')}>
                 Eligible for Aptitude test
               </button>
-              <button className="dropdown-item" type="button">
+              <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('Not Eligible')}>
                 Ineligible for Aptitude test
               </button>
-              <button className="dropdown-item" type="button">
+              <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('Attend Test')}>
                 Waiting for examination
+              </button>
+              <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('All')}>
+                All
               </button>
             </div>
           </div>
@@ -60,6 +64,7 @@ const Appliedjobs = () => {
         <div className="row justify-content-center">
           {jobportal
             .filter((jobs) => jobs.login_id === login_id)
+            .filter((jobs) => selectedStatus === 'All' || jobs.application_status === selectedStatus)
             .map((jobs) => (
               <div className="col-md-8 mb-5" key={jobs._id}>
                 <div className="card">
@@ -81,11 +86,11 @@ const Appliedjobs = () => {
               </div>
             ))}
         </div>
-      </div>
 
-      <div className="row justify-content-center">
+        <div className="row justify-content-center">
           {appliedjobs
             .filter((job) => job.login_id === login_id)
+            .filter((job) => selectedStatus === 'All' || job.application_status === selectedStatus)
             .map((job) => (
               <div className="col-md-8 mb-5" key={job._id}>
                 <div className="card">
@@ -107,37 +112,38 @@ const Appliedjobs = () => {
               </div>
             ))}
         </div>
-      
-      <div className="row justify-content-center" style={{ marginTop: '30px' }}>
-        <nav aria-label="Page navigation justify-content-center">
-          <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">«</span>
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">»</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+
+        <div className="row justify-content-center" style={{ marginTop: '30px' }}>
+          <nav aria-label="Page navigation justify-content-center">
+            <ul className="pagination">
+              <li className="page-item">
+                <a className="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">«</span>
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  1
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  2
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#">
+                  3
+                </a>
+              </li>
+              <li className="page-item">
+                <a className="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">»</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
       <PublicUserFooter />
     </>

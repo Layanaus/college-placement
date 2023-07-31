@@ -8,6 +8,7 @@ const Noticeboard = () => {
   const { id } = useParams();
   const [jobList, setJobList] = useState([]);
   const [sanitha, setSanitha] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetch(`http://localhost:5000/register/view-applicants/${id}`)
@@ -21,6 +22,7 @@ const Noticeboard = () => {
         console.log('Error:', error);
       });
   }, []);
+
   useEffect(() => {
     fetch(`http://localhost:5000/apply/view-layana/${id}`)
       .then((response) => response.json())
@@ -33,6 +35,14 @@ const Noticeboard = () => {
         console.log('Error:', error);
       });
   }, []);
+
+  const filteredJobList = jobList.filter((applicant) =>
+    applicant.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredSanitha = sanitha.filter((applicant) =>
+    applicant.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <>
@@ -48,6 +58,8 @@ const Noticeboard = () => {
             placeholder="Search Applicant's Name"
             aria-label="Search"
             aria-describedby="search-addon"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
           <button type="button" className="btn btn-outline-primary">
             Search
@@ -65,26 +77,24 @@ const Noticeboard = () => {
             </tr>
           </thead>
           <tbody>
-            {jobList.map((applicant, index) => (
+            {filteredJobList.map((applicant, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
                 <td>{applicant.name}</td>
                 <td>{applicant.address}</td>
                 <td>{applicant.phonenumber}</td>
-                <td>{applicant.college}</td>
+                <td>{applicant.collegename}</td>
                 <td>{applicant.application_status}</td>
               </tr>
             ))}
-          </tbody>
-          <tbody>
-            {sanitha.map((applicants, index) => (
+            {filteredSanitha.map((applicant, index) => (
               <tr key={index}>
                 <th scope="row">{index + 1}</th>
-                <td>{applicants.name}</td>
-                <td>{applicants.address}</td>
-                <td>{applicants.phonenumber}</td>
-                <td>{applicants.college}</td>
-                <td>{applicants.application_status}</td>
+                <td>{applicant.name}</td>
+                <td>{applicant.address}</td>
+                <td>{applicant.phonenumber}</td>
+                <td>{applicant.collegename}</td>
+                <td>{applicant.application_status}</td>
               </tr>
             ))}
           </tbody>

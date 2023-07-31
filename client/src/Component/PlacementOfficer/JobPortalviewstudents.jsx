@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 import Placementofficernav from './Placementofficernav';
@@ -6,6 +7,7 @@ import { useParams } from 'react-router-dom';
 const JobPortalviewstudents = () => {
   const { id } = useParams();
   const [List, setList] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch(`http://localhost:5000/apply/view-sudhee/${id}`)
@@ -19,6 +21,16 @@ const JobPortalviewstudents = () => {
         console.log('Error:', error);
       });
   }, [id]);
+
+  // Function to handle search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Filter the list based on the search term
+  const filteredList = List.filter((applicant) =>
+    applicant.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -34,6 +46,8 @@ const JobPortalviewstudents = () => {
             placeholder="Search Applicant's Name"
             aria-label='Search'
             aria-describedby='search-addon'
+            value={searchTerm}
+            onChange={handleSearchChange}
           />
           <button type='button' className='btn btn-outline-primary'>
             Search
@@ -50,7 +64,7 @@ const JobPortalviewstudents = () => {
             </tr>
           </thead>
           <tbody>
-            {List.map((applicant, index) => (
+            {filteredList.map((applicant, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
                 <td>{applicant.name}</td>
