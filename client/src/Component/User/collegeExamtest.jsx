@@ -4,7 +4,7 @@ import Usernav from '../User/Usernav';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-function Aptitudetest() {
+function CollegeExamtest() {
   const login_id=localStorage.getItem('login_id')
   const {id}=useParams();
   const {c_id}=useParams();
@@ -76,7 +76,7 @@ function Aptitudetest() {
        
       try {
         const t =axios.get(
-          `http://localhost:5000/register/update_appstatus/${id}`,);
+          `http://localhost:5000/apply/update-aptitude-status/${id}`,);
         const response = await axios.post('http://localhost:5000/result/add-result', {
         login_id:login_id,
         application_id:id,
@@ -240,4 +240,4 @@ function Aptitudetest() {
   );
 }
 
-export default Aptitudetest;
+export default CollegeExamtest;

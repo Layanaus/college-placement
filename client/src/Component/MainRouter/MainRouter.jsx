@@ -69,10 +69,7 @@ import PublicContact from '../Public/PublicContact'
 import ManageContactus from '../Admin/ManageContactus'
 import Editcreatejob from '../Company/Editcreatejob'
 import Editjobportal from '../PlacementOfficer/Editjobportal'
-
-
-
-
+import CollegeExamtest from '../User/collegeExamtest'
 const MainRouter = () => {
   return (
     
@@ -111,9 +108,9 @@ const MainRouter = () => {
             <Route path="ViewPlacementstudent" element={<ViewPlacementstudent/>}/>
             <Route path="Viewinterviewstatus" element={<InterviewStatus/>}/>
             <Route path="Createjob" element={<CreateJob/>}/>
-            <Route path="Application/:id" element={<Applications/>}/>
+            <Route path="Application/:id/:type" element={<Applications/>}/>
             <Route path="Notifyinterview/:id" element={<NotifyInterview/>}/>
-            <Route path="Reviewapplication/:id/:cid/:jid" element={<ReviewApplication/>}/>
+            <Route path="Reviewapplication/:id/:cid/:jid/:type" element={<ReviewApplication/>}/>
             <Route path="POviewjobs" element={<Placementofficerviewjobs/>}/>
             <Route path="POsearchvacancy2" element={<POsearchvacancy/>}/>
             <Route path="searchvacancy/:id" element={<SearchVacancy/>}/>
@@ -147,6 +144,8 @@ const MainRouter = () => {
 
             <Route path="editcreatejob/:id" element={<Editcreatejob/>}/>
             <Route path="editjobportal/:id" element={<Editjobportal/>}/>
+            <Route path="collegeaptitudetst/:id/:c_id/:j_id" element={<CollegeExamtest/>}/>
+
 
         
 

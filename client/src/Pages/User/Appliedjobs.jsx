@@ -45,14 +45,14 @@ const Appliedjobs = () => {
               Search by status of application
             </button>
             <div className="dropdown-menu dropdown-menu-right">
-              <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('Eligible for Aptitude test')}>
+              <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('Eligible for aptitudetest')}>
                 Eligible for Aptitude test
               </button>
               <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('Not Eligible')}>
                 Ineligible for Aptitude test
               </button>
-              <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('Attend Test')}>
-                Waiting for examination
+              <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('Applied')}>
+               Applied jobs
               </button>
               <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('All')}>
                 All
@@ -73,7 +73,7 @@ const Appliedjobs = () => {
                     <h5 className="card-title">{jobs.companyname}</h5>
                     <p className="card-text">Applied on: {jobs.date}</p>
                     {jobs.application_status === 'Eligible for aptitudetest' ? (
-                      <Link className="btn btn-primary" to={`/aptitudetst/${jobs._id}/${jobs.company_id}/${jobs.job_id}`}>
+                      <Link className="btn btn-primary" to={`/collegeaptitudetst/${jobs._id}/${jobs.company_id}/${jobs.job_id}`}>
                         Attend Aptitude Test
                       </Link>
                     ) : (

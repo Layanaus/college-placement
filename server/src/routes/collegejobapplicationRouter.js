@@ -437,6 +437,19 @@ collegejobapplicationRouter.get('/view-collegeapplication',async(req,res)=>{
         aboutyourself: req.body.aboutyourself,
         application_status:'Applied',
       };
+      const existingApplication = await collegeJobApplicationModel.findOne({
+        login_id: req.body.login_id,
+        job_id: req.body.job_id,
+      });
+  
+      if (existingApplication) {
+        return res.status(400).json({
+          success: false,
+          error: true,
+          message: "You have already applied for this job",
+          details: existingApplication,
+        });
+      }
   
       const savedData = await collegeJobApplicationModel(data).save();
   
@@ -501,5 +514,38 @@ collegejobapplicationRouter.get('/view-collegeapplication',async(req,res)=>{
   });
    
     
-
+  collegejobapplicationRouter.get('/update-aptitude-status/:id', async (req, res) => {
+    try {
+      const id = req.params.id;
+  
+      const updatedData = {
+        
+        application_status: 'Test Completed',
+      };
+  
+      const updatedApplication = await collegeJobApplicationModel.updateOne({_id:id}, {$set:updatedData});
+  
+      if (updatedApplication) {
+        return res.status(200).json({
+          success: true,
+          error: false,
+          message: "Application status updated successfully",
+          details: updatedApplication,
+        });
+      } else {
+        return res.status(404).json({
+          success: false,
+          error: true,
+          message: "Application not found",
+        });
+      }
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "Something went wrong",
+        details: error,
+      });
+    }
+  });
 module.exports = collegejobapplicationRouter;

@@ -4,8 +4,10 @@ import Companynav from './Companynav';
 import { Link, useParams } from 'react-router-dom';
 
 const Applications = () => {
+
   const { id } = useParams();
   const { cid } = useParams();
+  const {type} = useParams();
   const company_id = localStorage.getItem('login_id');
   const [applicants, setApplicants] = useState([]);
   const [vishnu, setVishnu] = useState([]);
@@ -58,7 +60,7 @@ const Applications = () => {
                   <td>{job.name}</td>
                  
                   <td>
-                    <Link to={`/Reviewapplication/${job.login_id}/${job._id}/${job.job_id}`}>View Cv &amp; More Detail</Link>
+                    <Link to={`/Reviewapplication/${job.login_id}/${job._id}/${job.job_id}/${type}`}>View Cv &amp; More Detail</Link>
                   </td>
                   <td>{job.application_status}</td>
                 </tr>
@@ -73,7 +75,7 @@ const Applications = () => {
                   <td>{chinnu.name}</td>
                  
                   <td>
-                    <Link to={`/Reviewapplication/${chinnu.login_id}/${chinnu._id}/${chinnu.job_id}`}>View Cv &amp; More Detail</Link>
+                    <Link to={`/Reviewapplication/${chinnu.login_id}/${chinnu._id}/${chinnu.job_id}/${type}`}>View Cv &amp; More Detail</Link>
                   </td>
                   <td>{chinnu.application_status}</td>
                 </tr>

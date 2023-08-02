@@ -415,6 +415,20 @@ companyjobapplicationRouter.post('/job_application', async (req, res) => {
     aboutyourself:req.body.aboutyourself,
     application_status:'Applied',
     };
+    const existingApplication = await companyJobApplicationModel.findOne({
+      login_id: req.body.login_id,
+      job_id: req.body.job_id,
+    });
+
+    if (existingApplication) {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "You have already applied for this job",
+        details: existingApplication,
+      });
+    }
+
     const savedData = await companyJobApplicationModel(data).save();
 
     if (savedData) {
@@ -483,14 +497,14 @@ companyjobapplicationRouter.put('/update_status/:id', async (req, res) => {
 
 companyjobapplicationRouter.get('/update_appstatus/:id', async (req, res) => {
   try {
-    const login_id = req.params.id;
+    const id = req.params.id;
 
     const updatedData = {
       
       application_status: 'Test Completed',
     };
 
-    const updatedApplication = await companyJobApplicationModel.updateOne({login_id:login_id}, {$set:updatedData});
+    const updatedApplication = await companyJobApplicationModel.updateOne({_id:id}, {$set:updatedData});
 
     if (updatedApplication) {
       return res.status(200).json({

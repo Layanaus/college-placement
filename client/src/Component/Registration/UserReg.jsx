@@ -7,7 +7,9 @@ import { useNavigate } from 'react-router-dom';
 
 const UserReg = () => {
   const navigate = useNavigate()
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState({
+    image:"",
+  });
 
   const[inputs, setinputs]=useState({
     first_name:"",
@@ -35,6 +37,25 @@ const UserReg = () => {
   const setRegister=(event)=>{
     const name=event.target.name;
     const value = event.target.value;
+    
+    if (name === 'dob') {
+      const currentDate = new Date();
+      const selectedDate = new Date(value);
+      const minDate = new Date();
+      minDate.setFullYear(currentDate.getFullYear() - 18);
+
+      if (selectedDate > minDate) {
+        setFormErrors({
+          ...formErrors,
+          dob: 'Must be 18 years or older.'
+        });
+      } else {
+        setFormErrors({
+          ...formErrors,
+          dob: ''
+        });
+      }
+    }
     setinputs({ ...inputs, [name]: value });
     console.log(inputs);
   }
@@ -102,6 +123,9 @@ const UserReg = () => {
     }
     if (!values.username) {
       errors.username = "User Name is required";
+    }
+    if (!values.image) {
+      errors.image = "image is required";
     }
     if (!values.password) {
       errors.password = "Password is required";
@@ -189,15 +213,17 @@ const UserReg = () => {
 
               </div>
               <div className="form-row">
-              <span className='errormsg' style={{ color: 'red' }}>{formErrors.dob}</span>
-              <input
-                type="date"
-                name="dob"
-                placeholder="DOB"
-                value={inputs.dob ||""}
-                onChange={setRegister}
-              />
-            </div>
+  <span className='errormsg' style={{ color: 'red' }}>{formErrors.dob}</span>
+  <input
+    type="date"
+    name="dob"
+    placeholder="DOB"
+    value={inputs.dob || ''}
+    onChange={setRegister}
+    max={(new Date(new Date().setFullYear(new Date().getFullYear() - 18))).toISOString().split('T')[0]}
+  />
+</div>
+
             <div className="form-row">
             <span className='errormsg' style={{ color: 'red' }}>{formErrors.gender}</span>
               <select name="gender" value={inputs.gender ||""} onChange={setRegister}>

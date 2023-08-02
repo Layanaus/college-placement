@@ -72,9 +72,9 @@ const Editcompanyprofile = () => {
               <input
                 type="text"
                 className="form-control custom-input"
-                name="location"
+                name="companylocation"
                 placeholder="Location"
-                value={inputs.location ||""}
+                value={inputs.companylocation ||""}
                 onChange={setRegister}
               />
             </div>
@@ -112,26 +112,14 @@ const Editcompanyprofile = () => {
               <input
                 type="text"
                 className="form-control custom-input"
-                name="website"
+                name="websiteaddress"
                 placeholder="Website Address"
-                value={inputs.website ||""}
+                value={inputs.websiteaddress ||""}
                 onChange={setRegister}
               />
             </div>
           </div>
-          <div className="form-group row">
-            <label htmlFor="username" className="col-sm-2 col-form-label">Username:</label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control custom-input"
-                name="username"
-                placeholder="Username"
-                value={inputs.username ||""}
-                onChange={setRegister}
-              />
-            </div>
-          </div>
+         
           
           <div className="form-group row" style={{marginLeft:'385px'}}>
             <div className="col-sm-10 offset-sm-2">

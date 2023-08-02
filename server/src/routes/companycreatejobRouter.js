@@ -91,6 +91,20 @@ companycreatejobRouter.get('/view-companyjobs/:id',async(req,res)=>{
 
 companycreatejobRouter.post('/create_job', async (req, res) => {
   try {
+    const existingJob = await companyCreateJobModel.findOne({
+      jobname: req.body.jobname,
+      companyname: req.body.companyname,
+      companylocation: req.body.companylocation,
+    });
+
+    if (existingJob) {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "Job with the same name and details already exists",
+        details: existingJob,
+      });
+    }
     const data = {
     login_id: req.body.login_id,
     companyname:req.body.companyname,
@@ -265,37 +279,34 @@ companycreatejobRouter.get('/view-vaccancy', async (req, res) => {
 
 
 
-companycreatejobRouter.get('/get-applications/:id', async (req, res) => {
+
+companycreatejobRouter.get('/get-applications/:cid', async (req, res) => {
   try {
-    const id = req.params.id;
-    const users = await companyJobApplicationModel.find({ company_id: id });
+    const cid = req.params.cid;
+    const applicationsCount = await companyJobApplicationModel.countDocuments({ job_id: cid });
 
-    const numMatches = users.length;
-
-    if (numMatches > 0) {
+    if (applicationsCount > 0) {
       return res.status(200).json({
         success: true,
-        error: false,
-        data: users,
-        numMatches: numMatches,
+        message: 'Data found',
+        numMatches: applicationsCount,
       });
     } else {
-      return res.status(400).json({
+      return res.status(404).json({
         success: false,
-        error: true,
         message: 'No data found',
-        numMatches: 0, // If no data is found, set the count of matches to 0 in the response
+        numMatches: 0,
       });
     }
   } catch (error) {
-    return res.status(400).json({
+    return res.status(500).json({
       success: false,
-      error: true,
       message: 'Something went wrong',
-      details: error,
+      details: error.message,
     });
   }
 });
+
 
 
 module.exports = companycreatejobRouter;

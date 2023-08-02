@@ -1,8 +1,10 @@
 const express = require('express');
 const collegeCreateJobModel = require('../models/collegeCreateJobModel')
 const mongoose = require('mongoose');
+const collegeJobApplicationModel = require('../models/collegeJobApplicationModel');
 const collegecreatejobRouter = express.Router();
 const objectId= mongoose.Types.ObjectId
+
 collegecreatejobRouter.get('/viewjobportal-jobs/:id', async (req, res) => {
   try {
     const id = req.params.id;
@@ -463,6 +465,20 @@ collegecreatejobRouter.get('/view-jobportal/:id',async(req,res)=>{
 
 collegecreatejobRouter.post('/create_jobportal', async (req, res) => {
   try {
+    const existingJob = await collegeCreateJobModel.findOne({
+      jobname: req.body.jobname,
+      companyname: req.body.companyname,
+      companylocation: req.body.companylocation,
+    });
+
+    if (existingJob) {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "Job with the same name and details already exists",
+        details: existingJob,
+      });
+    }
     const data = {
     login_id:req.body.login_id,
     company_id:req.body.company_id,
@@ -492,6 +508,33 @@ collegecreatejobRouter.post('/create_jobportal', async (req, res) => {
       error: true,
       message: "Something went wrong",
       details: error
+    });
+  }
+});
+
+collegecreatejobRouter.get('/get-applicant/:cid', async (req, res) => {
+  try {
+    const cid = req.params.cid;
+    const applicationsCount = await collegeJobApplicationModel.countDocuments({ job_id: cid });
+
+    if (applicationsCount > 0) {
+      return res.status(200).json({
+        success: true,
+        message: 'Data found',
+        num: applicationsCount,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        message: 'No data found',
+        num: 0,
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: 'Something went wrong',
+      details: error.message,
     });
   }
 });

@@ -26,7 +26,7 @@ const Testresult = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setUsers(data.data); // Assuming 'data.data' contains test results
+          setUsers(data.data);
         }
       })
       .catch((error) => {
@@ -87,6 +87,7 @@ const Testresult = () => {
               <th scope="col">Phone</th>
               <th scope="col">Email</th>
               <th scope="col">Date</th>
+              <th scope="col">Job name</th>
               <th scope="col">Score</th>
               <th scope="col">Result</th>
             </tr>
@@ -99,6 +100,7 @@ const Testresult = () => {
                 <td>{user.phone}</td>
                 <td>{user.email}</td>
                 <td>{user.date}</td>
+                <td>{user.jobtype}</td>
                 <td>{`${user.marks}/${user.totalmarks}`}</td>
                 <td>{user.passed === 'false' ? 'failed' : 'passed'}</td>
               </tr>
