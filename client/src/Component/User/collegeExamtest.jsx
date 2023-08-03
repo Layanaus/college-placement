@@ -13,7 +13,7 @@ function CollegeExamtest() {
   console.log(id);
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [countdown, setCountdown] = useState(5 * 60); // 5 minutes in seconds
+  const [countdown, setCountdown] = useState(20 * 60); 
   const [showContainer, setShowContainer] = useState(true);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
@@ -75,8 +75,7 @@ function CollegeExamtest() {
       const resultMessage = `${message} Your score is ${score}/${totalMarks}.`;
        
       try {
-        const t =axios.get(
-          `http://localhost:5000/apply/update-aptitude-status/${id}`,);
+        const t =axios.get(`http://localhost:5000/apply/update-aptitude-status/${id}`,);
         const response = await axios.post('http://localhost:5000/result/add-result', {
         login_id:login_id,
         application_id:id,
@@ -154,7 +153,6 @@ function CollegeExamtest() {
           <form id="quiz-form" onSubmit={submitForm}>
             <div id="questions" className="carousel slide" data-ride="false">
               <div className="carousel-inner">
-                {/* Question */}
                 {questions.map((questionData, index) => (
                   <div key={index} className={`carousel-item ${currentQuestion === index ? 'active' : ''}`}>
                     <div className="question-section bg-light rounded p-4">

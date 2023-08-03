@@ -2,6 +2,7 @@ const express = require('express');
 const companyJobApplicationModel = require('../models/companyJobApplicationModel');
 const { default: mongoose } = require('mongoose');
 const userProfileModel = require('../models/userProfileModel');
+const aptitudetestModel = require('../models/aptitudetestModel');
 
 const objectId= mongoose.Types.ObjectId
 
@@ -493,18 +494,27 @@ companyjobapplicationRouter.put('/update_status/:id', async (req, res) => {
 });
 
 
-
-
 companyjobapplicationRouter.get('/update_appstatus/:id', async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = req.params.id;// Use params for status
 
-    const updatedData = {
       
-      application_status: 'Test Completed',
-    };
+        const passstatus =await aptitudetestModel.findOne({application_id : id})
+        
+        console.log(passstatus.passed);
 
-    const updatedApplication = await companyJobApplicationModel.updateOne({_id:id}, {$set:updatedData});
+    if (passstatus.passed === 'true')
+    {
+    const updatedData = {application_status : 'Aptitude Test Passed'}
+    const updatedApplication = await companyJobApplicationModel.updateOne ({_id:id}, {$set:updatedData});
+  console.log(updatedApplication);  }
+  else
+    {
+      const updatedData = {application_status : 'Aptitude Test Failed'}
+      const updatedApplication = await companyJobApplicationModel.updateOne
+        ({_id:id}, {$set:updatedData});
+    console.log(updatedApplication);
+  }
 
     if (updatedApplication) {
       return res.status(200).json({
@@ -529,5 +539,6 @@ companyjobapplicationRouter.get('/update_appstatus/:id', async (req, res) => {
     });
   }
 });
+
 
 module.exports = companyjobapplicationRouter;

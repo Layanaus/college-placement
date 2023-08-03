@@ -35,9 +35,21 @@ jobcategoryRouter.get('/view-jobcategory', async (req, res) => {
 jobcategoryRouter.post('/add_jobcategory', async (req, res) => {
   try {
     const { jobcategory } = req.body;
+    const existingJobCategory = await jobCategoryModel.findOne({ jobcategory });
+
+    if (existingJobCategory) {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: 'Job category already exists',
+        data: existingJobCategory,
+      });
+    }
+
     const newJobCategory = new jobCategoryModel({
       jobcategory,
     });
+
     const savedJobCategory = await newJobCategory.save();
     return res.status(200).json({
       success: true,

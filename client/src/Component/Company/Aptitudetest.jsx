@@ -5,23 +5,23 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 function Aptitudetest() {
-  const login_id=localStorage.getItem('login_id')
-  const {id}=useParams();
-  const {c_id}=useParams();
-  const {j_id}=useParams();
+  const login_id = localStorage.getItem('login_id');
+  const { id } = useParams();
+  const { c_id } = useParams();
+  const { j_id } = useParams();
 
   console.log(id);
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [countdown, setCountdown] = useState(5 * 60); // 5 minutes in seconds
+  const [countdown, setCountdown] = useState(20 * 60);
   const [showContainer, setShowContainer] = useState(true);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [Answers, setAnswers] = useState([]);
-  console.log('question',selectedAnswers);
+  console.log('question', selectedAnswers);
   const [score, setScore] = useState(0);
   const [totalMarks, setTotalMarks] = useState(0);
-  const [passed, setPassed] = useState();
+  const [passed, setPassed] = useState(false);
   const [evaluationResults, setEvaluationResults] = useState(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function Aptitudetest() {
       const { data } = response.data;
       setQuestions(data);
       setTotalMarks(data.length);
-      setSelectedAnswers(Array(data.length).fill('')); 
+      setSelectedAnswers(Array(data.length).fill(''));
     } catch (error) {
       console.error('Error fetching questions:', error);
     }
@@ -73,27 +73,33 @@ function Aptitudetest() {
       setShowContainer(false);
 
       const resultMessage = `${message} Your score is ${score}/${totalMarks}.`;
-       
+
       try {
-        const t =axios.get(
-          `http://localhost:5000/register/update_appstatus/${id}`,);
-        const response = await axios.post('http://localhost:5000/result/add-result', {
-        login_id:login_id,
-        application_id:id,
-        job_id:j_id,
-        company_id:c_id,
-        selectedAnswers,
+        const updateStatusResponse = await axios.get(`http://localhost:5000/register/update_appstatus/${id}/${passed ? 'Aptitude Passed' : 'Aptitude Failed'}`);
+        if (updateStatusResponse.data.success) {
+          console.log('Application status updated successfully');
+        } else {
+          console.log('Failed to update application status');
+        }
+
+        const addResultResponse = await axios.post('http://localhost:5000/result/add-result', {
+          login_id: login_id,
+          application_id: id,
+          job_id: j_id,
+          company_id: c_id,
+          selectedAnswers,
           score,
           totalMarks,
           passed,
         });
+
+        console.log('Evaluation results stored:', addResultResponse.data);
       } catch (error) {
-        console.error('Error storing evaluation results:', error);
+        console.error('Error updating app status or storing evaluation results:', error);
       }
-  
+
       window.scrollTo(0, 0);
 
-    
       const evaluationResults = (
         <div className="container text-center" style={{ marginTop: '10%' }}>
           <h1>Congratulations!!!</h1>
@@ -108,23 +114,8 @@ function Aptitudetest() {
     }
   };
 
-  const updatestatus = async () => {
-    try {
-     
-    } catch (error) {
-      console.error('Error updating app status:', error);
-    }
-  };
-  const submitForm = (e) => {
-    e.preventDefault();
-    setShowContainer(false);
-    evaluateAnswers();
-    updatestatus();
-  };
-
-
   const handleAnswerSelection = (e) => {
-    const { name, value } = e.target;
+    const { value } = e.target;
     const updatedSelectedAnswers = [...selectedAnswers];
     updatedSelectedAnswers[currentQuestion] = value;
     setSelectedAnswers(updatedSelectedAnswers);
@@ -136,9 +127,7 @@ function Aptitudetest() {
     const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
     const formattedSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
     return formattedMinutes + ':' + formattedSeconds;
-  };
-
-
+  }
 
   return (
     <>
@@ -151,7 +140,7 @@ function Aptitudetest() {
             <h3 id="countdown">{formatTime(countdown)}</h3>
           </div>
           <hr />
-          <form id="quiz-form" onSubmit={submitForm}>
+          <form id="quiz-form" onSubmit={evaluateAnswers}>
             <div id="questions" className="carousel slide" data-ride="false">
               <div className="carousel-inner">
                 {/* Question */}
@@ -161,62 +150,22 @@ function Aptitudetest() {
                       <h4>Question {index + 1}:</h4>
                       <p>{questionData.question}</p>
                       <div className="options">
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name={`q${index + 1}`}
-                            id={`q${index + 1}a`}
-                            value="option1"
-                            checked={selectedAnswers[currentQuestion] === 'option1'}
-                            onChange={handleAnswerSelection}
-                          />
-                          <label className="form-check-label" htmlFor={`q${index + 1}a`}>
-                            a) {questionData.option1}
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name={`q${index + 1}`}
-                            id={`q${index + 1}b`}
-                            value="option2"
-                            checked={selectedAnswers[currentQuestion] === 'option2'}
-                            onChange={handleAnswerSelection}
-                          />
-                          <label className="form-check-label" htmlFor={`q${index + 1}b`}>
-                            b) {questionData.option2}
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name={`q${index + 1}`}
-                            id={`q${index + 1}c`}
-                            value="option3"
-                            checked={selectedAnswers[currentQuestion] === 'option3'}
-                            onChange={handleAnswerSelection}
-                          />
-                          <label className="form-check-label" htmlFor={`q${index + 1}c`}>
-                            c) {questionData.option3}
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name={`q${index + 1}`}
-                            id={`q${index + 1}d`}
-                            value="option4"
-                            checked={selectedAnswers[currentQuestion] === 'option4'}
-                            onChange={handleAnswerSelection}
-                          />
-                          <label className="form-check-label" htmlFor={`q${index + 1}d`}>
-                            d) {questionData.option4}
-                          </label>
-                        </div>
+                        {['option1', 'option2', 'option3', 'option4'].map((option, optionIndex) => (
+                          <div className="form-check" key={optionIndex}>
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name={`q${index + 1}`}
+                              id={`q${index + 1}${option}`}
+                              value={option}
+                              checked={selectedAnswers[currentQuestion] === option}
+                              onChange={handleAnswerSelection}
+                            />
+                            <label className="form-check-label" htmlFor={`q${index + 1}${option}`}>
+                              {option}) {questionData[option]}
+                            </label>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -240,4 +189,4 @@ function Aptitudetest() {
   );
 }
 
-export default Aptitudetest;
+export default Aptitudetest;

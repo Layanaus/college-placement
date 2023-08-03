@@ -22,17 +22,89 @@ aptitudetestRouter.get('/view-aptitude-result', async (req, res) => {
       {
         '$lookup': {
           'from': 'job_register_tbs',
-          'localField': 'company_id',
-          'foreignField': 'login_id',
+          'localField': 'job_id',
+          'foreignField': '_id',
           'as': 'job'
         }
       },
+     
       {
         "$unwind": "$result"
       },
       {
         "$unwind": "$job"
+      }, 
+     
+     
+      {
+        "$group": {
+          '_id': "$_id",
+          'marks': { "$first": "$marks" },
+          'choosecollege': { "$first": "$college.collegename" },          
+          'application_id': { "$first": "$application_id" },
+          'totalmarks': { "$first": "$totalmarks" },
+          'passed': { "$first": "$passed" },
+          'date': { "$first": "$date" },
+          'firstname': { "$first":"$result.firstname" },
+          'email': { "$first":"$result.email" },
+          'phone': { "$first":"$result.phone" },
+          'login_id': { "$first":"$login_id" },
+          'company_id': { "$first":"$company_id" },
+          'jobtype': { "$first":"$job.jobname" },
+        }
+      }
+    ])
+    if (users[0] != undefined) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: users
+      })
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      })
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    })
+  }
+})
+aptitudetestRouter.get('/view-aptitude-results2', async (req, res) => {
+  try {
+    const users = await aptitudetestModel.aggregate([
+
+
+      {
+        '$lookup': {
+          'from': 'user_register_tbs',
+          'localField': 'login_id',
+          'foreignField': 'login_id',
+          'as': 'result'
+        }
       },
+      {
+        '$lookup': {
+          'from': 'jobportal_register_tbs',
+          'localField': 'job_id',
+          'foreignField': '_id',
+          'as': 'job'
+        }
+      },
+     
+      {
+        "$unwind": "$result"
+      },
+      {
+        "$unwind": "$job"
+      }, 
+     
      
       {
         "$group": {

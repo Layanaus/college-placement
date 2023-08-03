@@ -9,9 +9,9 @@ const objectId= mongoose.Types.ObjectId
 const companynotifyinterviewRouter = express.Router();
 
 
-companynotifyinterviewRouter.get('/view-notify-interview', async (req, res) => {
+companynotifyinterviewRouter.get('/view-notify-interview/:id', async (req, res) => {
   try {
-    const login_id = req.query.login_id;
+    const id = req.query.login_id;
 
     const users = await companyNotifyInterviewModel.aggregate([
       {
@@ -33,8 +33,8 @@ companynotifyinterviewRouter.get('/view-notify-interview', async (req, res) => {
       {
         '$lookup': {
           'from': 'jobapplication_register_tbs',
-          'localField': 'login_id',
-          'foreignField': 'company_id',
+          'localField': 'job_id',
+          'foreignField': '_id',
           'as': 'data'
         }
       },
@@ -86,7 +86,84 @@ companynotifyinterviewRouter.get('/view-notify-interview', async (req, res) => {
     });
   }
 });
+companynotifyinterviewRouter.get('/view-notified-interview/:id', async (req, res) => {
+  const id = req.query.login_id;
+  try {
+  
 
+    const users = await companyNotifyInterviewModel.aggregate([
+      {
+        '$lookup': {
+          'from': 'company_register_tbs',
+          'localField': 'login_id',
+          'foreignField': 'login_id',
+          'as': 'company'
+        }
+      },
+      {
+        '$lookup': {
+          'from': 'job_register_tbs',
+          'localField': 'login_id',
+          'foreignField': 'login_id',
+          'as': 'job'
+        }
+      },
+      {
+        '$lookup': {
+          'from': 'jobapplication_register_tbs',
+          'localField': 'job_id',
+          'foreignField': 'job_id',
+          'as': 'data'
+        }
+      },
+      {
+        "$unwind": "$company"
+      },
+      {
+        "$unwind": "$job"
+      },
+      {
+        "$unwind": "$data"
+      },
+      {
+        "$group": {
+          '_id': "$_id",
+          'message': { "$first": "$message" },
+          'jobname': { "$first": "$job.jobname" },
+          'companyname': { "$first": "$company.companyname" },
+          'companylocation': { "$first": "$company.companylocation" },
+          'date': { "$first": "$date" },
+          'application_status': { "$first": "$data.application_status" },
+          'application_id': { "$first": "$data._id" },
+          'user_id': { "$first": "$data.login_id" },
+          'login_id': { "$first": "$login_id" },
+          'job_id': { "$first": "$job_id" },
+        }
+      }
+    ]);
+
+    if (users[0] !== undefined) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: users
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    });
+  }
+});
 companynotifyinterviewRouter.get('/view-interview',async(req,res)=>{
   try {
       const interview = await companyNotifyInterviewModel.find()
@@ -127,7 +204,7 @@ companynotifyinterviewRouter.get('/view-interview',async(req,res)=>{
       date:req.body.interviewdate,
    
     };
-    const savedData = await companyNotifyInterviewModel(data).save();
+       const savedData = await companyNotifyInterviewModel(data).save();
 
     if (savedData) {
       return res.status(200).json({

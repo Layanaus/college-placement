@@ -7,11 +7,11 @@ const Usernotification = () => {
   const [notice, setNotice] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/notify/view-notify-interview?login_id=${login_id}`)
+    fetch(`http://localhost:5000/notify/view-notified-interview/${login_id}}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          const filteredData = data.data.filter((notification) => notification.application_status === 'Test Completed');
+          const filteredData = data.data.filter((notification) => notification.application_status ==='Aptitude Passed');
           setNotice(filteredData);
         }
       })

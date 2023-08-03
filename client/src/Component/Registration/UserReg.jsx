@@ -125,7 +125,7 @@ const UserReg = () => {
       errors.username = "User Name is required";
     }
     if (!values.image) {
-      errors.image = "image is required";
+      errors.image = "student image is required";
     }
     if (!values.password) {
       errors.password = "Password is required";
