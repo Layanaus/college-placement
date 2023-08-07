@@ -5,23 +5,23 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 function Aptitudetest() {
-  const login_id = localStorage.getItem('login_id');
-  const { id } = useParams();
-  const { c_id } = useParams();
-  const { j_id } = useParams();
+  const login_id=localStorage.getItem('login_id')
+  const {id}=useParams();
+  const {c_id}=useParams();
+  const {j_id}=useParams();
 
   console.log(id);
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [countdown, setCountdown] = useState(20 * 60);
+  const [countdown, setCountdown] = useState(20 * 60); 
   const [showContainer, setShowContainer] = useState(true);
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [Answers, setAnswers] = useState([]);
-  console.log('question', selectedAnswers);
+  console.log('question',selectedAnswers);
   const [score, setScore] = useState(0);
   const [totalMarks, setTotalMarks] = useState(0);
-  const [passed, setPassed] = useState(false);
+  const [passed, setPassed] = useState();
   const [evaluationResults, setEvaluationResults] = useState(null);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ function Aptitudetest() {
       const { data } = response.data;
       setQuestions(data);
       setTotalMarks(data.length);
-      setSelectedAnswers(Array(data.length).fill(''));
+      setSelectedAnswers(Array(data.length).fill('')); 
     } catch (error) {
       console.error('Error fetching questions:', error);
     }
@@ -59,6 +59,7 @@ function Aptitudetest() {
     }
   };
 
+  console.log(id);
   const evaluateAnswers = async () => {
     try {
       const response = await axios.post(`http://localhost:5000/add/evaluate-answers/${c_id}`, {
@@ -66,40 +67,43 @@ function Aptitudetest() {
       });
 
       const { score, totalMarks, passed, message } = response.data;
-
+ 
       setScore(score);
       setPassed(passed);
       setShowCongratulations(true);
       setShowContainer(false);
 
       const resultMessage = `${message} Your score is ${score}/${totalMarks}.`;
+      console.log(passed);
+       
+      try {
+        
+        const response = await axios.post('http://localhost:5000/result/add-result', {
+        login_id:login_id,
+        application_id:id,
+        job_id:j_id,
+        company_id:c_id,
+        selectedAnswers,
+        score,
+        totalMarks,
+        passed,
+        });
+       
+      } catch (error) {
+        console.error('Error storing evaluation results:', error);
+      }
 
       try {
-        const updateStatusResponse = await axios.get(`http://localhost:5000/register/update_appstatus/${id}/${passed ? 'Aptitude Passed' : 'Aptitude Failed'}`);
-        if (updateStatusResponse.data.success) {
-          console.log('Application status updated successfully');
-        } else {
-          console.log('Failed to update application status');
-        }
-
-        const addResultResponse = await axios.post('http://localhost:5000/result/add-result', {
-          login_id: login_id,
-          application_id: id,
-          job_id: j_id,
-          company_id: c_id,
-          selectedAnswers,
-          score,
-          totalMarks,
-          passed,
-        });
-
-        console.log('Evaluation results stored:', addResultResponse.data);
+        await axios.get(`http://localhost:5000/register/update_appstatus/${id}`);
       } catch (error) {
-        console.error('Error updating app status or storing evaluation results:', error);
+        console.error('Error updating app status:', error);
       }
+       
+      
 
       window.scrollTo(0, 0);
 
+    
       const evaluationResults = (
         <div className="container text-center" style={{ marginTop: '10%' }}>
           <h1>Congratulations!!!</h1>
@@ -114,8 +118,24 @@ function Aptitudetest() {
     }
   };
 
+  const updatestatus = async () => {
+    try {
+      axios.post(`http://localhost:5000/register/update_appstatus/${id}`,);
+     
+    } catch (error) {
+      console.error('Error updating app status:', error);
+    }
+  };
+  const submitForm = (e) => {
+    e.preventDefault();
+    setShowContainer(false);
+    evaluateAnswers();
+    updatestatus();
+  };
+
+
   const handleAnswerSelection = (e) => {
-    const { value } = e.target;
+    const { name, value } = e.target;
     const updatedSelectedAnswers = [...selectedAnswers];
     updatedSelectedAnswers[currentQuestion] = value;
     setSelectedAnswers(updatedSelectedAnswers);
@@ -127,7 +147,8 @@ function Aptitudetest() {
     const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
     const formattedSeconds = remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds;
     return formattedMinutes + ':' + formattedSeconds;
-  }
+  };
+
 
   return (
     <>

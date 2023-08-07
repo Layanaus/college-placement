@@ -51,6 +51,19 @@ const Editjobportal = () => {
   const updatedInputs = { ...inputs, jobcategory_id,company_id };
 
   useEffect(() => {
+
+
+    fetch(`http://localhost:5000/register/view-openedjobportaldetails/${id}`)
+.then((response) => response.json())
+.then((data) => {
+console.log(data);
+  if (data.success) {
+    setinputs(data.data ||{});
+  }
+})
+.catch((error) => {
+  console.log('Error:', error);
+});
     axios.get('http://localhost:5000/jobcategory/view-jobcategory')
       .then((response) => {
         setjobCategory(response.data.data);
@@ -68,6 +81,9 @@ const Editjobportal = () => {
         console.log('Error:', error);
       });
   }, []);
+
+  
+
   return (
     <>
     <Placementofficernav/>

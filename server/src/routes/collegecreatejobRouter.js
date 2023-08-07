@@ -131,6 +131,7 @@ collegecreatejobRouter.get('/viewjobportal-jobs', async (req, res) => {
           'collegename': { "$first": "$portal.collegename" },
           'companyname': { "$first": "$vishnu.companyname" },
           'jobcategory': { "$first": "$chinnu.jobcategory" },
+          'date': { "$first": "$date" },
           'lastdate': { "$first": "$lastdate" },
           'college_id': { "$first": "$portal._id" },
           'company_id': { "$first": "$company_id" },
@@ -490,6 +491,7 @@ collegecreatejobRouter.post('/create_jobportal', async (req, res) => {
     Requiredqualification:req.body.qualification,
     salaryrange:req.body.salaryrange,
     companycontact:req.body.companycontact,
+    date:new Date(),
     lastdate:req.body.lastdate,
     };
     const savedData = await collegeCreateJobModel(data).save();
@@ -535,6 +537,112 @@ collegecreatejobRouter.get('/get-applicant/:cid', async (req, res) => {
       success: false,
       message: 'Something went wrong',
       details: error.message,
+    });
+  }
+});
+collegecreatejobRouter.put('/edit-openjobportaljob/:id', async (req, res) => {
+  try {
+    const job_id = req.params.id;
+    const updatedData = {
+      companyname:req.body.companyname,
+      companylocation:req.body.companylocation,
+      jobname:req.body.jobname,
+      jobdescription:req.body.jobdescription,
+      jobcategory:req.body.jobcategory,
+      Requiredqualification:req.body.qualification,
+      salaryrange:req.body.salaryrange,
+      companycontact:req.body.companycontact,
+      lastdate:req.body.lastdate,
+
+    };
+
+    const updatedjob = await collegeCreateJobModel.updateOne({_id:job_id}, {$set:updatedData});
+
+    if (updatedjob) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        message: 'job updated successfully',
+        data: updatedmyprofile,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: 'job not found',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: 'Something went wrong',
+      details: error,
+    });
+     }
+      });
+
+
+
+
+collegecreatejobRouter.get('/view-jobportaljobdetails/:id', async (req, res) => {
+  try {
+  
+    const id=req.params.id;
+    const student = await collegeCreateJobModel.findOne({_id:id}); 
+
+    if (student) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: student
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    });
+  }
+});
+
+collegecreatejobRouter.delete('/delete-jobportaljob/:id', async (req, res) => {
+  try {
+    const jobId = req.params.id;
+
+    const existingJob = await collegeCreateJobModel.findById(jobId);
+
+    if (!existingJob) {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: "Job not found",
+        details: null
+      });
+    }
+
+    await collegeCreateJobModel.findByIdAndRemove(jobId);
+
+    return res.status(200).json({
+      success: true,
+      error: false,
+      message: "Job deleted successfully",
+      details: existingJob
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
     });
   }
 });

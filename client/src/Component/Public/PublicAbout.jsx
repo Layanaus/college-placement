@@ -12,12 +12,13 @@ const PublicAbout = () => {
         <div className="col-lg-6">
           <h1 className="display-4">About us page</h1>
           <p className="lead text-muted mb-0">
-            Create a minimal about us page using Bootstrap 4.
+          Welcome to the College Placement Cell! We, at the College Placement Cell, are dedicated to empowering our students and bridging the gap between academia and the professional world. Our mission is to facilitate successful career opportunities for our students and provide a platform for esteemed organizations to recruite top talent from our institution. 
+
           </p>
           <p className="lead text-muted">
-            Snippet by{" "}
+            {" "}
             <a href="https://bootstrapious.com/snippets" className="text-muted">
-              <u>Bootstrapious</u>
+              <u></u>
             </a>
           </p>
         </div>
@@ -36,58 +37,58 @@ const PublicAbout = () => {
       <div className="row align-items-center mb-5">
         <div className="col-lg-6 order-2 order-lg-1">
           <i className="fa fa-bar-chart fa-2x mb-3 text-primary" />
-          <h2 className="font-weight-light">Lorem ipsum dolor sit amet</h2>
-          <p className="font-italic text-muted mb-4">
+          {/* <h2 className="font-weight-light">Lorem ipsum dolor sit amet</h2> */}
+          {/* <p className="font-italic text-muted mb-4">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <a href="#" className="btn btn-light px-5 rounded-pill shadow-sm">
+          </p> */}
+          {/* <a href="#" className="btn btn-light px-5 rounded-pill shadow-sm">
             Learn More
-          </a>
+          </a> */}
         </div>
-        <div className="col-lg-5 px-5 mx-auto order-1 order-lg-2">
+        {/* <div className="col-lg-5 px-5 mx-auto order-1 order-lg-2">
           <img
             src="https://bootstrapious.com/i/snippets/sn-about/img-1.jpg"
             alt=""
             className="img-fluid mb-4 mb-lg-0"
           />
-        </div>
-      </div>
-      <div className="row align-items-center">
-        <div className="col-lg-5 px-5 mx-auto">
+        </div> */}
+      {/* </div>
+      <div className="row align-items-center"> */}
+        {/* <div className="col-lg-5 px-5 mx-auto">
           <img
             src="https://bootstrapious.com/i/snippets/sn-about/img-2.jpg"
             alt=""
             className="img-fluid mb-4 mb-lg-0"
           />
-        </div>
-        <div className="col-lg-6">
-          <i className="fa fa-leaf fa-2x mb-3 text-primary" />
-          <h2 className="font-weight-light">Lorem ipsum dolor sit amet</h2>
-          <p className="font-italic text-muted mb-4">
+        </div> */}
+        {/* <div className="col-lg-6">
+          <i className="fa fa-leaf fa-2x mb-3 text-primary" /> */}
+          {/* <h2 className="font-weight-light">Lorem ipsum dolor sit amet</h2> */}
+          {/* <p className="font-italic text-muted mb-4">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-          <a href="#" className="btn btn-light px-5 rounded-pill shadow-sm">
+          </p> */}
+          {/* <a href="#" className="btn btn-light px-5 rounded-pill shadow-sm">
             Learn More
-          </a>
+          </a> */}
         </div>
       </div>
     </div>
-  </div>
-  <div className="bg-light py-5">
-    <div className="container py-5">
-      <div className="row mb-4">
+  {/* </div> */}
+  {/* <div className="bg-light py-5">
+    <div className="container py-5"> */}
+      {/* <div className="row mb-4">
         <div className="col-lg-5">
           <h2 className="display-4 font-weight-light">Our team</h2>
           <p className="font-italic text-muted">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit.
           </p>
         </div>
-      </div>
-      <div className="row text-center">
+      </div> */}
+      {/* <div className="row text-center"> */}
         {/* Team item*/}
-        <div className="col-xl-3 col-sm-6 mb-5">
+        {/* <div className="col-xl-3 col-sm-6 mb-5">
           <div className="bg-white rounded shadow-sm py-5 px-4">
             <img
               src="https://bootstrapious.com/i/snippets/sn-about/avatar-4.png"
@@ -122,10 +123,10 @@ const PublicAbout = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
         {/* End*/}
         {/* Team item*/}
-        <div className="col-xl-3 col-sm-6 mb-5">
+        {/* <div className="col-xl-3 col-sm-6 mb-5">
           <div className="bg-white rounded shadow-sm py-5 px-4">
             <img
               src="https://bootstrapious.com/i/snippets/sn-about/avatar-3.png"
@@ -160,10 +161,10 @@ const PublicAbout = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
         {/* End*/}
         {/* Team item*/}
-        <div className="col-xl-3 col-sm-6 mb-5">
+        {/* <div className="col-xl-3 col-sm-6 mb-5">
           <div className="bg-white rounded shadow-sm py-5 px-4">
             <img
               src="https://bootstrapious.com/i/snippets/sn-about/avatar-2.png"
@@ -198,10 +199,10 @@ const PublicAbout = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
         {/* End*/}
         {/* Team item*/}
-        <div className="col-xl-3 col-sm-6 mb-5">
+        {/* <div className="col-xl-3 col-sm-6 mb-5">
           <div className="bg-white rounded shadow-sm py-5 px-4">
             <img
               src="https://bootstrapious.com/i/snippets/sn-about/avatar-1.png"
@@ -236,11 +237,11 @@ const PublicAbout = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </div> */}
         {/* End*/}
-      </div>
+      {/* </div>
     </div>
-  </div>
+  </div> */}
 </>
 
 

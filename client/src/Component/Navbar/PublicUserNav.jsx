@@ -58,9 +58,9 @@ const PublicUserNav = () => {
           className="nav-item dropdown"
           style={{ backgroundColor: "#1aa7ec", color: "white", borderRadius: 5 }}
         >
-          <a href="#" className="nav-link " style={{ color: "white" }}>
+          {/* <a href="#" className="nav-link " style={{ color: "white" }}>
             Login
-          </a>
+          </a> */}
       
         </div>
       </div>

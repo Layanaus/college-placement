@@ -55,7 +55,7 @@ const Appliedjobs = () => {
                Applied jobs
               </button>
               <button className="dropdown-item" type="button" onClick={() => setSelectedStatus('All')}>
-                All
+               All
               </button>
             </div>
           </div>

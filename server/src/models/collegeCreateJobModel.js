@@ -13,6 +13,7 @@ const createjobportalSchema=new schema({
     Requiredqualification:{type:String},
     salaryrange:{type:String},
     companycontact:{type:String},
+    date:{type:String},
     lastdate:{type:String},
        
 })

@@ -59,6 +59,7 @@ function CollegeExamtest() {
     }
   };
 
+  console.log(id);
   const evaluateAnswers = async () => {
     try {
       const response = await axios.post(`http://localhost:5000/add/evaluate-answers/${c_id}`, {
@@ -66,30 +67,40 @@ function CollegeExamtest() {
       });
 
       const { score, totalMarks, passed, message } = response.data;
-
+ 
       setScore(score);
       setPassed(passed);
       setShowCongratulations(true);
       setShowContainer(false);
 
       const resultMessage = `${message} Your score is ${score}/${totalMarks}.`;
+      console.log(passed);
        
       try {
-        const t =axios.get(`http://localhost:5000/apply/update-aptitude-status/${id}`,);
+        
         const response = await axios.post('http://localhost:5000/result/add-result', {
         login_id:login_id,
         application_id:id,
         job_id:j_id,
         company_id:c_id,
         selectedAnswers,
-          score,
-          totalMarks,
-          passed,
+        score,
+        totalMarks,
+        passed,
         });
+       
       } catch (error) {
         console.error('Error storing evaluation results:', error);
       }
-  
+
+      try {
+        await axios.get(`http://localhost:5000/apply/update-aptitude-status/${id}`);
+      } catch (error) {
+        console.error('Error updating app status:', error);
+      }
+       
+      
+
       window.scrollTo(0, 0);
 
     
@@ -109,6 +120,7 @@ function CollegeExamtest() {
 
   const updatestatus = async () => {
     try {
+      axios.post(`http://localhost:5000/register/update_appstatus/${id}`,);
      
     } catch (error) {
       console.error('Error updating app status:', error);
@@ -138,7 +150,6 @@ function CollegeExamtest() {
   };
 
 
-
   return (
     <>
       <Usernav />
@@ -150,71 +161,32 @@ function CollegeExamtest() {
             <h3 id="countdown">{formatTime(countdown)}</h3>
           </div>
           <hr />
-          <form id="quiz-form" onSubmit={submitForm}>
+          <form id="quiz-form" onSubmit={evaluateAnswers}>
             <div id="questions" className="carousel slide" data-ride="false">
               <div className="carousel-inner">
+                {/* Question */}
                 {questions.map((questionData, index) => (
                   <div key={index} className={`carousel-item ${currentQuestion === index ? 'active' : ''}`}>
                     <div className="question-section bg-light rounded p-4">
                       <h4>Question {index + 1}:</h4>
                       <p>{questionData.question}</p>
                       <div className="options">
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name={`q${index + 1}`}
-                            id={`q${index + 1}a`}
-                            value="option1"
-                            checked={selectedAnswers[currentQuestion] === 'option1'}
-                            onChange={handleAnswerSelection}
-                          />
-                          <label className="form-check-label" htmlFor={`q${index + 1}a`}>
-                            a) {questionData.option1}
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name={`q${index + 1}`}
-                            id={`q${index + 1}b`}
-                            value="option2"
-                            checked={selectedAnswers[currentQuestion] === 'option2'}
-                            onChange={handleAnswerSelection}
-                          />
-                          <label className="form-check-label" htmlFor={`q${index + 1}b`}>
-                            b) {questionData.option2}
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name={`q${index + 1}`}
-                            id={`q${index + 1}c`}
-                            value="option3"
-                            checked={selectedAnswers[currentQuestion] === 'option3'}
-                            onChange={handleAnswerSelection}
-                          />
-                          <label className="form-check-label" htmlFor={`q${index + 1}c`}>
-                            c) {questionData.option3}
-                          </label>
-                        </div>
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="radio"
-                            name={`q${index + 1}`}
-                            id={`q${index + 1}d`}
-                            value="option4"
-                            checked={selectedAnswers[currentQuestion] === 'option4'}
-                            onChange={handleAnswerSelection}
-                          />
-                          <label className="form-check-label" htmlFor={`q${index + 1}d`}>
-                            d) {questionData.option4}
-                          </label>
-                        </div>
+                        {['option1', 'option2', 'option3', 'option4'].map((option, optionIndex) => (
+                          <div className="form-check" key={optionIndex}>
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name={`q${index + 1}`}
+                              id={`q${index + 1}${option}`}
+                              value={option}
+                              checked={selectedAnswers[currentQuestion] === option}
+                              onChange={handleAnswerSelection}
+                            />
+                            <label className="form-check-label" htmlFor={`q${index + 1}${option}`}>
+                              {option}) {questionData[option]}
+                            </label>
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -238,4 +210,4 @@ function CollegeExamtest() {
   );
 }
 
-export default CollegeExamtest;
+export default CollegeExamtest;

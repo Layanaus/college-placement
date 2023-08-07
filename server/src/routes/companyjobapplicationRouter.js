@@ -9,7 +9,32 @@ const objectId= mongoose.Types.ObjectId
 
 
 const companyjobapplicationRouter = express.Router();
-
+companyjobapplicationRouter.get('/view-sudhee/:id',async(req,res)=>{
+  
+    try {
+      const users = await companyJobApplicationModel.find()
+      if(users[0]!=undefined){
+          return res.status(200).json({
+              success:true,
+              error:false,
+              data:users
+          })
+      }else{
+          return res.status(400).json({
+              success:false,
+              error:true,
+              message:"No data found"
+          })
+      }
+  } catch (error) {
+      return res.status(400).json({
+          success:false,
+          error:true,
+          message:"Something went wrong",
+          details:error
+      })
+  }
+  })
 companyjobapplicationRouter.get('/view-companyapplication',async(req,res)=>{
   try {
       const users = await companyJobApplicationModel.find()
@@ -493,30 +518,26 @@ companyjobapplicationRouter.put('/update_status/:id', async (req, res) => {
   }
 });
 
-
 companyjobapplicationRouter.get('/update_appstatus/:id', async (req, res) => {
   try {
-    const id = req.params.id;// Use params for status
+    const id = req.params.id; // Use params for status
+    
+    const passstatus = await aptitudetestModel.findOne({ application_id: id });
+    
+    console.log(passstatus);
 
-      
-        const passstatus =await aptitudetestModel.findOne({application_id : id})
-        
-        console.log(passstatus.passed);
+    let updatedData; // Define the variable here
 
-    if (passstatus.passed === 'true')
-    {
-    const updatedData = {application_status : 'Aptitude Test Passed'}
-    const updatedApplication = await companyJobApplicationModel.updateOne ({_id:id}, {$set:updatedData});
-  console.log(updatedApplication);  }
-  else
-    {
-      const updatedData = {application_status : 'Aptitude Test Failed'}
-      const updatedApplication = await companyJobApplicationModel.updateOne
-        ({_id:id}, {$set:updatedData});
+    if (passstatus.passed === 'true') {
+      updatedData = { application_status: 'woww!..Aptitude Test Passed' };
+    } else {
+      updatedData = { application_status: 'oops!..Aptitude Test Failed' };
+    }
+
+    const updatedApplication = await companyJobApplicationModel.updateOne({ _id: id }, { $set: updatedData });
     console.log(updatedApplication);
-  }
 
-    if (updatedApplication) {
+    if (updatedApplication.nModified > 0) {
       return res.status(200).json({
         success: true,
         error: false,
@@ -539,6 +560,50 @@ companyjobapplicationRouter.get('/update_appstatus/:id', async (req, res) => {
     });
   }
 });
+
+
+// companyjobapplicationRouter.get('/update_appstatus/:id/:condition', async (req, res) => {
+//   try {
+//     const id = req.params.id; // Use params for status
+//     const condition = req.params.condition;
+//     const passstatus = await aptitudetestModel.findOne({ application_id: id,passed:condition });
+    
+//     console.log(passstatus);
+
+//     let updatedData; // Define the variable here
+
+//     if (passstatus.passed === 'true') {
+//       updatedData = { application_status: 'woww!..Aptitude Test Passed' };
+//     } else {
+//       updatedData = { application_status: 'oops!..Aptitude Test Failed' };
+//     }
+
+//     const updatedApplication = await companyJobApplicationModel.updateOne({ _id: id }, { $set: updatedData });
+//     console.log(updatedApplication);
+
+//     if (updatedApplication.nModified > 0) {
+//       return res.status(200).json({
+//         success: true,
+//         error: false,
+//         message: "Application status updated successfully",
+//         details: updatedApplication,
+//       });
+//     } else {
+//       return res.status(404).json({
+//         success: false,
+//         error: true,
+//         message: "Application not found",
+//       });
+//     }
+//   } catch (error) {
+//     return res.status(400).json({
+//       success: false,
+//       error: true,
+//       message: "Something went wrong",
+//       details: error,
+//     });
+//   }
+// });
 
 
 module.exports = companyjobapplicationRouter;

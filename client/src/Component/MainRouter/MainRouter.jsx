@@ -77,7 +77,7 @@ const MainRouter = () => {
             <Route path="/" element={<PublicUser/>}/>
             <Route path="contact" element={<PublicContact/>}/>
             <Route path="home" element={<PublicUser/>}/>
-            <Route path='PublicUser' element={<PublicUserAbout/>}/>
+            <Route path='PublicUser' eleFment={<PublicUserAbout/>}/>
             <Route path="PublicUserContact" element={<PublicUserContact/>}/>
             <Route path="PublicUserAbout" element={<PublicUserAbout/>}/>
             <Route path="UserReg" element={<UserReg/>}/>

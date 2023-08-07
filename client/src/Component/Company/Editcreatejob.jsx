@@ -56,6 +56,28 @@ const Editcreatejob = () => {
       .catch((error) => {
         console.log('Error:', error);
       });
+//       axios
+//       .put(`http://localhost:5000/register/edit-openedjob/${id}`,inputs)
+//       .then((response) => {
+//         console.log(response.data);
+//         setInputs(response.data.data[0] || {});
+//       })
+//       .catch((error) => {
+//         console.log('Error:', error);
+//       });
+
+fetch(`http://localhost:5000/register/view-openedjobdetails/${id}`)
+.then((response) => response.json())
+.then((data) => {
+console.log(data);
+  if (data.success) {
+    setInputs(data.data ||{});
+  }
+})
+.catch((error) => {
+  console.log('Error:', error);
+});
+
   }, []);
 
 

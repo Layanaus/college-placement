@@ -22,7 +22,8 @@ console.log(category);
   }, []);
 
   const handleDeleteJob = (jobId) => {
-    fetch(`http://localhost:5000/register/delete-job/${jobId}`, {
+    console.log('ready to fail');
+    fetch(`http://localhost:5000/register//delete-jobportaljob/${jobId}`, {
       method: 'DELETE'
     })
       .then((response) => response.json())

@@ -174,7 +174,7 @@ userregRouter.get('/view-student-manage/:id', async (req, res) => {
     })
   }
 })
-userregRouter.get('/view-users', async (req, res) => {
+userregRouter.get('/view-registered-students', async (req, res) => {
   try {
     const users = await userRegisterModel.aggregate([
 
@@ -191,7 +191,7 @@ userregRouter.get('/view-users', async (req, res) => {
         '$lookup': {     
           'from': 'pofficer_register_tbs',
           'localField': 'choosecollege',
-          'foreignField': '_id',
+          'foreignField': 'login_id',
           'as': 'college'
         }
       },

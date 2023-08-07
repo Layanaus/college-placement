@@ -512,19 +512,26 @@ collegejobapplicationRouter.get('/view-collegeapplication',async(req,res)=>{
       });
     }
   });
-   
-    
   collegejobapplicationRouter.get('/update-aptitude-status/:id', async (req, res) => {
     try {
-      const id = req.params.id;
+      const id = req.params.id; // Use params for status
+      
+      const passstatus = await aptitudetestModel.findOne({ application_id: id });
+      
+      console.log(passstatus);
   
-      const updatedData = { 
-        application_status: 'Test Completed',
-      };
+      let updatedData; // Define the variable here
   
-      const updatedApplication = await collegeJobApplicationModel.updateOne({_id:id}, {$set:updatedData});
+      if (passstatus.passed === 'true') {
+        updatedData = { application_status: 'woww!..Aptitude Test Passed' };
+      } else {
+        updatedData = { application_status: 'oops!..Aptitude Test Failed' };
+      }
   
-      if (updatedApplication) {
+      const updatedApplication = await collegeJobApplicationModel.updateOne({ _id: id }, { $set: updatedData });
+      console.log(updatedApplication);
+  
+      if (updatedApplication.nModified > 0) {
         return res.status(200).json({
           success: true,
           error: false,
@@ -547,4 +554,39 @@ collegejobapplicationRouter.get('/view-collegeapplication',async(req,res)=>{
       });
     }
   });
+  
+    
+  // collegejobapplicationRouter.get('/update-aptitude-status/:id', async (req, res) => {
+  //   try {
+  //     const id = req.params.id;
+  
+  //     const updatedData = { 
+  //       application_status: 'Test Completed',
+  //     };
+  
+  //     const updatedApplication = await collegeJobApplicationModel.updateOne({_id:id}, {$set:updatedData});
+  
+  //     if (updatedApplication) {
+  //       return res.status(200).json({
+  //         success: true,
+  //         error: false,
+  //         message: "Application status updated successfully",
+  //         details: updatedApplication,
+  //       });
+  //     } else {
+  //       return res.status(404).json({
+  //         success: false,
+  //         error: true,
+  //         message: "Application not found",
+  //       });
+  //     }
+  //   } catch (error) {
+  //     return res.status(400).json({
+  //       success: false,
+  //       error: true,
+  //       message: "Something went wrong",
+  //       details: error,
+  //     });
+  //   }
+  // });
 module.exports = collegejobapplicationRouter;

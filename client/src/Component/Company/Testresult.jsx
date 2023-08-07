@@ -118,8 +118,10 @@ const Testresult = () => {
               <option key={uniqueJobType} value={uniqueJobType}>
                 {uniqueJobType}
               </option>
+            
             ))}
           </select>
+          
         </div>
         <table className="table" style={{ borderRadius: 15 }}>
           <thead>

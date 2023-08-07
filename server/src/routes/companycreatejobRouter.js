@@ -1,6 +1,7 @@
 const express = require('express');
 const companyCreateJobModel = require('../models/companyCreateJobModel');
 const companyJobApplicationModel = require('../models/companyJobApplicationModel');
+const collegeCreateJobModel = require('../models/collegeCreateJobModel');
 
 
 const companycreatejobRouter = express.Router();
@@ -308,5 +309,107 @@ companycreatejobRouter.get('/get-applications/:cid', async (req, res) => {
 });
 
 
+companycreatejobRouter.put('/edit-openedjob/:id', async (req, res) => {
+  try {
+    const job_id = req.params.id;
+    const updatedData = {
+      jobname: req.body.jobname,
+    jobdescription: req.body.jobdescription,
+    jobcategory: req.body.jobcategory,
+    vaccancy: req.body.vaccancy,
+    qualification: req.body.qualification,
+    expectedsalary: req.body.expectedsalary,
+    lastdate: req.body.lastdate,
 
+    };
+
+    const updatedjob = await companyCreateJobModel.updateOne({_id:job_id}, {$set:updatedData});
+
+    if (updatedjob) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        message: 'job updated successfully',
+        data: updatedmyprofile,
+      });
+    } else {
+      return res.status(404).json({
+        success: false,
+        error: true,
+        message: 'job not found',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: true,
+      message: 'Something went wrong',
+      details: error,
+    });
+     }
+      });
+
+
+
+
+companycreatejobRouter.get('/view-openedjobdetails/:id', async (req, res) => {
+  try {
+  
+    const id=req.params.id;
+    const student = await companyCreateJobModel.findOne({_id:id}); 
+
+    if (student) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: student
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    });
+  }
+});
+
+
+
+
+companycreatejobRouter.get('/view-openedjobportaldetails/:id', async (req, res) => {
+  try {
+  
+    const id=req.params.id;
+    const student = await collegeCreateJobModel.findOne({_id:id}); 
+
+    if (student) {
+      return res.status(200).json({
+        success: true,
+        error: false,
+        data: student
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+        error: true,
+        message: "No data found"
+      });
+    }
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      error: true,
+      message: "Something went wrong",
+      details: error
+    });
+  }
+});
 module.exports = companycreatejobRouter;

@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const AdminNav = () => {
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.removeItem('login_id')
+    localStorage.removeItem('role')
+    navigate('/')
+  }
+  useEffect(() => {
+    const login_id = localStorage.getItem('login_id')
+                  if (!login_id) {
+                    navigate('/')
+                  }
+  }, [])
+  const login_id=localStorage.getItem('login_id')
+  if (!login_id) {
+    navigate('/')
+  }
   return (
     <>
     <div className="container-fluid bg-dark">
@@ -117,7 +134,7 @@ const AdminNav = () => {
               <a href="changepassword" className="dropdown-item">
                 Change Password
               </a>
-              <a href="/" className="dropdown-item">
+              <a href="/" onClick={logout} className="dropdown-item">
                 log out
               </a>
               

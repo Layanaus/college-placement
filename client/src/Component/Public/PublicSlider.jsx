@@ -21,6 +21,7 @@ const PublicSlider = () => {
       axios.post('http://localhost:5000/login/login', inputs)
         .then((data) => {
           console.log(data);
+          
           if (data.data.role === '1') {
             localStorage.setItem('user_id', data.data.user_id);
             localStorage.setItem('login_id', data.data.login_id);
@@ -37,15 +38,29 @@ const PublicSlider = () => {
             localStorage.setItem('role', data.data.role);
             navigate('/placementofficer');
           }
+          else if (data.data.role === '0') {
+            localStorage.setItem('login_id', data.data.login_id);
+            localStorage.setItem('role', data.data.role);
+            navigate('/admin');
+          }
           else {
             toast.error('Incorrect username or password');
           }
         })
         .catch((error) => {
-          console.log(error);
-          toast.error('incorrect password or username');
-        });
-    }
+          console.error(error);
+          toast.error(error.response.data.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+            });
+        });
+    };
   }, [formErrors, inputs, isSubmit, navigate]);
 
   const setRegister = (event) => {
@@ -98,7 +113,7 @@ const PublicSlider = () => {
 >
   <div className="container text-center my-5 py-5">
     <h1 className="text-white mt-4 mb-4">Welcome To Your</h1>
-    <h1 className="text-white display-1 mb-5">Career Stepping stone</h1>
+    <h1 className="text-white display-1 mb-5">Career Stepping Stone</h1>
     <div className="mx-auto mb-5" style={{ width: "100%", maxWidth: 600 }}>
       <div className="wrapper fadeInDown">
         <div id="formContent">
@@ -144,11 +159,11 @@ const PublicSlider = () => {
             />
           </form>
          {/* Remind Passowrd */}
-          <div id="formFooter">
+          {/* <div id="formFooter">
             <a className="underlineHover" href="#">
               Forgot Password?
             </a>
-          </div> 
+          </div>  */}
         </div>
       </div>
     </div>
@@ -192,9 +207,7 @@ are online platforms that connect job seekers with employers.
         <div className="col-md-10 col-xl-8 text-center">
           <h3 className="mb-4">Testimonials</h3>
           <p className="mb-4 pb-2 mb-md-5 pb-md-0">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error
-            amet numquam iure provident voluptate esse quasi, veritatis totam
-            voluptas nostrum quisquam eum porro a pariatur veniam.
+          The goal of a testimonial is to show the potential customer that other customers were happy using your service or product. The more your satisfied customers are reliable, the more the testimonial is trustworthy.
           </p>
         </div>
       </div>

@@ -20,18 +20,23 @@ loginRouter.post('/login', async (req, res) => {
         }
         if (oldUser.password == req.body.password) {
             if (oldUser.role == 0) {
+            
                 return res.status(200).json({
                     success: true,
                     error: false,
                     role:oldUser.role,
-                    admin_id:admin._id,
                     login_id: oldUser._id,
+                    status: oldUser.status,
                     details: oldUser
+                    
+                    
                 })
             }
             if (oldUser.role == 1) {
                 const user = await userRegisterModel.findOne({ login_id: oldUser._id })
                 if (user) {
+                  if(oldUser.status==1){
+
                     return res.status(200).json({
                         success: true,
                         error: false,
@@ -41,12 +46,23 @@ loginRouter.post('/login', async (req, res) => {
                         status: oldUser.status,
                         details: oldUser
                     })
-                }
+                }else{
+                  return res.status(406).json({
+                      success:false,
+                      error:true,
+                      message:"waiting for admin approval!"
+      
+                  })
+              }
+             
+          }
+        
 
             }
             if (oldUser.role == 2) {
                 const company = await companyRegisterModel.findOne({ login_id: oldUser._id });
                 if (company) {
+                  if(oldUser.status==1){
                   return res.status(200).json({
                     success: true,
                     error: false,
@@ -56,11 +72,21 @@ loginRouter.post('/login', async (req, res) => {
                     status: oldUser.status,
                     details: oldUser
                   })
-                }
+                }else{
+                  return res.status(406).json({
+                      success:false,
+                      error:true,
+                      message:"waiting for admin approval!"
+      
+                  })
+              }
+             
+          }
               }
               if (oldUser.role == 3) {
                 const college = await collegeRegisterModel.findOne({ login_id: oldUser._id });
                 if (college) {
+                  if(oldUser.status==1){
                   return res.status(200).json({
                     success: true,
                     error: false,
@@ -70,8 +96,17 @@ loginRouter.post('/login', async (req, res) => {
                     status: oldUser.status,
                     details: oldUser
                   })
-                }
+                }else{
+                  return res.status(406).json({
+                      success:false,
+                      error:true,
+                      message:"waiting for admin approval!"
+      
+                  })
               }
+              }
+              }
+              
               
             } else {
             return res.status(406).json({

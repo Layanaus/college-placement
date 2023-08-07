@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'; // Import axios library
+import axios from 'axios'; 
 import AdminNav from './AdminNav';
 import PublicUserFooter from '../Footer/PublicUserFooter';
 
@@ -8,7 +8,7 @@ const Manageuser = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    fetch('http://localhost:5000/register/view-users')
+    fetch('http://localhost:5000/register/view-registered-students')
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
